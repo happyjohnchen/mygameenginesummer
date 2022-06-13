@@ -1,0 +1,21 @@
+{
+  "name": "mygameengine",
+  "private": true,
+  "version": "0.0.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "typescript": "^4.5.5",
+    "vite": "^2.8.0"
+  },
+  "dependencies": {
+    "@flyover/box2d": "^1.0.1",
+    "@microsoft/fast-components": "^2.30.6",
+    "@types/ws": "^8.5.3",
+    "electron": "^18.2.0",
+    "js-yaml": "^4.1.0",
+    "ws": "^7.4.6"
+  }
+}

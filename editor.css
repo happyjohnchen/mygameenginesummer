@@ -1,0 +1,40 @@
+body {
+    margin: 0px;
+    overflow: hidden;
+    color: var(--neutral-foreground-rest);
+}
+
+#hierarchy-panel {
+
+    width: 400px;
+    height: 400px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    overflow-y: auto;
+}
+
+#runtime-panel {
+    width:400px;
+    height: 400px;
+    position: absolute;
+    top: 0px;
+    left: 400px;
+}
+
+#inspector-panel {
+    width:400px;
+    height: 400px;
+    position: absolute;
+    top:0px;
+    left:800px;
+    overflow-y: auto;
+}
+
+#assets-panel {
+    width:1200px;
+    height: 200px;
+    position: absolute;
+    top:400px;
+    left:0px;
+}

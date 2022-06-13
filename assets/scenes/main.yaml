@@ -1,0 +1,48 @@
+behaviours:
+  - type: Transform
+    properties:
+      x: 0
+      y: 0
+      scaleX: 1
+      scaleY: 1
+      rotation: 0
+  - type: Walkable
+    properties:
+      speed: 1
+children:
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -56
+          y: -48
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ShapeRectRenderer
+        properties:
+          width: 100
+          height: 100
+          color: red
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 200
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ShapeRectRenderer
+        properties:
+          width: 400
+          height: 10
+          color: blue
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -200
+          y: -200
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+    id: camera
