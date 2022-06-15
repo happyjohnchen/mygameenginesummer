@@ -6,6 +6,16 @@
 </head>
 
 <body>
+    <fast-card id="control-panel">
+        <div style="padding: 0 10px 10px;">
+            <h4 id="inspector-id" class="control-element">控制面板</h4>
+            <fast-button id="save-button" class="control-element" style="margin-left: 400px;">保存</fast-button>
+            <fast-button id="refresh-button" class="control-element">刷新</fast-button>
+            <fast-button id="play-button" class="control-element">运行</fast-button>
+            <fast-button id="edit-button" class="control-element">编辑</fast-button>
+            <h4 id="play-edit-mode" class="control-element" style="margin-left: 350px; color: bisque;">编辑模式</h4>
+        </div>
+    </fast-card>
     <fast-card id="hierarchy-panel">
         <div style="padding: 0 10px 10px;">
             <h4>层级树面板</h4>
@@ -28,17 +38,14 @@
 
             </fast-select>
             <fast-button id="add-component-button">添加组件</fast-button>
-            <fast-button id="remove-gameobject-button" style="width: 350px; vertical-align: middle;background-color:indigo;">删除GameObject</fast-button>
+            <fast-button id="remove-gameobject-button"
+                style="width: 350px; vertical-align: middle;background-color:indigo;">删除GameObject</fast-button>
         </div>
     </fast-card>
 
     <fast-card id="assets-panel">
         <div style="padding: 0 10px 10px; ">
             <h4>资源面板</h4>
-            <fast-button id="save-button">保存</fast-button>
-            <fast-button id="play-button">运行</fast-button>
-            <fast-button id="edit-button">编辑</fast-button>
-            <h5 id="play-edit-mode">编辑模式</h5>
         </div>
     </fast-card>
     <script type="module" src="/editor/index.ts"></script>

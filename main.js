@@ -25,7 +25,7 @@ async function startEditor() {
     function createWindow() {
         const editorProcess = new BrowserWindow({
             width: 1200,
-            height: 600,
+            height: 700,
             webPreferences: {
                 nodeIntegration: true,  //允许渲染进程使用Nodejs
                 contextIsolation: false //允许渲染进程使用Nodejs
@@ -38,7 +38,7 @@ async function startEditor() {
         setTimeout(() => {
             runtimeView = new BrowserView()
             editorProcess.setBrowserView(runtimeView)
-            runtimeView.setBounds({ x: 400, y: 0, width: 400, height: 400 })
+            runtimeView.setBounds({ x: 400, y: 100, width: 400, height: 400 })
             const mode = 'edit'
             runtimeView.webContents.loadURL(`http://localhost:3000/index.html?mode=${mode}`)
             runtimeView.webContents.openDevTools({ mode: 'undocked' })

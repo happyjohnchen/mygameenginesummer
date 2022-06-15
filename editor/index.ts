@@ -11,6 +11,8 @@ provideFASTDesignSystem().register(allComponents);
 
 async function startup() {
     const editorHost = new EditorHost();
+
+    //保存按钮
     const saveButton = document.getElementById("save-button") as Button;
     saveButton.onclick = async () => {
         const response = await editorHost.execute('getSceneSerializedData', null);
@@ -20,6 +22,13 @@ async function startup() {
         location.reload();
     };
 
+    //刷新按钮
+    const refershButton = document.getElementById("refresh-button") as Button;
+    refershButton.onclick = () => {
+        location.reload();
+    }
+
+    //编辑/运行按钮
     const playButton = document.getElementById('play-button') as Button;
     const editButton = document.getElementById('edit-button') as Button;
     const playEditMode = document.getElementById('play-edit-mode') as HTMLElement;

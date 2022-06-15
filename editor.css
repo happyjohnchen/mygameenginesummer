@@ -4,37 +4,50 @@ body {
     color: var(--neutral-foreground-rest);
 }
 
-#hierarchy-panel {
+#control-panel {
+    width: 1200px;
+    height: 100px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+}
 
+#hierarchy-panel {
     width: 400px;
     height: 400px;
     position: absolute;
-    top: 0px;
+    top: 100px;
     left: 0px;
     overflow-y: auto;
 }
 
 #runtime-panel {
-    width:400px;
+    width: 400px;
     height: 400px;
     position: absolute;
-    top: 0px;
+    top: 100px;
     left: 400px;
 }
 
 #inspector-panel {
-    width:400px;
+    width: 400px;
     height: 400px;
     position: absolute;
-    top:0px;
-    left:800px;
+    top: 100px;
+    left: 800px;
     overflow-y: auto;
 }
 
 #assets-panel {
-    width:1200px;
+    width: 1200px;
     height: 200px;
     position: absolute;
-    top:400px;
-    left:0px;
+    top: 500px;
+    left: 0px;
+}
+
+.control-element {
+    display: inline-block;
+    line-height: 50px;
+    vertical-align: middle;
 }
