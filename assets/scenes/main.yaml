@@ -20,6 +20,9 @@ children:
           width: 100
           height: 100
           color: red
+      - type: Walkable
+        properties:
+          speed: 10
   - behaviours:
       - type: Transform
         properties:
@@ -35,7 +38,7 @@ children:
           color: blue
       - type: Walkable
         properties:
-          speed: 10
+          speed: 8
   - behaviours:
       - type: Transform
         properties:

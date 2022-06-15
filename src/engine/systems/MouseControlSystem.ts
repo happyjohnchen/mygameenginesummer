@@ -1,4 +1,4 @@
-import { GameObject } from "../../engine";
+import { GameObject, getGameObjectById } from "../../engine";
 import { checkPointInRectangle, invertMatrix, Point, pointAppendMatrix } from "../math";
 import { Transform } from "../Transform";
 import { System } from "./System";
@@ -8,7 +8,11 @@ export class MouseControlSystem extends System {
     onStart() {
         window.addEventListener('mousedown', (e) => {
             const point = { x: e.clientX, y: e.clientY };
-            console.log("mousedown(" + point.x + "," + point.y + ")");
+            const camera = getGameObjectById('camera')
+            const cameraTransform = camera.getBehaviour(Transform);
+            //画布坐标转化为摄像机坐标
+            point.x += cameraTransform.x;
+            point.y += cameraTransform.y;
             let result = this.hitTest(this.rootGameObject, point);
             if (result) {
                 while (result) {
