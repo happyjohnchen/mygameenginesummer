@@ -16,8 +16,6 @@ export class InspectorPanel {
     }
 
     async onSelectGameObject(gameObjectUUID: number) {
-        const inspectorPanelId = document.getElementById("inspector-id") as HTMLElement;
-        inspectorPanelId.innerText = "属性面板 " + gameObjectUUID;
 
         //添加组件按钮
         const addComponentButton = document.getElementById("add-component-button") as Button;
