@@ -55,7 +55,12 @@ export class CanvasContextRenderingSystem extends System {
                     else if (child.renderer instanceof ShapeRectRenderer) {
                         const renderer = child.renderer as ShapeRectRenderer;
                         context.save();
-                        context.fillStyle = renderer.color;
+                        if (renderer.color != "custom") {
+                            context.fillStyle = renderer.color;
+                        } else {
+                            context.fillStyle = renderer.customColor;
+                        }
+
                         context.fillRect(0, 0, renderer.width, renderer.height);
                         context.restore();
                     }

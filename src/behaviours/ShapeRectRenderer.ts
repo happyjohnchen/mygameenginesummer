@@ -12,10 +12,14 @@ export class ShapeRectRenderer extends Behaviour implements Renderer {
     @string({
         editorType: 'select', options: [
             { value: 'red', label: "红色" },
-            { value: 'blue', label: '蓝色' }
+            { value: 'green', label: "绿色" },
+            { value: 'blue', label: '蓝色' },
+            { value:'custom', label: '自定义'}
         ]
     })
     color = "red";
+    @string()
+    customColor = "#00ff00";
 
     getBounds(): Rectangle {
         return {
