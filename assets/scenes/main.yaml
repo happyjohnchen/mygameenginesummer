@@ -23,7 +23,8 @@ children:
           customColor: '#00ff00'
       - type: Walkable
         properties:
-          speed: 10
+          speed: 5
+    id: GreenSquare
   - behaviours:
       - type: Transform
         properties:
@@ -39,7 +40,8 @@ children:
           color: blue
       - type: Walkable
         properties:
-          speed: 8
+          speed: 2
+    id: BlueRect
   - behaviours:
       - type: Transform
         properties:

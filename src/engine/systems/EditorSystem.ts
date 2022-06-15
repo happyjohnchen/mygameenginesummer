@@ -98,6 +98,18 @@ export class EditorSystem extends System {
             gameObject.removeBehaviour(behaviour);
         }
 
+        const getIDByGameObjectUUID = (gameObjectUUID: number) => {
+            const gameObject = GameObject.map[gameObjectUUID];
+            return gameObject.id;
+        }
+
+        const setIDByGameObjectUUID = (data: { gameObjectUUID: number, newID: string }) => {
+            const gameObject = GameObject.map[data.gameObjectUUID];
+            gameObject.id = data.newID;
+            return data.newID;
+        }
+
+
 
 
         host.registerCommand(getSceneSerializedData);
@@ -107,6 +119,8 @@ export class EditorSystem extends System {
         host.registerCommand(getAllComponentDefinations);
         host.registerCommand(addComponentToGameObject);
         host.registerCommand(removeComponentFromGameObject);
+        host.registerCommand(getIDByGameObjectUUID);
+        host.registerCommand(setIDByGameObjectUUID);
         host.start()
     }
 }

@@ -17,6 +17,7 @@ async function startup() {
         const fs = require("fs");
         fs.writeFileSync('assets/scenes/main.yaml', response);
         alert('保存成功')
+        location.reload();
     };
 
     const playButton = document.getElementById('play-button') as Button;

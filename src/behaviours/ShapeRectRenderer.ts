@@ -19,7 +19,7 @@ export class ShapeRectRenderer extends Behaviour implements Renderer {
     })
     color = "red";
     @string()
-    customColor = "#00ff00";
+    customColor = "#ffffff";
 
     getBounds(): Rectangle {
         return {
