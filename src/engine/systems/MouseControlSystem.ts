@@ -8,6 +8,7 @@ export class MouseControlSystem extends System {
     onStart() {
         window.addEventListener('mousedown', (e) => {
             const point = { x: e.clientX, y: e.clientY };
+            console.log("mousedown(" + point.x + "," + point.y + ")");
             let result = this.hitTest(this.rootGameObject, point);
             if (result) {
                 while (result) {

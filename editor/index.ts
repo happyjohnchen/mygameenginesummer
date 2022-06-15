@@ -1,5 +1,6 @@
 import {
     allComponents,
+    Button,
     provideFASTDesignSystem
 } from "@microsoft/fast-components";
 import { EditorHost } from "./EditorHost";
@@ -18,16 +19,20 @@ async function startup() {
         alert('保存成功')
     };
 
-    const playButton = document.getElementById('play-button');
+    const playButton = document.getElementById('play-button') as Button;
+    const editButton = document.getElementById('edit-button') as Button;
     const playEditMode = document.getElementById('play-edit-mode') as HTMLElement;
     playButton.onclick = () => {
         editorHost.send({ command: "changeMode", data: "play" })
         playEditMode.innerText = "运行模式";
+        playButton.innerText = ">运行<";
+        editButton.innerText = "编辑";
     }
-    const editButton = document.getElementById('edit-button');
     editButton.onclick = () => {
         editorHost.send({ command: "changeMode", data: "edit" })
         playEditMode.innerText = "编辑模式";
+        playButton.innerText = "运行";
+        editButton.innerText = ">编辑<";
     }
 
     await editorHost.start();

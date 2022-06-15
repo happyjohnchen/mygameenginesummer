@@ -6,9 +6,6 @@ behaviours:
       scaleX: 1
       scaleY: 1
       rotation: 0
-  - type: Walkable
-    properties:
-      speed: 1
 children:
   - behaviours:
       - type: Transform
@@ -36,6 +33,9 @@ children:
           width: 400
           height: 10
           color: blue
+      - type: Walkable
+        properties:
+          speed: 10
   - behaviours:
       - type: Transform
         properties:
