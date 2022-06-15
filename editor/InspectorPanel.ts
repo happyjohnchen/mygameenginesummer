@@ -19,6 +19,7 @@ export class InspectorPanel {
         const inspectorPanelId = document.getElementById("inspector-id") as HTMLElement;
         inspectorPanelId.innerText = "属性面板 " + gameObjectUUID;
 
+        //添加组件按钮
         const addComponentButton = document.getElementById("add-component-button") as Button;
 
         const addComponentSelect = document.getElementById("add-component-select") as Select;
@@ -44,6 +45,18 @@ export class InspectorPanel {
         };
 
         this.updateComponentsUI(gameObjectUUID);
+
+        //删除对象按钮
+        const removeGameObjectButton = document.getElementById(
+            "remove-gameobject-button"
+        ) as Button;
+        removeGameObjectButton.onclick = async () => {
+            if (confirm("确定要删除GameObject吗？")) {
+                console.log("删除GameObject:", gameObjectUUID);
+                await this.editorHost.execute("removeGameObjectByGameObjectUUID", gameObjectUUID);
+                location.reload();
+            }
+        };
     }
 
     async updateComponentsUI(gameObjectUUID: number) {

@@ -11,7 +11,7 @@ provideFASTDesignSystem().register(allComponents);
 
 async function startup() {
     const editorHost = new EditorHost();
-    const saveButton = document.getElementById("save-button");
+    const saveButton = document.getElementById("save-button") as Button;
     saveButton.onclick = async () => {
         const response = await editorHost.execute('getSceneSerializedData', null);
         const fs = require("fs");

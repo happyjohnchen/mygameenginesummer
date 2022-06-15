@@ -241,9 +241,11 @@ export class GameObject {
     }
 
     removeChild(child: GameObject) {
+        
         const index = this.children.indexOf(child);
+        console.log("removeChild:", index);
         if (index >= 0) {
-            this.children.splice(index);
+            this.children.splice(index, 1);
         }
         this.active = false;
     }
