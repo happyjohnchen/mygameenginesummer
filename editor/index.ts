@@ -19,12 +19,15 @@ async function startup() {
     };
 
     const playButton = document.getElementById('play-button');
+    const playEditMode = document.getElementById('play-edit-mode') as HTMLElement;
     playButton.onclick = () => {
         editorHost.send({ command: "changeMode", data: "play" })
+        playEditMode.innerText = "运行模式";
     }
     const editButton = document.getElementById('edit-button');
     editButton.onclick = () => {
         editorHost.send({ command: "changeMode", data: "edit" })
+        playEditMode.innerText = "编辑模式";
     }
 
     await editorHost.start();
