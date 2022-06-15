@@ -99,6 +99,7 @@ export class EditorSystem extends System {
         }
 
         const getIDByGameObjectUUID = (gameObjectUUID: number) => {
+            
             const gameObject = GameObject.map[gameObjectUUID];
             return gameObject.id;
         }
@@ -107,6 +108,12 @@ export class EditorSystem extends System {
             const gameObject = GameObject.map[data.gameObjectUUID];
             gameObject.id = data.newID;
             return data.newID;
+        }
+
+        const removeGameObjectByGameObjectUUID = (gameObjectUUID: number) => {
+            const gameObject = GameObject.map[gameObjectUUID];
+            const parent = gameObject.parent;
+            parent.removeChild(gameObject);
         }
 
 
@@ -121,6 +128,7 @@ export class EditorSystem extends System {
         host.registerCommand(removeComponentFromGameObject);
         host.registerCommand(getIDByGameObjectUUID);
         host.registerCommand(setIDByGameObjectUUID);
+        host.registerCommand(removeGameObjectByGameObjectUUID);
         host.start()
     }
 }
