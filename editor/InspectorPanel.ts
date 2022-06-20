@@ -11,11 +11,14 @@ import { EditorHost } from "./EditorHost";
 
 export class InspectorPanel {
     private accordion: Accordion;
+    public selectedGameObjectUUID;
     constructor(private editorHost: EditorHost) {
         this.accordion = document.getElementById("inspector-accordion") as Accordion;
+        this.selectedGameObjectUUID = 0;
     }
 
     async onSelectGameObject(gameObjectUUID: number) {
+        this.selectedGameObjectUUID = gameObjectUUID;
 
         //添加组件按钮
         const addComponentButton = document.getElementById("add-component-button") as Button;
@@ -39,14 +42,14 @@ export class InspectorPanel {
                 gameObjectUUID,
                 componentName: componentToAdd,
             });
-            this.updateComponentsUI(gameObjectUUID);
+            await this.updateComponentsUI(gameObjectUUID);
         };
 
-        this.updateComponentsUI(gameObjectUUID);
+        await this.updateComponentsUI(gameObjectUUID);
 
         //删除对象按钮
         const removeGameObjectButton = document.getElementById(
-            "remove-gameobject-button"
+            "remove-game-object-button"
         ) as Button;
         removeGameObjectButton.onclick = async () => {
             if (confirm("确定要删除GameObject吗？")) {

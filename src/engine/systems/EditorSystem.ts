@@ -1,8 +1,9 @@
-import { GameObject, getAllComponentDefinationNames, getBehaviourClassByName } from "../../engine";
-import { RuntimeHost } from "../../host";
-import { GameObjectInfo, GameObjectComponents } from "../../types";
-import { Behaviour } from "../Behaviour";
-import { System } from "./System";
+import {GameObject, getAllComponentDefinationNames, getBehaviourClassByName} from "../../engine";
+import {RuntimeHost} from "../../host";
+import {GameObjectInfo, GameObjectComponents} from "../../types";
+import {Behaviour} from "../Behaviour";
+import {System} from "./System";
+import {Transform} from "../Transform";
 
 export class EditorSystem extends System {
 
@@ -19,7 +20,7 @@ export class EditorSystem extends System {
                 const children = gameObject.children || []
                 for (const child of children) {
                     const childrenInfo: GameObjectInfo[] = [];
-                    info.push({ name: child.id || "GameObject", children: childrenInfo, uuid: child.uuid })
+                    info.push({name: child.id || "GameObject", children: childrenInfo, uuid: child.uuid})
                     createGameObjectInfo(child, childrenInfo);
                 }
                 return info;
@@ -40,7 +41,7 @@ export class EditorSystem extends System {
                     const type = metadata.type || 'string';
                     const editorType = metadata.editorType || 'textfield'
                     const options = metadata.options;
-                    properties.push({ name, value: b[name], type, editorType, options })
+                    properties.push({name, value: b[name], type, editorType, options})
                 }
                 return {
                     name: componentName,
@@ -51,7 +52,7 @@ export class EditorSystem extends System {
 
         }
         const modifyComponentProperty = (param: any) => {
-            const { gameObjectUUID, componentName, propertyName, value } = param;
+            const {gameObjectUUID, componentName, propertyName, value} = param;
             const gameObject = GameObject.map[gameObjectUUID];
             const component = gameObject.behaviours.find(b => {
                 return componentName === (b as any).__proto__.constructor.name
@@ -66,6 +67,7 @@ export class EditorSystem extends System {
             const existedComponentsName = gameObject.behaviours.map(behaviour => {
                 return (behaviour as any).__proto__.constructor.name
             });
+            //以下数组中的每一组的组件是互斥的，已添加一个就不能添加同组中的其他组件了
             const groupedComponentsLimitation = [
                 ['BoxCollider', 'EdgeCollider', 'CircleCollider'],
                 ['TextRenderer', 'ShapeRectRenderer']
@@ -81,7 +83,7 @@ export class EditorSystem extends System {
             return allComponentNames
                 .filter(componentName => !ignoreComponentNames.includes(componentName))
                 .map(componentName => {
-                    return { name: componentName }
+                    return {name: componentName}
                 })
         }
 
@@ -89,6 +91,7 @@ export class EditorSystem extends System {
             const gameObject = GameObject.map[data.gameObjectUUID];
             const behaviourClass = getBehaviourClassByName(data.componentName);
             gameObject.addBehaviour(new behaviourClass());
+            console.log(data.gameObjectUUID + " add component " + data.componentName);
         }
 
         const removeComponentFromGameObject = (data: { gameObjectUUID: number, componentName: string }) => {
@@ -99,7 +102,7 @@ export class EditorSystem extends System {
         }
 
         const getIDByGameObjectUUID = (gameObjectUUID: number) => {
-            
+
             const gameObject = GameObject.map[gameObjectUUID];
             return gameObject.id;
         }
@@ -116,7 +119,17 @@ export class EditorSystem extends System {
             parent.removeChild(gameObject);
         }
 
-
+        const createNewGameObject = (parentUUID: number) => {
+            const parent = GameObject.map[parentUUID];
+            const newGameObject = new GameObject();
+            newGameObject.active = true;
+            newGameObject.id = "NewGameObject";
+            // const newTransform = new Transform();
+            // newTransform.active = true;
+            // console.log("newTransform.active:" + newTransform.active)
+            // newGameObject.addBehaviour(newTransform);
+            parent.addChild(newGameObject);
+        }
 
 
         host.registerCommand(getSceneSerializedData);
@@ -129,6 +142,7 @@ export class EditorSystem extends System {
         host.registerCommand(getIDByGameObjectUUID);
         host.registerCommand(setIDByGameObjectUUID);
         host.registerCommand(removeGameObjectByGameObjectUUID);
+        host.registerCommand(createNewGameObject)
         host.start()
     }
 }
