@@ -1,6 +1,4 @@
 import * as yaml from 'js-yaml';
-import { ShapeRectRenderer } from './behaviours/ShapeRectRenderer';
-import { Walkable } from './behaviours/Walkable';
 import { Behaviour } from "./engine/Behaviour";
 import { Rectangle } from './engine/math';
 import { ResourceManager } from "./engine/ResourceManager";
@@ -10,7 +8,6 @@ import { MouseControlSystem } from './engine/systems/MouseControlSystem';
 import { CanvasContextRenderingSystem } from './engine/systems/RenderingSystem';
 import { System } from './engine/systems/System';
 import { TransformSystem } from './engine/systems/TransformSystem';
-import { TextRenderer } from './engine/TextRenderer';
 import { Transform } from "./engine/Transform";
 import { GameSystem } from './GameSystem';
 

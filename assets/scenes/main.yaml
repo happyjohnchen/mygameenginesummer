@@ -71,7 +71,7 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: -100
+          x: -80
           y: 100
           scaleX: 1
           scaleY: 1
@@ -79,4 +79,7 @@ children:
       - type: TextRenderer
         properties:
           text: '1234'
+          fontSize: 30
+          font: 微软雅黑
+          fontColor: '#000000'
     id: NewText

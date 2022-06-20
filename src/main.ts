@@ -5,7 +5,7 @@ import { Rotatable } from './behaviours/Rotatable';
 import { ShapeRectRenderer } from './behaviours/ShapeRectRenderer';
 import { Walkable } from './behaviours/Walkable';
 import { GameEngine, registerBehaviourClass } from './engine';
-import { TextRenderer } from './engine/TextRenderer';
+import { TextRenderer } from './behaviours/TextRenderer';
 import { Transform } from './engine/Transform';
 
 registerBehaviourClass(Transform);

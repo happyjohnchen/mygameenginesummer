@@ -2,7 +2,7 @@ import { ShapeRectRenderer } from "../../behaviours/ShapeRectRenderer";
 import { GameObject, getGameObjectById } from "../../engine";
 import { Behaviour } from "../Behaviour";
 import { invertMatrix, matrixAppendMatrix } from "../math";
-import { TextRenderer } from "../TextRenderer";
+import { TextRenderer } from "../../behaviours/TextRenderer";
 import { Transform } from "../Transform";
 import { System } from "./System";
 
@@ -48,9 +48,13 @@ export class CanvasContextRenderingSystem extends System {
                         matrix.ty
                     )
                     if (child.renderer instanceof TextRenderer) {
+                        context.save();
                         const renderer = child.renderer as TextRenderer
-                        context.fillText(renderer.text, 0, 40);
-                        renderer.measuredTextWidth = context.measureText(renderer.text).width
+                        context.font = renderer.fontSize + "px " + renderer.font;
+                        context.fillStyle = renderer.fontColor;
+                        context.fillText(renderer.text, 0, renderer.fontSize);
+                        renderer.measuredTextWidth = context.measureText(renderer.text).width;
+                        context.restore();
                     }
                     else if (child.renderer instanceof ShapeRectRenderer) {
                         const renderer = child.renderer as ShapeRectRenderer;
