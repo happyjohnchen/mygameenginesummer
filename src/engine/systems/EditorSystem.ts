@@ -1,7 +1,6 @@
 import {GameObject, getAllComponentDefinationNames, getBehaviourClassByName} from "../../engine";
 import {RuntimeHost} from "../../host";
 import {GameObjectInfo, GameObjectComponents} from "../../types";
-import {Behaviour} from "../Behaviour";
 import {System} from "./System";
 import {Transform} from "../Transform";
 
@@ -122,13 +121,11 @@ export class EditorSystem extends System {
         const createNewGameObject = (parentUUID: number) => {
             const parent = GameObject.map[parentUUID];
             const newGameObject = new GameObject();
-            newGameObject.active = true;
             newGameObject.id = "NewGameObject";
-            // const newTransform = new Transform();
-            // newTransform.active = true;
-            // console.log("newTransform.active:" + newTransform.active)
-            // newGameObject.addBehaviour(newTransform);
             parent.addChild(newGameObject);
+            //默认添加一个Transform
+            const gameObject = GameObject.map[newGameObject.uuid];
+            gameObject.addBehaviour(new Transform());
         }
 
 
