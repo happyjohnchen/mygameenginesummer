@@ -6,12 +6,13 @@ import {
     TextField,
     Button,
 } from "@microsoft/fast-components";
-import type { GameObjectComponentProperty, GameObjectComponents } from "../src/types";
-import { EditorHost } from "./EditorHost";
+import type {GameObjectComponentProperty, GameObjectComponents} from "../src/types";
+import {EditorHost} from "./EditorHost";
 
 export class InspectorPanel {
     private accordion: Accordion;
     public selectedGameObjectUUID;
+
     constructor(private editorHost: EditorHost) {
         this.accordion = document.getElementById("inspector-accordion") as Accordion;
         this.selectedGameObjectUUID = 0;
@@ -46,18 +47,6 @@ export class InspectorPanel {
         };
 
         await this.updateComponentsUI(gameObjectUUID);
-
-        //删除对象按钮
-        const removeGameObjectButton = document.getElementById(
-            "remove-game-object-button"
-        ) as Button;
-        removeGameObjectButton.onclick = async () => {
-            if (confirm("确定要删除GameObject吗？")) {
-                console.log("删除GameObject:", gameObjectUUID);
-                await this.editorHost.execute("removeGameObjectByGameObjectUUID", gameObjectUUID);
-                location.reload();
-            }
-        };
     }
 
     async updateComponentsUI(gameObjectUUID: number) {
@@ -137,6 +126,18 @@ export class InspectorPanel {
 
             this.accordion.appendChild(accordionItem);
         }
+
+        //删除对象按钮
+        const removeGameObjectButton = document.getElementById(
+            "remove-game-object-button"
+        ) as Button;
+        removeGameObjectButton.onclick = async () => {
+            if (confirm("确定要删除" + gameObjectID + "吗？")) {
+                console.log("删除GameObject:", gameObjectUUID);
+                await this.editorHost.execute("removeGameObjectByGameObjectUUID", gameObjectUUID);
+                location.reload();
+            }
+        };
     }
 }
 

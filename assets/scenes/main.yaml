@@ -68,12 +68,3 @@ children:
           color: green
           customColor: '#ffffff'
     id: GreenSquare2
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-    id: NewGameObject
