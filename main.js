@@ -25,7 +25,7 @@ async function startEditor() {
     function createWindow() {
         const editorProcess = new BrowserWindow({
             width: 1200,
-            height: 700,
+            height: 800,
             webPreferences: {
                 nodeIntegration: true,  //允许渲染进程使用Nodejs
                 contextIsolation: false //允许渲染进程使用Nodejs
