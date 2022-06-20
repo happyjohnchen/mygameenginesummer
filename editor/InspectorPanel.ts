@@ -15,7 +15,7 @@ export class InspectorPanel {
 
     constructor(private editorHost: EditorHost) {
         this.accordion = document.getElementById("inspector-accordion") as Accordion;
-        this.selectedGameObjectUUID = 0;
+        this.selectedGameObjectUUID = 1;
     }
 
     async onSelectGameObject(gameObjectUUID: number) {
