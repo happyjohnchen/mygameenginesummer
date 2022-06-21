@@ -119,3 +119,19 @@ children:
           speed: 1
           direction: up
     id: Image
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: ImageText
+              fontSize: 20
+              font: chalkboard
+              fontColor: '#662222'
+        id: ImageText
