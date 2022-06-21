@@ -29,10 +29,11 @@
 2. 添加GameObject按钮
 3. 删除GameObject按钮
 4. 编辑GameObject的id
-5. ShapeRectRenderer的自定义颜色
-6. TextRenderer的自定义字体、字号、颜色
-7. ShapeCircleRenderer可绘制圆形
-8. ImageRenderer可绘制指定图片
+5. ShapeRectRenderer 自定义颜色
+6. TextRenderer 自定义字体、字号、颜色
+7. Walkable 选择移动方向
+8. 新增 ShapeCircleRenderer 可绘制圆形
+9. 新增 ImageRenderer 可绘制指定图片
 
 ### 常见问题
 
