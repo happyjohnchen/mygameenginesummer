@@ -8,6 +8,7 @@ import { GameEngine, registerBehaviourClass } from './engine';
 import { TextRenderer } from './behaviours/TextRenderer';
 import { Transform } from './engine/Transform';
 import {ShapeCircleRenderer} from "./behaviours/ShapeCircleRenderer";
+import {ImageRenderer} from "./behaviours/ImageRenderer";
 
 registerBehaviourClass(Transform);
 registerBehaviourClass(TextRenderer);
@@ -15,6 +16,7 @@ registerBehaviourClass(Walkable);
 registerBehaviourClass(Rotatable);
 registerBehaviourClass(ShapeRectRenderer);
 registerBehaviourClass(ShapeCircleRenderer);
+registerBehaviourClass(ImageRenderer);
 registerBehaviourClass(RigidBody);
 registerBehaviourClass(BoxCollider);
 registerBehaviourClass(CircleCollider);

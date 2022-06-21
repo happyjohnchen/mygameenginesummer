@@ -86,7 +86,7 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: null
+          x: 0
           y: -100
           scaleX: 1
           scaleY: 1
@@ -97,3 +97,18 @@ children:
           color: custom
           customColor: '#ffff00'
     id: YellowCircle
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 100
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/images/testImage.png
+      - type: Walkable
+        properties:
+          speed: 1
+    id: Image

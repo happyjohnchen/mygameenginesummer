@@ -6,6 +6,7 @@ import {TextRenderer} from "../../behaviours/TextRenderer";
 import {Transform} from "../Transform";
 import {System} from "./System";
 import {ShapeCircleRenderer} from "../../behaviours/ShapeCircleRenderer";
+import {ImageRenderer} from "../../behaviours/ImageRenderer";
 
 export class CanvasContextRenderingSystem extends System {
 
@@ -18,13 +19,13 @@ export class CanvasContextRenderingSystem extends System {
 
 
     onAddComponent(gameObject: GameObject, component: Behaviour): void {
-        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer) {
+        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer || component instanceof ImageRenderer) {
             gameObject.renderer = component;
         }
     }
 
     onRemoveComponent(gameObject: GameObject, component: Behaviour): void {
-        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer) {
+        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer || component instanceof ImageRenderer) {
             gameObject.renderer = null;
         }
     }
@@ -80,6 +81,11 @@ export class CanvasContextRenderingSystem extends System {
                         context.arc(0, 0, renderer.radius, 0, 2 * Math.PI, true);
                         context.fill();
                         context.restore();
+                    } else if (child.renderer instanceof ImageRenderer) {
+                        const renderer = child.renderer as ImageRenderer;
+                        const image = new Image();
+                        image.src = renderer.imagePath;
+                        context.drawImage(image, 0, 0);
                     }
                 }
                 visitChildren(child)
