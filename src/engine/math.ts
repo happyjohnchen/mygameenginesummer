@@ -1,10 +1,10 @@
-import { Matrix } from "../engine";
+import {Matrix} from "../engine";
 
 
 /**
- * 
+ *
  * 矩阵与矩阵相乘
- * 扩展阅读：矩阵乘法的几何意义是什么？ 
+ * 扩展阅读：矩阵乘法的几何意义是什么？
  * https://www.zhihu.com/question/21351965/answer/204058188
  */
 export function matrixAppendMatrix(m1: Matrix, m2: Matrix) {
@@ -37,11 +37,17 @@ export function checkPointInRectangle(point: Point, rectangle: Rectangle) {
     )
 }
 
+export type Circle = {
+    x: number, y: number, radius: number
+}
 
+export function checkPointInCircle(point: Point, circle: Circle) {
+    return ((point.x - circle.x) * (point.x - circle.x) + (point.y - circle.y) * (point.y - circle.y) <= (circle.radius * circle.radius))
+}
 
 
 /**
- * 
+ *
  * 向量与矩阵相乘
  * 其几何意义是：
  * 把一个点的坐标（向量）进行一个空间变换（矩阵），得到一个新的坐标（向量）
@@ -49,7 +55,7 @@ export function checkPointInRectangle(point: Point, rectangle: Rectangle) {
 export function pointAppendMatrix(point: Point, m: Matrix) {
     const x = m.a * point.x + m.c * point.y + m.tx;
     const y = m.b * point.x + m.d * point.y + m.ty;
-    return { x, y }
+    return {x, y}
 
 }
 

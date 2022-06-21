@@ -98,6 +98,10 @@ children:
           radius: 40
           color: custom
           customColor: '#ffff00'
+      - type: Walkable
+        properties:
+          speed: 1
+          direction: left
     id: YellowCircle
   - behaviours:
       - type: Transform

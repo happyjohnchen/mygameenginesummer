@@ -1,6 +1,5 @@
 import * as yaml from 'js-yaml';
 import { Behaviour } from "./engine/Behaviour";
-import { Rectangle } from './engine/math';
 import { ResourceManager } from "./engine/ResourceManager";
 import { EditorSystem } from './engine/systems/EditorSystem';
 import { GameLifeCycleSystem } from './engine/systems/GameLifeCycleSystem';
@@ -185,7 +184,7 @@ export class GameEngine {
 }
 
 export interface Renderer {
-    getBounds(): Rectangle
+    getBounds()
 }
 
 export class GameObject {

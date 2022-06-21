@@ -1,6 +1,6 @@
 import {Renderer} from "../engine";
 import {Behaviour} from "../engine/Behaviour";
-import {Rectangle} from "../engine/math";
+import {Circle} from "../engine/math";
 import {number} from "../engine/validators/number";
 import {string} from "../engine/validators/string";
 
@@ -19,12 +19,11 @@ export class ShapeCircleRenderer extends Behaviour implements Renderer {
     @string()
     customColor = "#ffffff";
 
-    getBounds(): Rectangle {
+    getBounds(): Circle {
         return {
-            x: -this.radius,
-            y: -this.radius,
-            width: this.radius * 2,
-            height: this.radius * 2,
+            x: 0,
+            y: 0,
+            radius: this.radius
         };
     }
 }
