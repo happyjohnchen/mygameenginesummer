@@ -15,7 +15,6 @@ export class HierarchyTree {
 
     async start(inspectorPanel: InspectorPanel) {
         const gameObjects = await this.editorHost.execute('getAllGameObjects', null);
-        console.log(gameObjects);
 
         function createTreeItem(container: HTMLElement, info: GameObjectInfo) {
             const treeItem = new TreeItem();
