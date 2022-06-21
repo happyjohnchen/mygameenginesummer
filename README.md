@@ -37,6 +37,14 @@
 4. 确认摄像机的属性面板中拥有`Camera`属性
 5. 使用 `npm run start` 重新启动游戏引擎
 
+### 添加的功能
+1. 新的控制面板
+2. 添加GameObject按钮
+3. 删除GameObject按钮
+4. 编辑GameObject的id
+5. ShapeRectRenderer的自定义颜色
+6. TextRenderer的自定义字体、字号、颜色
+
 ##### 层级树面板不显示层级树
 1. 点击控制面板的刷新按钮，刷新编辑器
 2. 确认YAML文件没有被损坏且格式正确
