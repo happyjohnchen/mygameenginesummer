@@ -45,6 +45,7 @@
 5. ShapeRectRenderer的自定义颜色
 6. TextRenderer的自定义字体、字号、颜色
 7. ShapeCircleRenderer可绘制圆形
+8. ImageRenderer可绘制指定图片
 
 ##### 层级树面板不显示层级树
 1. 点击控制面板中的刷新按钮，刷新编辑器
