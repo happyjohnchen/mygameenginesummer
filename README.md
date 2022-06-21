@@ -24,6 +24,16 @@
 4. 运行游戏进行测试
 5. 发布你的游戏
 
+### 添加的功能
+1. 新的控制面板
+2. 添加GameObject按钮
+3. 删除GameObject按钮
+4. 编辑GameObject的id
+5. ShapeRectRenderer的自定义颜色
+6. TextRenderer的自定义字体、字号、颜色
+7. ShapeCircleRenderer可绘制圆形
+8. ImageRenderer可绘制指定图片
+
 ### 常见问题
 
 >若在使用游戏引擎的过程中遇到了如下问题，可尝试根据下面的步骤排查。
@@ -36,16 +46,6 @@
 3. 确认摄像机的名称为`camera`
 4. 确认摄像机的属性面板中拥有`Camera`属性
 5. 使用 `npm run start` 重新启动游戏引擎
-
-### 添加的功能
-1. 新的控制面板
-2. 添加GameObject按钮
-3. 删除GameObject按钮
-4. 编辑GameObject的id
-5. ShapeRectRenderer的自定义颜色
-6. TextRenderer的自定义字体、字号、颜色
-7. ShapeCircleRenderer可绘制圆形
-8. ImageRenderer可绘制指定图片
 
 ##### 层级树面板不显示层级树
 1. 点击控制面板中的刷新按钮，刷新编辑器
