@@ -7,12 +7,14 @@ import { Walkable } from './behaviours/Walkable';
 import { GameEngine, registerBehaviourClass } from './engine';
 import { TextRenderer } from './behaviours/TextRenderer';
 import { Transform } from './engine/Transform';
+import {ShapeCircleRenderer} from "./behaviours/ShapeCircleRenderer";
 
 registerBehaviourClass(Transform);
 registerBehaviourClass(TextRenderer);
 registerBehaviourClass(Walkable);
 registerBehaviourClass(Rotatable);
 registerBehaviourClass(ShapeRectRenderer);
+registerBehaviourClass(ShapeCircleRenderer);
 registerBehaviourClass(RigidBody);
 registerBehaviourClass(BoxCollider);
 registerBehaviourClass(CircleCollider);

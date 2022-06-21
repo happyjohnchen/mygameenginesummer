@@ -83,3 +83,17 @@ children:
           font: 微软雅黑
           fontColor: '#000000'
     id: NewText
+  - behaviours:
+      - type: Transform
+        properties:
+          x: null
+          y: -100
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ShapeCircleRenderer
+        properties:
+          radius: 40
+          color: custom
+          customColor: '#ffff00'
+    id: YellowCircle

@@ -1,14 +1,16 @@
-import { ShapeRectRenderer } from "../../behaviours/ShapeRectRenderer";
-import { GameObject, getGameObjectById } from "../../engine";
-import { Behaviour } from "../Behaviour";
-import { invertMatrix, matrixAppendMatrix } from "../math";
-import { TextRenderer } from "../../behaviours/TextRenderer";
-import { Transform } from "../Transform";
-import { System } from "./System";
+import {ShapeRectRenderer} from "../../behaviours/ShapeRectRenderer";
+import {GameObject, getGameObjectById} from "../../engine";
+import {Behaviour} from "../Behaviour";
+import {invertMatrix, matrixAppendMatrix} from "../math";
+import {TextRenderer} from "../../behaviours/TextRenderer";
+import {Transform} from "../Transform";
+import {System} from "./System";
+import {ShapeCircleRenderer} from "../../behaviours/ShapeCircleRenderer";
 
 export class CanvasContextRenderingSystem extends System {
 
     private context: CanvasRenderingContext2D
+
     constructor(context: CanvasRenderingContext2D) {
         super();
         this.context = context;
@@ -16,13 +18,13 @@ export class CanvasContextRenderingSystem extends System {
 
 
     onAddComponent(gameObject: GameObject, component: Behaviour): void {
-        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer) {
+        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer) {
             gameObject.renderer = component;
         }
     }
 
     onRemoveComponent(gameObject: GameObject, component: Behaviour): void {
-        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer) {
+        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer) {
             gameObject.renderer = null;
         }
     }
@@ -55,11 +57,10 @@ export class CanvasContextRenderingSystem extends System {
                         context.fillText(renderer.text, 0, renderer.fontSize);
                         renderer.measuredTextWidth = context.measureText(renderer.text).width;
                         context.restore();
-                    }
-                    else if (child.renderer instanceof ShapeRectRenderer) {
+                    } else if (child.renderer instanceof ShapeRectRenderer) {
                         const renderer = child.renderer as ShapeRectRenderer;
                         context.save();
-                        if (renderer.color != "custom") {
+                        if (renderer.color != 'custom') {
                             context.fillStyle = renderer.color;
                         } else {
                             context.fillStyle = renderer.customColor;
@@ -67,11 +68,24 @@ export class CanvasContextRenderingSystem extends System {
 
                         context.fillRect(0, 0, renderer.width, renderer.height);
                         context.restore();
+                    } else if (child.renderer instanceof ShapeCircleRenderer) {
+                        const renderer = child.renderer as ShapeCircleRenderer;
+                        context.save();
+                        if (renderer.color != 'custom') {
+                            context.fillStyle = renderer.color;
+                        } else {
+                            context.fillStyle = renderer.customColor;
+                        }
+                        context.beginPath();
+                        context.arc(0, 0, renderer.radius, 0, 2 * Math.PI, true);
+                        context.fill();
+                        context.restore();
                     }
                 }
                 visitChildren(child)
             }
         }
+
         visitChildren(this.rootGameObject);
 
 
