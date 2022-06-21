@@ -11,6 +11,16 @@ children:
   - behaviours:
       - type: Transform
         properties:
+          x: -200
+          y: -200
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
           x: -5
           y: -48
           scaleX: 1
@@ -48,17 +58,7 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: -100
-          y: -200
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: Camera
-    id: camera
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 120
+          x: -180
           y: -150
           scaleX: 1
           scaleY: 1
@@ -102,8 +102,8 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: 0
-          y: 100
+          x: -100
+          y: -200
           scaleX: 1
           scaleY: 1
           rotation: 0

@@ -22,8 +22,8 @@ async function startup() {
     };
 
     //刷新按钮
-    const refershButton = document.getElementById("refresh-button") as Button;
-    refershButton.onclick = () => {
+    const refreshButton = document.getElementById("refresh-button") as Button;
+    refreshButton.onclick = () => {
         location.reload();
     }
 
