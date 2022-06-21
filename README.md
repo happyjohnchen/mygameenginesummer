@@ -13,8 +13,8 @@
 1.  安装nodejs
 2.  安装VSCode或其他代码编辑器
 3.  git拉取本项目源码
-4.  运行npm install安装项目依赖
-5.  执行npm run start运行引擎
+4.  运行`npm install`安装项目依赖
+5.  执行`npm run start`运行引擎
 
 ### 使用说明
 
