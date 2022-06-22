@@ -4,7 +4,7 @@ import {
     Select,
     ListboxOption,
     TextField,
-    Button,
+    Button, Checkbox,
 } from "@microsoft/fast-components";
 import type {GameObjectComponentProperty, GameObjectComponents} from "../src/types";
 import {EditorHost} from "./EditorHost";
@@ -88,9 +88,12 @@ export class InspectorPanel {
                 const factory = factoryMap[property.editorType];
                 const editorUI = factory(property);
                 editorUI.onchange = () => {
-                    let value: string | number = editorUI.value;
+                    let value: string | number | boolean = editorUI.value;
                     if (property.type === "number") {
                         value = parseFloat(value);
+                    } else if (property.type === "boolean") {
+                        const checkbox = editorUI as Checkbox;
+                        value = checkbox.checked;
                     }
                     this.editorHost.execute("modifyComponentProperty", {
                         gameObjectUUID,
@@ -115,6 +118,7 @@ export class InspectorPanel {
                     gameObjectUUID,
                     componentName,
                 });
+                await this.updateComponentsUI(gameObjectUUID);
                 await this.updateComponentsUI(gameObjectUUID);
             };
             accordionItem.appendChild(button);
@@ -144,6 +148,7 @@ export class InspectorPanel {
 let factoryMap = {
     select: createSelect,
     textfield: createTextField,
+    checkbox: createCheckBox,
 };
 
 function createSelect(property: GameObjectComponentProperty) {
@@ -161,5 +166,11 @@ function createSelect(property: GameObjectComponentProperty) {
 function createTextField(property: GameObjectComponentProperty) {
     const input = new TextField();
     input.value = property.value;
+    return input;
+}
+
+function createCheckBox(property: GameObjectComponentProperty) {
+    const input = new Checkbox();
+    input.checked = property.value;
     return input;
 }

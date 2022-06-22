@@ -14,9 +14,9 @@ export type GameObjectComponentProperty = {
     /**
      * 编辑器类型
      */
-    editorType: 'select' | 'textfield'
+    editorType: 'select' | 'textfield' | 'checkbox'
 
-    options?: { value: (number | string), label: string }[]
+    options?: { value: (number | string | boolean), label: string }[]
 }
 
 export type GameObjectComponents = { name: string, properties: GameObjectComponentProperty[] }[]

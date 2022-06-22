@@ -114,6 +114,7 @@ children:
       - type: ImageRenderer
         properties:
           imagePath: assets/images/testImage.png
+          showImage: true
       - type: Walkable
         properties:
           speed: 1

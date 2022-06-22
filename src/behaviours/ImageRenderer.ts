@@ -2,10 +2,13 @@ import {Renderer} from "../engine";
 import {Behaviour} from "../engine/Behaviour";
 import {Rectangle} from "../engine/math";
 import {string} from "../engine/validators/string";
+import {boolean} from "../engine/validators/boolean";
 
 export class ImageRenderer extends Behaviour implements Renderer {
     @string()
     imagePath = "";
+    @boolean()
+    showImage = true;
 
     getBounds(): Rectangle {
         const image = new Image();

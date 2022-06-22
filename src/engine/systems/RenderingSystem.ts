@@ -86,7 +86,9 @@ export class CanvasContextRenderingSystem extends System {
                         const renderer = child.renderer as ImageRenderer;
                         const image = new Image();
                         image.src = renderer.imagePath;
-                        context.drawImage(image, 0, 0);
+                        if (renderer.showImage){
+                            context.drawImage(image, 0, 0);
+                        }
                     } else if (child.renderer instanceof RoundedRectRenderer) {
                         const renderer = child.renderer as RoundedRectRenderer;
                         //避免圆角过大
