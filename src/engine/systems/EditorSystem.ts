@@ -101,7 +101,6 @@ export class EditorSystem extends System {
         }
 
         const getIDByGameObjectUUID = (gameObjectUUID: number) => {
-
             const gameObject = GameObject.map[gameObjectUUID];
             return gameObject.id;
         }
@@ -110,6 +109,17 @@ export class EditorSystem extends System {
             const gameObject = GameObject.map[data.gameObjectUUID];
             gameObject.id = data.newID;
             return data.newID;
+        }
+
+        const upMoveGameObjectByGameObjectUUID = (gameObjectUUID: number) => {
+            const gameObject = GameObject.map[gameObjectUUID];
+            const parent = gameObject.parent;
+            parent.upMoveChild(gameObject);
+        }
+        const downMoveGameObjectByGameObjectUUID = (gameObjectUUID: number) => {
+            const gameObject = GameObject.map[gameObjectUUID];
+            const parent = gameObject.parent;
+            parent.downMoveChild(gameObject);
         }
 
         const removeGameObjectByGameObjectUUID = (gameObjectUUID: number) => {
@@ -138,6 +148,8 @@ export class EditorSystem extends System {
         host.registerCommand(removeComponentFromGameObject);
         host.registerCommand(getIDByGameObjectUUID);
         host.registerCommand(setIDByGameObjectUUID);
+        host.registerCommand(upMoveGameObjectByGameObjectUUID);
+        host.registerCommand(downMoveGameObjectByGameObjectUUID);
         host.registerCommand(removeGameObjectByGameObjectUUID);
         host.registerCommand(createNewGameObject)
         host.start()

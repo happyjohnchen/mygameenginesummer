@@ -1,24 +1,20 @@
 import * as yaml from 'js-yaml';
-import { Behaviour } from "./engine/Behaviour";
-import { ResourceManager } from "./engine/ResourceManager";
-import { EditorSystem } from './engine/systems/EditorSystem';
-import { GameLifeCycleSystem } from './engine/systems/GameLifeCycleSystem';
-import { MouseControlSystem } from './engine/systems/MouseControlSystem';
-import { CanvasContextRenderingSystem } from './engine/systems/RenderingSystem';
-import { System } from './engine/systems/System';
-import { TransformSystem } from './engine/systems/TransformSystem';
-import { Transform } from "./engine/Transform";
-import { GameSystem } from './GameSystem';
+import {Behaviour} from "./engine/Behaviour";
+import {ResourceManager} from "./engine/ResourceManager";
+import {EditorSystem} from './engine/systems/EditorSystem';
+import {GameLifeCycleSystem} from './engine/systems/GameLifeCycleSystem';
+import {MouseControlSystem} from './engine/systems/MouseControlSystem';
+import {CanvasContextRenderingSystem} from './engine/systems/RenderingSystem';
+import {System} from './engine/systems/System';
+import {TransformSystem} from './engine/systems/TransformSystem';
+import {Transform} from "./engine/Transform";
+import {GameSystem} from './GameSystem';
 
 const canvas = document.getElementById('game') as HTMLCanvasElement;
 const context = canvas.getContext('2d')
 context.font = "40px Arial";
 
-const gameObjects: { [id: string]: GameObject } = {
-
-}
-
-
+const gameObjects: { [id: string]: GameObject } = {}
 
 
 export class Matrix {
@@ -86,15 +82,13 @@ export class GameEngine {
         const mode = getQuery().mode;
         if (mode === 'edit' || mode === 'play') {
             this.mode = mode;
-        }
-        else {
+        } else {
             this.mode = 'play'
         }
 
         if (this.mode === 'edit') {
             this.addSystem(new EditorSystem());
-        }
-        else {
+        } else {
             this.addSystem(new GameLifeCycleSystem());
         }
         this.addSystem(new TransformSystem());
@@ -144,8 +138,7 @@ export class GameEngine {
         try {
             let data = yaml.load(text);
             return createGameObject(data, this);
-        }
-        catch (e) {
+        } catch (e) {
             console.log(e)
             alert('配置文件解析失败')
         }
@@ -236,13 +229,28 @@ export class GameObject {
     }
 
     removeChild(child: GameObject) {
-        
         const index = this.children.indexOf(child);
         console.log("removeChild:", index);
         if (index >= 0) {
             this.children.splice(index, 1);
         }
         this.active = false;
+    }
+
+    upMoveChild(child: GameObject) {
+        const index = this.children.indexOf(child);
+        if (index >= 1) {
+            [this.children[index], this.children[index - 1]] = [this.children[index - 1], this.children[index]];
+            console.log("upMoveChild:", index);
+        }
+    }
+
+    downMoveChild(child: GameObject) {
+        const index = this.children.indexOf(child);
+        if (index >= 0 && index < this.children.length-1) {
+            [this.children[index], this.children[index + 1]] = [this.children[index + 1], this.children[index]];
+            console.log("downMoveChild:", index);
+        }
     }
 
     addBehaviour(behaviour: Behaviour) {
@@ -274,9 +282,7 @@ export class GameObject {
     }
 }
 
-const behaviourTable = {
-
-}
+const behaviourTable = {}
 
 export function getAllComponentDefinationNames() {
     return Object.keys(behaviourTable);
@@ -313,7 +319,7 @@ export function extractGameObject(gameObject: GameObject): GameObjectData {
         const behaviourClass = (behaviour as any).__proto__
         const behaviourClassName = (behaviour as any).constructor.name;
         const __metadatas = behaviourClass.__metadatas || [];
-        const behaviourData: BehaviourData = { type: behaviourClassName }
+        const behaviourData: BehaviourData = {type: behaviourClassName}
         gameObjectData.behaviours.push(behaviourData)
         for (const metadata of __metadatas) {
             behaviourData.properties = behaviourData.properties || {};
@@ -365,12 +371,11 @@ export function createGameObject(data: any, gameEngine: GameEngine): GameObject 
 }
 
 
-
 export function getGameObjectById(id: string) {
     return gameObjects[id]
 }
 
 
 // rootGameObject
-    // A.active:true->false
-            //B.active:true->false
+// A.active:true->false
+//B.active:true->false

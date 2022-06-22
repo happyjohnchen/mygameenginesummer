@@ -26,16 +26,17 @@
 
 ### 添加的功能
 1. 新的控制面板
-2. 添加GameObject按钮
-3. 删除GameObject按钮
-4. 编辑GameObject的id
-5. ShapeRectRenderer 自定义颜色
-6. TextRenderer 自定义字体、字号、颜色
-7. Walkable 选择移动方向
-8. 新增 ShapeCircleRenderer 可绘制圆形
-9. 新增 ImageRenderer 可绘制指定图片
-10. 新增 RoundedRectRenderer 可绘制圆角矩形
-11. 新增 boolean 布尔型验证器 可用勾选框控制属性
+2. 添加 GameObject 按钮
+3. 删除 GameObject 按钮
+4. 上移/下移 GameObject 按钮
+5. 编辑GameObject的id
+6. ShapeRectRenderer 自定义颜色
+7. TextRenderer 自定义字体、字号、颜色
+8. Walkable 选择移动方向
+9. 新增 ShapeCircleRenderer 可绘制圆形
+10. 新增 ImageRenderer 可绘制指定图片
+11. 新增 RoundedRectRenderer 可绘制圆角矩形
+12. 新增 boolean 布尔型验证器 可用勾选框控制属性
 
 ### 常见问题
 

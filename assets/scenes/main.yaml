@@ -11,6 +11,24 @@ children:
   - behaviours:
       - type: Transform
         properties:
+          x: 0 
+          y: -100
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ShapeCircleRenderer
+        properties:
+          radius: 40
+          color: custom
+          customColor: '#ffff00'
+      - type: Walkable
+        properties:
+          speed: 1
+          direction: left
+    id: YellowCircle
+  - behaviours:
+      - type: Transform
+        properties:
           x: -200
           y: -200
           scaleX: 1
@@ -85,24 +103,6 @@ children:
           font: 微软雅黑
           fontColor: '#000000'
     id: NewText
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: -100
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: ShapeCircleRenderer
-        properties:
-          radius: 40
-          color: custom
-          customColor: '#ffff00'
-      - type: Walkable
-        properties:
-          speed: 1
-          direction: left
-    id: YellowCircle
   - behaviours:
       - type: Transform
         properties:

@@ -19,7 +19,6 @@ export class HierarchyTree {
         function createTreeItem(container: HTMLElement, info: GameObjectInfo) {
             const treeItem = new TreeItem();
             treeItem.addEventListener('click', (e) => {
-                console.log('点击了' + info.name, info.uuid)
                 inspectorPanel.onSelectGameObject(info.uuid);
                 e.stopPropagation();
             })

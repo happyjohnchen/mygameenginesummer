@@ -9,6 +9,7 @@ export class Player extends Behaviour {
     onStart() {
         const transform = this.gameObject.getBehaviour(Transform);
         document.addEventListener('keydown', (e) => {
+            console.log(e.key)
             switch (e.key) {
                 case 'a':
                     transform.x -= this.speed;

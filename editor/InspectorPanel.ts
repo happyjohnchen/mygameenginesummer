@@ -131,6 +131,16 @@ export class InspectorPanel {
             this.accordion.appendChild(accordionItem);
         }
 
+        //上移下移按钮
+        const upMoveGameObjectButton = document.getElementById("up-move-game-object-button");
+        const downMoveGameObjectButton = document.getElementById("down-move-game-object-button");
+        upMoveGameObjectButton.onclick = async () => {
+            await this.editorHost.execute("upMoveGameObjectByGameObjectUUID", gameObjectUUID);
+        }
+        downMoveGameObjectButton.onclick = async () => {
+            await this.editorHost.execute("downMoveGameObjectByGameObjectUUID", gameObjectUUID);
+        }
+
         //删除对象按钮
         const removeGameObjectButton = document.getElementById(
             "remove-game-object-button"
