@@ -142,7 +142,6 @@ export class GameEngine {
 
     private unserilize(text: string): GameObject {
         try {
-            console.log(text)
             let data = yaml.load(text);
             return createGameObject(data, this);
         }
@@ -331,7 +330,6 @@ export function extractGameObject(gameObject: GameObject): GameObjectData {
 }
 
 export function createGameObject(data: any, gameEngine: GameEngine): GameObject {
-    console.log(data)
     const gameObject = new GameObject();
     gameObject.engine = gameEngine;
     if (data.id) {

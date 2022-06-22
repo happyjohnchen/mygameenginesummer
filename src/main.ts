@@ -10,7 +10,9 @@ import { Transform } from './engine/Transform';
 import {ShapeCircleRenderer} from "./behaviours/ShapeCircleRenderer";
 import {ImageRenderer} from "./behaviours/ImageRenderer";
 import {RoundedRectRenderer} from "./behaviours/RoundedRectRenderer";
+import {Player} from "../assets/scripts/Player";
 
+//注册引擎提供的组件
 registerBehaviourClass(Transform);
 registerBehaviourClass(TextRenderer);
 registerBehaviourClass(Walkable);
@@ -24,6 +26,9 @@ registerBehaviourClass(BoxCollider);
 registerBehaviourClass(CircleCollider);
 registerBehaviourClass(EdgeCollider);
 registerBehaviourClass(Camera);
+
+//注册自定义脚本
+registerBehaviourClass(Player);
 
 const engine = new GameEngine()
 engine.start()
