@@ -7,6 +7,7 @@ import {Transform} from "../Transform";
 import {System} from "./System";
 import {ShapeCircleRenderer} from "../../behaviours/ShapeCircleRenderer";
 import {ImageRenderer} from "../../behaviours/ImageRenderer";
+import {RoundedRectRenderer} from "../../behaviours/RoundedRectRenderer";
 
 export class CanvasContextRenderingSystem extends System {
 
@@ -19,13 +20,13 @@ export class CanvasContextRenderingSystem extends System {
 
 
     onAddComponent(gameObject: GameObject, component: Behaviour): void {
-        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer || component instanceof ImageRenderer) {
+        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer || component instanceof ImageRenderer || component instanceof RoundedRectRenderer) {
             gameObject.renderer = component;
         }
     }
 
     onRemoveComponent(gameObject: GameObject, component: Behaviour): void {
-        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer || component instanceof ImageRenderer) {
+        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer || component instanceof ImageRenderer || component instanceof RoundedRectRenderer) {
             gameObject.renderer = null;
         }
     }
@@ -86,6 +87,26 @@ export class CanvasContextRenderingSystem extends System {
                         const image = new Image();
                         image.src = renderer.imagePath;
                         context.drawImage(image, 0, 0);
+                    } else if (child.renderer instanceof RoundedRectRenderer) {
+                        const renderer = child.renderer as RoundedRectRenderer;
+                        //避免圆角过大
+                        if (renderer.cornerRadius > Math.min(renderer.width, renderer.height) / 2) {
+                            renderer.cornerRadius = Math.min(renderer.width, renderer.height) / 2;
+                        }
+                        context.save();
+                        if (renderer.color != 'custom') {
+                            context.fillStyle = renderer.color;
+                        } else {
+                            context.fillStyle = renderer.customColor;
+                        }
+                        context.beginPath();
+                        context.moveTo(renderer.cornerRadius, 0);
+                        context.arcTo(renderer.width, 0, renderer.width, renderer.height, renderer.cornerRadius);
+                        context.arcTo(renderer.width, renderer.height, 0, renderer.height, renderer.cornerRadius);
+                        context.arcTo(0, renderer.height, 0, 0, renderer.cornerRadius);
+                        context.arcTo(0, 0, renderer.width, 0, renderer.cornerRadius);
+                        context.fill();
+                        context.restore();
                     }
                 }
                 visitChildren(child)

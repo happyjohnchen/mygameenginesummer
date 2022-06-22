@@ -9,12 +9,14 @@ import { TextRenderer } from './behaviours/TextRenderer';
 import { Transform } from './engine/Transform';
 import {ShapeCircleRenderer} from "./behaviours/ShapeCircleRenderer";
 import {ImageRenderer} from "./behaviours/ImageRenderer";
+import {RoundedRectRenderer} from "./behaviours/RoundedRectRenderer";
 
 registerBehaviourClass(Transform);
 registerBehaviourClass(TextRenderer);
 registerBehaviourClass(Walkable);
 registerBehaviourClass(Rotatable);
 registerBehaviourClass(ShapeRectRenderer);
+registerBehaviourClass(RoundedRectRenderer);
 registerBehaviourClass(ShapeCircleRenderer);
 registerBehaviourClass(ImageRenderer);
 registerBehaviourClass(RigidBody);

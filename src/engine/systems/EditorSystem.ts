@@ -69,7 +69,7 @@ export class EditorSystem extends System {
             //以下数组中的每一组的组件是互斥的，已添加一个就不能添加同组中的其他组件了
             const groupedComponentsLimitation = [
                 ['BoxCollider', 'EdgeCollider', 'CircleCollider'],
-                ['TextRenderer', 'ShapeRectRenderer', 'ShapeCircleRenderer', 'ImageRenderer']
+                ['TextRenderer', 'ShapeRectRenderer', 'ShapeCircleRenderer', 'ImageRenderer', 'RoundedRectRenderer']
             ]
             let ignoreComponentNames = existedComponentsName;
             for (const component of existedComponentsName) {

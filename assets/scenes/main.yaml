@@ -135,3 +135,19 @@ children:
               font: chalkboard
               fontColor: '#662222'
         id: ImageText
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -180
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: RoundedRectRenderer
+        properties:
+          width: 150
+          height: 50
+          cornerRadius: 15
+          color: custom
+          customColor: '#ff00ff'
+    id: RoundedCornerRect

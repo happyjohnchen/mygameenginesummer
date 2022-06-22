@@ -34,6 +34,7 @@
 7. Walkable 选择移动方向
 8. 新增 ShapeCircleRenderer 可绘制圆形
 9. 新增 ImageRenderer 可绘制指定图片
+10. 新增 RoundedRectRenderer 可绘制圆角矩形
 
 ### 常见问题
 
