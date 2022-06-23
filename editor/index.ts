@@ -48,7 +48,8 @@ async function startup() {
     await editorHost.start();
 
     const inspector = new InspectorPanel(editorHost);
-    await new HierarchyTree(editorHost).start(inspector);
+    const hierarchyTree = new HierarchyTree(editorHost);
+    await hierarchyTree.start(inspector);
 }
 
 startup();
