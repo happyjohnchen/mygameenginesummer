@@ -42,9 +42,10 @@
 3. Walkable 选择移动方向
 4. 新增 ShapeCircleRenderer 可绘制圆形
 5. 新增 ImageRenderer 可绘制指定图片
-6. 新增 RoundedRectRenderer 可绘制圆角矩形
-7. 新增 boolean 布尔型验证器 可用勾选框控制属性
-8. 新增 Sound 可播放音频，能控制音频自动播放和循环播放
+6. 新增 AnimationRenderer 可渲染动画
+7. 新增 RoundedRectRenderer 可绘制圆角矩形
+8. 新增 boolean 布尔型验证器 可用勾选框控制属性
+9. 新增 Sound 可播放音频，能控制音频自动播放和循环播放
 
 ### 常见问题
 
