@@ -68,6 +68,15 @@ export class Assets {
                             location.reload();
                         }
                         accordionItem.appendChild(button);
+                    } else if (file.endsWith('.ts')){
+                        const button = new Button();
+                        button.innerText = "使用VSCode编辑此脚本";
+                        button.onclick = async () => {
+                            const filePath = path.join(__dirname.split("node_modules")[0], file)
+                            console.log(filePath);
+                            window.open("vscode://file/"+filePath,'_self');
+                        }
+                        accordionItem.appendChild(button);
                     }
                     accordion.appendChild(accordionItem);
                 }
