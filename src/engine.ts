@@ -67,7 +67,8 @@ function getQuery(): { [key: string]: string } {
 
 
 export class GameEngine {
-    defaultSceneName: string = './assets/scenes/main.yaml'
+    defaultSceneName: string = 'assets/scenes/main.yaml'
+    currentSceneName: string = ''
     rootGameObject = new GameObject()
     lastTime: number = 0;
     storeDuringTime: number = 0;
@@ -77,6 +78,7 @@ export class GameEngine {
     public mode: "edit" | "play" = 'edit'
 
     start() {
+        this.currentSceneName = this.defaultSceneName;
         this.rootGameObject.engine = this;
 
         const mode = getQuery().mode;
@@ -103,6 +105,14 @@ export class GameEngine {
         })
     }
 
+    loadScene(sceneName: string) {
+        this.currentSceneName = sceneName;
+        this.resourceManager.loadText(sceneName, () => {
+            this.rootGameObject.children = [];
+            console.log(this.rootGameObject);
+            this.startup();
+        })
+    }
 
     addSystem(system: System) {
         this.systems.push(system);
@@ -123,7 +133,7 @@ export class GameEngine {
 
     private startup() {
         this.rootGameObject.addBehaviour(new Transform());
-        const text = this.resourceManager.get(this.defaultSceneName);
+        const text = this.resourceManager.get(this.currentSceneName);
         const scene = this.unserilize(text)
         if (scene) {
             this.rootGameObject.addChild(scene);
@@ -140,6 +150,7 @@ export class GameEngine {
             return createGameObject(data, this);
         } catch (e) {
             console.log(e)
+            console.log("配置文件解析失败", text);
             alert('配置文件解析失败')
         }
         return null;
@@ -247,7 +258,7 @@ export class GameObject {
 
     downMoveChild(child: GameObject) {
         const index = this.children.indexOf(child);
-        if (index >= 0 && index < this.children.length-1) {
+        if (index >= 0 && index < this.children.length - 1) {
             [this.children[index], this.children[index + 1]] = [this.children[index + 1], this.children[index]];
             console.log("downMoveChild:", index);
         }

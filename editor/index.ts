@@ -3,9 +3,10 @@ import {
     Button,
     provideFASTDesignSystem
 } from "@microsoft/fast-components";
-import { EditorHost } from "./EditorHost";
-import { HierarchyTree } from "./HierarchyTree";
-import { InspectorPanel } from "./InspectorPanel";
+import {EditorHost} from "./EditorHost";
+import {HierarchyTree} from "./HierarchyTree";
+import {InspectorPanel} from "./InspectorPanel";
+
 provideFASTDesignSystem().register(allComponents);
 
 
@@ -17,7 +18,8 @@ async function startup() {
     saveButton.onclick = async () => {
         const response = await editorHost.execute('getSceneSerializedData', null);
         const fs = require("fs");
-        fs.writeFileSync('assets/scenes/main.yaml', response);
+        const currentSceneName = await editorHost.execute('getCurrentSceneName', null);
+        fs.writeFileSync(currentSceneName, response);
         alert('保存成功')
     };
 
@@ -33,13 +35,13 @@ async function startup() {
     const playEditMode = document.getElementById('play-edit-mode') as HTMLElement;
     editButton.innerText = ">编辑<";
     playButton.onclick = () => {
-        editorHost.send({ command: "changeMode", data: "play" })
+        editorHost.send({command: "changeMode", data: "play"})
         playEditMode.innerText = "运行模式";
         playButton.innerText = ">运行<";
         editButton.innerText = "编辑";
     }
     editButton.onclick = () => {
-        editorHost.send({ command: "changeMode", data: "edit" })
+        editorHost.send({command: "changeMode", data: "edit"})
         playEditMode.innerText = "编辑模式";
         playButton.innerText = "运行";
         editButton.innerText = ">编辑<";

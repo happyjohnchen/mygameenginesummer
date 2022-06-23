@@ -1,0 +1,68 @@
+behaviours:
+  - type: Transform
+    properties:
+      x: 0
+      y: 0
+      scaleX: 1
+      scaleY: 1
+      rotation: 0
+id: MyGameObject
+children:
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -200
+          y: -200
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -150
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TextRenderer
+        properties:
+          text: SecondScene
+          fontSize: 50
+          font: 微软雅黑
+          fontColor: '#000000'
+    id: textSecondScene
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Player
+        properties:
+          speed: 1
+      - type: ShapeCircleRenderer
+        properties:
+          radius: 100
+          color: green
+          customColor: '#ffffff'
+    id: player
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -50
+              y: -20
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: player
+              fontSize: 40
+              font: 微软雅黑
+              fontColor: '#ffffff'
+        id: playerText

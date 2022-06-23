@@ -139,6 +139,10 @@ export class EditorSystem extends System {
             gameObject.addBehaviour(new Transform());
         }
 
+        const getCurrentSceneName = () => {
+            return engine.currentSceneName;
+        }
+
 
         host.registerCommand(getSceneSerializedData);
         host.registerCommand(getAllGameObjects);
@@ -152,7 +156,8 @@ export class EditorSystem extends System {
         host.registerCommand(upMoveGameObjectByGameObjectUUID);
         host.registerCommand(downMoveGameObjectByGameObjectUUID);
         host.registerCommand(removeGameObjectByGameObjectUUID);
-        host.registerCommand(createNewGameObject)
+        host.registerCommand(createNewGameObject);
+        host.registerCommand(getCurrentSceneName);
         host.start()
     }
 }

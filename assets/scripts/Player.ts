@@ -70,6 +70,15 @@ export class Player extends Behaviour {
                     childRenderer.color = "#117744";
                     child.addBehaviour(childRenderer);
                     break;
+                case 'k':
+                    this.engine.loadScene("assets/scenes/main.yaml");
+                    console.log("to main scene")
+                    break;
+                case 'j':
+                    this.engine.loadScene("assets/scenes/secondScene.yaml")
+                    console.log("to second scene")
+                    break;
+
             }
         })
     }
