@@ -12,6 +12,7 @@ import {ImageRenderer} from "./behaviours/ImageRenderer";
 import {RoundedRectRenderer} from "./behaviours/RoundedRectRenderer";
 import {Player} from "../assets/scripts/Player";
 import {Sound} from "./behaviours/Sound";
+import {AnimationRenderer} from "./behaviours/AnimationRenderer";
 
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
@@ -22,6 +23,7 @@ registerBehaviourClass(ShapeRectRenderer);
 registerBehaviourClass(RoundedRectRenderer);
 registerBehaviourClass(ShapeCircleRenderer);
 registerBehaviourClass(ImageRenderer);
+registerBehaviourClass(AnimationRenderer);
 registerBehaviourClass(RigidBody);
 registerBehaviourClass(BoxCollider);
 registerBehaviourClass(CircleCollider);

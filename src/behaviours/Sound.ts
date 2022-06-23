@@ -12,10 +12,13 @@ export class Sound extends Behaviour {
 
     @boolean()
     private _loopPlay = false;//循环播放
+    get loopPlay(): boolean {
+        return this._loopPlay;
+    }
 
     set loopPlay(value: boolean) {
         this._loopPlay = value;
-        if (this.audio){
+        if (this.audio) {
             this.audio.loop = this._loopPlay;
         }
     }

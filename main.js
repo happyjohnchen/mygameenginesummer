@@ -1,8 +1,5 @@
-
-
-
 async function startupCompiler() {
-    const { createServer } = require('vite');
+    const {createServer} = require('vite');
     const server = await createServer({
         // 任何合法的用户配置选项，加上 `mode` 和 `configFile`
         configFile: false,
@@ -20,7 +17,7 @@ let runtimeView;
 
 async function startEditor() {
 
-    const { app, BrowserWindow, BrowserView } = require('electron')
+    const {app, BrowserWindow, BrowserView} = require('electron')
 
     function createWindow() {
         const editorProcess = new BrowserWindow({
@@ -38,10 +35,10 @@ async function startEditor() {
         setTimeout(() => {
             runtimeView = new BrowserView()
             editorProcess.setBrowserView(runtimeView)
-            runtimeView.setBounds({ x: 400, y: 100, width: 400, height: 400 })
+            runtimeView.setBounds({x: 400, y: 100, width: 400, height: 400})
             const mode = 'edit'
             runtimeView.webContents.loadURL(`http://localhost:3000/index.html?mode=${mode}`)
-            runtimeView.webContents.openDevTools({ mode: 'undocked' })
+            runtimeView.webContents.openDevTools({mode: 'undocked'})
         }, 5000)
     }
 
@@ -71,18 +68,16 @@ class WebSocketProxy {
     runtimeClient;
 
     start() {
-        const { Server } = require('ws');
-        const wss = new Server({ port: 1234 });
+        const {Server} = require('ws');
+        const wss = new Server({port: 1234});
         wss.on('connection', (client) => {
             client.on('message', (text) => {
                 const message = JSON.parse(text);
                 if (message.command === 'login') {
                     this.handleLogin(message, client)
-                }
-                else if (message.command === 'changeMode') {
+                } else if (message.command === 'changeMode') {
                     this.handleChangeMode(message)
-                }
-                else {
+                } else {
                     this.handleDispatchToOtherRendererProcess(message, text)
                 }
             });
@@ -97,12 +92,11 @@ class WebSocketProxy {
     handleLogin(data, client) {
         if (data.id === 'editor') {
             this.editorClient = client;
-        }
-        else if (data.id === 'runtime') {
+        } else if (data.id === 'runtime') {
             this.runtimeClient = client;
         }
         if (this.editorClient && this.runtimeClient) {
-            const text = JSON.stringify({ command: 'loginSuccess' });
+            const text = JSON.stringify({command: 'loginSuccess'});
             this.editorClient.send(text);
             this.runtimeClient.send(text);
         }
@@ -111,8 +105,7 @@ class WebSocketProxy {
     handleDispatchToOtherRendererProcess(data, text) {
         if (data.id === 'editor') {
             this.runtimeClient.send(text);
-        }
-        else if (data.id === 'runtime') {
+        } else if (data.id === 'runtime') {
             this.editorClient.send(text);
         }
     }

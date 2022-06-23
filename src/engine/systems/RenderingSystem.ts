@@ -8,6 +8,7 @@ import {System} from "./System";
 import {ShapeCircleRenderer} from "../../behaviours/ShapeCircleRenderer";
 import {ImageRenderer} from "../../behaviours/ImageRenderer";
 import {RoundedRectRenderer} from "../../behaviours/RoundedRectRenderer";
+import {AnimationRenderer} from "../../behaviours/AnimationRenderer";
 
 export class CanvasContextRenderingSystem extends System {
 
@@ -20,13 +21,13 @@ export class CanvasContextRenderingSystem extends System {
 
 
     onAddComponent(gameObject: GameObject, component: Behaviour): void {
-        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer || component instanceof ImageRenderer || component instanceof RoundedRectRenderer) {
+        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer || component instanceof ImageRenderer || component instanceof RoundedRectRenderer || component instanceof AnimationRenderer) {
             gameObject.renderer = component;
         }
     }
 
     onRemoveComponent(gameObject: GameObject, component: Behaviour): void {
-        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer || component instanceof ImageRenderer || component instanceof RoundedRectRenderer) {
+        if (component instanceof ShapeRectRenderer || component instanceof TextRenderer || component instanceof ShapeCircleRenderer || component instanceof ImageRenderer || component instanceof RoundedRectRenderer || component instanceof AnimationRenderer) {
             gameObject.renderer = null;
         }
     }
@@ -86,9 +87,11 @@ export class CanvasContextRenderingSystem extends System {
                         const renderer = child.renderer as ImageRenderer;
                         const image = new Image();
                         image.src = renderer.imagePath;
-                        if (renderer.showImage){
-                            context.drawImage(image, 0, 0);
-                        }
+                        context.drawImage(image, 0, 0);
+                    } else if (child.renderer instanceof AnimationRenderer) {
+                        const renderer = child.renderer as AnimationRenderer;
+                        context.drawImage(renderer.currentImage, 0, 0);
+                        console.log(renderer.currentImage.src)
                     } else if (child.renderer instanceof RoundedRectRenderer) {
                         const renderer = child.renderer as RoundedRectRenderer;
                         //避免圆角过大

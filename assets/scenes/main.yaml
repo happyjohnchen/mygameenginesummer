@@ -114,7 +114,6 @@ children:
       - type: ImageRenderer
         properties:
           imagePath: assets/images/testImage.png
-          showImage: true
       - type: Walkable
         properties:
           speed: 1
@@ -207,5 +206,20 @@ children:
         properties:
           soundPath: assets/sounds/start.mp3
           autoPlay: false
-          loopPlay: false
     id: sound
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 100
+          y: 100
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: AnimationRenderer
+        properties:
+          imagePathPrefix: assets/animations/testAnimation/testAnim
+          imagePathSuffix: .png
+          startNum: 1
+          endNum: 10
+          frameForEachImage: 10
+    id: animation

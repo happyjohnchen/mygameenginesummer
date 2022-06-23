@@ -66,10 +66,11 @@ export class EditorSystem extends System {
             const existedComponentsName = gameObject.behaviours.map(behaviour => {
                 return (behaviour as any).__proto__.constructor.name
             });
-            //以下数组中的每一组的组件是互斥的，已添加一个就不能添加同组中的其他组件了
+            // 以下数组中,每一组的组件是互斥的
+            // 同一 GameObject 添加一个组件后，就不能添加同组中的其他组件了
             const groupedComponentsLimitation = [
                 ['BoxCollider', 'EdgeCollider', 'CircleCollider'],
-                ['TextRenderer', 'ShapeRectRenderer', 'ShapeCircleRenderer', 'ImageRenderer', 'RoundedRectRenderer']
+                ['TextRenderer', 'ShapeRectRenderer', 'ShapeCircleRenderer', 'ImageRenderer', 'AnimationRenderer', 'RoundedRectRenderer']
             ]
             let ignoreComponentNames = existedComponentsName;
             for (const component of existedComponentsName) {
