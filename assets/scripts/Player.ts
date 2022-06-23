@@ -11,7 +11,6 @@ export class Player extends Behaviour {
     onStart() {
         const transform = this.gameObject.getBehaviour(Transform);
         document.addEventListener('keydown', (e) => {
-            console.log(e.key)
             switch (e.key) {
                 case 'a':
                     transform.x -= this.speed;
@@ -21,12 +20,14 @@ export class Player extends Behaviour {
                     break;
                 case 'w':
                     transform.y -= this.speed;
-                    //前进时会发出声音
+                    //前进时会发出声音，并自动循环播放
                     getGameObjectById("sound").getBehaviour(Sound).play();
                     getGameObjectById("sound").getBehaviour(Sound).loopPlay = true;
                     break;
                 case 's':
                     transform.y += this.speed;
+                    //后退时取消循环播放
+                    getGameObjectById("sound").getBehaviour(Sound).loopPlay = false;
                     break;
             }
         })
