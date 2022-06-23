@@ -15,24 +15,36 @@ export class Player extends Behaviour {
             switch (e.key) {
                 case 'a':
                     transform.x -= this.speed;
-                    //左移时暂停动画
-                    getGameObjectById("animation").getBehaviour(AnimationRenderer).pauseAnimation = true;
                     break;
                 case 'd':
                     transform.x += this.speed;
-                    //右移时恢复动画
-                    getGameObjectById("animation").getBehaviour(AnimationRenderer).pauseAnimation = false;
                     break;
                 case 'w':
                     transform.y -= this.speed;
-                    //前进时会发出声音，并自动循环播放
-                    getGameObjectById("sound").getBehaviour(Sound).play();
-                    getGameObjectById("sound").getBehaviour(Sound).loopPlay = true;
                     break;
                 case 's':
                     transform.y += this.speed;
-                    //后退时取消循环播放
+                    break;
+                case 'z':
+                    //发出声音，并自动循环播放
+                    getGameObjectById("sound").getBehaviour(Sound).play();
+                    getGameObjectById("sound").getBehaviour(Sound).loopPlay = true;
+                    break;
+                case 'x':
+                    //暂停播放
+                    getGameObjectById("sound").getBehaviour(Sound).pause();
+                    break;
+                case 'c':
+                    //取消循环播放
                     getGameObjectById("sound").getBehaviour(Sound).loopPlay = false;
+                    break;
+                case 'v':
+                    //暂停动画
+                    getGameObjectById("animation").getBehaviour(AnimationRenderer).pauseAnimation = true;
+                    break;
+                case 'b':
+                    //恢复动画
+                    getGameObjectById("animation").getBehaviour(AnimationRenderer).pauseAnimation = false;
                     break;
             }
         })

@@ -11,6 +11,16 @@ children:
   - behaviours:
       - type: Transform
         properties:
+          x: -200
+          y: -200
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
           x: 0
           y: -100
           scaleX: 1
@@ -26,16 +36,6 @@ children:
           speed: 1
           direction: left
     id: YellowCircle
-  - behaviours:
-      - type: Transform
-        properties:
-          x: -200
-          y: -200
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: Camera
-    id: camera
   - behaviours:
       - type: Transform
         properties:
@@ -102,7 +102,7 @@ children:
           fontSize: 30
           font: 微软雅黑
           fontColor: '#000000'
-    id: NewText
+    id: text1234
   - behaviours:
       - type: Transform
         properties:
@@ -135,22 +135,6 @@ children:
               font: chalkboard
               fontColor: '#662222'
         id: ImageText
-  - behaviours:
-      - type: Transform
-        properties:
-          x: -180
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: RoundedRectRenderer
-        properties:
-          width: 150
-          height: 50
-          cornerRadius: 15
-          color: custom
-          customColor: '#ff00ff'
-    id: RoundedCornerRect
   - behaviours:
       - type: Transform
         properties:
@@ -194,6 +178,22 @@ children:
               scaleY: 1
               rotation: 0
         id: NewGameObject
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -120
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: RoundedRectRenderer
+        properties:
+          width: 150
+          height: 50
+          cornerRadius: 15
+          color: custom
+          customColor: '#ff00ff'
+    id: RoundedCornerRect
   - behaviours:
       - type: Transform
         properties:
