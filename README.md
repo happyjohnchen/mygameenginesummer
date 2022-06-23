@@ -31,10 +31,11 @@
 ##### 编辑器部分
 
 1. 新的控制面板
-2. 添加 GameObject 按钮
-3. 删除 GameObject 按钮
-4. 上移/下移 GameObject 按钮
-5. 编辑GameObject的id
+2. 新的资源面板
+3. 添加 GameObject 按钮
+4. 删除 GameObject 按钮
+5. 上移/下移 GameObject 按钮
+6. 编辑GameObject的id
 
 ##### 引擎部分
 
@@ -92,15 +93,6 @@
 2. 再次尝试点击控制面板中的刷新按钮，刷新编辑器
 3. 关闭游戏引擎
 4. 使用 `npm run start` 再次启动游戏引擎
-
-##### 我希望编辑其他场景，而不是 main.yaml
-
-1. 在 `assets/scenes` 中创建一个新的yaml文件并命名
-2. 前往 `src/engine.ts` 文件
-3. 找到 `GameEngine` 类
-4. 将 `defaultSceneName` 修改为你想要编辑的场景
-5. 使用 `npm run start` 重新启动游戏引擎
-6. 引擎会以编辑模式载入新指定的场景
 
 ##### 填写组件的文件路径后，游戏没有按预期加载相应文件
 

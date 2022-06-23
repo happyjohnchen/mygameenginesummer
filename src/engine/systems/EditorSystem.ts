@@ -143,6 +143,10 @@ export class EditorSystem extends System {
             return engine.currentSceneName;
         }
 
+        const loadScene = (scene: string) => {
+            this.gameEngine.loadScene(scene);
+        }
+
 
         host.registerCommand(getSceneSerializedData);
         host.registerCommand(getAllGameObjects);
@@ -158,6 +162,7 @@ export class EditorSystem extends System {
         host.registerCommand(removeGameObjectByGameObjectUUID);
         host.registerCommand(createNewGameObject);
         host.registerCommand(getCurrentSceneName);
+        host.registerCommand(loadScene);
         host.start()
     }
 }

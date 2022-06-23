@@ -38,12 +38,22 @@ body {
     overflow-y: auto;
 }
 
-#assets-panel {
-    width: 1200px;
-    height: 300px;
+#file-panel {
+    width: 400px;
+    height: 280px;
     position: absolute;
     top: 500px;
     left: 0;
+    overflow-y: auto;
+}
+
+#assets-panel {
+    width: 800px;
+    height: 280px;
+    position: absolute;
+    top: 500px;
+    left: 400px;
+    overflow-y: auto;
 }
 
 .control-element {

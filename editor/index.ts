@@ -6,6 +6,7 @@ import {
 import {EditorHost} from "./EditorHost";
 import {HierarchyTree} from "./HierarchyTree";
 import {InspectorPanel} from "./InspectorPanel";
+import {Assets} from "./Assets";
 
 provideFASTDesignSystem().register(allComponents);
 
@@ -51,7 +52,9 @@ async function startup() {
 
     const inspector = new InspectorPanel(editorHost);
     const hierarchyTree = new HierarchyTree(editorHost);
+    const assetPanel = new Assets(editorHost);
     await hierarchyTree.start(inspector);
+    await assetPanel.start();
 }
 
 startup();

@@ -1,60 +1,71 @@
 <html>
 
 <head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" type="text/css" href="editor.css" />
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="editor.css"/>
     <title>MyGameEngineSummer</title>
 </head>
 
 <body>
-    <fast-card id="control-panel" style="background-color:dimgrey;">
-        <div style="padding: 0 10px 10px;">
-            <h4 id="inspector-id" class="control-element">控制面板</h4>
-            <fast-button id="save-button" class="control-element" style="margin-left: 30px;">保存</fast-button>
-            <fast-button id="refresh-button" class="control-element">刷新</fast-button>
-            <fast-button id="play-button" class="control-element" style="margin-left: 320px;">运行</fast-button>
-            <fast-button id="edit-button" class="control-element">编辑</fast-button>
-            <h4 id="play-edit-mode" class="control-element" style="margin-left: 400px; color: bisque;">编辑模式</h4>
-        </div>
-    </fast-card>
-    <fast-card id="hierarchy-panel">
-        <div style="padding: 0 10px 10px;">
-            <h4>层级树面板</h4>
-            <fast-tree-view id="hierarchy-tree"> </fast-tree-view>
-            <fast-divide></fast-divide>
-            <fast-button id="add-game-object-button" style="width: 380px;background-color: cadetblue">添加GameObject</fast-button>
-        </div>
-    </fast-card>
-    <fast-card id="runtime-panel">
-        <div style="padding: 0 10px 10px;">
-            <h4>编辑器面板</h4>
-            <fast-button>Button</fast-button>
-        </div>
-    </fast-card>
-    <fast-card id="inspector-panel">
-        <div style="padding: 0 10px 10px; ">
-            <h4 id="inspector-id">属性面板</h4>
-            <fast-accordion id="inspector-accordion">
-            </fast-accordion>
-            <fast-divide></fast-divide>
-            <fast-select id="add-component-select">
+<fast-card id="control-panel" style="background-color:dimgrey;">
+    <div style="padding: 0 10px 10px;">
+        <h4 id="inspector-id" class="control-element">控制面板</h4>
+        <fast-button id="save-button" class="control-element" style="margin-left: 30px;">保存</fast-button>
+        <fast-button id="refresh-button" class="control-element">刷新</fast-button>
+        <fast-button id="play-button" class="control-element" style="margin-left: 320px;">运行</fast-button>
+        <fast-button id="edit-button" class="control-element">编辑</fast-button>
+        <h4 id="play-edit-mode" class="control-element" style="margin-left: 400px; color: bisque;">编辑模式</h4>
+    </div>
+</fast-card>
+<fast-card id="hierarchy-panel">
+    <div style="padding: 0 10px 10px;">
+        <h4>层级树面板</h4>
+        <fast-tree-view id="hierarchy-tree"></fast-tree-view>
+        <fast-divide></fast-divide>
+        <fast-button id="add-game-object-button" style="width: 380px;background-color: cadetblue">添加GameObject
+        </fast-button>
+    </div>
+</fast-card>
+<fast-card id="runtime-panel">
+    <div style="padding: 0 10px 10px;">
+        <h4>编辑器面板</h4>
+        <fast-button>Button</fast-button>
+    </div>
+</fast-card>
+<fast-card id="inspector-panel">
+    <div style="padding: 0 10px 10px; ">
+        <h4 id="inspector-id">属性面板</h4>
+        <fast-accordion id="inspector-accordion">
+        </fast-accordion>
+        <fast-divide></fast-divide>
+        <fast-select id="add-component-select">
 
-            </fast-select>
-            <fast-button id="add-component-button">添加组件</fast-button>
+        </fast-select>
+        <fast-button id="add-component-button">添加组件</fast-button>
 
-            <fast-button id="up-move-game-object-button" style="width: 185px; background-color: dimgrey;">上移</fast-button>
-            <fast-button id="down-move-game-object-button" style="width: 185px; background-color: dimgrey;">下移</fast-button>
-            <fast-button id="remove-game-object-button"
-                style="width: 380px; vertical-align: middle;background-color:indigo;">删除GameObject</fast-button>
-        </div>
-    </fast-card>
+        <fast-button id="up-move-game-object-button" style="width: 185px; background-color: dimgrey;">上移</fast-button>
+        <fast-button id="down-move-game-object-button" style="width: 185px; background-color: dimgrey;">下移</fast-button>
+        <fast-button id="remove-game-object-button"
+                     style="width: 380px; vertical-align: middle;background-color:indigo;">删除GameObject
+        </fast-button>
+    </div>
+</fast-card>
 
-    <fast-card id="assets-panel">
-        <div style="padding: 0 10px 10px; ">
-            <h4>资源面板</h4>
-        </div>
-    </fast-card>
-    <script type="module" src="/editor/index.ts"></script>
+<fast-card id="file-panel">
+    <div style="padding: 0 10px 10px; ">
+        <h4>资源面板</h4>
+        <fast-tree-view id="file-tree"></fast-tree-view>
+        <fast-divide></fast-divide>
+    </div>
+</fast-card>
+
+<fast-card id="assets-panel">
+    <div style="padding: 0 10px 10px; ">
+        <div id="file-browser"></div>
+        <fast-divide></fast-divide>
+    </div>
+</fast-card>
+<script type="module" src="/editor/index.ts"></script>
 
 </body>
 
