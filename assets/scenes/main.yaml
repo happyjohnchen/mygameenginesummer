@@ -206,6 +206,6 @@ children:
       - type: Sound
         properties:
           soundPath: assets/sounds/start.mp3
-          autoPlay: true
+          autoPlay: false
           loopPlay: false
     id: sound

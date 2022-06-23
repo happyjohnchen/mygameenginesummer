@@ -25,12 +25,9 @@ export class Sound extends Behaviour {
         this.audio.setAttribute('hidden', 'true');
         document.body.appendChild(this.audio);
         this.audio.loop = this.loopPlay;
-        console.log("autoplay:" + this.autoPlay);
-        console.log("loopplay:" + this.loopPlay);
-        if (this.autoPlay) {
+        if (this.autoPlay && this.engine.mode === "play") {
             this.play();
         }
-        console.log(this.audio)
     }
 
     play() {

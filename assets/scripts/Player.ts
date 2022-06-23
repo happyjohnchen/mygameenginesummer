@@ -1,6 +1,8 @@
 import {Behaviour} from "../../src/engine/Behaviour";
 import {Transform} from "../../src/engine/Transform";
 import {number} from "../../src/engine/validators/number";
+import {getGameObjectById} from "../../src/engine";
+import {Sound} from "../../src/behaviours/Sound";
 
 export class Player extends Behaviour {
     @number()
@@ -19,6 +21,8 @@ export class Player extends Behaviour {
                     break;
                 case 'w':
                     transform.y -= this.speed;
+                    //前进时会发出声音
+                    getGameObjectById("sound").getBehaviour(Sound).play();
                     break;
                 case 's':
                     transform.y += this.speed;
