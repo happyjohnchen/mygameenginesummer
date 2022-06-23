@@ -23,6 +23,7 @@ export class Player extends Behaviour {
                     transform.y -= this.speed;
                     //前进时会发出声音
                     getGameObjectById("sound").getBehaviour(Sound).play();
+                    getGameObjectById("sound").getBehaviour(Sound).loopPlay = true;
                     break;
                 case 's':
                     transform.y += this.speed;
