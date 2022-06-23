@@ -3,6 +3,7 @@ import {Transform} from "../../src/engine/Transform";
 import {number} from "../../src/engine/validators/number";
 import {getGameObjectById} from "../../src/engine";
 import {Sound} from "../../src/behaviours/Sound";
+import {AnimationRenderer} from "../../src/behaviours/AnimationRenderer";
 
 export class Player extends Behaviour {
     @number()
@@ -14,9 +15,13 @@ export class Player extends Behaviour {
             switch (e.key) {
                 case 'a':
                     transform.x -= this.speed;
+                    //左移时暂停动画
+                    getGameObjectById("animation").getBehaviour(AnimationRenderer).pauseAnimation = true;
                     break;
                 case 'd':
                     transform.x += this.speed;
+                    //右移时恢复动画
+                    getGameObjectById("animation").getBehaviour(AnimationRenderer).pauseAnimation = false;
                     break;
                 case 'w':
                     transform.y -= this.speed;
