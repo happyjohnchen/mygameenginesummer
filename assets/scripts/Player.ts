@@ -1,9 +1,10 @@
 import {Behaviour} from "../../src/engine/Behaviour";
 import {Transform} from "../../src/engine/Transform";
 import {number} from "../../src/engine/validators/number";
-import {getGameObjectById} from "../../src/engine";
+import {GameObject, getGameObjectById} from "../../src/engine";
 import {Sound} from "../../src/behaviours/Sound";
 import {AnimationRenderer} from "../../src/behaviours/AnimationRenderer";
+import {ShapeCircleRenderer} from "../../src/behaviours/ShapeCircleRenderer";
 
 export class Player extends Behaviour {
     @number()
@@ -45,6 +46,29 @@ export class Player extends Behaviour {
                 case 'b':
                     //恢复动画
                     getGameObjectById("animation").getBehaviour(AnimationRenderer).pauseAnimation = false;
+                    break;
+                case 'n':
+                    //隐藏动画
+                    getGameObjectById("animation").active = false;
+                    break;
+                case 'm':
+                    //显示动画
+                    getGameObjectById("animation").active = true;
+                    break;
+                case 'l':
+                    //在player周围随机生成绿点
+                    const child = new GameObject();
+                    this.gameObject.addChild(child);
+
+                    const childTransform = new Transform();
+                    childTransform.x = Math.random() * 100;
+                    childTransform.y = Math.random() * 100;
+                    child.addBehaviour(childTransform);
+
+                    const childRenderer = new ShapeCircleRenderer();
+                    childRenderer.radius = Math.random() % 30 + 20;
+                    childRenderer.color = "#117744";
+                    child.addBehaviour(childRenderer);
                     break;
             }
         })
