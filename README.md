@@ -70,10 +70,10 @@
 
 ##### 点击添加GameObject按钮后，新的GameObject未出现在期望的位置
 
-1. 在层级树中尚未选中任何GameObject的情况下，新的GameObject默认出现在uuid=1的MyGameObject下
+1. 在层级树中尚未选中任何GameObject的情况下，新的 GameObject 默认出现在 uuid = 1 的 MyGameObject 下
 2. 点击新添加GameObject的父对象
 3. 在属性面板中确认已经选中父对象
-4. 点击添加GameObject按钮
+4. 点击添加 GameObject 按钮
 5. 点击控制面板中的刷新按钮
 6. 使用 `npm run start` 重新启动游戏引擎
 
@@ -83,6 +83,22 @@
 2. 再次尝试点击控制面板中的刷新按钮，刷新编辑器
 3. 关闭游戏引擎
 4. 使用 `npm run start` 再次启动游戏引擎
+
+##### 我希望编辑其他场景，而不是 main.yaml
+
+1. 在 `assets/scenes` 中创建一个新的yaml文件并命名
+2. 前往 `src/engine.ts` 文件
+3. 找到 `GameEngine` 类
+4. 将 `defaultSceneName` 修改为你想要编辑的场景
+5. 使用 `npm run start` 重新启动游戏引擎
+6. 引擎会以编辑模式载入新指定的场景
+
+##### 填写组件的文件路径后，游戏没有按预期加载相应文件
+
+1. 检查文件名是否正确
+2. 填写文件路径时，应包含文件后缀
+3. 文件路径应为相对于项目的根目录，例如 `assets\images\testImage.png`
+4. 确认文件格式可被浏览器打开，且文件没有损坏
 
 ### 参与贡献
 
