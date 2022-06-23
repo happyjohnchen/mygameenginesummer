@@ -13,9 +13,10 @@
 
 1. 安装nodejs
 2. 安装VSCode或其他代码编辑器
-3. git拉取本项目源码
-4. 运行`npm install`安装项目依赖
-5. 执行`npm run start`运行引擎
+3. 使用 `git clone https://gitee.com/happyjohnchen/mygameenginesummer.git` 拉取本项目源码
+4. `cd mygameenginesummer` 进入项目目录
+5. 运行 `npm install` 安装项目依赖
+6. 执行 `npm run start` 运行引擎
 
 ### 使用说明
 
