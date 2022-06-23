@@ -72,11 +72,11 @@ export class Player extends Behaviour {
                     break;
                 case 'k':
                     this.engine.loadScene("assets/scenes/main.yaml");
-                    console.log("to main scene")
+                    console.log("player: to main scene")
                     break;
                 case 'j':
                     this.engine.loadScene("assets/scenes/secondScene.yaml")
-                    console.log("to second scene")
+                    console.log("player: to second scene")
                     break;
 
             }

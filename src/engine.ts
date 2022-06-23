@@ -281,6 +281,7 @@ export class GameObject {
                 return behaviour as any;
             }
         }
+        console.log("getBehaviour: " + this.id + "找不到Behaviour" + clz.name);
         return null;
     }
 
@@ -383,6 +384,9 @@ export function createGameObject(data: any, gameEngine: GameEngine): GameObject 
 
 
 export function getGameObjectById(id: string) {
+    if (gameObjects[id] === null) {
+        console.log("getGameObjectById:不存在id为 " + id + " 的GameObject");
+    }
     return gameObjects[id]
 }
 

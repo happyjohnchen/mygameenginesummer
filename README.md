@@ -37,7 +37,7 @@
 
 ##### 引擎部分
 
-1. engine.loadScene() 可跳转场景
+1. `engine.loadScene()` 可跳转场景
 2. ShapeRectRenderer 自定义颜色
 3. TextRenderer 自定义字体、字号、颜色
 4. Walkable 选择移动方向
