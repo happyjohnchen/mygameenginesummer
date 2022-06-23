@@ -55,6 +55,14 @@
 >
 >若到某一步已经解决问题，则无需继续执行后面的步骤。
 
+##### 如何添加新的 Behaviour 组件
+
+1. 复制 `src/behaviours/BehaviourDemo` 到 `assets/scripts` 中
+2. 修改为文件名和类名 
+3. 编写脚本
+4. 在 `main.ts` 中使用 `registerBehaviourClass()` 注册你的新 Behaviour
+5. 启动/刷新引擎，即可在添加组件菜单中看到你的新组件
+
 ##### 运行时不能正确显示场景中的内容，而是显示为空白
 
 1. 点击控制面板的编辑按钮，刷新运行时
