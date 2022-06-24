@@ -53,6 +53,7 @@ export class Assets {
                 const fileNameInput = document.getElementById('file-name-input') as TextField;
                 const newDirectoryButton = document.getElementById('new-directory-button') as Button;
                 const newScriptButton = document.getElementById('new-script-button') as Button;
+                const newSceneButton = document.getElementById('new-scene-button') as Button;
                 //新建文件夹
                 newDirectoryButton.onclick = () => {
                     const newDirectoryName = fileNameInput.currentValue;
@@ -60,12 +61,31 @@ export class Assets {
                         const newDirectoryFullPath = path.join(dir, newDirectoryName);
                         if (!fs.existsSync(newDirectoryFullPath)) {
                             fs.mkdirSync(newDirectoryFullPath);
+                            alert("新建文件夹" + newDirectoryFullPath);
                         }
                     }
                 }
                 //新建脚本
                 newScriptButton.onclick = () => {
-
+                    if (fileNameInput.currentValue && fileNameInput.currentValue !== "") {
+                        const newScriptPath = path.join(dir, fileNameInput.currentValue + ".ts");
+                        if (!fs.existsSync(newScriptPath)) {
+                            const scriptDemo = fs.readFileSync('src/behaviours/BehaviourDemo.ts');
+                            fs.writeFileSync(newScriptPath, scriptDemo);
+                            alert("新建脚本" + newScriptPath);
+                        }
+                    }
+                }
+                //新建场景
+                newSceneButton.onclick = () => {
+                    if (fileNameInput.currentValue && fileNameInput.currentValue !== "") {
+                        const newScenePath = path.join(dir, fileNameInput.currentValue + ".yaml");
+                        if (!fs.existsSync(newScenePath)) {
+                            const sceneDemo = fs.readFileSync('src/engine/SceneDemo.yaml');
+                            fs.writeFileSync(newScenePath, sceneDemo);
+                            alert("新建场景" + newScenePath);
+                        }
+                    }
                 }
                 //显示当前路径
                 const breadcrumb = new Breadcrumb();
