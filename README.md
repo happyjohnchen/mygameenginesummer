@@ -101,6 +101,14 @@
 3. 文件路径应为相对于项目的根目录，例如 `assets\images\testImage.png`
 4. 确认文件格式可被浏览器打开，且文件没有损坏
 
+##### 从资源面板加载其他场景后，刷新编辑器或运行时后又回到了 main.yaml 场景
+
+1. 打开 `src/engine.ts` 文件
+2. 找到 `class GameEngine` 中的 `defaultSceneName` 属性
+3. 将属性值更改为你需要编辑的场景文件(_注意文件地址的完整及拼写_)
+4. 保存 `src/engine.ts` 文件
+5. 点击游戏引擎控制面板中的刷新按钮
+
 ### 参与贡献
 
 1. Fork 本仓库
