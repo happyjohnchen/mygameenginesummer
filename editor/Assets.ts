@@ -37,6 +37,7 @@ export class Assets {
                 const fullPath = path.join(dir, item);
                 const stat = fs.statSync(fullPath);
                 if (stat.isDirectory()) {
+                    fileList.push(fullPath);
                     readFileList(path.join(dir, item), treeItem, fileBrowser, editorHost);  //递归读取文件
                 } else {
                     if (!item.startsWith('.')) {
@@ -59,8 +60,14 @@ export class Assets {
                 const accordion = new Accordion();
                 for (const file of fileList) {
                     const accordionItem = new AccordionItem();
-                    accordionItem.innerHTML = "<div slot=\"heading\">" + file.split('/').slice(-1)[0] + "</div>";
+                    const stat = fs.statSync(file);
+                    if (stat.isDirectory()) {
+                        accordionItem.innerHTML = "<div slot=\"heading\">" + file.split('/').slice(-1)[0] + "/</div>";
+                    } else {
+                        accordionItem.innerHTML = "<div slot=\"heading\">" + file.split('/').slice(-1)[0] + "</div>";
+                    }
                     if (file.endsWith('.yaml')) {
+                        //场景
                         const button = new Button();
                         button.innerText = "加载此场景";
                         button.onclick = async () => {
@@ -68,7 +75,8 @@ export class Assets {
                             location.reload();
                         }
                         accordionItem.appendChild(button);
-                    } else if (file.endsWith('.ts')) {
+                    } else if (file.endsWith('.ts') || file.endsWith('.js')) {
+                        //脚本
                         const button = new Button();
                         button.innerText = "使用VSCode编辑此脚本";
                         button.onclick = async () => {
@@ -77,7 +85,8 @@ export class Assets {
                             window.open("vscode://file/" + filePath, '_self');
                         }
                         accordionItem.appendChild(button);
-                    } else if (file.endsWith('.png') || file.endsWith('.jpg')) {
+                    } else if (file.endsWith('.png') || file.endsWith('.jpg') || file.endsWith('.jpeg') || file.endsWith('.JPG')) {
+                        //图片
                         const image = new Image();
                         image.src = file;
                         accordionItem.appendChild(image);
