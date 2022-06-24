@@ -281,8 +281,17 @@ export class GameObject {
                 return behaviour as any;
             }
         }
-        console.log("getBehaviour: " + this.id + "找不到Behaviour" + clz.name);
+        console.log("getBehaviour: " + this.id + "找不到Behaviour: " + clz.name);
         return null;
+    }
+
+    hasBehaviour<T extends typeof Behaviour>(clz: T): boolean {
+        for (const behaviour of this.behaviours) {
+            if (behaviour.constructor.name === clz.name) {
+                return true;
+            }
+        }
+        return false;
     }
 
     removeBehaviour(behaviour: Behaviour) {

@@ -28,8 +28,8 @@ export class GameSystem extends System {
         this.m_world = world
 
         function visit(gameObject: GameObject) {
-            const rigidBodyComponent = gameObject.getBehaviour(RigidBody)
-            if (rigidBodyComponent) {
+            if (gameObject.hasBehaviour(RigidBody)) {
+                const rigidBodyComponent = gameObject.getBehaviour(RigidBody)
                 const bodyDefine = new b2BodyDef();
                 bodyDefine.position.Set(rigidBodyComponent.x, rigidBodyComponent.y);
                 bodyDefine.type = rigidBodyComponent.type as any as b2BodyType;
