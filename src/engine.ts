@@ -57,7 +57,8 @@ function getQuery(): { [key: string]: string } {
     const search = window.location.search;
     if (search) {
         const queryString = search.substring(1);
-        const tempArr = queryString.split('=');
+        const splitRegulation = /[&=]/;
+        const tempArr = queryString.split(splitRegulation);
         for (let i = 0; i < tempArr.length; i = i + 2) {
             result[tempArr[i]] = tempArr[i + 1]
         }
@@ -81,6 +82,7 @@ export class GameEngine {
         this.currentSceneName = this.defaultSceneName;
         this.rootGameObject.engine = this;
 
+        //获取模式
         const mode = getQuery().mode;
         if (mode === 'edit' || mode === 'play') {
             this.mode = mode;
@@ -109,7 +111,6 @@ export class GameEngine {
         this.currentSceneName = sceneName;
         this.resourceManager.loadText(sceneName, () => {
             this.rootGameObject.children = [];
-            console.log(this.rootGameObject);
             this.startup();
         })
     }
