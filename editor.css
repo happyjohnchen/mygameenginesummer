@@ -48,11 +48,20 @@ body {
 }
 
 #assets-panel {
-    width: 800px;
+    width: 600px;
     height: 280px;
     position: absolute;
     top: 500px;
     left: 400px;
+    overflow-y: auto;
+}
+
+#file-handle-panel {
+    width: 200px;
+    height: 280px;
+    position: absolute;
+    top: 500px;
+    left: 1000px;
     overflow-y: auto;
 }
 

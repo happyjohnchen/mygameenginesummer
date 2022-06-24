@@ -56,15 +56,25 @@
         <h4>资源面板</h4>
         <fast-tree-view id="file-tree"></fast-tree-view>
         <fast-divide></fast-divide>
-        <fast-button id="new-directory-button" style="width: 380px;">新建目录</fast-button>
-        <fast-divide></fast-divide>
-        <fast-button id="new-script-button" style="width: 380px;">新建脚本</fast-button>
     </div>
 </fast-card>
 
 <fast-card id="assets-panel">
     <div style="padding: 0 10px 10px; ">
         <div id="file-browser"></div>
+        <fast-divide></fast-divide>
+    </div>
+</fast-card>
+<script type="module" src="/editor/index.ts"></script>
+
+<fast-card id="file-handle-panel">
+    <div style="padding: 0 10px 10px; ">
+        <div id="file-handler"></div>
+        <fast-text-field id="file-name-input" placeholder="新文件/文件夹名" style="width: 180px;"></fast-text-field>
+        <fast-divide></fast-divide>
+        <fast-button id="new-directory-button" style="width: 180px;">新建文件夹</fast-button>
+        <fast-divide></fast-divide>
+        <fast-button id="new-script-button" style="width: 180px;">新建 Behaviour 脚本</fast-button>
         <fast-divide></fast-divide>
     </div>
 </fast-card>

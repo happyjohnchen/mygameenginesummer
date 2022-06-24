@@ -3,7 +3,7 @@ import {
     AccordionItem,
     Breadcrumb,
     BreadcrumbItem,
-    Button,
+    Button, TextField,
     TreeItem,
     TreeView
 } from "@microsoft/fast-components";
@@ -14,11 +14,13 @@ export class Assets {
 
     treeNode: TreeView
     fileBrowser: HTMLDivElement
+    fileHandler: HTMLDivElement
     editorHostt: EditorHost
 
     constructor(editorHost: EditorHost) {
         this.treeNode = document.getElementById('file-tree') as TreeView;
         this.fileBrowser = document.getElementById('file-browser') as HTMLDivElement;
+        this.fileHandler = document.getElementById('file-handler') as HTMLDivElement;
         this.editorHostt = editorHost;
     }
 
@@ -48,6 +50,23 @@ export class Assets {
             treeItem.onclick = (e) => {
                 //选中了当前文件夹
                 fileBrowser.innerHTML = '';
+                const fileNameInput = document.getElementById('file-name-input') as TextField;
+                const newDirectoryButton = document.getElementById('new-directory-button') as Button;
+                const newScriptButton = document.getElementById('new-script-button') as Button;
+                //新建文件夹
+                newDirectoryButton.onclick = () => {
+                    const newDirectoryName = fileNameInput.currentValue;
+                    if (newDirectoryName && newDirectoryName !== "") {
+                        const newDirectoryFullPath = path.join(dir, newDirectoryName);
+                        if (!fs.existsSync(newDirectoryFullPath)) {
+                            fs.mkdirSync(newDirectoryFullPath);
+                        }
+                    }
+                }
+                //新建脚本
+                newScriptButton.onclick = () => {
+
+                }
                 //显示当前路径
                 const breadcrumb = new Breadcrumb();
                 for (const direction of dir.split('/')) {
@@ -91,6 +110,35 @@ export class Assets {
                         image.src = file;
                         accordionItem.appendChild(image);
                     }
+                    //删除文件
+                    const button = new Button();
+                    if (stat.isDirectory()) {
+                        button.innerText = "删除文件夹";
+                        button.onclick = () => {
+                            if (confirm("确认删除文件夹" + file)) {
+                                if (!fs.existsSync(file)) {
+                                    alert("文件夹不存在")
+                                    return;
+                                }
+                                if (fs.readdirSync(file).length !== 0) {
+                                    console.log(fs.readdirSync(file))
+                                    alert("文件夹非空")
+                                    return;
+                                }
+                                fs.rmdirSync(file);
+                            }
+                        }
+                    } else {
+                        button.innerText = "删除文件";
+                        button.onclick = () => {
+                            if (confirm("确认删除文件" + file)) {
+                                if (fs.existsSync(file)) {
+                                    fs.rmSync(file);
+                                }
+                            }
+                        }
+                    }
+                    accordionItem.appendChild(button);
                     accordion.appendChild(accordionItem);
                 }
                 fileBrowser.appendChild(accordion);
