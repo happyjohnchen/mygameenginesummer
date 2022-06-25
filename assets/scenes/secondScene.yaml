@@ -6,7 +6,7 @@ behaviours:
       scaleX: 1
       scaleY: 1
       rotation: 0
-id: MyGameObject
+id: RootGameObject
 children:
   - behaviours:
       - type: Transform

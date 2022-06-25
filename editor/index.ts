@@ -48,7 +48,7 @@ async function startup() {
     //场景显示
     const currentScene = document.getElementById('current-scene') as HTMLElement;
     const fs = require('fs');
-    currentScene.innerText = fs.readFileSync('src/engineconfig').toString();
+    currentScene.innerText = fs.readFileSync('src/defaultScene').toString();
 
     await editorHost.start();
 
