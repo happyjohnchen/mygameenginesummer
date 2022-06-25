@@ -68,8 +68,7 @@ function getQuery(): { [key: string]: string } {
 
 
 export class GameEngine {
-    defaultSceneName: string = 'assets/scenes/main.yaml'
-    currentSceneName: string = ''
+    currentSceneName: string = 'assets/scenes/main.yaml'
     rootGameObject = new GameObject()
     lastTime: number = 0;
     storeDuringTime: number = 0;
@@ -79,7 +78,6 @@ export class GameEngine {
     public mode: "edit" | "play" = 'edit'
 
     start() {
-        this.currentSceneName = this.defaultSceneName;
         this.rootGameObject.engine = this;
 
         //获取模式
@@ -100,8 +98,12 @@ export class GameEngine {
         this.addSystem(new CanvasContextRenderingSystem(context));
         this.addSystem(new MouseControlSystem())
 
+        //获取场景
+        const scene = getQuery().scene;
+        this.currentSceneName = scene;
+        console.log("load scene: " + scene);
 
-        this.resourceManager.loadText(this.defaultSceneName, () => {
+        this.resourceManager.loadText(this.currentSceneName, () => {
             this.rootGameObject.active = true;
             this.startup();
         })

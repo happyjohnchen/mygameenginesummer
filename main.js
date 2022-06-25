@@ -89,9 +89,8 @@ class WebSocketProxy {
     handleChangeMode(message) {
         const mode = message.data;
         const fs = require('fs');
-        console.log(fs);
-        const scene = fs.readFileSync('src/engineconfig')
-        runtimeView.webContents.loadURL(`http://localhost:3000/index.html?mode=${mode}&scene=${scene}`)
+        const scene = fs.readFileSync('src/engineconfig');
+        runtimeView.webContents.loadURL(`http://localhost:3000/index.html?mode=${mode}&scene=${scene}`);
     }
 
     handleLogin(data, client) {

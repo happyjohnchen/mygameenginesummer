@@ -111,6 +111,8 @@ export class Assets {
                         button.innerText = "加载此场景";
                         button.onclick = async () => {
                             await editorHost.execute('loadScene', file);
+                            const fs = require('fs');
+                            fs.writeFileSync('src/engineconfig', file);
                             location.reload();
                         }
                         accordionItem.appendChild(button);
