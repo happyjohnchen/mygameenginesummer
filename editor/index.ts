@@ -33,20 +33,22 @@ async function startup() {
     //编辑/运行按钮
     const playButton = document.getElementById('play-button') as Button;
     const editButton = document.getElementById('edit-button') as Button;
-    const playEditMode = document.getElementById('play-edit-mode') as HTMLElement;
     editButton.innerText = ">编辑<";
     playButton.onclick = () => {
         editorHost.send({command: "changeMode", data: "play"})
-        playEditMode.innerText = "运行模式";
         playButton.innerText = ">运行<";
         editButton.innerText = "编辑";
     }
     editButton.onclick = () => {
         editorHost.send({command: "changeMode", data: "edit"})
-        playEditMode.innerText = "编辑模式";
         playButton.innerText = "运行";
         editButton.innerText = ">编辑<";
     }
+
+    //场景显示
+    const currentScene = document.getElementById('current-scene') as HTMLElement;
+    const fs = require('fs');
+    currentScene.innerText = fs.readFileSync('src/engineconfig').toString();
 
     await editorHost.start();
 
