@@ -20,9 +20,12 @@ async function startEditor() {
     const {app, BrowserWindow, BrowserView} = require('electron')
 
     function createWindow() {
+        //设定编辑器尺寸
+        const fs = require('fs');
+        const engineUIConfig = JSON.parse(fs.readFileSync('engineUIConfig.json').toString());
         const editorProcess = new BrowserWindow({
-            width: 1200,
-            height: 800,
+            width: engineUIConfig.canvasWidth + engineUIConfig.hierarchyPanelWidth + engineUIConfig.inspectorPanelWidth,
+            height: engineUIConfig.canvasHeight + engineUIConfig.controlPanelHeight + engineUIConfig.assetsPanelHeight,
             webPreferences: {
                 nodeIntegration: true,  //允许渲染进程使用Nodejs
                 contextIsolation: false //允许渲染进程使用Nodejs
@@ -35,9 +38,15 @@ async function startEditor() {
         setTimeout(() => {
             runtimeView = new BrowserView()
             editorProcess.setBrowserView(runtimeView)
-            runtimeView.setBounds({x: 400, y: 100, width: 400, height: 400})
-            const mode = 'edit'
             const fs = require('fs');
+            const engineUIConfig = JSON.parse(fs.readFileSync('engineUIConfig.json').toString());
+            runtimeView.setBounds({
+                x: engineUIConfig.hierarchyPanelWidth,
+                y: engineUIConfig.controlPanelHeight,
+                width: engineUIConfig.canvasWidth,
+                height: engineUIConfig.canvasHeight
+            })
+            const mode = 'edit'
             const scene = fs.readFileSync('src/defaultScene.txt');
             runtimeView.webContents.loadURL(`http://localhost:3000/index.html?mode=${mode}&scene=${scene}`);
             runtimeView.webContents.openDevTools({mode: 'undocked'});

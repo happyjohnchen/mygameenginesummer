@@ -32,10 +32,11 @@
 
 1. 新的控制面板: 可切换运行/编辑模式，保存场景，刷新引擎
 2. 新的资源面板: 可查看与编辑项目文件（场景、脚本、图片），可新建/删除文件和文件夹
-3. 添加 GameObject 按钮
-4. 删除 GameObject 按钮
-5. 上移/下移 GameObject 按钮
-6. 编辑GameObject的id
+3. 可调节的窗口大小: 可通过更改 `engineUIConfig.json` 文件更改窗口各个部分的大小
+4. 添加 GameObject 按钮
+5. 删除 GameObject 按钮
+6. 上移/下移 GameObject 按钮
+7. 编辑GameObject的id
 
 ##### 引擎部分
 
