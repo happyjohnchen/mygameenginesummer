@@ -38,7 +38,7 @@ async function startEditor() {
             runtimeView.setBounds({x: 400, y: 100, width: 400, height: 400})
             const mode = 'edit'
             const fs = require('fs');
-            const scene = fs.readFileSync('src/defaultScene');
+            const scene = fs.readFileSync('src/defaultScene.txt');
             runtimeView.webContents.loadURL(`http://localhost:3000/index.html?mode=${mode}&scene=${scene}`);
             runtimeView.webContents.openDevTools({mode: 'undocked'});
         }, 5000)
@@ -89,7 +89,7 @@ class WebSocketProxy {
     handleChangeMode(message) {
         const mode = message.data;
         const fs = require('fs');
-        const scene = fs.readFileSync('src/defaultScene');
+        const scene = fs.readFileSync('src/defaultScene.txt');
         runtimeView.webContents.loadURL(`http://localhost:3000/index.html?mode=${mode}&scene=${scene}`);
     }
 

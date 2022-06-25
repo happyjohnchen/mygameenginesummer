@@ -112,7 +112,7 @@ export class Assets {
                         button.onclick = async () => {
                             await editorHost.execute('loadScene', file);
                             const fs = require('fs');
-                            fs.writeFileSync('src/defaultScene', file);
+                            fs.writeFileSync('src/defaultScene.txt', file);
                             location.reload();
                         }
                         accordionItem.appendChild(button);
