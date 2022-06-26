@@ -1,7 +1,6 @@
 import {ShapeRectRenderer} from "../../behaviours/ShapeRectRenderer";
 import {GameObject, getGameObjectById} from "../../engine";
 import {Behaviour} from "../Behaviour";
-import {invertMatrix, matrixAppendMatrix} from "../math";
 import {TextRenderer} from "../../behaviours/TextRenderer";
 import {Transform} from "../Transform";
 import {System} from "./System";
@@ -52,6 +51,26 @@ export class CanvasContextRenderingSystem extends System {
                         matrix.tx,
                         matrix.ty
                     )
+
+                    if (child.chosen) {
+                        const bounds = child.renderer.getBounds();
+                        const distance = 6;
+                        context.save();
+                        context.strokeStyle = "red";
+                        context.lineWidth = 3;
+                        if (bounds.width) {
+                            //矩形边框
+                            context.strokeRect(bounds.x - distance, bounds.y - distance, bounds.width + distance * 2, bounds.height + distance * 2);
+                        } else if (bounds.radius) {
+                            //圆形边框
+                            context.moveTo(bounds.x + bounds.radius, bounds.y);
+                            context.arc(bounds.x, bounds.y, bounds.radius + distance, 0, Math.PI * 2);
+                            context.closePath();
+                            context.stroke();
+                        }
+                        context.restore();
+                    }
+
                     if (child.renderer instanceof TextRenderer) {
                         context.save();
                         const renderer = child.renderer as TextRenderer

@@ -147,6 +147,12 @@ export class EditorSystem extends System {
             this.gameEngine.loadScene(scene);
         }
 
+        const setGameObjectChosenByGameObjectUUID = (data: { gameObjectUUID: number, chosen: boolean}) => {
+            const gameObject = GameObject.map[data.gameObjectUUID];
+            if (gameObject.active){
+                gameObject.chosen = data.chosen;
+            }
+        }
 
         host.registerCommand(getSceneSerializedData);
         host.registerCommand(getAllGameObjects);
@@ -163,6 +169,7 @@ export class EditorSystem extends System {
         host.registerCommand(createNewGameObject);
         host.registerCommand(getCurrentSceneName);
         host.registerCommand(loadScene);
+        host.registerCommand(setGameObjectChosenByGameObjectUUID);
         host.start()
     }
 }

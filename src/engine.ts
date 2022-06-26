@@ -24,7 +24,7 @@ request.onload = function () {/*XHR对象获取到返回信息后执行*/
         const json = JSON.parse(request.responseText);
         canvas.width = json.canvasWidth;
         canvas.height = json.canvasHeight;
-        console.log("分辨率:"+canvas.width+"x"+canvas.height);
+        console.log("分辨率:" + canvas.width + "x" + canvas.height);
     }
 }
 
@@ -225,6 +225,9 @@ export class GameObject {
     children: GameObject[] = [];
 
     _active: boolean = false;
+
+    _chosen: boolean = false;
+
     engine: GameEngine;
 
     get active() {
@@ -238,6 +241,19 @@ export class GameObject {
         }
         for (const child of this.children) {
             child.active = value;
+        }
+    }
+
+    get chosen(): boolean {
+        return this._chosen;
+    }
+
+    set chosen(value: boolean) {
+        this._chosen = value;
+        for (const child of this.children) {
+            if (child.active) {
+                child.chosen = value;
+            }
         }
     }
 

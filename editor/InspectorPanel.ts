@@ -20,6 +20,15 @@ export class InspectorPanel {
 
     async onSelectGameObject(gameObjectUUID: number) {
         this.selectedGameObjectUUID = gameObjectUUID;
+        //标记被选中
+        await this.editorHost.execute('setGameObjectChosenByGameObjectUUID', {
+            gameObjectUUID: 1,
+            chosen: false
+        });
+        await this.editorHost.execute('setGameObjectChosenByGameObjectUUID', {
+            gameObjectUUID: gameObjectUUID,
+            chosen: true
+        });
 
         //添加组件按钮
         const addComponentButton = document.getElementById("add-component-button") as Button;
