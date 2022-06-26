@@ -25,7 +25,7 @@ async function startEditor() {
         const engineUIConfig = JSON.parse(fs.readFileSync('engineUIConfig.json').toString());
         const editorProcess = new BrowserWindow({
             width: engineUIConfig.canvasWidth + engineUIConfig.hierarchyPanelWidth + engineUIConfig.inspectorPanelWidth,
-            height: engineUIConfig.canvasHeight + engineUIConfig.controlPanelHeight + engineUIConfig.assetsPanelHeight,
+            height: engineUIConfig.canvasHeight + engineUIConfig.controlPanelHeight + engineUIConfig.assetsPanelHeight + 28,
             webPreferences: {
                 nodeIntegration: true,  //允许渲染进程使用Nodejs
                 contextIsolation: false //允许渲染进程使用Nodejs

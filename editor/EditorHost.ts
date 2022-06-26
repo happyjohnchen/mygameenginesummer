@@ -39,17 +39,17 @@ export class EditorHost {
         inspectorPanel.style.left = engineUIConfig.hierarchyPanelWidth + engineUIConfig.canvasWidth;
 
         filePanel.style.width = engineUIConfig.hierarchyPanelWidth;
-        filePanel.style.height = (engineUIConfig.assetsPanelHeight - 25).toString();
+        filePanel.style.height = engineUIConfig.assetsPanelHeight;
         filePanel.style.top = engineUIConfig.controlPanelHeight + engineUIConfig.canvasHeight;
         filePanel.style.left = '0';
 
         assetsPanel.style.width = (engineUIConfig.canvasWidth + engineUIConfig.inspectorPanelWidth - 200).toString();
-        assetsPanel.style.height = (engineUIConfig.assetsPanelHeight - 25).toString();
+        assetsPanel.style.height = engineUIConfig.assetsPanelHeight;
         assetsPanel.style.top = engineUIConfig.controlPanelHeight + engineUIConfig.canvasHeight;
         assetsPanel.style.left = engineUIConfig.hierarchyPanelWidth;
 
         fileHandlePanel.style.width = '300';
-        fileHandlePanel.style.height = (engineUIConfig.assetsPanelHeight - 25).toString();
+        fileHandlePanel.style.height = engineUIConfig.assetsPanelHeight;
         fileHandlePanel.style.top = engineUIConfig.controlPanelHeight + engineUIConfig.canvasHeight;
         fileHandlePanel.style.left = (engineUIConfig.hierarchyPanelWidth + engineUIConfig.canvasWidth + engineUIConfig.inspectorPanelWidth - 200).toString();
 
