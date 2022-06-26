@@ -185,6 +185,10 @@ export class GameEngine {
                 getGameObjectById('cameraEditor').getBehaviour(Transform).y = (mouseDownPosition.y - e.clientY) * 0.02 + mouseDownTransform.y;
             }
         }
+        body.onwheel = (e) =>{
+            getGameObjectById('cameraEditor').getBehaviour(Transform).scaleX += e.deltaY/100;
+            getGameObjectById('cameraEditor').getBehaviour(Transform).scaleY += e.deltaY/100;
+        }
 
         for (const system of this.systems) {
             system.onStart();
