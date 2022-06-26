@@ -35,12 +35,12 @@ async function startup() {
     const editButton = document.getElementById('edit-button') as Button;
     editButton.innerText = ">编辑<";
     playButton.onclick = () => {
-        editorHost.send({command: "changeMode", data: "play"})
+        editorHost.send({command: "changeMode", data: "play"});
         playButton.innerText = ">运行<";
         editButton.innerText = "编辑";
     }
     editButton.onclick = () => {
-        editorHost.send({command: "changeMode", data: "edit"})
+        editorHost.send({command: "changeMode", data: "edit"});
         playButton.innerText = "运行";
         editButton.innerText = ">编辑<";
     }

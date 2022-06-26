@@ -152,6 +152,9 @@ export class InspectorPanel {
                 const currentSceneName = await this.editorHost.execute('getCurrentSceneName', null);
                 fs.writeFileSync(currentSceneName, response);
                 alert('删除成功')
+                //重新加载运行时
+                this.editorHost.send({command: "changeMode", data: "play"});
+                await new Promise(resolve => setTimeout(resolve, 1000));
                 location.reload();
             }
         };
