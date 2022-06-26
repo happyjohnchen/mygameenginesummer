@@ -1,1 +1,1 @@
-assets/scenes/main.yaml
+assets/scenes/secondScene.yaml

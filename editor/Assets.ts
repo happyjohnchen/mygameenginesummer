@@ -126,7 +126,7 @@ export class Assets {
                             window.open("vscode://file/" + filePath, '_self');
                         }
                         accordionItem.appendChild(button);
-                    } else if (file.endsWith('.png') || file.endsWith('.jpg') || file.endsWith('.jpeg') || file.endsWith('.JPG')) {
+                    } else if (file.endsWith('.png') || file.endsWith('.PNG') || file.endsWith('.jpg') || file.endsWith('.jpeg') || file.endsWith('.JPG')) {
                         //图片
                         const image = new Image();
                         image.src = file;
