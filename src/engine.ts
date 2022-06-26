@@ -24,7 +24,7 @@ request.onload = function () {/*XHR对象获取到返回信息后执行*/
         const json = JSON.parse(request.responseText);
         canvas.width = json.canvasWidth;
         canvas.height = json.canvasHeight;
-        console.log(canvas.width,canvas.height)
+        console.log("分辨率:"+canvas.width+"x"+canvas.height);
     }
 }
 
