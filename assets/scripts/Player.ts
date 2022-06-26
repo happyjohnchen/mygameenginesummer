@@ -78,7 +78,12 @@ export class Player extends Behaviour {
                     this.engine.loadScene("assets/scenes/secondScene.yaml")
                     console.log("player: to second scene")
                     break;
-
+                case 'h':
+                    getGameObjectById("YellowCircle").active = false;
+                    break;
+                case 'g':
+                    getGameObjectById("YellowCircle").active = true;
+                    break;
             }
         })
     }
