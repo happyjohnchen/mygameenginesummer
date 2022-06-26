@@ -1,6 +1,7 @@
 import {ShapeRectRenderer} from "../../behaviours/ShapeRectRenderer";
 import {GameObject, getGameObjectById} from "../../engine";
 import {Behaviour} from "../Behaviour";
+import {invertMatrix, matrixAppendMatrix} from "../math";
 import {TextRenderer} from "../../behaviours/TextRenderer";
 import {Transform} from "../Transform";
 import {System} from "./System";
