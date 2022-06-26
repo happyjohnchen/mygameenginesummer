@@ -32,7 +32,7 @@ export class Assets {
         function readFileList(dir: string, container: HTMLElement, fileBrowser: HTMLDivElement, editorHost: EditorHost) {
             const treeItem = new TreeItem();
             const fileList = [];
-            treeItem.innerText = dir.split('/').slice(-1)[0];//文件夹名称
+            treeItem.innerText = dir.split(/[/\\]/).slice(-1)[0];//文件夹名称
             container.appendChild(treeItem);
             const files = fs.readdirSync(dir);
             files.forEach((item) => {
@@ -89,7 +89,7 @@ export class Assets {
                 }
                 //显示当前路径
                 const breadcrumb = new Breadcrumb();
-                for (const direction of dir.split('/')) {
+                for (const direction of dir.split(/[/\\]/)) {
                     const breadcrumbItem = new BreadcrumbItem();
                     breadcrumbItem.innerText = direction;
                     breadcrumb.appendChild(breadcrumbItem);
@@ -101,9 +101,9 @@ export class Assets {
                     const accordionItem = new AccordionItem();
                     const stat = fs.statSync(file);
                     if (stat.isDirectory()) {
-                        accordionItem.innerHTML = "<div slot=\"heading\">" + file.split('/').slice(-1)[0] + "/</div>";
+                        accordionItem.innerHTML = "<div slot=\"heading\">" + file.split(/[/\\]/).slice(-1)[0] + "/</div>";
                     } else {
-                        accordionItem.innerHTML = "<div slot=\"heading\">" + file.split('/').slice(-1)[0] + "</div>";
+                        accordionItem.innerHTML = "<div slot=\"heading\">" + file.split(/[/\\]/).slice(-1)[0] + "</div>";
                     }
                     if (file.endsWith('.yaml')) {
                         //场景
