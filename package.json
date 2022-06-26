@@ -15,6 +15,7 @@
     "@electron-forge/maker-rpm": "^6.0.0-beta.64",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.64",
     "@electron-forge/maker-zip": "^6.0.0-beta.64",
+    "copy-paste": "^1.3.0",
     "electron": "^18.3.5",
     "typescript": "^4.5.5",
     "vite": "^2.8.0"
@@ -53,5 +54,15 @@
         }
       ]
     }
-  }
+  },
+  "description": "游戏开发实践课程实践作业\r 这是一个具有可编辑的图形化界面的游戏引擎，可用于游戏开发。",
+  "repository": {
+    "type": "git",
+    "url": "https://gitee.com/happyjohnchen/mygameenginesummer.git"
+  },
+  "keywords": [
+    "gameengine"
+  ],
+  "author": "陈沫言",
+  "license": "ISC"
 }

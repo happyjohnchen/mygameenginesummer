@@ -100,11 +100,13 @@ export class Assets {
                 for (const file of fileList) {
                     const accordionItem = new AccordionItem();
                     const stat = fs.statSync(file);
+
                     if (stat.isDirectory()) {
                         accordionItem.innerHTML = "<div slot=\"heading\">" + file.split(/[/\\]/).slice(-1)[0] + "/</div>";
                     } else {
                         accordionItem.innerHTML = "<div slot=\"heading\">" + file.split(/[/\\]/).slice(-1)[0] + "</div>";
                     }
+
                     if (file.endsWith('.yaml')) {
                         //场景
                         const button = new Button();
@@ -133,10 +135,10 @@ export class Assets {
                         accordionItem.appendChild(image);
                     }
                     //删除文件
-                    const button = new Button();
+                    const deleteButton = new Button();
                     if (stat.isDirectory()) {
-                        button.innerText = "删除文件夹";
-                        button.onclick = () => {
+                        deleteButton.innerText = "删除文件夹";
+                        deleteButton.onclick = () => {
                             if (confirm("确认删除文件夹" + file)) {
                                 if (!fs.existsSync(file)) {
                                     alert("文件夹不存在")
@@ -151,8 +153,8 @@ export class Assets {
                             }
                         }
                     } else {
-                        button.innerText = "删除文件";
-                        button.onclick = () => {
+                        deleteButton.innerText = "删除文件";
+                        deleteButton.onclick = () => {
                             if (confirm("确认删除文件" + file)) {
                                 if (fs.existsSync(file)) {
                                     fs.rmSync(file);
@@ -160,7 +162,19 @@ export class Assets {
                             }
                         }
                     }
-                    accordionItem.appendChild(button);
+                    accordionItem.appendChild(deleteButton);
+
+                    //拷贝路径按钮
+                    const copyButton = new Button();
+                    copyButton.innerText = '拷贝路径';
+                    copyButton.onclick = () => {
+                        const ncp = require('copy-paste');
+                        ncp.copy(file, function () {
+                            console.log("拷贝成功", file)
+                        })
+                    }
+                    accordionItem.appendChild(copyButton);
+
                     accordion.appendChild(accordionItem);
                 }
                 fileBrowser.appendChild(accordion);
