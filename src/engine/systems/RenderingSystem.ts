@@ -36,13 +36,13 @@ export class CanvasContextRenderingSystem extends System {
 
         const context = this.context;
         let camera;
-        if (this.gameEngine.mode==='play'){
+        if (this.gameEngine.mode === 'play') {
             camera = getGameObjectById('camera');
         } else {
             camera = getGameObjectById('cameraEditor');
         }
         const cameraTransform = camera.getBehaviour(Transform);
-        const invertCameraTransform = invertMatrix(cameraTransform.globalMatrix)
+        const invertCameraTransform = invertMatrix(cameraTransform.globalMatrix);
 
         function visitChildren(gameObject: GameObject) {
             for (const child of gameObject.children) {
@@ -136,11 +136,33 @@ export class CanvasContextRenderingSystem extends System {
                         context.restore();
                     }
                 }
+                if (child.id === 'camera' && child.chosen) {
+                    //绘制照相机范围
+                    const transform = child.getBehaviour(Transform);
+                    const matrix = matrixAppendMatrix(transform.globalMatrix, invertCameraTransform);
+                    context.setTransform(
+                        matrix.a,
+                        matrix.b,
+                        matrix.c,
+                        matrix.d,
+                        matrix.tx,
+                        matrix.ty
+                    )
+                    const canvas = document.getElementById('game') as HTMLCanvasElement;
+                    context.save();
+                    context.strokeStyle = "blue";
+                    context.lineWidth = 3;
+                    context.strokeRect(0, 0, canvas.width, canvas.height);
+                    context.restore();
+                }
                 visitChildren(child)
             }
         }
 
-        visitChildren(this.rootGameObject);
+        visitChildren(this
+
+            .rootGameObject
+        );
 
 
     }

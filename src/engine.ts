@@ -160,7 +160,10 @@ export class GameEngine {
         cameraEditor.id = 'cameraEditor';
         gameObjects[cameraEditor.id] = cameraEditor;//注册摄像机
         this.rootGameObject.addChild(cameraEditor);
-        cameraEditor.addBehaviour(getGameObjectById('camera').getBehaviour(Transform));
+        const cameraEditorTransform = new Transform();
+        cameraEditorTransform.x = getGameObjectById('camera').getBehaviour(Transform).x;
+        cameraEditorTransform.y = getGameObjectById('camera').getBehaviour(Transform).y;
+        cameraEditor.addBehaviour(cameraEditorTransform);
 
         const body = document.body;
         const mouseDownPosition = {x: 0, y: 0};
@@ -178,8 +181,8 @@ export class GameEngine {
         body.onmousemove = (e) => {
             if (mouseDown) {
                 //移动cameraEditor
-                cameraEditor.getBehaviour(Transform).x = (mouseDownPosition.x - e.clientX) * 0.02 + mouseDownTransform.x;
-                cameraEditor.getBehaviour(Transform).y = (mouseDownPosition.y - e.clientY) * 0.02 + mouseDownTransform.y;
+                getGameObjectById('cameraEditor').getBehaviour(Transform).x = (mouseDownPosition.x - e.clientX) * 0.02 + mouseDownTransform.x;
+                getGameObjectById('cameraEditor').getBehaviour(Transform).y = (mouseDownPosition.y - e.clientY) * 0.02 + mouseDownTransform.y;
             }
         }
 
