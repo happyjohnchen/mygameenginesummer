@@ -38,6 +38,7 @@
 5. 删除 GameObject 按钮
 6. 上移/下移 GameObject 按钮
 7. 编辑GameObject的id
+8. 发行模式: 不显示编辑器和控制台，直接运行游戏
 
 ##### 引擎部分
 

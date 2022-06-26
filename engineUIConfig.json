@@ -4,5 +4,6 @@
   "controlPanelHeight": 80,
   "assetsPanelHeight": 350,
   "hierarchyPanelWidth": 400,
-  "inspectorPanelWidth": 400
+  "inspectorPanelWidth": 400,
+  "showEditor" : true
 }

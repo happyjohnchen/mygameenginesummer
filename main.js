@@ -23,34 +23,61 @@ async function startEditor() {
         //设定编辑器尺寸
         const fs = require('fs');
         const engineUIConfig = JSON.parse(fs.readFileSync('engineUIConfig.json').toString());
-        const editorProcess = new BrowserWindow({
-            width: engineUIConfig.canvasWidth + engineUIConfig.hierarchyPanelWidth + engineUIConfig.inspectorPanelWidth,
-            height: engineUIConfig.canvasHeight + engineUIConfig.controlPanelHeight + engineUIConfig.assetsPanelHeight + 35,
-            webPreferences: {
-                nodeIntegration: true,  //允许渲染进程使用Nodejs
-                contextIsolation: false //允许渲染进程使用Nodejs
-            }
-        })
-        editorProcess.loadURL('http://localhost:3000/editor.html')
-        editorProcess.openDevTools({mode: 'undocked'});
+        let editorProcess;
+        if (engineUIConfig.showEditor) {
+            //编辑器模式
+            editorProcess = new BrowserWindow({
+                width: engineUIConfig.canvasWidth + engineUIConfig.hierarchyPanelWidth + engineUIConfig.inspectorPanelWidth,
+                height: engineUIConfig.canvasHeight + engineUIConfig.controlPanelHeight + engineUIConfig.assetsPanelHeight + 35,
+                webPreferences: {
+                    nodeIntegration: true,  //允许渲染进程使用Nodejs
+                    contextIsolation: false //允许渲染进程使用Nodejs
+                }
+            })
+            editorProcess.loadURL('http://localhost:3000/editor.html');
+            editorProcess.openDevTools({mode: 'undocked'});
+        } else {
+            //发行模式
+            editorProcess = new BrowserWindow({
+                width: engineUIConfig.canvasWidth,
+                height: engineUIConfig.canvasHeight + 35,
+                webPreferences: {
+                    nodeIntegration: true,  //允许渲染进程使用Nodejs
+                    contextIsolation: false //允许渲染进程使用Nodejs
+                }
+            })
+        }
 
-
+        const timeout = engineUIConfig.showEditor ? 5000 : 0;
         setTimeout(() => {
-            runtimeView = new BrowserView()
-            editorProcess.setBrowserView(runtimeView)
+            runtimeView = new BrowserView();
+            editorProcess.setBrowserView(runtimeView);
             const fs = require('fs');
             const engineUIConfig = JSON.parse(fs.readFileSync('engineUIConfig.json').toString());
-            runtimeView.setBounds({
-                x: engineUIConfig.hierarchyPanelWidth,
-                y: engineUIConfig.controlPanelHeight,
-                width: engineUIConfig.canvasWidth,
-                height: engineUIConfig.canvasHeight
-            })
-            const mode = 'edit'
+            let mode = 'edit';
+            if (engineUIConfig.showEditor) {
+                runtimeView.setBounds({
+                    x: engineUIConfig.hierarchyPanelWidth,
+                    y: engineUIConfig.controlPanelHeight,
+                    width: engineUIConfig.canvasWidth,
+                    height: engineUIConfig.canvasHeight
+                })
+            } else {
+                mode = 'play';
+                runtimeView.setBounds({
+                    x: 0,
+                    y: 0,
+                    width: engineUIConfig.canvasWidth,
+                    height: engineUIConfig.canvasHeight
+                })
+
+            }
             const scene = fs.readFileSync('src/defaultScene.txt');
             runtimeView.webContents.loadURL(`http://localhost:3000/index.html?mode=${mode}&scene=${scene}`);
-            runtimeView.webContents.openDevTools({mode: 'undocked'});
-        }, 5000)
+            if (engineUIConfig.showEditor) {
+                runtimeView.webContents.openDevTools({mode: 'undocked'});
+            }
+        }, timeout)
     }
 
     app.whenReady().then(() => {
