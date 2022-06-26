@@ -7,6 +7,8 @@ export class ImageRenderer extends Behaviour implements Renderer {
     @string()
     imagePath = "";
 
+    image:HTMLImageElement
+
     getBounds(): Rectangle {
         const image = new Image();
         image.src = this.imagePath;
@@ -16,5 +18,10 @@ export class ImageRenderer extends Behaviour implements Renderer {
             width: image.width,
             height: image.height,
         };
+    }
+
+    onStart() {
+        this.image = new Image();
+        this.image.src = this.imagePath;
     }
 }

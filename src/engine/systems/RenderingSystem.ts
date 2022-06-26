@@ -85,9 +85,7 @@ export class CanvasContextRenderingSystem extends System {
                         context.restore();
                     } else if (child.renderer instanceof ImageRenderer) {
                         const renderer = child.renderer as ImageRenderer;
-                        const image = new Image();
-                        image.src = renderer.imagePath;
-                        context.drawImage(image, 0, 0);
+                        context.drawImage(renderer.image, 0, 0);
                     } else if (child.renderer instanceof AnimationRenderer) {
                         const renderer = child.renderer as AnimationRenderer;
                         context.drawImage(renderer.currentImage, 0, 0);
