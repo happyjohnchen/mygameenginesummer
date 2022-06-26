@@ -35,7 +35,12 @@ export class CanvasContextRenderingSystem extends System {
     onUpdate(): void {
 
         const context = this.context;
-        const camera = getGameObjectById('camera')
+        let camera;
+        if (this.gameEngine.mode==='play'){
+            camera = getGameObjectById('camera');
+        } else {
+            camera = getGameObjectById('cameraEditor');
+        }
         const cameraTransform = camera.getBehaviour(Transform);
         const invertCameraTransform = invertMatrix(cameraTransform.globalMatrix)
 

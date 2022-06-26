@@ -154,9 +154,19 @@ export class GameEngine {
         if (scene) {
             this.rootGameObject.addChild(scene);
         }
+
+        //编辑器摄像机视角
+        const cameraEditor = new GameObject();
+        cameraEditor.id = 'cameraEditor';
+        this.rootGameObject.addChild(cameraEditor);
+        this.rootGameObject['cameraEditor'] = cameraEditor;
+        console.log(this.rootGameObject)
+        cameraEditor.addBehaviour(new Transform());
+
         for (const system of this.systems) {
             system.onStart();
         }
+
         this.enterFrame(0);
     }
 
@@ -213,7 +223,9 @@ export class GameObject {
     static map: { [uuid: number]: GameObject } = {};
 
     uuid: number = 0;
+
     id: string;
+
     parent: GameObject;
 
     onClick?: Function;
