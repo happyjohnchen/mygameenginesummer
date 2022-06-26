@@ -158,10 +158,10 @@ export class GameEngine {
         //编辑器摄像机视角
         const cameraEditor = new GameObject();
         cameraEditor.id = 'cameraEditor';
+        gameObjects[cameraEditor.id] = cameraEditor;//注册摄像机
         this.rootGameObject.addChild(cameraEditor);
-        this.rootGameObject['cameraEditor'] = cameraEditor;
-        console.log(this.rootGameObject)
-        cameraEditor.addBehaviour(new Transform());
+        cameraEditor.addBehaviour(getGameObjectById('camera').getBehaviour(Transform));
+        console.log(cameraEditor)
 
         for (const system of this.systems) {
             system.onStart();
