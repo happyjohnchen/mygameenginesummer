@@ -142,13 +142,16 @@ export class InspectorPanel {
         }
 
         //删除对象按钮
-        const removeGameObjectButton = document.getElementById(
-            "remove-game-object-button"
-        ) as Button;
+        const removeGameObjectButton = document.getElementById("remove-game-object-button") as Button;
         removeGameObjectButton.onclick = async () => {
             if (confirm("确定要删除" + gameObjectID + "吗？")) {
                 console.log("删除GameObject:", gameObjectUUID);
                 await this.editorHost.execute("removeGameObjectByGameObjectUUID", gameObjectUUID);
+                const response = await this.editorHost.execute('getSceneSerializedData', null);
+                const fs = require("fs");
+                const currentSceneName = await this.editorHost.execute('getCurrentSceneName', null);
+                fs.writeFileSync(currentSceneName, response);
+                alert('删除成功')
                 location.reload();
             }
         };
