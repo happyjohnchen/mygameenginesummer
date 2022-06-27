@@ -155,39 +155,41 @@ export class GameEngine {
             this.rootGameObject.addChild(scene);
         }
 
-        //编辑器摄像机视角
-        const cameraEditor = new GameObject();
-        cameraEditor.id = 'cameraEditor';
-        gameObjects[cameraEditor.id] = cameraEditor;//注册摄像机
-        this.rootGameObject.addChild(cameraEditor);
-        const cameraEditorTransform = new Transform();
-        cameraEditorTransform.x = getGameObjectById('camera').getBehaviour(Transform).x;
-        cameraEditorTransform.y = getGameObjectById('camera').getBehaviour(Transform).y;
-        cameraEditor.addBehaviour(cameraEditorTransform);
+        if (this.mode === 'edit') {
+            //编辑器摄像机视角
+            const cameraEditor = new GameObject();
+            cameraEditor.id = 'cameraEditor';
+            gameObjects[cameraEditor.id] = cameraEditor;//注册摄像机
+            this.rootGameObject.addChild(cameraEditor);
+            const cameraEditorTransform = new Transform();
+            cameraEditorTransform.x = getGameObjectById('camera').getBehaviour(Transform).x;
+            cameraEditorTransform.y = getGameObjectById('camera').getBehaviour(Transform).y;
+            cameraEditor.addBehaviour(cameraEditorTransform);
 
-        const body = document.body;
-        const mouseDownPosition = {x: 0, y: 0};
-        let mouseDownTransform = new Transform();
-        let mouseDown = false;
-        body.onmousedown = (e) => {
-            mouseDown = true;
-            mouseDownPosition.x = e.clientX;
-            mouseDownPosition.y = e.clientY;
-            mouseDownTransform = cameraEditor.getBehaviour(Transform);
-        }
-        body.onmouseup = (e) => {
-            mouseDown = false
-        }
-        body.onmousemove = (e) => {
-            if (mouseDown) {
-                //移动cameraEditor
-                getGameObjectById('cameraEditor').getBehaviour(Transform).x = (mouseDownPosition.x - e.clientX) * 0.02 + mouseDownTransform.x;
-                getGameObjectById('cameraEditor').getBehaviour(Transform).y = (mouseDownPosition.y - e.clientY) * 0.02 + mouseDownTransform.y;
+            const body = document.body;
+            const mouseDownPosition = {x: 0, y: 0};
+            let mouseDownTransform = new Transform();
+            let mouseDown = false;
+            body.onmousedown = (e) => {
+                mouseDown = true;
+                mouseDownPosition.x = e.clientX;
+                mouseDownPosition.y = e.clientY;
+                mouseDownTransform = cameraEditor.getBehaviour(Transform);
             }
-        }
-        body.onwheel = (e) =>{
-            getGameObjectById('cameraEditor').getBehaviour(Transform).scaleX += e.deltaY/100;
-            getGameObjectById('cameraEditor').getBehaviour(Transform).scaleY += e.deltaY/100;
+            body.onmouseup = (e) => {
+                mouseDown = false
+            }
+            body.onmousemove = (e) => {
+                if (mouseDown) {
+                    //移动cameraEditor
+                    getGameObjectById('cameraEditor').getBehaviour(Transform).x = (mouseDownPosition.x - e.clientX) * 0.02 + mouseDownTransform.x;
+                    getGameObjectById('cameraEditor').getBehaviour(Transform).y = (mouseDownPosition.y - e.clientY) * 0.02 + mouseDownTransform.y;
+                }
+            }
+            body.onwheel = (e) => {
+                getGameObjectById('cameraEditor').getBehaviour(Transform).scaleX += e.deltaY / 100;
+                getGameObjectById('cameraEditor').getBehaviour(Transform).scaleY += e.deltaY / 100;
+            }
         }
 
         for (const system of this.systems) {
