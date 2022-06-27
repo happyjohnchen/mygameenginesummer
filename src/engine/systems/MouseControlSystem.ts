@@ -17,13 +17,13 @@ export class MouseControlSystem extends System {
             if (result) {
                 while (result) {
                     if (result.onClick) {
-                        result.onClick();
+                        result.onClick(e);
                     }
                     result = result.parent;
                 }
             } else {
                 if (this.rootGameObject.onClick) {
-                    this.rootGameObject.onClick();
+                    this.rootGameObject.onClick(e);
                 }
             }
         });

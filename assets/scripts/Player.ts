@@ -12,7 +12,7 @@ export class Player extends Behaviour {
 
     onStart() {
         const transform = this.gameObject.getBehaviour(Transform);
-        document.addEventListener('keydown', (e) => {
+        document.addEventListener('keyup', (e) => {
             switch (e.key) {
                 case 'a':
                     transform.x -= this.speed;
@@ -86,5 +86,18 @@ export class Player extends Behaviour {
                     break;
             }
         })
+        this.gameObject.onClick = (e) => {
+            switch (e.button) {
+                case 0:
+                    console.log("左键");
+                    break;
+                case 1:
+                    console.log("中键");
+                    break;
+                case 2:
+                    console.log("右键");
+                    break;
+            }
+        }
     }
 }

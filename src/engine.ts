@@ -170,6 +170,9 @@ export class GameEngine {
             const mouseDownPosition = {x: 0, y: 0};
             let mouseDownTransform = new Transform();
             let mouseDown = false;
+            document.oncontextmenu = () => {
+                return false;
+            }
             body.onmousedown = (e) => {
                 mouseDown = true;
                 mouseDownPosition.x = e.clientX;
