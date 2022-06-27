@@ -21,7 +21,7 @@ async function startup() {
         const fs = require("fs");
         const currentSceneName = await editorHost.execute('getCurrentSceneName', null);
         fs.writeFileSync(currentSceneName, response);
-        alert('保存成功')
+        alert('保存成功');
     };
 
     //刷新按钮

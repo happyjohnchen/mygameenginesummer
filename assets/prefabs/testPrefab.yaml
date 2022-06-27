@@ -30,7 +30,7 @@ children:
         properties:
           width: 100
           height: 100
-          color: blue
+          color: green
           customColor: '#ffffff'
     id: PrefabSquare
   - behaviours:
