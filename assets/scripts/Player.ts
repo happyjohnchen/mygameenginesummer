@@ -5,14 +5,22 @@ import {GameObject, getGameObjectById} from "../../src/engine";
 import {Sound} from "../../src/behaviours/Sound";
 import {AnimationRenderer} from "../../src/behaviours/AnimationRenderer";
 import {ShapeCircleRenderer} from "../../src/behaviours/ShapeCircleRenderer";
+import {TileMap} from "../../src/behaviours/TileMap";
 
 export class Player extends Behaviour {
     @number()
     speed = 1;
 
+    sceneData?: any;
+
     onStart() {
         const transform = this.gameObject.getBehaviour(Transform);
+        if (this.engine.loadSceneData && this.engine.loadSceneData !== this.sceneData) {
+            this.sceneData = this.engine.loadSceneData;
+            console.log(this.sceneData)
+        }
         document.addEventListener('keyup', (e) => {
+            console.log(getGameObjectById('TileMap').getBehaviour(TileMap).tileToWorldPosition(1, 1))
             switch (e.key) {
                 case 'a':
                     transform.x -= this.speed;
@@ -71,7 +79,7 @@ export class Player extends Behaviour {
                     child.addBehaviour(childRenderer);
                     break;
                 case 'k':
-                    this.engine.loadScene("assets/scenes/main.yaml");
+                    this.engine.loadScene("assets/scenes/main.yaml", "123");
                     console.log("player: to main scene")
                     break;
                 case 'j':

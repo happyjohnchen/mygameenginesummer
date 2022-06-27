@@ -13,10 +13,20 @@ import {AnimationRenderer} from "../../behaviours/AnimationRenderer";
 export class CanvasContextRenderingSystem extends System {
 
     private context: CanvasRenderingContext2D
+    engineUIConfig;
 
     constructor(context: CanvasRenderingContext2D) {
         super();
         this.context = context;
+        const url = "engineUIConfig.json";
+        const request = new XMLHttpRequest();
+        request.open("get", url);/*设置请求方法与路径*/
+        request.send(null);/*不发送数据到服务器*/
+        request.onload = () => {/*XHR对象获取到返回信息后执行*/
+            if (request.status == 200) {/*返回状态为200，即为数据获取成功*/
+                this.engineUIConfig = JSON.parse(request.responseText);
+            }
+        }
     }
 
 

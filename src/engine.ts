@@ -81,12 +81,13 @@ function getQuery(): { [key: string]: string } {
 
 
 export class GameEngine {
-    currentSceneName: string = 'assets/scenes/main.yaml'
-    rootGameObject = new GameObject()
+    currentSceneName: string = 'assets/scenes/main.yaml';
+    rootGameObject = new GameObject();
     lastTime: number = 0;
     storeDuringTime: number = 0;
     resourceManager = new ResourceManager();
     systems: System[] = [];
+    loadSceneData?: any;
 
     public mode: "edit" | "play" = 'edit'
 
@@ -122,10 +123,13 @@ export class GameEngine {
         })
     }
 
-    loadScene(sceneName: string) {
+    loadScene(sceneName: string, data?: any) {
+        this.loadSceneData = data;
         this.currentSceneName = sceneName;
+        delete this.rootGameObject.children;
+        this.rootGameObject.children =[];
         this.resourceManager.loadText(sceneName, () => {
-            this.rootGameObject.children = [];
+            this.rootGameObject.active = true;
             this.startup();
         })
     }

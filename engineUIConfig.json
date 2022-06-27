@@ -5,5 +5,6 @@
   "assetsPanelHeight": 350,
   "hierarchyPanelWidth": 400,
   "inspectorPanelWidth": 400,
-  "showEditor" : true
+  "showEditor" : true,
+  "launchModeZoomIndex": 1.5
 }
