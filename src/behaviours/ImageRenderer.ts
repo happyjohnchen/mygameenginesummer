@@ -7,7 +7,7 @@ export class ImageRenderer extends Behaviour implements Renderer {
     @string()
     imagePath = "";
 
-    image:HTMLImageElement
+    image: HTMLImageElement
 
     getBounds(): Rectangle {
         const image = new Image();

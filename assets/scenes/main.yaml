@@ -123,6 +123,22 @@ children:
   - behaviours:
       - type: Transform
         properties:
+          x: -120
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: RoundedRectRenderer
+        properties:
+          width: 150
+          height: 50
+          cornerRadius: 15
+          color: custom
+          customColor: '#ff00ff'
+    id: RoundedCornerRect
+  - behaviours:
+      - type: Transform
+        properties:
           x: 0
           y: 0
           scaleX: 1
@@ -154,31 +170,6 @@ children:
               font: 微软雅黑
               fontColor: '#ffffff'
         id: PlayerText
-      - behaviours:
-          - type: Transform
-            properties:
-              x: 0
-              y: 0
-              scaleX: 1
-              scaleY: 1
-              rotation: 0
-        id: NewGameObject
-  - behaviours:
-      - type: Transform
-        properties:
-          x: -120
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: RoundedRectRenderer
-        properties:
-          width: 150
-          height: 50
-          cornerRadius: 15
-          color: custom
-          customColor: '#ff00ff'
-    id: RoundedCornerRect
   - behaviours:
       - type: Transform
         properties:

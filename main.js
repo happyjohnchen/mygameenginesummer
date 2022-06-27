@@ -48,7 +48,7 @@ async function startEditor() {
             })
         }
 
-        const timeout = engineUIConfig.showEditor ? 1000 : 0;
+        const timeout = engineUIConfig.showEditor ? 3000 : 0;
         setTimeout(() => {
             runtimeView = new BrowserView();
             editorProcess.setBrowserView(runtimeView);
