@@ -18,8 +18,6 @@ export class Prefab extends Behaviour {
         resourceManager.loadText(this.prefabPath, () => {
             const text = resourceManager.get(this.prefabPath);
             const prefab = this.unserilize(text);
-            const prefabGameObject = new GameObject();
-            prefabGameObject.addBehaviour(new Transform());
 
             //移除Prefab中的camera
             function visitChildren(gameObject: GameObject) {
@@ -36,7 +34,7 @@ export class Prefab extends Behaviour {
 
             visitChildren(prefab);
 
-            this.gameObject.addChild(prefab);
+            this.gameObject.addChild(prefab.children[0]);
         });
     }
 
