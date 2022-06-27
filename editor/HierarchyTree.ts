@@ -31,12 +31,11 @@ export class HierarchyTree {
             }
         }
 
-        for (const gameObject of gameObjects) {
-            if (gameObject.id === "RootGameObject")
-                continue;
-            createTreeItem(this.treeNode, gameObject, this.editorHost);
-        }
+        //仅显示RootGameObject（uuid=1）
+        createTreeItem(this.treeNode, gameObjects[0], this.editorHost);
 
+
+        //创建GameObject按钮
         this.addGameObjectButton.onclick = async () => {
             const parentUUID = inspectorPanel.selectedGameObjectUUID;
             await this.editorHost.execute('createNewGameObject', parentUUID);
