@@ -15,8 +15,25 @@ export class Prefab extends Behaviour {
         }
         const resourceManager = new ResourceManager();
         resourceManager.loadText(this.prefabPath, () => {
-            const prefab = this.unserilize(resourceManager.get(this.prefabPath));
-            console.log(prefab);
+            const prefabObject = this.unserilize(resourceManager.get(this.prefabPath));
+
+            //移除Prefab中的camera
+            function visitChildren(gameObject: GameObject) {
+                for (const child of gameObject.children) {
+                    if (child.id === 'camera') {
+                        const index = gameObject.children.indexOf(child);
+                        if (index >= 0) {
+                            gameObject.children.splice(index, 1);
+                        }
+                        return;
+                    }
+                    visitChildren(child);
+                }
+            }
+
+            visitChildren(prefabObject);
+
+            console.log(prefabObject);
         });
     }
 
