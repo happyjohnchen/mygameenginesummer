@@ -34,7 +34,9 @@ export class Prefab extends Behaviour {
 
             visitChildren(prefab);
 
-            this.gameObject.addChild(prefab.children[0]);
+            for (const child of prefab.children){
+                this.gameObject.addChild(child);
+            }
         });
     }
 
