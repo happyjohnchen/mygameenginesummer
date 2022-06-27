@@ -110,7 +110,7 @@ export class GameEngine {
         this.addSystem(new TransformSystem());
         this.addSystem(new GameSystem(context));
         this.addSystem(new CanvasContextRenderingSystem(context));
-        this.addSystem(new MouseControlSystem())
+        this.addSystem(new MouseControlSystem());
 
         //获取场景
         const scene = getQuery().scene;
@@ -120,18 +120,18 @@ export class GameEngine {
         this.resourceManager.loadText(this.currentSceneName, () => {
             this.rootGameObject.active = true;
             this.startup();
-        })
+        });
     }
 
     loadScene(sceneName: string, data?: any) {
         this.loadSceneData = data;
         this.currentSceneName = sceneName;
         delete this.rootGameObject.children;
-        this.rootGameObject.children =[];
+        this.rootGameObject.children = [];
         this.resourceManager.loadText(sceneName, () => {
             this.rootGameObject.active = true;
             this.startup();
-        })
+        });
     }
 
     addSystem(system: System) {

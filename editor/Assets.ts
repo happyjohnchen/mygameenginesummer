@@ -110,7 +110,7 @@ export class Assets {
                     if (file.endsWith('.yaml')) {
                         //场景
                         const button = new Button();
-                        button.innerText = "加载此场景";
+                        button.innerText = "加载此场景/预制体";
                         button.onclick = async () => {
                             await editorHost.execute('loadScene', file);
                             const fs = require('fs');
