@@ -3,6 +3,7 @@ import {RuntimeHost} from "../../host";
 import {GameObjectInfo, GameObjectComponents} from "../../types";
 import {System} from "./System";
 import {Transform} from "../Transform";
+import {Prefab} from "../../behaviours/Prefab";
 
 export class EditorSystem extends System {
 
@@ -11,6 +12,15 @@ export class EditorSystem extends System {
         const engine = this.gameEngine;
 
         const getSceneSerializedData = () => {
+            function visit(gameObject:GameObject){
+                if (gameObject.hasBehaviour(Prefab)){
+                    gameObject.children = [];
+                }
+                for (const child of gameObject.children){
+                    visit(child);
+                }
+            }
+            visit(this.rootGameObject.children[0]);
             return engine.serilize(this.rootGameObject.children[0]);
         }
         const getAllGameObjects = () => {
