@@ -3,6 +3,7 @@ import {Behaviour} from "../engine/Behaviour";
 import {string} from "../engine/validators/string";
 import {ResourceManager} from "../engine/ResourceManager";
 import {createGameObject, GameObject} from "../engine";
+import {Transform} from "../engine/Transform";
 
 export class Prefab extends Behaviour {
     @string()
@@ -15,7 +16,10 @@ export class Prefab extends Behaviour {
         }
         const resourceManager = new ResourceManager();
         resourceManager.loadText(this.prefabPath, () => {
-            const prefabObject = this.unserilize(resourceManager.get(this.prefabPath));
+            const text = resourceManager.get(this.prefabPath);
+            const prefab = this.unserilize(text);
+            const prefabGameObject = new GameObject();
+            prefabGameObject.addBehaviour(new Transform());
 
             //移除Prefab中的camera
             function visitChildren(gameObject: GameObject) {
@@ -27,19 +31,19 @@ export class Prefab extends Behaviour {
                         }
                         return;
                     }
-                    visitChildren(child);
                 }
             }
 
-            visitChildren(prefabObject);
+            visitChildren(prefab);
 
-            console.log(prefabObject);
+            this.gameObject.addChild(prefab);
         });
     }
 
     private unserilize(text: string): GameObject {
         try {
-            return yaml.load(text);
+            let data = yaml.load(text);
+            return createGameObject(data, this.engine);
         } catch (e) {
             console.log(e)
             console.log("配置文件解析失败", text);

@@ -154,7 +154,7 @@ export class GameEngine {
     private startup() {
         this.rootGameObject.addBehaviour(new Transform());
         const text = this.resourceManager.get(this.currentSceneName);
-        const scene = this.unserilize(text)
+        const scene = this.unserilize(text);
         if (scene) {
             this.rootGameObject.addChild(scene);
         }
