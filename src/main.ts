@@ -16,6 +16,9 @@ import {AnimationRenderer} from "./behaviours/AnimationRenderer";
 import {TileMap} from "./behaviours/TileMap";
 import {Prefab} from "./behaviours/Prefab";
 
+import {TimeControllerSystem} from "../assets/scripts/TimeControllerSystem";
+
+
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
 registerBehaviourClass(TextRenderer);
@@ -37,6 +40,6 @@ registerBehaviourClass(Prefab);
 
 //注册自定义脚本
 registerBehaviourClass(Player);
-
+registerBehaviourClass(TimeControllerSystem);
 const engine = new GameEngine()
 engine.start()
