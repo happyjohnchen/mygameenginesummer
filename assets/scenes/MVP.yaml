@@ -1,0 +1,32 @@
+behaviours:
+  - type: Transform
+    properties:
+      x: 0
+      y: 0
+      scaleX: 1
+      scaleY: 1
+      rotation: 0
+id: RootGameObject
+children:
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -480
+          y: -270
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Prefab
+        properties:
+          prefabPath: assets/prefabs/TimeController.yaml
+    id: TimeController

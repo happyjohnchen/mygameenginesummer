@@ -16,7 +16,7 @@ export class TimeControllerSystem extends Behaviour {
 
     private totalsecondtime=0;//秒
     private totalmintime=0;//分钟
-    private totalhourtime=15;//小时
+    private totalhourtime=0;//小时
     private isday = true;
     private daycount = 1; //经过了多少天
 
