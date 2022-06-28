@@ -6,5 +6,7 @@ behaviours:
       scaleX: 1
       scaleY: 1
       rotation: 0
+  - type: Room
+        properties:
+          RoomType: 0
 id: RootGameObject
-children:

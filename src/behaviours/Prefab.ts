@@ -16,7 +16,7 @@ export class Prefab extends Behaviour {
         const resourceManager = new ResourceManager();
         resourceManager.loadText(this.prefabPath, () => {
             const text = resourceManager.get(this.prefabPath);
-            console.log(text);
+            //console.log(text);
             const prefab = this.unserilize(text);
             for (const child of prefab.children){
                 this.gameObject.addChild(child);

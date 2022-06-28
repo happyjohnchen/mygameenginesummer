@@ -19,6 +19,7 @@ export class Walkable extends Behaviour {
 
     onStart() {
         this.gameObject.onClick = () => {
+        
             if (this.currentSpeed === 0) {
                 this.currentSpeed = this.speed;
             } else {

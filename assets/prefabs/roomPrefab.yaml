@@ -19,4 +19,7 @@ children:
       - type: ImageRenderer
         properties:
           imagePath: assets\images\testImage.png
+      - type: Room
+        properties:
+          RoomType: 0
     id: NewGameObject
