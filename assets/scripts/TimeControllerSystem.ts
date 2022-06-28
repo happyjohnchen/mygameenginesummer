@@ -65,7 +65,7 @@ export class TimeControllerSystem extends Behaviour {
             this.totalsecondtime-=60;
             this.totalmintime+=1;
         }
-        console.log(this.totalhourtime+"小时"+this.totalmintime+"分钟"+this.totalsecondtime+"秒");
+        //console.log(this.totalhourtime+"小时"+this.totalmintime+"分钟"+this.totalsecondtime+"秒");
          } 
        }
 

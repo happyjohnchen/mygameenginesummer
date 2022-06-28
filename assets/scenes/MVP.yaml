@@ -51,5 +51,24 @@ children:
           fontColor: '#000000'
       - type: Attribute
         properties:
-          consumeperhour: 3
+          consumepermin: 1
+          time: 2
     id: water
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 200
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ShapeRectRenderer
+        properties:
+          width: 100
+          height: 100
+          color: red
+          customColor: '#ffffff'
+      - type: addwater
+        properties:
+          addvaluecount: 5
+    id: addwater

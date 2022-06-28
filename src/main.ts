@@ -18,7 +18,7 @@ import {Prefab} from "./behaviours/Prefab";
 
 import {TimeControllerSystem} from "../assets/scripts/TimeControllerSystem";
 import {Attribute} from "../assets/scripts/Attribute";
-
+import {addwater} from "../assets/scripts/addwater";
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
 registerBehaviourClass(TextRenderer);
@@ -42,5 +42,6 @@ registerBehaviourClass(Prefab);
 registerBehaviourClass(Player);
 registerBehaviourClass(TimeControllerSystem);
 registerBehaviourClass(Attribute);
+registerBehaviourClass(addwater);
 const engine = new GameEngine()
 engine.start()
