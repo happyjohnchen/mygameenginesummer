@@ -124,7 +124,8 @@ export class Player extends Behaviour {
     }
 
     onTick(duringTime: number) {
-        if (getGameObjectById('Prefab').getBehaviour(Prefab).created){
+        const prefab = getGameObjectById('Prefab');
+        if (prefab.getBehaviour(Prefab).created) {
             console.log(getGameObjectById('PrefabSquare').getBehaviour(Transform));
         }
     }
