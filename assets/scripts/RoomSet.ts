@@ -25,7 +25,7 @@ export class RoomSet extends Behaviour {
         const child = new GameObject();
         this.gameObject.addChild(child)
      const roomPrefab=new Prefab();
-        roomPrefab.prefabPath='assets\prefabs\roomPrefab.yaml'
+        roomPrefab.prefabPath='assets/prefabs/roomPrefab.yaml'
         child.addBehaviour(roomPrefab);
         const childTransform = new Transform();
         childTransform.x =0;
