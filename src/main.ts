@@ -11,6 +11,7 @@ import {ShapeCircleRenderer} from "./behaviours/ShapeCircleRenderer";
 import {ImageRenderer} from "./behaviours/ImageRenderer";
 import {RoundedRectRenderer} from "./behaviours/RoundedRectRenderer";
 import {Player} from "../assets/scripts/Player";
+import {RoomSet} from "../assets/scripts/RoomSet";
 import {Sound} from "./behaviours/Sound";
 import {AnimationRenderer} from "./behaviours/AnimationRenderer";
 import {TileMap} from "./behaviours/TileMap";
@@ -37,6 +38,6 @@ registerBehaviourClass(Prefab);
 
 //注册自定义脚本
 registerBehaviourClass(Player);
-
+registerBehaviourClass(RoomSet);
 const engine = new GameEngine()
 engine.start()

@@ -1,0 +1,65 @@
+behaviours:
+  - type: Transform
+    properties:
+      x: 0
+      y: 0
+      scaleX: 1
+      scaleY: 1
+      rotation: 0
+id: RootGameObject
+children:
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -480
+          y: -270
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: RoomSet
+        properties:
+          roomtype: 0
+    id: tileMap
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 3
+              scaleY: 2
+              rotation: 0
+          - type: ImageRenderer
+            properties:
+              imagePath: assets\images\testImage.png
+        id: firstRoom
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 300
+              y: 0
+              scaleX: 3
+              scaleY: 2
+              rotation: 0
+        id: NewGameObject
