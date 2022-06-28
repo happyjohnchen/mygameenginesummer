@@ -383,6 +383,7 @@ export class GameObject {
     }
 
     removeBehaviour(behaviour: Behaviour) {
+        behaviour.onEnd();
         const index = this.behaviours.indexOf(behaviour);
         if (index >= 0) {
             this.behaviours.splice(index, 1);
