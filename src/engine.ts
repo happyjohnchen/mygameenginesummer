@@ -87,7 +87,7 @@ export class GameEngine {
     storeDuringTime: number = 0;
     resourceManager = new ResourceManager();
     systems: System[] = [];
-    loadSceneData?: any;
+    loadSceneData?: string;
 
     public mode: "edit" | "play" = 'edit'
 
@@ -100,6 +100,10 @@ export class GameEngine {
             this.mode = mode;
         } else {
             this.mode = 'play'
+        }
+
+        if (getQuery().data) {
+            this.loadSceneData = getQuery().data;
         }
 
         if (this.mode === 'edit') {
@@ -123,15 +127,9 @@ export class GameEngine {
         });
     }
 
-    loadScene(sceneName: string, data?: any) {
-        this.loadSceneData = data;
-        this.currentSceneName = sceneName;
-        delete this.rootGameObject.children;
-        this.rootGameObject.children = [];
-        this.resourceManager.loadText(sceneName, () => {
-            this.rootGameObject.active = true;
-            this.startup();
-        });
+    loadScene(sceneName: string, data?: string) {
+        data = data ? data : '';
+        window.location.href = window.location.href.split('?')[0] + `?mode=${this.mode}&scene=${sceneName}&data=${data}`;
     }
 
     addSystem(system: System) {
@@ -166,7 +164,7 @@ export class GameEngine {
             gameObjects[cameraEditor.id] = cameraEditor;//注册摄像机
             this.rootGameObject.addChild(cameraEditor);
             const cameraEditorTransform = new Transform();
-            if (getGameObjectById('camera')){
+            if (getGameObjectById('camera')) {
                 cameraEditorTransform.x = getGameObjectById('camera').getBehaviour(Transform).x;
                 cameraEditorTransform.y = getGameObjectById('camera').getBehaviour(Transform).y;
             }
@@ -436,7 +434,7 @@ export function extractGameObject(gameObject: GameObject): GameObjectData {
             behaviourData.properties[metadata.key] = behaviour[metadata.key];
         }
     }
-    if (gameObject.children){
+    if (gameObject.children) {
         for (const child of gameObject.children) {
             const childData = extractGameObject(child);
             gameObjectData.children = gameObjectData.children || [];
