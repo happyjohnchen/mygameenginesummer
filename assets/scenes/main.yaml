@@ -224,3 +224,17 @@ children:
         properties:
           prefabPath: assets/prefabs/testPrefab.yaml
     id: Prefab
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TimeControllerSystem
+        properties:
+          timepertick: 1.6
+          dayhourtime: 16
+          nighttime: 120
+    id: TimeController
