@@ -72,11 +72,12 @@ canUpdateRoom=false;
     //游戏开始时会执行一次
     onStart(): void {
         roomStart();
+        for(var i=0;i<2;i++)
      for(let j=1;j<6;j++)
-        createRoom(j,0,roomPostionArray[0][j],this)
+        createRoom(j,i,roomPostionArray[0][j],this)
         this.gameObject.onClick = () => {
         //this.gameObject.getBehaviour(Room).RoomType=1
-        roomPostionArray[1][1]=1
+        roomPostionArray[2][1]=1
         console.log("click")
         checkNewRoomCanBuild()
         this.canUpdateRoom=true;
