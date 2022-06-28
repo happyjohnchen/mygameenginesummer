@@ -85,7 +85,7 @@ function getQuery(): { [key: string]: string } {
 
 
 export class GameEngine {
-    currentSceneName: string = 'assets/scenes/main.yaml';
+    currentSceneName: string = 'assets/engineTest/scenes/main.yaml';
     rootGameObject = new GameObject();
     lastTime: number = 0;
     storeDuringTime: number = 0;
