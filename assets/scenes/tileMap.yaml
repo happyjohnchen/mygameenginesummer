@@ -30,50 +30,5 @@ children:
         properties:
           roomtype: 0
     id: tileMap
-    children:
-      - behaviours:
-          - type: Prefab
-            properties:
-              prefabPath: "assetsprefabs\roomPrefab.yaml"
-          - type: Transform
-            properties:
-              x: 0
-              y: 0
-              scaleX: 1
-              scaleY: 1
-              rotation: 0
-          - type: ImageRenderer
-            properties:
-              imagePath: assets/images/testImage.png
-      - behaviours:
-          - type: Transform
-            properties:
-              x: 0
-              y: 0
-              scaleX: 1
-              scaleY: 1
-              rotation: 0
-          - type: ImageRenderer
-            properties:
-              imagePath: assets/images/testImage.png
-      - behaviours:
-          - type: Transform
-            properties:
-              x: 0
-              y: 0
-              scaleX: 3
-              scaleY: 2
-              rotation: 0
-          - type: ImageRenderer
-            properties:
-              imagePath: assets\images\testImage.png
-        id: firstRoom
-      - behaviours:
-          - type: Transform
-            properties:
-              x: 300
-              y: 0
-              scaleX: 3
-              scaleY: 2
-              rotation: 0
-        id: NewGameObject
+
+  

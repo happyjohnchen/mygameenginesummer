@@ -11,10 +11,12 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: -480
-          y: -270
+          x: 0
+          y: 0
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: Camera
-    id: camera
+      - type: ImageRenderer
+        properties:
+          imagePath: assets\images\testImage.png
+    id: NewGameObject
