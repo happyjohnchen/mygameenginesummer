@@ -151,10 +151,6 @@ export class GameEngine {
         return this.systems;
     }
 
-    reloadPage(){
-        location.reload();
-    }
-
     private startup() {
         this.rootGameObject.addBehaviour(new Transform());
         const text = this.resourceManager.get(this.currentSceneName);
