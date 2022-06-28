@@ -17,7 +17,7 @@ import { System } from "./System";
 export class GameLifeCycleSystem extends System {
 
     onAddComponent(gameObject: GameObject, component: Behaviour): void {
-        component.onStart();
+        //component.onStart();
     }
 
     onRemoveComponent(gameObject: GameObject, component: Behaviour): void {
