@@ -9,7 +9,7 @@ import {TileMap} from "../../src/behaviours/TileMap";
 
 export class Player extends Behaviour {
     @number()
-    speed:number = 1;
+    speed: number = 1;
 
     sceneData?: any;
 
@@ -20,18 +20,18 @@ export class Player extends Behaviour {
             console.log(this.sceneData)
         }
 
-        this.gameObject.onHoverIn=(e)=>{
+        this.gameObject.onHoverIn = (e) => {
             //鼠标移入
             console.log("Player onHoverIn");
         }
 
-        this.gameObject.onHoverOut=(e)=>{
+        this.gameObject.onHoverOut = (e) => {
             //鼠标移出
             console.log("Player onHoverOut");
         }
 
         this.gameObject.onClick = (e) => {
-            //鼠标移出
+            //鼠标点击
             switch (e.button) {
                 case 0:
                     console.log("左键");
