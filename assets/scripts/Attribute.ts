@@ -14,12 +14,12 @@ export class Attribute extends Behaviour {
      private gameobject;
 
      @number()
-     consumepermin = 1;
+     consumepertime = 1;//一次消耗多少
 
      private lasttime = 0;//经过的时间
      private nowtime = 0;
      @number()
-     timeperconsume = 2;//多少分钟消耗一次
+     minpertime = 2;//多少分钟消耗一次
 
 
      maxvalue = 100;
@@ -40,8 +40,8 @@ export class Attribute extends Behaviour {
     onTick(duringTime: number) {
         this.nowtime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
         this.lasttime = this.lasttime==60? 0:this.lasttime;
-        if(this.nowtime-this.lasttime >=this.timeperconsume){
-            this.setvalue(-this.consumepermin);
+        if(this.nowtime-this.lasttime >=this. minpertime){
+            this.setvalue(-this.consumepertime);
             this.lasttime = this.nowtime;    
             console.log(this.lasttime);
         }
@@ -62,5 +62,11 @@ export class Attribute extends Behaviour {
         this.value = newnumber;
     }
 
-  
+    getconsumepertime(){
+        return this.consumepertime;
+    }
+    
+   setconsumepertime(consume:number){
+        this.consumepertime = consume;
+   }
 }

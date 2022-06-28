@@ -51,8 +51,8 @@ children:
           fontColor: '#000000'
       - type: Attribute
         properties:
-          consumepermin: 1
-          timeperconsume: 2
+          consumepertime: 1
+          minpertime: 2
     id: water
   - behaviours:
       - type: Transform
@@ -122,6 +122,15 @@ children:
               font: 微软雅黑
               fontColor: '#000000'
         id: text
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+        id: NewGameObject
   - behaviours:
       - type: Transform
         properties:
@@ -156,3 +165,75 @@ children:
               font: 微软雅黑
               fontColor: '#000000'
         id: text
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TextRenderer
+        properties:
+          text: '60'
+          fontSize: 40
+          font: 微软雅黑
+          fontColor: '#000000'
+      - type: Attribute
+        properties:
+          consumepertime: 1
+          minpertime: 2
+    id: power
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 150
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TextRenderer
+        properties:
+          text: '60'
+          fontSize: 40
+          font: 微软雅黑
+          fontColor: '#000000'
+      - type: Attribute
+        properties:
+          consumepertime: 1
+          minpertime: 2
+    id: food
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -300
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: addspeed
+        properties:
+          thisspped: 1
+      - type: ShapeRectRenderer
+        properties:
+          width: 100
+          height: 100
+          color: green
+          customColor: '#ffffff'
+    id: normal
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: 一倍速
+              fontSize: 30
+              font: 微软雅黑
+              fontColor: '#000000'
+        id: Text
