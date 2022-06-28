@@ -28,7 +28,7 @@ export class Behaviour {
         const allSystems = this.engine.getSystems();
         for (const system of allSystems) {
             if (value) {
-                system.onAddComponent(this.gameObject, this)
+                system.onAddComponent(this.gameObject, this);
             }
             else {
                 system.onRemoveComponent(this.gameObject, this);

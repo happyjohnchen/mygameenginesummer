@@ -5,7 +5,6 @@ import {GameObject, getGameObjectById} from "../../src/engine";
 import {Sound} from "../../src/behaviours/Sound";
 import {AnimationRenderer} from "../../src/behaviours/AnimationRenderer";
 import {ShapeCircleRenderer} from "../../src/behaviours/ShapeCircleRenderer";
-import {TileMap} from "../../src/behaviours/TileMap";
 
 export class Player extends Behaviour {
     @number()
@@ -14,10 +13,11 @@ export class Player extends Behaviour {
     sceneData?: any;
 
     onStart() {
+        console.log("player onStart, data: " + this.engine.loadSceneData as string);
         const transform = this.gameObject.getBehaviour(Transform);
         if (this.engine.loadSceneData && this.engine.loadSceneData !== this.sceneData) {
             this.sceneData = this.engine.loadSceneData;
-            console.log(this.sceneData)
+            //console.log(this.sceneData)
         }
 
         this.gameObject.onHoverIn = (e) => {
@@ -46,7 +46,7 @@ export class Player extends Behaviour {
         }
 
         document.addEventListener('keyup', (e) => {
-            console.log(getGameObjectById('TileMap').getBehaviour(TileMap).tileToWorldPosition(1, 1))
+            //console.log(getGameObjectById('TileMap').getBehaviour(TileMap).tileToWorldPosition(1, 1))
             switch (e.key) {
                 case 'a':
                     transform.x -= this.speed;
@@ -120,5 +120,16 @@ export class Player extends Behaviour {
                     break;
             }
         })
+    }
+
+    onTick(duringTime: number) {
+        if (getGameObjectById('PrefabSquare')){
+            getGameObjectById('PrefabSquare').getBehaviour(Transform);
+        }
+    }
+
+    onEnd() {
+        super.onEnd();
+        this.gameObject.children=[];
     }
 }
