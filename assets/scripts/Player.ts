@@ -13,7 +13,7 @@ export class Player extends Behaviour {
     sceneData?: any;
 
     onStart() {
-        console.log("player onStart, data:" + this.engine.loadSceneData as string);
+        console.log("player onStart, data: " + this.engine.loadSceneData as string);
         const transform = this.gameObject.getBehaviour(Transform);
         if (this.engine.loadSceneData && this.engine.loadSceneData !== this.sceneData) {
             this.sceneData = this.engine.loadSceneData;
