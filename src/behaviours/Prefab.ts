@@ -3,7 +3,6 @@ import {Behaviour} from "../engine/Behaviour";
 import {string} from "../engine/validators/string";
 import {ResourceManager} from "../engine/ResourceManager";
 import {createGameObject, GameObject} from "../engine";
-import {Transform} from "../engine/Transform";
 
 export class Prefab extends Behaviour {
     @string()
@@ -18,22 +17,6 @@ export class Prefab extends Behaviour {
         resourceManager.loadText(this.prefabPath, () => {
             const text = resourceManager.get(this.prefabPath);
             const prefab = this.unserilize(text);
-
-            //移除Prefab中的camera
-            function visitChildren(gameObject: GameObject) {
-                for (const child of gameObject.children) {
-                    if (child.id === 'camera') {
-                        const index = gameObject.children.indexOf(child);
-                        if (index >= 0) {
-                            gameObject.children.splice(index, 1);
-                        }
-                        return;
-                    }
-                }
-            }
-
-            visitChildren(prefab);
-
             for (const child of prefab.children){
                 this.gameObject.addChild(child);
             }

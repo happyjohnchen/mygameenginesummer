@@ -170,8 +170,10 @@ export class GameEngine {
             gameObjects[cameraEditor.id] = cameraEditor;//注册摄像机
             this.rootGameObject.addChild(cameraEditor);
             const cameraEditorTransform = new Transform();
-            cameraEditorTransform.x = getGameObjectById('camera').getBehaviour(Transform).x;
-            cameraEditorTransform.y = getGameObjectById('camera').getBehaviour(Transform).y;
+            if (getGameObjectById('camera')){
+                cameraEditorTransform.x = getGameObjectById('camera').getBehaviour(Transform).x;
+                cameraEditorTransform.y = getGameObjectById('camera').getBehaviour(Transform).y;
+            }
             cameraEditor.addBehaviour(cameraEditorTransform);
 
             const body = document.body;
@@ -431,10 +433,12 @@ export function extractGameObject(gameObject: GameObject): GameObjectData {
             behaviourData.properties[metadata.key] = behaviour[metadata.key];
         }
     }
-    for (const child of gameObject.children) {
-        const childData = extractGameObject(child);
-        gameObjectData.children = gameObjectData.children || [];
-        gameObjectData.children.push(childData);
+    if (gameObject.children){
+        for (const child of gameObject.children) {
+            const childData = extractGameObject(child);
+            gameObjectData.children = gameObjectData.children || [];
+            gameObjectData.children.push(childData);
+        }
     }
     console.log(gameObjectData)
     return gameObjectData
