@@ -24,4 +24,8 @@ export class ImageRenderer extends Behaviour implements Renderer {
         this.image = new Image();
         this.image.src = this.imagePath;
     }
+
+    onEnd() {
+        delete this.image;
+    }
 }

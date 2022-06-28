@@ -54,6 +54,8 @@ export class Assets {
                 const newDirectoryButton = document.getElementById('new-directory-button') as Button;
                 const newScriptButton = document.getElementById('new-script-button') as Button;
                 const newSceneButton = document.getElementById('new-scene-button') as Button;
+                const newPrefabButton = document.getElementById('new-prefab-button') as Button;
+
                 //新建文件夹
                 newDirectoryButton.onclick = () => {
                     const newDirectoryName = fileNameInput.currentValue;
@@ -84,6 +86,17 @@ export class Assets {
                             const sceneDemo = fs.readFileSync('src/engine/SceneDemo.yaml');
                             fs.writeFileSync(newScenePath, sceneDemo);
                             alert("新建场景" + newScenePath);
+                        }
+                    }
+                }
+                //新建预制体
+                newPrefabButton.onclick = () => {
+                    if (fileNameInput.currentValue && fileNameInput.currentValue !== "") {
+                        const newPrefabPath = path.join(dir, fileNameInput.currentValue + ".yaml");
+                        if (!fs.existsSync(newPrefabPath)) {
+                            const sceneDemo = fs.readFileSync('src/engine/PrefabDemo.yaml');
+                            fs.writeFileSync(newPrefabPath, sceneDemo);
+                            alert("新建预制体" + newPrefabPath);
                         }
                     }
                 }

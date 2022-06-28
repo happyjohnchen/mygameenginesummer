@@ -224,3 +224,15 @@ children:
         properties:
           prefabPath: assets/prefabs/testPrefab.yaml
     id: Prefab
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -200
+          y: -100
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Prefab
+        properties:
+          prefabPath: assets/prefabs/test2Prefab.yaml
+    id: Prefab2

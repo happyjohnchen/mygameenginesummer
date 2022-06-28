@@ -3,6 +3,7 @@ import {RuntimeHost} from "../../host";
 import {GameObjectInfo, GameObjectComponents} from "../../types";
 import {System} from "./System";
 import {Transform} from "../Transform";
+// @ts-ignore
 import {Prefab} from "../../behaviours/Prefab";
 
 export class EditorSystem extends System {

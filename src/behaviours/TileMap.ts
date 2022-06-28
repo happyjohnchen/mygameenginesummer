@@ -23,4 +23,13 @@ export class TileMap extends Behaviour {
         return {x: tX, y: tY, width: tWidth, height: tHeight};
     }
 
+    tileToWorldTransform(tileX: number, tileY: number): Transform {
+        const transform = new Transform();
+        transform.x = this.tileToWorldPosition(tileX, tileY).x;
+        transform.y = this.tileToWorldPosition(tileX, tileY).y;
+        transform.scaleX = this.gameObject.getBehaviour(Transform).scaleX;
+        transform.scaleY = this.gameObject.getBehaviour(Transform).scaleY;
+        return transform;
+    }
+
 }
