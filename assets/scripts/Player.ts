@@ -9,7 +9,7 @@ import {TileMap} from "../../src/behaviours/TileMap";
 
 export class Player extends Behaviour {
     @number()
-    speed = 1;
+    speed:number = 1;
 
     sceneData?: any;
 
@@ -19,6 +19,32 @@ export class Player extends Behaviour {
             this.sceneData = this.engine.loadSceneData;
             console.log(this.sceneData)
         }
+
+        this.gameObject.onHoverIn=(e)=>{
+            //鼠标移入
+            console.log("Player onHoverIn");
+        }
+
+        this.gameObject.onHoverOut=(e)=>{
+            //鼠标移出
+            console.log("Player onHoverOut");
+        }
+
+        this.gameObject.onClick = (e) => {
+            //鼠标移出
+            switch (e.button) {
+                case 0:
+                    console.log("左键");
+                    break;
+                case 1:
+                    console.log("中键");
+                    break;
+                case 2:
+                    console.log("右键");
+                    break;
+            }
+        }
+
         document.addEventListener('keyup', (e) => {
             console.log(getGameObjectById('TileMap').getBehaviour(TileMap).tileToWorldPosition(1, 1))
             switch (e.key) {
@@ -94,18 +120,5 @@ export class Player extends Behaviour {
                     break;
             }
         })
-        this.gameObject.onClick = (e) => {
-            switch (e.button) {
-                case 0:
-                    console.log("左键");
-                    break;
-                case 1:
-                    console.log("中键");
-                    break;
-                case 2:
-                    console.log("右键");
-                    break;
-            }
-        }
     }
 }

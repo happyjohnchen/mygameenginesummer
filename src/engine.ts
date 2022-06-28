@@ -268,6 +268,12 @@ export class GameObject {
 
     onClick?: Function;
 
+    onHoverIn?: Function;
+
+    onHoverOut?: Function;
+
+    hovered = false;
+
     behaviours: Behaviour[] = [];
 
     renderer: Renderer;
