@@ -8,6 +8,8 @@ export class Prefab extends Behaviour {
     @string()
     prefabPath = "";//预制体路径
 
+    created = false;
+
     onStart() {
         if (!this.prefabPath.endsWith('.yaml')) {
             console.log("Prefab:", this.prefabPath, "不是yaml文件");
@@ -18,9 +20,10 @@ export class Prefab extends Behaviour {
             const text = resourceManager.get(this.prefabPath);
             //console.log(text);
             const prefab = this.unserilize(text);
-            for (const child of prefab.children){
+            for (const child of prefab.children) {
                 this.gameObject.addChild(child);
             }
+            this.created = true;
         });
     }
 
