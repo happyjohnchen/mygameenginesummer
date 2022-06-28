@@ -52,7 +52,7 @@ children:
       - type: Attribute
         properties:
           consumepermin: 1
-          time: 2
+          timeperconsume: 2
     id: water
   - behaviours:
       - type: Transform
@@ -72,3 +72,21 @@ children:
         properties:
           addvaluecount: 5
     id: addwater
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -100
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ShapeRectRenderer
+        properties:
+          width: 100
+          height: 100
+          color: green
+          customColor: '#ffffff'
+      - type: addspeed
+        properties:
+          thisspped: 2
+    id: beisu

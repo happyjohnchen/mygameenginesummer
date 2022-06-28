@@ -12,7 +12,6 @@ export class Attribute extends Behaviour {
    
      private value = 60;//初始数值百分比
      private gameobject;
-     private speed = 1; //倍速
 
      @number()
      consumepermin = 1;
@@ -20,7 +19,7 @@ export class Attribute extends Behaviour {
      private lasttime = 0;//经过的时间
      private nowtime = 0;
      @number()
-     time = 2;//多少分钟消耗一次
+     timeperconsume = 2;//多少分钟消耗一次
 
 
      maxvalue = 100;
@@ -40,12 +39,15 @@ export class Attribute extends Behaviour {
     //平均每16ms执行一次 拿到时间
     onTick(duringTime: number) {
         this.nowtime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
-        if(this.nowtime-this.lasttime >=this.time){
+        this.lasttime = this.lasttime==60? 0:this.lasttime;
+        if(this.nowtime-this.lasttime >=this.timeperconsume){
             this.setvalue(-this.consumepermin);
-            this.lasttime = this.nowtime;
+            this.lasttime = this.nowtime;    
+            console.log(this.lasttime);
         }
+        
         this.onUpdate();
-        console.log(this.value);
+        //console.log(this.lasttime);
         
     }
 
