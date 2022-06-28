@@ -87,7 +87,7 @@ export class GameEngine {
     storeDuringTime: number = 0;
     resourceManager = new ResourceManager();
     systems: System[] = [];
-    loadSceneData?: string;
+    loadSceneData: string = '';
 
     public mode: "edit" | "play" = 'edit'
 
