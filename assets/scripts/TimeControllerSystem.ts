@@ -6,10 +6,11 @@ export class TimeControllerSystem extends Behaviour {
     /* 时间控制系统
     游戏里白天一共16h
     现实ontick等于游戏n秒（目前1.6）
-    黑天时间
-    倍速
-    暂停
+    16h后进入黑夜 并天数+1
+    可以通过get函数拿到时间
+    可以通过set函数调整倍速
     */
+
     @number()
     timepertick = 1.6;//控制每次ontick的游戏秒数
 
@@ -17,13 +18,14 @@ export class TimeControllerSystem extends Behaviour {
     private totalmintime=0;//分钟
     private totalhourtime=15;//小时
     private isday = true;
+    private daycount = 1; //经过了多少天
 
     @number()
-    dayhourtime = 16;//白天时间
-    private speed= 1;
+    dayhourtime = 16;//白天总时间
+    private speed= 1.0;
 
     @number()
-    nighttime = 120;//夜晚时间
+    nighttime = 120;//夜晚时间长度
     private nownighttime = 0;
     //游戏开始时会执行一次
     onStart() {
@@ -42,6 +44,9 @@ export class TimeControllerSystem extends Behaviour {
             this.nownighttime +=1;
             if(this.nownighttime>=this.nighttime){
                 this.isday = true;
+                this.daycount +=1;
+                console.log(this.daycount);
+                
             }
         }
         else{   
@@ -62,5 +67,28 @@ export class TimeControllerSystem extends Behaviour {
         }
         console.log(this.totalhourtime+"小时"+this.totalmintime+"分钟"+this.totalsecondtime+"秒");
          } 
+       }
+
+       getSecondTime(){
+        return this.totalsecondtime;           
+       }
+
+       getMinTime(){
+        return this.totalmintime;
+       }
+
+       getHourTime(){
+        return this.totalhourtime;
+       }
+       getspeed(){
+        return this.speed;
+       }
+
+       setspeed(nowspeed:number){
+        this.speed = nowspeed;
+       }
+
+       getdaycount(){
+        return this.daycount;
        }
 }
