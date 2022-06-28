@@ -27,6 +27,28 @@ export class MouseControlSystem extends System {
                 }
             }
         });
+        window.addEventListener('mousemove', (e) => {
+            const point = {x: e.clientX, y: e.clientY};
+            const camera = getGameObjectById('camera')
+            const cameraTransform = camera.getBehaviour(Transform);
+            //画布坐标转化为摄像机坐标
+            point.x += cameraTransform.x;
+            point.y += cameraTransform.y;
+            const visit = (gameObject: GameObject) => {
+                if (gameObject.hovered !== this.hoverTest(gameObject, point)) {
+                    gameObject.hovered = this.hoverTest(gameObject, point);
+                    if (gameObject.hovered && gameObject.onHoverIn) {
+                        gameObject.onHoverIn(e);
+                    } else if (!gameObject.hovered && gameObject.onHoverOut) {
+                        gameObject.onHoverOut(e);
+                    }
+                }
+                for (const child of gameObject.children) {
+                    visit(child);
+                }
+            }
+            visit(this.rootGameObject);
+        })
     }
 
     hitTest(gameObject: GameObject, point: Point): GameObject {
@@ -59,5 +81,32 @@ export class MouseControlSystem extends System {
             }
             return null;
         }
+    }
+
+    hoverTest(gameObject: GameObject, point: Point): boolean {
+        if (gameObject.renderer) {
+            const bounds = gameObject.renderer.getBounds();
+            let result = false;
+            if (bounds.width) {
+                result = checkPointInRectangle(point, bounds)
+            } else if (bounds.radius) {
+                result = checkPointInCircle(point, bounds);
+            }
+            if (result) {
+                return result;
+            }
+        }
+        const length = gameObject.children.length;
+        for (let childIndex = length - 1; childIndex >= 0; childIndex--) {
+            const child = gameObject.children[childIndex];
+            const childTransform = child.getBehaviour(Transform);
+            const childLocalMatrix = childTransform.localMatrix;
+            const childInvertLocalMatrix = invertMatrix(childLocalMatrix);
+            const newPoint = pointAppendMatrix(point, childInvertLocalMatrix);
+            if (this.hoverTest(child, newPoint)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

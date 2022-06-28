@@ -51,7 +51,12 @@ export class CanvasContextRenderingSystem extends System {
         } else {
             camera = getGameObjectById('cameraEditor');
         }
-        const cameraTransform = camera.getBehaviour(Transform);
+        let cameraTransform;
+        if(camera){
+            cameraTransform = camera.getBehaviour(Transform);
+        }else {
+            cameraTransform = new Transform();
+        }
         const invertCameraTransform = invertMatrix(cameraTransform.globalMatrix);
 
         function visitChildren(gameObject: GameObject) {

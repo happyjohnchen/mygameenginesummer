@@ -151,10 +151,6 @@ export class GameEngine {
         return this.systems;
     }
 
-    reloadPage(){
-        location.reload();
-    }
-
     private startup() {
         this.rootGameObject.addBehaviour(new Transform());
         const text = this.resourceManager.get(this.currentSceneName);
@@ -170,8 +166,10 @@ export class GameEngine {
             gameObjects[cameraEditor.id] = cameraEditor;//注册摄像机
             this.rootGameObject.addChild(cameraEditor);
             const cameraEditorTransform = new Transform();
-            cameraEditorTransform.x = getGameObjectById('camera').getBehaviour(Transform).x;
-            cameraEditorTransform.y = getGameObjectById('camera').getBehaviour(Transform).y;
+            if (getGameObjectById('camera')){
+                cameraEditorTransform.x = getGameObjectById('camera').getBehaviour(Transform).x;
+                cameraEditorTransform.y = getGameObjectById('camera').getBehaviour(Transform).y;
+            }
             cameraEditor.addBehaviour(cameraEditorTransform);
 
             const body = document.body;
@@ -269,6 +267,12 @@ export class GameObject {
     parent: GameObject;
 
     onClick?: Function;
+
+    onHoverIn?: Function;
+
+    onHoverOut?: Function;
+
+    hovered = false;
 
     behaviours: Behaviour[] = [];
 
@@ -379,6 +383,7 @@ export class GameObject {
     }
 
     removeBehaviour(behaviour: Behaviour) {
+        behaviour.onEnd();
         const index = this.behaviours.indexOf(behaviour);
         if (index >= 0) {
             this.behaviours.splice(index, 1);
@@ -431,10 +436,12 @@ export function extractGameObject(gameObject: GameObject): GameObjectData {
             behaviourData.properties[metadata.key] = behaviour[metadata.key];
         }
     }
-    for (const child of gameObject.children) {
-        const childData = extractGameObject(child);
-        gameObjectData.children = gameObjectData.children || [];
-        gameObjectData.children.push(childData);
+    if (gameObject.children){
+        for (const child of gameObject.children) {
+            const childData = extractGameObject(child);
+            gameObjectData.children = gameObjectData.children || [];
+            gameObjectData.children.push(childData);
+        }
     }
     console.log(gameObjectData)
     return gameObjectData
