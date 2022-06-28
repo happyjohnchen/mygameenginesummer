@@ -62,6 +62,25 @@ function checkNewRoomCanBuild(){
        }
 }
 }
+function getRoomTypeById(roomId1:number,roomId2:number){
+
+return RoomType;
+}
+function checkNeighbor(roomId:number){
+
+if(roomId%5==1||roomId%6==1){
+    return getRoomTypeById(roomId,roomId+1)
+}
+ if(getRoomTypeById(roomId,roomId+1)){
+     return
+ }
+ else if (roomId%5!=1||roomId%6!=1){
+ if(getRoomTypeById(roomId,roomId-1)){
+return
+ }
+
+}
+}
 export class RoomSet extends Behaviour {
 
     //在此定义脚本中的属性
