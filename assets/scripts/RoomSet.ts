@@ -20,7 +20,7 @@ function createRoom(roomPositinX:number,roomPositinY:number,roomType:number,self
     
     self.gameObject.addChild(self.child)
     const childTransform = new Transform();
-    childTransform.x =0+roomPositinX;
+    childTransform.x =0+roomPositinX*150;
     childTransform.y = 0+roomPositinY;
     self.child.addBehaviour(childTransform);
  const roomPrefab=new Prefab();
@@ -71,7 +71,7 @@ export class RoomSet extends Behaviour {
     onStart(): void {
         roomStart();
      for(let j=1;j<6;j++)
-        createRoom(0,0,roomPostionArray[0][j],this)
+        createRoom(j,0,roomPostionArray[0][j],this)
         
 
     }
