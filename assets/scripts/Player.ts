@@ -5,6 +5,7 @@ import {GameObject, getGameObjectById} from "../../src/engine";
 import {Sound} from "../../src/behaviours/Sound";
 import {AnimationRenderer} from "../../src/behaviours/AnimationRenderer";
 import {ShapeCircleRenderer} from "../../src/behaviours/ShapeCircleRenderer";
+import {Prefab} from "../../src/behaviours/Prefab";
 
 export class Player extends Behaviour {
     @number()
@@ -123,13 +124,13 @@ export class Player extends Behaviour {
     }
 
     onTick(duringTime: number) {
-        if (getGameObjectById('PrefabSquare')){
-            getGameObjectById('PrefabSquare').getBehaviour(Transform);
+        if (getGameObjectById('Prefab').getBehaviour(Prefab).created){
+            console.log(getGameObjectById('PrefabSquare').getBehaviour(Transform));
         }
     }
 
     onEnd() {
         super.onEnd();
-        this.gameObject.children=[];
+        this.gameObject.children = [];
     }
 }
