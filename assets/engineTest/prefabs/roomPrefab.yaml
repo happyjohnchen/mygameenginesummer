@@ -16,7 +16,4 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: ImageRenderer
-        properties:
-          imagePath: assets/engineTest/images/testImage.png
     id: NewGameObject
