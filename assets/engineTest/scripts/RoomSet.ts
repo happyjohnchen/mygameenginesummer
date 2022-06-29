@@ -83,7 +83,7 @@ export class RoomSet extends Behaviour {
         room.positionX = roomPositionX;
         room.positionY = roomPositionY;
         room.RoomType = RoomStatus.canBuild;
-        self.child.addBehaviour(Room);
+        self.child.addBehaviour(room);
 
     };
     //在此定义脚本中的属性
