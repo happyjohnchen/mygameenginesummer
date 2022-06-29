@@ -45,7 +45,7 @@ export class TimeControllerSystem extends Behaviour {
             if(this.nownighttime>=this.nighttime){
                 this.isday = true;
                 this.daycount +=1;
-                console.log(this.daycount);
+                //console.log(this.daycount);
                 
             }
         }

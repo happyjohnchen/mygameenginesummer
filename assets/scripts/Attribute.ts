@@ -37,14 +37,14 @@ export class Attribute extends Behaviour {
         this.gameObject.getBehaviour(TextRenderer).text= this.value.toString();
     }
 
-    //平均每16ms执行一次 每一小时掉一次
+    //平均每16ms执行一次 每oncetime小时掉一次
     onTick(duringTime: number) {
-        this.nowtime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getHourTime();
-        this.lasttime = this.lasttime==16? 0:this.lasttime;
-        if(this.nowtime-this.lasttime >=this. oncetime){
+        this.nowtime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
+        this.lasttime = this.lasttime==60? 0:this.lasttime;
+        if(this.nowtime-this.lasttime >=this. oncetime*60){
             this.setvalue(-this.consumepertime);
             this.lasttime = this.nowtime;    
-            console.log(this.lasttime);
+            //console.log(this.lasttime);
         }
         //console.log(this.lasttime);
         

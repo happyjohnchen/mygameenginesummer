@@ -22,6 +22,9 @@ import {addAttribute} from "../assets/scripts/addAttribute";
 import {addspeed} from "../assets/scripts/addspeed";
 import {showtime} from "../assets/scripts/showtime";
 
+import {RoomClass} from "../assets/scripts/RoomClass";
+
+
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
 registerBehaviourClass(TextRenderer);
@@ -48,5 +51,6 @@ registerBehaviourClass(Attribute);
 registerBehaviourClass(addAttribute);
 registerBehaviourClass(addspeed);
 registerBehaviourClass(showtime);
+registerBehaviourClass(RoomClass);
 const engine = new GameEngine()
 engine.start()

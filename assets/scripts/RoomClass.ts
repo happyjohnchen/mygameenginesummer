@@ -1,14 +1,15 @@
 import { whitespaceFilter } from "_@microsoft_fast-foundation@2.46.9@@microsoft/fast-foundation";
+import { Prefab } from "../../src/behaviours/Prefab";
+import { GameObject, getGameObjectById,createGameObject } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
 import { number } from "../../src/engine/validators/number";
+import { addAttribute } from "./addAttribute";
 import {RoomModule, RoomType } from "./modules/RoomModule";
-export class BehaviourDemo extends Behaviour {
+import { TimeControllerSystem } from "./TimeControllerSystem";
 
-    //在此定义脚本中的属性
-    @String()
-    roomtype:RoomType = "WaterFactory";
-    //游戏编辑模式或运行模式开始时会执行一次
+export class RoomClass extends Behaviour {
 
+    roomtype= "water";
     @number()
     primeproducetime = 5;//多少小时产出一次
 
@@ -22,9 +23,16 @@ export class BehaviourDemo extends Behaviour {
     @number()
     radix = 0.2;
    
+    private lasttime = 0;//经过的时间
+    private nowtime = 0;
 
     onStart() {
-
+        this.gameObject.onClick = (e) => {
+            if(e.button ==0){
+                console.log("点击");
+            }
+     
+        }
     }
 
     //游戏运行模式开始时会执行一次
@@ -37,26 +45,45 @@ export class BehaviourDemo extends Behaviour {
 
     }
 
-    //平均每16ms执行一次
+    //平均每16ms执行一次   每一个小时产出一个增加
     onTick(duringTime: number) {
-
+        this.nowtime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
+        this.lasttime = this.lasttime==60? 0:this.lasttime;
+        if(this.nowtime-this.lasttime >=this.calculatePeriod()*60){
+            this.createProduction();
+            this.lasttime = this.nowtime;    
+            //console.log(this.lasttime);
+        }
     }
 
     getRoomType(){
         return this.roomtype;
     }
 
-    getattribute(type:RoomType){//转化能源
-        const Attribute = {
-            WaterFactory:"water",
-            EnergyFactory:"energy",
-            FoodFactory:"food"
-        }
-        return Attribute[type];
-    }
+    // getattribute(type:RoomType){//转化能源
+    //     const Attribute = {
+    //         WaterFactory:"water",
+    //         EnergyFactory:"energy",
+    //         FoodFactory:"food"
+    //     }
+    //     return Attribute[type];
+    // }
 
     calculatePeriod(){ //计算消耗周期
         let period = this.primeproducetime - (this.totalpeopleattribute*this.coefficient) + this.radix;
         return period;
+    }
+
+    createProduction(){ //把type 和 产出值 赋给预制体
+        const attributeprefab = new Prefab();
+        attributeprefab.prefabPath = 'assets/engineTest/prefabs/addPrefab.yaml'
+        //attributeprefab.gameObject.getBehaviour(addAttribute).setvalue(this.production);
+        //attributeprefab.gameObject.getBehaviour(addAttribute).settype(this.roomtype);
+        this.gameObject.addBehaviour(attributeprefab);
+      
+    }
+
+    getproduction(){
+        return this.production;
     }
 }

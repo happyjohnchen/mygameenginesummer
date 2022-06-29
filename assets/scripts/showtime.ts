@@ -31,7 +31,7 @@ export class showtime extends Behaviour {
         this.nowhour= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getHourTime()+this.starttime;
         this.nowmin = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
         this.nowday = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getdaycount();
-        console.log(getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).gettotalgamesecondtime());
+        //console.log(getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).gettotalgamesecondtime());
         
     }
 
