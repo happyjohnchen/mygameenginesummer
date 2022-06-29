@@ -95,7 +95,7 @@ async function startEditor() {
 
 function generateAssetsYaml() {
     const fs = require("fs");
-    const path = require('path');
+    const path = require('path').posix;
 
     const files = [];
 
@@ -103,7 +103,7 @@ function generateAssetsYaml() {
         //添加目录内所有文件
         const filesList = fs.readdirSync(dir)
         for (const file of filesList) {
-            const fullPath = dir + '/' + file;
+            const fullPath = path.join(dir, file);
             files.push(fullPath);
             if (fs.statSync(fullPath).isDirectory()) {
                 //递归添加所有子目录

@@ -26,7 +26,7 @@ export class Assets {
 
     async start() {
         const fs = require('fs');
-        const path = require('path');
+        const path = require('path').posix;
 
         //文件树
         function readFileList(dir: string, container: HTMLElement, fileBrowser: HTMLDivElement, editorHost: EditorHost) {
