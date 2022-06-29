@@ -21,10 +21,14 @@ request.open("get", url);/*设置请求方法与路径*/
 request.send(null);/*不发送数据到服务器*/
 request.onload = function () {/*XHR对象获取到返回信息后执行*/
     if (request.status == 200) {/*返回状态为200，即为数据获取成功*/
-        const json = JSON.parse(request.responseText);
-        canvas.width = json.canvasWidth;
-        canvas.height = json.canvasHeight;
+        const engineUIConfig = JSON.parse(request.responseText);
+        canvas.width = engineUIConfig.canvasWidth;
+        canvas.height = engineUIConfig.canvasHeight;
         console.log("分辨率:" + canvas.width + "x" + canvas.height);
+        if (!engineUIConfig.showEditor){
+            canvas.width  *= engineUIConfig.launchModeZoomIndex;
+            canvas.height  *= engineUIConfig.launchModeZoomIndex;
+        }
     }
 }
 
@@ -81,13 +85,13 @@ function getQuery(): { [key: string]: string } {
 
 
 export class GameEngine {
-    currentSceneName: string = 'assets/scenes/main.yaml';
+    currentSceneName: string = 'assets/engineTest/scenes/main.yaml';
     rootGameObject = new GameObject();
     lastTime: number = 0;
     storeDuringTime: number = 0;
     resourceManager = new ResourceManager();
     systems: System[] = [];
-    loadSceneData?: any;
+    loadSceneData: string = '';
 
     public mode: "edit" | "play" = 'edit'
 
@@ -100,6 +104,10 @@ export class GameEngine {
             this.mode = mode;
         } else {
             this.mode = 'play'
+        }
+
+        if (getQuery().data) {
+            this.loadSceneData = getQuery().data;
         }
 
         if (this.mode === 'edit') {
@@ -123,15 +131,9 @@ export class GameEngine {
         });
     }
 
-    loadScene(sceneName: string, data?: any) {
-        this.loadSceneData = data;
-        this.currentSceneName = sceneName;
-        delete this.rootGameObject.children;
-        this.rootGameObject.children = [];
-        this.resourceManager.loadText(sceneName, () => {
-            this.rootGameObject.active = true;
-            this.startup();
-        });
+    loadScene(sceneName: string, data?: string) {
+        data = data ? data : '';
+        window.location.href = window.location.href.split('?')[0] + `?mode=${this.mode}&scene=${sceneName}&data=${data}`;
     }
 
     addSystem(system: System) {
@@ -166,7 +168,7 @@ export class GameEngine {
             gameObjects[cameraEditor.id] = cameraEditor;//注册摄像机
             this.rootGameObject.addChild(cameraEditor);
             const cameraEditorTransform = new Transform();
-            if (getGameObjectById('camera')){
+            if (getGameObjectById('camera')) {
                 cameraEditorTransform.x = getGameObjectById('camera').getBehaviour(Transform).x;
                 cameraEditorTransform.y = getGameObjectById('camera').getBehaviour(Transform).y;
             }
@@ -356,7 +358,10 @@ export class GameObject {
         this.behaviours.push(behaviour);
         behaviour.gameObject = this;
         behaviour.engine = this.engine;
-        behaviour.onStart()
+        behaviour.onStart();
+        if (this.engine.mode==="play"){
+            behaviour.onPlayStart();
+        }
         if (this.active) {
             behaviour.active = true;
         }
@@ -436,7 +441,7 @@ export function extractGameObject(gameObject: GameObject): GameObjectData {
             behaviourData.properties[metadata.key] = behaviour[metadata.key];
         }
     }
-    if (gameObject.children){
+    if (gameObject.children) {
         for (const child of gameObject.children) {
             const childData = extractGameObject(child);
             gameObjectData.children = gameObjectData.children || [];

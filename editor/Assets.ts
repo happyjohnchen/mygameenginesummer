@@ -182,7 +182,8 @@ export class Assets {
                     copyButton.innerText = '拷贝路径';
                     copyButton.onclick = () => {
                         const ncp = require('copy-paste');
-                        ncp.copy(file, function () {
+                        const filePath = file.split('\\').join('/');
+                        ncp.copy(filePath, function () {
                             console.log("拷贝成功", file)
                         })
                     }

@@ -98,7 +98,7 @@ children:
           rotation: 0
       - type: ImageRenderer
         properties:
-          imagePath: assets/images/testImage.png
+          imagePath: assets/engineTest/images/testImage.png
       - type: Walkable
         properties:
           speed: 1
@@ -144,43 +144,9 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: ShapeRectRenderer
-        properties:
-          width: 100
-          height: 100
-          color: red
-          customColor: '#ffffff'
-      - type: Player
-        properties:
-          speed: 10
-    id: Player
-    children:
-      - behaviours:
-          - type: Transform
-            properties:
-              x: 20
-              y: 40
-              scaleX: 1
-              scaleY: 1
-              rotation: 0
-          - type: TextRenderer
-            properties:
-              text: Player
-              fontSize: 20
-              font: 微软雅黑
-              fontColor: '#ffffff'
-        id: PlayerText
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
       - type: Sound
         properties:
-          soundPath: assets/sounds/start.mp3
+          soundPath: assets/engineTest/sounds/start.mp3
           autoPlay: false
     id: sound
   - behaviours:
@@ -193,7 +159,7 @@ children:
           rotation: 0
       - type: AnimationRenderer
         properties:
-          imagePathPrefix: assets/animations/testAnimation/testAnim
+          imagePathPrefix: assets/engineTest/animations/testAnimation/testAnim
           imagePathSuffix: .png
           startNum: 1
           endNum: 10
@@ -222,7 +188,7 @@ children:
           rotation: 0
       - type: Prefab
         properties:
-          prefabPath: assets/prefabs/testPrefab.yaml
+          prefabPath: assets/engineTest/prefabs/testPrefab.yaml
     id: Prefab
   - behaviours:
       - type: Transform
@@ -247,6 +213,43 @@ children:
           rotation: 0
       - type: Prefab
         properties:
-          prefabPath: assets/prefabs/test2Prefab.yaml
+          prefabPath: assets/engineTest/prefabs/test2Prefab.yaml
     id: Prefab2
+<<<<<<< HEAD:assets/scenes/main.yaml
 >>>>>>> master
+=======
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ShapeRectRenderer
+        properties:
+          width: 100
+          height: 100
+          color: red
+          customColor: '#ffffff'
+      - type: Player
+        properties:
+          speed: 10
+    id: Player
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 20
+              y: 40
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: Player
+              fontSize: 20
+              font: 微软雅黑
+              fontColor: '#ffffff'
+        id: PlayerText
+>>>>>>> master:assets/engineTest/scenes/main.yaml

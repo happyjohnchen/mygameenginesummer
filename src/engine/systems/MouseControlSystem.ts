@@ -8,7 +8,10 @@ export class MouseControlSystem extends System {
     onStart() {
         window.addEventListener('mousedown', (e) => {
             const point = {x: e.clientX, y: e.clientY};
-            const camera = getGameObjectById('camera')
+            const camera = getGameObjectById('camera');
+            if (!camera){
+                return;
+            }
             const cameraTransform = camera.getBehaviour(Transform);
             //画布坐标转化为摄像机坐标
             point.x += cameraTransform.x;
@@ -30,6 +33,9 @@ export class MouseControlSystem extends System {
         window.addEventListener('mousemove', (e) => {
             const point = {x: e.clientX, y: e.clientY};
             const camera = getGameObjectById('camera')
+            if (!camera){
+                return;
+            }
             const cameraTransform = camera.getBehaviour(Transform);
             //画布坐标转化为摄像机坐标
             point.x += cameraTransform.x;
