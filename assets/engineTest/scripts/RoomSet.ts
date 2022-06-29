@@ -71,25 +71,26 @@ console.log(x,y)
 if(x-1<-1||x+1>6)return
 
    if(x-1>=0&&roomPostionArray[x-1][y]==0&&roomPostionArray[x+1][y]==0){
-       console.log("a")
+      
         this.createRoom(x+1,y,RoomStatus.canBuild,this.gameObject)
         this.createRoom(x,y+1,RoomStatus.canBuild,this.gameObject)
         this.createRoom(x-1,y,RoomStatus.canBuild,this.gameObject)
     }
     else if(x>0&&roomPostionArray[x+1][y]==0){
-        console.log("yes")
+        
         this.createRoom(x+1,y,RoomStatus.canBuild,this.gameObject)
         this.createRoom(x,y+1,RoomStatus.canBuild,this.gameObject)
 
     }
     else if(x-1>=0&&roomPostionArray[x-1][y]==0){
-        console.log("yes1")
+       
         this.createRoom(x-1,y,RoomStatus.canBuild,this.gameObject)
         this.createRoom(x,y+1,RoomStatus.canBuild,this.gameObject)
 
     }
     else 
-    {console.log("v")
+    {
+        
         this.createRoom(x,y+1,RoomStatus.canBuild,this.gameObject)
     }
     }
