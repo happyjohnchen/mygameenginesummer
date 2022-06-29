@@ -125,7 +125,6 @@ export class GameEngine {
         await this.resourceManager.loadText(assetsYaml);
         const assetsData = this.unserilizeAssetsYaml(assetsYaml);
         if (assetsData) {
-            console.log(assetsData)
             const imageList = assetsData.images;
             for (const asset of imageList) {
                 await this.resourceManager.loadImage(asset);

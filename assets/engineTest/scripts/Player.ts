@@ -23,7 +23,7 @@ export class Player extends Behaviour {
             const gModule = JSON.parse(decodeURI(this.engine.loadSceneData)) as GameModule;
             console.log(gModule);
         } catch (e){
-            console.log(e);
+            console.log("Player:loadSceneData没有被解析，因为其不是JSON格式")
         }
         const transform = this.gameObject.getBehaviour(Transform);
         if (this.engine.loadSceneData && this.engine.loadSceneData !== this.sceneData) {
