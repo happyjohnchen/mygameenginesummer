@@ -21,8 +21,8 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: -600
-          y: -100
+          x: -200
+          y: -400
           scaleX: 1
           scaleY: 1
           rotation: 0
