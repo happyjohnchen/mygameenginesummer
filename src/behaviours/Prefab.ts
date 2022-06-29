@@ -11,13 +11,6 @@ export class Prefab extends Behaviour {
 
     prefab: GameObject;
 
-    resetPrefab(prefabPath: string) {
-        this.gameObject.removeChild(this.prefab);
-        this.created = false;
-        this.prefabPath = prefabPath;
-        this.onStart();
-    }
-
     onStart() {
         this.prefab = this.unserilize(this.engine.resourceManager.getText(this.prefabPath));
         this.gameObject.children = [];
