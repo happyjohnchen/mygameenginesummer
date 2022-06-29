@@ -358,7 +358,10 @@ export class GameObject {
         this.behaviours.push(behaviour);
         behaviour.gameObject = this;
         behaviour.engine = this.engine;
-        behaviour.onStart()
+        behaviour.onStart();
+        if (this.engine.mode==="play"){
+            behaviour.onPlayStart();
+        }
         if (this.active) {
             behaviour.active = true;
         }

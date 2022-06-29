@@ -144,40 +144,6 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: ShapeRectRenderer
-        properties:
-          width: 100
-          height: 100
-          color: red
-          customColor: '#ffffff'
-      - type: Player
-        properties:
-          speed: 10
-    id: Player
-    children:
-      - behaviours:
-          - type: Transform
-            properties:
-              x: 20
-              y: 40
-              scaleX: 1
-              scaleY: 1
-              rotation: 0
-          - type: TextRenderer
-            properties:
-              text: Player
-              fontSize: 20
-              font: 微软雅黑
-              fontColor: '#ffffff'
-        id: PlayerText
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
       - type: Sound
         properties:
           soundPath: assets/engineTest/sounds/start.mp3

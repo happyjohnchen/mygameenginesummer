@@ -47,6 +47,9 @@ export class Player extends Behaviour {
         }
 
         document.addEventListener('keyup', (e) => {
+            if (this.engine.mode==='edit'){
+                return;
+            }
             //console.log(getGameObjectById('TileMap').getBehaviour(TileMap).tileToWorldPosition(1, 1))
             switch (e.key) {
                 case 'a':
@@ -121,6 +124,10 @@ export class Player extends Behaviour {
                     break;
             }
         })
+    }
+
+    onPlayStart() {
+        console.log("Player onPlayStart")
     }
 
     onTick(duringTime: number) {
