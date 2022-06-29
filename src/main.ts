@@ -11,6 +11,8 @@ import {ShapeCircleRenderer} from "./behaviours/ShapeCircleRenderer";
 import {ImageRenderer} from "./behaviours/ImageRenderer";
 import {RoundedRectRenderer} from "./behaviours/RoundedRectRenderer";
 
+import {Player} from "../assets/engineTest/scripts/Player";
+
 import {Sound} from "./behaviours/Sound";
 import {AnimationRenderer} from "./behaviours/AnimationRenderer";
 import {TileMap} from "./behaviours/TileMap";
@@ -41,8 +43,4 @@ registerBehaviourClass(Player);
 registerBehaviourClass(RoomSet);
 registerBehaviourClass(Room);
 const engine = new GameEngine()
-engine.start()
-function Player(Player: any) {
-    throw new Error('Function not implemented.');
-}
 
