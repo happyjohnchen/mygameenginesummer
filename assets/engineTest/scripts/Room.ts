@@ -19,9 +19,9 @@ export class Room extends Behaviour {
         
         this.gameObject.onClick = () => {
             //想在这里判断点击了物体然后返回到父物体的roomSet中，然后就可以new 一个新的房间（create newroom()），并把新的房间状态改变
-            console.log( this.gameObject.getBehaviour(Room).RoomType)
+            console.log("点之前"+this.gameObject.getBehaviour(Room).RoomType)
             this.gameObject.getBehaviour(Room).RoomType=1
-            console.log( this.gameObject.getBehaviour(Room).RoomType)
+            console.log( "点之后"+this.gameObject.getBehaviour(Room).RoomType)
 
             this.gameObject.getBehaviour(Prefab).prefabPath='assets//engineTest//prefabs//buildingPrefab.yaml'
             console.log(this.gameObject.getBehaviour(Prefab).prefabPath)

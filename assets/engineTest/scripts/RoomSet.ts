@@ -25,31 +25,16 @@ for (var i = 0; i < 9; i++) {
 
 }
 
-function roomStart() {
 
-    for (let j = 1; j < 6; j++) {
-        roomPostionArray[0][j] = 2
-    }
-}
-function checkNewRoomCanBuild() {
-    for (var i = 0; i < 9; i++) {
-        for (var j = 0; j < 6; j++) {
-            if (roomPostionArray[i][j] == 1) {
-                roomPostionArray[i++][j] = 2
-            }
-        }
-    }
-}
+
 //记录每个坑的状态
 function storeBuildStatus(x:number,y:number,roomStatus:RoomStatus){
     roomPostionArray[x][y]=roomStatus;
 }
-function getRoomTypeById(roomId1: number, roomId2: number) {
 
-    return RoomStatus;
-}
 
 export class RoomSet extends Behaviour {
+    //建坑
     createRoom(roomPositionX: number, roomPositionY: number, roomType: number, self: any) {
         if (roomType == 0||roomPositionX+1>6||roomPositionX-1<-1) return;
 
