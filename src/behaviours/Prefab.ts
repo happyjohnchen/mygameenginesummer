@@ -1,8 +1,8 @@
 import * as yaml from 'js-yaml';
-import {Behaviour} from "../engine/Behaviour";
-import {string} from "../engine/validators/string";
-import {ResourceManager} from "../engine/ResourceManager";
-import {createGameObject, GameObject} from "../engine";
+import { Behaviour } from "../engine/Behaviour";
+import { string } from "../engine/validators/string";
+import { ResourceManager } from "../engine/ResourceManager";
+import { createGameObject, GameObject } from "../engine";
 
 export class Prefab extends Behaviour {
     @string()
@@ -10,7 +10,7 @@ export class Prefab extends Behaviour {
 
     created = false;
 
-    prefab : GameObject;
+    prefab: GameObject;
 
     onStart() {
         if (!this.prefabPath.endsWith('.yaml')) {
@@ -25,7 +25,6 @@ export class Prefab extends Behaviour {
             this.created = true;
         });
     }
-
     private unserilize(text: string): GameObject {
         try {
             let data = yaml.load(text);

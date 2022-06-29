@@ -10,7 +10,9 @@ import {Transform} from './engine/Transform';
 import {ShapeCircleRenderer} from "./behaviours/ShapeCircleRenderer";
 import {ImageRenderer} from "./behaviours/ImageRenderer";
 import {RoundedRectRenderer} from "./behaviours/RoundedRectRenderer";
+
 import {Player} from "../assets/engineTest/scripts/Player";
+
 import {Sound} from "./behaviours/Sound";
 import {AnimationRenderer} from "./behaviours/AnimationRenderer";
 import {TileMap} from "./behaviours/TileMap";
@@ -42,4 +44,4 @@ registerBehaviourClass(Room);
 registerBehaviourClass(RoomSet);
 
 const engine = new GameEngine()
-engine.start()
+
