@@ -103,8 +103,7 @@ function generateAssetsYaml() {
         //添加目录内所有文件
         const filesList = fs.readdirSync(dir)
         for (const file of filesList) {
-            let fullPath = path.join(dir, file);
-            fullPath = fullPath.replace('\\', '/')
+            const fullPath = dir + '/' + file;
             files.push(fullPath);
             if (fs.statSync(fullPath).isDirectory()) {
                 //递归添加所有子目录
