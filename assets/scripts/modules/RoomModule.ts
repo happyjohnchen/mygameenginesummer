@@ -5,7 +5,6 @@ export class RoomModule {
     roomType: RoomType;
     position: { x: number, y: number };
     people: [number];
-    capability: number;
 }
 
 export enum RoomType {

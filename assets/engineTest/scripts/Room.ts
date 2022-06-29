@@ -23,7 +23,7 @@ export class Room extends Behaviour {
             this.gameObject.getBehaviour(Room).RoomType=1
             console.log( "点之后"+this.gameObject.getBehaviour(Room).RoomType)
 
-            this.gameObject.getBehaviour(Prefab).prefabPath='assets//engineTest//prefabs//buildingPrefab.yaml'
+            this.gameObject.getBehaviour(Prefab).prefabPath='assets/engineTest/prefabs/buildingPrefab.yaml'
             console.log(this.gameObject.getBehaviour(Prefab).prefabPath)
             const tileMapGameObj = getGameObjectById("tileMap")
             tileMapGameObj.getBehaviour(RoomSet).checkNeighbor(this.positionX,this.positionY)

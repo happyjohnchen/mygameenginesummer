@@ -1,8 +1,7 @@
 import * as yaml from 'js-yaml';
-import { Behaviour } from "../engine/Behaviour";
-import { string } from "../engine/validators/string";
-import { ResourceManager } from "../engine/ResourceManager";
-import { createGameObject, GameObject } from "../engine";
+import {Behaviour} from "../engine/Behaviour";
+import {string} from "../engine/validators/string";
+import {createGameObject, GameObject} from "../engine";
 
 export class Prefab extends Behaviour {
     @string()
@@ -12,18 +11,23 @@ export class Prefab extends Behaviour {
 
     prefab: GameObject;
 
+    resetPrefab(prefabPath: string) {
+        this.gameObject.removeChild(this.prefab);
+        this.created = false;
+        this.prefabPath = prefabPath;
+        this.onStart();
+    }
+
     onStart() {
-        if (!this.prefabPath.endsWith('.yaml')) {
-            console.log("Prefab:", this.prefabPath, "不是yaml文件");
-            return;
-        }
-        const resourceManager = new ResourceManager();
-        resourceManager.loadText(this.prefabPath, () => {
-            const text = resourceManager.get(this.prefabPath);
-            this.prefab = this.unserilize(text);
-            this.gameObject.addChild(this.prefab);
-            this.created = true;
-        });
+        this.prefab = this.unserilize(this.engine.resourceManager.getText(this.prefabPath));
+        this.gameObject.children = [];
+        this.gameObject.addChild(this.prefab);
+    }
+
+    onTick(duringTime: number) {
+        this.prefab = this.unserilize(this.engine.resourceManager.getText(this.prefabPath));
+        this.gameObject.children = [];
+        this.gameObject.addChild(this.prefab);
     }
     private unserilize(text: string): GameObject {
         try {

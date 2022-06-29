@@ -32,38 +32,28 @@ export class AnimationRenderer extends Behaviour implements Renderer {
     }
 
     currentImage = new Image();
-    private imageList = [];
     private currentNum = 0;
     private frameCount = 0;
 
     getBounds(): Rectangle {
-        const image = new Image();
-        image.src = this.imagePathPrefix + this.startNum + this.imagePathSuffix;
         return {
             x: 0,
             y: 0,
-            width: image.width,
-            height: image.height,
+            width: this.currentImage.width,
+            height: this.currentImage.height,
         };
     }
 
     onStart() {
-        if (this.startNum > this.endNum) {
-            this.endNum = this.startNum;
-        }
-        this.currentNum = this.startNum;
-        //加载所有图片
-        for (let i = 0; i <= this.endNum - this.startNum; i++) {
-            const image = new Image();
-            image.src = this.imagePathPrefix + this.currentNum + this.imagePathSuffix;
-            this.imageList.push(image);
-            this.currentNum++;
-        }
-        this.currentImage = this.imageList[0];
         this.currentNum = 0;
+        this.currentImage = this.engine.resourceManager.getImage(this.imagePathPrefix + this.startNum + this.imagePathSuffix);
     }
 
     onTick(duringTime: number) {
+        if (this.startNum > this.endNum) {
+            this.endNum = this.startNum;
+        }
+        this.currentImage = this.engine.resourceManager.getImage(this.imagePathPrefix + (this.startNum + this.currentNum) + this.imagePathSuffix);
         if (this.pauseAnimation) {
             return;
         }
@@ -71,10 +61,9 @@ export class AnimationRenderer extends Behaviour implements Renderer {
         if (this.frameCount >= this.frameForEachImage) {
             this.frameCount = 0;
             this.currentNum++;
-            if (this.currentNum >= this.imageList.length) {
+            if (this.currentNum > (this.endNum - this.startNum)) {
                 this.currentNum = 0;
             }
-            this.currentImage = this.imageList[this.currentNum];
         }
     }
 
