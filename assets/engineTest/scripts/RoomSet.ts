@@ -71,9 +71,9 @@ export class RoomSet extends Behaviour {
         self.child.addBehaviour(childTransform);
         const roomPrefab = new Prefab();
         if (roomType == 1) {
-            roomPrefab.prefabPath = 'assets//prefabs//buildingPrefab.yaml'
+            roomPrefab.prefabPath = 'assets//engineTest//prefabs//roomPrefab.yaml'
         }
-        else { roomPrefab.prefabPath = 'assets//prefabs//roomPrefab.yaml' }
+        else { roomPrefab.prefabPath = 'assets//engineTest//prefabs//buildingPrefab.yaml' }
         self.child.addBehaviour(roomPrefab);
 
         /* const image=new ImageRenderer();
