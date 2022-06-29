@@ -19,6 +19,12 @@ export class Player extends Behaviour {
 
     onStart() {
         console.log("player onStart, data: " + this.engine.loadSceneData as string);
+        try{
+            const gModule = JSON.parse(decodeURI(this.engine.loadSceneData)) as GameModule;
+            console.log(gModule);
+        } catch (e){
+            console.log(e);
+        }
         const transform = this.gameObject.getBehaviour(Transform);
         if (this.engine.loadSceneData && this.engine.loadSceneData !== this.sceneData) {
             this.sceneData = this.engine.loadSceneData;
@@ -48,7 +54,12 @@ export class Player extends Behaviour {
                     console.log("右键");
                     break;
             }
-            ArchiveSystem.readFile(() => {
+            ArchiveSystem.readFile((file) => {
+                const reader = new FileReader();
+                reader.readAsText(file);
+                reader.onload=()=>{
+                    this.engine.loadScene('assets/engineTest/scenes/secondScene.yaml', reader.result.toString())
+                }
             });
         }
 

@@ -9,7 +9,7 @@ export class ArchiveSystem {
         this.openDownloadDialog(blob, fileName + ".json");
     }
 
-    static readFile(onFileRead: Function) {
+    static readFile(onFileRead: (file: File) => void) {
         const head = document.head;
         const selector = document.createElement('input') as HTMLInputElement;
         selector.type = 'file';
@@ -17,13 +17,14 @@ export class ArchiveSystem {
         selector.style.display = 'none';
         head.appendChild(selector);
         selector.click();
-        while (true){
-            if (selector.value){
-                console.log(selector.value);
+        const interval = setInterval(() => {
+            if (selector.files[0]) {
+                clearInterval(interval);//停止定时器
+                onFileRead(selector.files[0]);
                 return;
             }
-            console.log("no value");
-        }
+        }, 100)
+
     }
 
     static openDownloadDialog = (url, fileName) => {
