@@ -21,7 +21,7 @@ export class RoomClass extends Behaviour {
     production = 20;//一次产出多少
 
     @number()
-    totalpeopleattribute = 1;//速度 有一个根据总特质转化的式子
+    totalpeopleattribute = 1;//总人物属性 有一个根据总特质转化的式子
     @number()
     coefficient = 0.2;
     @number()
