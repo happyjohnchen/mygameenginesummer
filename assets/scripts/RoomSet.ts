@@ -5,7 +5,7 @@ import {Behaviour} from "../../src/engine/Behaviour";
 import { Transform } from "../../src/engine/Transform";
 import { number } from "../../src/engine/validators/number";
 import { Room } from "./Room";
-export enum RoomType {
+export enum RoomStatus {
 
     empty = 0,
 
@@ -15,15 +15,15 @@ export enum RoomType {
 }
 
 child:GameObject
-function createRoom(roomPositinX:number,roomPositinY:number,roomType:number,self:any) {
+function createRoom(roomPositionX:number,roomPositionY:number,roomType:number,self:any) {
    if(roomType==0)return;
    
    self.child = new GameObject();
 
     self.gameObject.addChild(self.child)
     const childTransform = new Transform();
-    childTransform.x =0+roomPositinX*150;
-    childTransform.y = 0+roomPositinY*100;
+    childTransform.x =0+roomPositionX*150;
+    childTransform.y = 0+roomPositionY*100;
     self.child.addBehaviour(childTransform);
  const roomPrefab=new Prefab();
  if(roomType==1){
@@ -35,7 +35,11 @@ function createRoom(roomPositinX:number,roomPositinY:number,roomType:number,self
    /* const image=new ImageRenderer();
     image.imagePath='assets//images//testImage.png'
     child.addBehaviour(image);*/
-  
+  const room=new Room();
+  room.positionX=roomPositionX;
+  room.positionY=roomPositionY;
+  room.RoomType=RoomStatus.canBuild;
+  self.child.addBehaviour(Room);
 
 } ;
 let roomPostionArray = new Array();         //先声明一维
@@ -64,7 +68,7 @@ function checkNewRoomCanBuild(){
 }
 function getRoomTypeById(roomId1:number,roomId2:number){
 
-return RoomType;
+return RoomStatus;
 }
 function checkNeighbor(roomId:number){
 
@@ -85,7 +89,7 @@ export class RoomSet extends Behaviour {
 
     //在此定义脚本中的属性
     @number()
-    roomtype =RoomType.empty;
+    roomtype =RoomStatus.empty;
 canUpdateRoom=false;
 
     //游戏开始时会执行一次
