@@ -237,3 +237,21 @@ children:
               font: 微软雅黑
               fontColor: '#000000'
         id: Text
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -200
+          y: -200
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TextRenderer
+        properties:
+          text: 0天 0:0
+          fontSize: 40
+          font: 微软雅黑
+          fontColor: '#000000'
+      - type: showtime
+        properties:
+          starttime: 8
+    id: timeshow

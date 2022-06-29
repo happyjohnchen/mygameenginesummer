@@ -14,9 +14,9 @@ export class TimeControllerSystem extends Behaviour {
     @number()
     timepertick = 1.6;//控制每次ontick的游戏秒数
 
-    private totalsecondtime=0;//秒
-    private totalmintime=0;//分钟
-    private totalhourtime=0;//小时
+    private secondtime=0;//秒
+    private mintime=0;//分钟
+    private hourtime=0;//小时
     private isday = true;
     private daycount = 1; //经过了多少天
 
@@ -25,7 +25,7 @@ export class TimeControllerSystem extends Behaviour {
     private speed= 1.0;
 
     @number()
-    nighttime = 120;//夜晚时间长度
+    nighttime = 120;//夜晚时间长度 目前相当于现实2s
     private nownighttime = 0;
     //游戏开始时会执行一次
     onStart() {
@@ -38,7 +38,7 @@ export class TimeControllerSystem extends Behaviour {
     }
 
     //平均每16ms执行一次 60次是1s
-    //1次ontick 游戏1.6秒  超过六十秒就-60s 分钟+1 分钟超过60-60s 小时进位 小时等于16s时清0变为黑天
+    //1次ontick 游戏1.6秒  超过六十秒就-60s 分钟+1 分钟超过60-60s 小时进位 小时等于16时清0变为黑天
     onTick(duringTime: number) {  
         if(!this.isday){//黑夜
             this.nownighttime +=1;
@@ -50,35 +50,35 @@ export class TimeControllerSystem extends Behaviour {
             }
         }
         else{   
-        this.totalsecondtime += this.timepertick*this.speed;
-        if(this.totalhourtime>=this.dayhourtime){
-            this.totalhourtime = 0;
+        this.secondtime += this.timepertick*this.speed;
+        if(this.hourtime>=this.dayhourtime){
+            this.hourtime = 0;
             this.isday = false;
             console.log("黑夜");
         }
-        if(this.totalmintime>=60){
-            this.totalmintime-=60;
-            this.totalhourtime+=1;
+        if(this.mintime>=60){
+            this.mintime-=60;
+            this.hourtime+=1;
         }
 
-        if(this.totalsecondtime>=60){
-            this.totalsecondtime-=60;
-            this.totalmintime+=1;
+        if(this.secondtime>=60){
+            this.secondtime-=60;
+            this.mintime+=1;
         }
         //console.log(this.totalhourtime+"小时"+this.totalmintime+"分钟"+this.totalsecondtime+"秒");
          } 
        }
 
        getSecondTime(){
-        return this.totalsecondtime;           
+        return this.secondtime;           
        }
 
        getMinTime(){
-        return this.totalmintime;
+        return this.mintime;
        }
 
        getHourTime(){
-        return this.totalhourtime;
+        return this.hourtime;
        }
        getspeed(){
         return this.speed;
@@ -90,5 +90,9 @@ export class TimeControllerSystem extends Behaviour {
 
        getdaycount(){
         return this.daycount;
+       }
+
+       gettotalgamesecondtime(){//得到游戏时长 以秒为单位
+        return this.daycount*this.dayhourtime*3600+this.hourtime*3600+this.mintime*60+this.secondtime;
        }
 }

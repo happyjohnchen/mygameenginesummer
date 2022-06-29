@@ -20,6 +20,8 @@ import {TimeControllerSystem} from "../assets/scripts/TimeControllerSystem";
 import {Attribute} from "../assets/scripts/Attribute";
 import {addwater} from "../assets/scripts/addwater";
 import {addspeed} from "../assets/scripts/addspeed";
+import {showtime} from "../assets/scripts/showtime";
+
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
 registerBehaviourClass(TextRenderer);
@@ -45,5 +47,6 @@ registerBehaviourClass(TimeControllerSystem);
 registerBehaviourClass(Attribute);
 registerBehaviourClass(addwater);
 registerBehaviourClass(addspeed);
+registerBehaviourClass(showtime);
 const engine = new GameEngine()
 engine.start()
