@@ -28,7 +28,7 @@ children:
           rotation: 0
       - type: Prefab
         properties:
-          prefabPath: assets/prefabs/TimeController.yaml
+          prefabPath: assets/engineTest/prefabs/TimeController.yaml
       - type: TimeControllerSystem
         properties:
           timepertick: 1.6

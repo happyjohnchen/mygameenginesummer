@@ -1,5 +1,1 @@
-<<<<<<< HEAD
-assets\scenes\MVP.yaml
-=======
-assets/engineTest/scenes/main.yaml
->>>>>>> master
+assets/engineTest/scenes/MVP.yaml
