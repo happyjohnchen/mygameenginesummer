@@ -10,13 +10,13 @@ import {Transform} from './engine/Transform';
 import {ShapeCircleRenderer} from "./behaviours/ShapeCircleRenderer";
 import {ImageRenderer} from "./behaviours/ImageRenderer";
 import {RoundedRectRenderer} from "./behaviours/RoundedRectRenderer";
-import {Player} from "../assets/scripts/Player";
-import {RoomSet} from "../assets/scripts/RoomSet";
+import {Player} from "../assets/engineTest/scripts/Player";
 import {Sound} from "./behaviours/Sound";
 import {AnimationRenderer} from "./behaviours/AnimationRenderer";
 import {TileMap} from "./behaviours/TileMap";
 import {Prefab} from "./behaviours/Prefab";
 import {Room} from "../assets/scripts/Room";
+import { RoomSet } from '../assets/scripts/RoomSet';
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
 registerBehaviourClass(TextRenderer);

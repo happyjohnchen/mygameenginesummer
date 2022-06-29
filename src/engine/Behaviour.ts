@@ -1,4 +1,4 @@
-import { GameEngine, GameObject } from "../engine";
+import {GameEngine, GameObject} from "../engine";
 
 /**
  * Game-root
@@ -29,14 +29,17 @@ export class Behaviour {
         for (const system of allSystems) {
             if (value) {
                 system.onAddComponent(this.gameObject, this);
-            }
-            else {
+            } else {
                 system.onRemoveComponent(this.gameObject, this);
             }
         }
     }
 
     onStart() {
+    }
+
+    onPlayStart() {
+
     }
 
     onTick(duringTime: number) {
