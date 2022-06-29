@@ -18,9 +18,11 @@ export class Prefab extends Behaviour {
     }
 
     onTick(duringTime: number) {
-        this.prefab = this.unserilize(this.engine.resourceManager.getText(this.prefabPath));
-        this.gameObject.children = [];
-        this.gameObject.addChild(this.prefab);
+        if (this.unserilize(this.engine.resourceManager.getText(this.prefabPath)) !== this.prefab) {
+            this.gameObject.children = [];
+            this.prefab = this.unserilize(this.engine.resourceManager.getText(this.prefabPath));
+            this.gameObject.addChild(this.prefab);
+        }
     }
 
     private unserilize(text: string): GameObject {
