@@ -10,13 +10,15 @@ export class addAttribute extends Behaviour  {
 
     private value = 0;
     @string()
-    private type = "water";
+    private type = "";
     @number()
-    addvaluecount = 5;
+    private addvaluecount = 20;
     //游戏开始时会执行一次
     onStart() {//点击会增加数量
+        console.log(this.type);
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
+                console.log(this.type);
                 const a = getGameObjectById(this.type.toString());
                 getGameObjectById(this.type).getBehaviour(Attribute).setvalue(this.addvaluecount);
                 const parent = this.gameObject.parent;

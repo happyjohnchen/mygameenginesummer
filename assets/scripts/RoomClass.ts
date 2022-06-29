@@ -33,10 +33,11 @@ export class RoomClass extends Behaviour {
     onStart() {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
-                console.log("点击");
+                //console.log("点击");
             }
      
         }
+        
     }
 
     //游戏运行模式开始时会执行一次
@@ -50,9 +51,11 @@ export class RoomClass extends Behaviour {
             const parentgameObject = getGameObjectById("addAttributePrefab").parent.parent;
             if(parentgameObject==this.gameObject){
                 getGameObjectById("addAttributePrefab").getBehaviour(addAttribute).setvalue(this.production);
-                getGameObjectById("addAttributePrefab").getBehaviour(addAttribute).settype(this.roomtype);
+                //getGameObjectById("addAttributePrefab").getBehaviour(addAttribute).settype(this.roomtype);
             }        
         }
+        console.log(this.getRoomType() + "时间周期为："+this.calculatePeriod() + "小时");
+        
     }
 
     //平均每16ms执行一次   每一个小时产出一个增加
@@ -70,14 +73,6 @@ export class RoomClass extends Behaviour {
         return this.roomtype;
     }
 
-    // getattribute(type:RoomType){//转化能源
-    //     const Attribute = {
-    //         WaterFactory:"water",
-    //         EnergyFactory:"energy",
-    //         FoodFactory:"food"
-    //     }
-    //     return Attribute[type];
-    // }
 
     calculatePeriod(){ //计算消耗周期
         let period = this.primeproducetime - (this.totalpeopleattribute*this.coefficient) + this.radix;
@@ -88,9 +83,7 @@ export class RoomClass extends Behaviour {
         const attributeprefab = new Prefab();
         attributeprefab.prefabPath = 'assets/engineTest/prefabs/add'+this.roomtype +'Prefab.yaml'
         this.gameObject.addBehaviour(attributeprefab);
-        
-      
-      
+        console.log(this.roomtype);   
     }
 
     getproduction(){
