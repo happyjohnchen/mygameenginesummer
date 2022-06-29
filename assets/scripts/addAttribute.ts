@@ -2,18 +2,20 @@ import { getGameObjectById } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
 import { number } from "../../src/engine/validators/number";
 import { Attribute } from "./Attribute";
-export class addwater extends Behaviour  {
+import {RoomModule, RoomType } from "./modules/RoomModule";
+export class addAttribute extends Behaviour  {
     //
-    //在此定义脚本中的属性
+    //用来挂载到可点击的增加属性的物品上
 
     private value = 0;
+    private type:RoomType;
     @number()
     addvaluecount = 5;
     //游戏开始时会执行一次
     onStart() {//点击会增加数量
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
-                const a = getGameObjectById('water');
+                const a = getGameObjectById(this.type.toString());
                 getGameObjectById('water').getBehaviour(Attribute).setvalue(+5);
                 //console.log(a.getBehaviour(Attribute).getvalue());
             }

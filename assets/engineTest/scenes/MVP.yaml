@@ -52,7 +52,7 @@ children:
       - type: Attribute
         properties:
           consumepertime: 1
-          minpertime: 2
+          oncetime: 1
     id: water
     children:
       - behaviours:
@@ -84,7 +84,7 @@ children:
           height: 100
           color: red
           customColor: '#ffffff'
-      - type: addwater
+      - type: addAttribute
         properties:
           addvaluecount: 5
     id: addwater
@@ -181,6 +181,15 @@ children:
               font: 微软雅黑
               fontColor: '#000000'
         id: text
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+        id: NewGameObject
   - behaviours:
       - type: Transform
         properties:
@@ -198,7 +207,7 @@ children:
       - type: Attribute
         properties:
           consumepertime: 1
-          minpertime: 2
+          oncetime: 1
     id: energy
     children:
       - behaviours:
@@ -233,7 +242,7 @@ children:
       - type: Attribute
         properties:
           consumepertime: 1
-          minpertime: 2
+          oncetime: 1
     id: food
     children:
       - behaviours:
@@ -303,3 +312,33 @@ children:
         properties:
           starttime: 8
     id: timeshow
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 200
+          y: -200
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ShapeCircleRenderer
+        properties:
+          radius: 50
+          color: red
+          customColor: '#ffffff'
+    id: waterroom
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: 水房间
+              fontSize: 20
+              font: 微软雅黑
+              fontColor: '#000000'
+        id: 水房间
