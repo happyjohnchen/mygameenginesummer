@@ -54,6 +54,22 @@ children:
           consumepertime: 1
           minpertime: 2
     id: water
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -50
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: 水：
+              fontSize: 40
+              font: 微软雅黑
+              fontColor: '#000000'
+        id: 水
   - behaviours:
       - type: Transform
         properties:
@@ -83,7 +99,7 @@ children:
               rotation: 0
           - type: TextRenderer
             properties:
-              text: 添加属性值
+              text: 添加水
               fontSize: 20
               font: 微软雅黑
               fontColor: '#000000'
@@ -91,7 +107,7 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: -100
+          x: -250
           y: 0
           scaleX: 1
           scaleY: 1
@@ -183,7 +199,23 @@ children:
         properties:
           consumepertime: 1
           minpertime: 2
-    id: power
+    id: energy
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -100
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: 能源：
+              fontSize: 40
+              font: 微软雅黑
+              fontColor: '#000000'
+        id: energy
   - behaviours:
       - type: Transform
         properties:
@@ -203,10 +235,26 @@ children:
           consumepertime: 1
           minpertime: 2
     id: food
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -100
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: 食物：
+              fontSize: 40
+              font: 微软雅黑
+              fontColor: '#000000'
+        id: 食物
   - behaviours:
       - type: Transform
         properties:
-          x: -300
+          x: -400
           y: 0
           scaleX: 1
           scaleY: 1
@@ -247,7 +295,7 @@ children:
           rotation: 0
       - type: TextRenderer
         properties:
-          text: 0天 0:0
+          text: 第0天 0:0
           fontSize: 40
           font: 微软雅黑
           fontColor: '#000000'
