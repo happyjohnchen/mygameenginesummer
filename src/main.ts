@@ -38,5 +38,5 @@ registerBehaviourClass(Prefab);
 //注册自定义脚本
 registerBehaviourClass(Player);
 
-const engine = new GameEngine()
-engine.start()
+const engine = new GameEngine();
+engine.start();

@@ -10,7 +10,20 @@ export class ArchiveSystem {
     }
 
     static readFile(onFileRead: Function) {
-        return JSON.parse(fs.readFileSync("").toString());
+        const head = document.head;
+        const selector = document.createElement('input') as HTMLInputElement;
+        selector.type = 'file';
+        selector.accept = ".json";
+        selector.style.display = 'none';
+        head.appendChild(selector);
+        selector.click();
+        while (true){
+            if (selector.value){
+                console.log(selector.value);
+                return;
+            }
+            console.log("no value");
+        }
     }
 
     static openDownloadDialog = (url, fileName) => {

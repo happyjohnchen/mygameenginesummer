@@ -48,6 +48,8 @@ export class Player extends Behaviour {
                     console.log("右键");
                     break;
             }
+            ArchiveSystem.readFile(() => {
+            });
         }
 
         document.addEventListener('keyup', (e) => {
@@ -154,7 +156,8 @@ export class Player extends Behaviour {
         gameModule.food = 5;
         gameModule.material = 3;
 
-        ArchiveSystem.saveFile("testGame", gameModule);
+        //ArchiveSystem.saveFile("testGame", gameModule);
+
 
         //console.log(ArchiveSystem.readFile('testGame'));
 
