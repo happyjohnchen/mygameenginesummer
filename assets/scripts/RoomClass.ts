@@ -47,13 +47,13 @@ export class RoomClass extends Behaviour {
 
     //每次屏幕刷新执行
     onUpdate() { //获取自己的父物体判断是否是自己生成的 这样可以单个调整数值
-        if(getGameObjectById("addAttributePrefab")){
-            const parentgameObject = getGameObjectById("addAttributePrefab").parent.parent;
-            if(parentgameObject==this.gameObject){
-                getGameObjectById("addAttributePrefab").getBehaviour(addAttribute).setvalue(this.production);
-                //getGameObjectById("addAttributePrefab").getBehaviour(addAttribute).settype(this.roomtype);
-            }        
-        }
+        // if(getGameObjectById("addAttributePrefab")){
+        //     const parentgameObject = getGameObjectById("addAttributePrefab").parent.parent;
+        //     if(parentgameObject==this.gameObject){
+        //         getGameObjectById("addAttributePrefab").getBehaviour(addAttribute).setvalue(this.production);
+        //         //getGameObjectById("addAttributePrefab").getBehaviour(addAttribute).settype(this.roomtype);
+        //     }        
+        // }
         console.log(this.getRoomType() + "时间周期为："+this.calculatePeriod() + "小时");
         
     }

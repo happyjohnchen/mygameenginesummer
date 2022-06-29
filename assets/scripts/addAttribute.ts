@@ -4,6 +4,7 @@ import { number } from "../../src/engine/validators/number";
 import { Attribute } from "./Attribute";
 import {RoomModule, RoomType } from "./modules/RoomModule";
 import {string} from "../../src/engine/validators/string";
+import { RoomClass } from "./RoomClass";
 export class addAttribute extends Behaviour  {
     //
     //用来挂载到可点击的增加属性的物品上
@@ -20,6 +21,7 @@ export class addAttribute extends Behaviour  {
             if(e.button ==0){
                 console.log(this.type);
                 const a = getGameObjectById(this.type.toString());
+                this.addvaluecount = getGameObjectById(this.type+"room").getBehaviour(RoomClass).getproduction();
                 getGameObjectById(this.type).getBehaviour(Attribute).setvalue(this.addvaluecount);
                 const parent = this.gameObject.parent;
                 parent.removeChild(this.gameObject);           
