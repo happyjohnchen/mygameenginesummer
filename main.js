@@ -93,7 +93,48 @@ async function startEditor() {
     })
 }
 
+function generateAssetsYaml() {
+    const fs = require("fs");
+    const path = require('path');
+
+    const files = [];
+
+    function readFiles(dir) {
+        //添加目录内所有文件
+        const filesList = fs.readdirSync(dir)
+        for (const file of filesList) {
+            const fullPath = path.join(dir, file);
+            files.push(fullPath);
+            if (fs.statSync(fullPath).isDirectory()) {
+                //递归添加所有子目录
+                readFiles(fullPath);
+            }
+        }
+
+    }
+
+    readFiles('assets');
+
+    imageAssets = files
+        .filter((item) => item.includes(".jpg") || item.includes(".png"))
+        .map((item) => item);
+    prefabAssets = files
+        .filter((item) => item.includes(".yaml"))
+        .map((item) => item);
+
+    let content = "images:\n";
+    if (imageAssets) {
+        content += imageAssets.map((item) => "  - " + item).join("\n") + "\n";
+    }
+    content += "prefabs:\n";
+    if (prefabAssets) {
+        content += prefabAssets.map((item) => "  - " + item).join("\n");
+    }
+    fs.writeFileSync("./assets/assets.yaml", content, "utf-8");
+}
+
 async function startup() {
+    generateAssetsYaml();
     new WebSocketProxy().start();
     await startupCompiler();
     await startEditor();
