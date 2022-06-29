@@ -40,28 +40,18 @@ function checkNewRoomCanBuild() {
         }
     }
 }
+//记录每个坑的状态
+function storeBuildStatus(x:number,y:number,roomStatus:RoomStatus){
+    roomPostionArray[x][y]=roomStatus;
+}
 function getRoomTypeById(roomId1: number, roomId2: number) {
 
     return RoomStatus;
 }
-function checkNeighbor(roomId: number) {
 
-    if (roomId % 5 == 1 || roomId % 6 == 1) {
-        return getRoomTypeById(roomId, roomId + 1)
-    }
-    if (getRoomTypeById(roomId, roomId + 1)) {
-        return
-    }
-    else if (roomId % 5 != 1 || roomId % 6 != 1) {
-        if (getRoomTypeById(roomId, roomId - 1)) {
-            return
-        }
-
-    }
-}
 export class RoomSet extends Behaviour {
     createRoom(roomPositionX: number, roomPositionY: number, roomType: number, self: any) {
-        if (roomType == 0) return;
+        if (roomType == 0||roomPositionX+1>6||roomPositionX-1<-1) return;
 
         self.child = new GameObject();
         self.addChild(self.child)
@@ -69,23 +59,50 @@ export class RoomSet extends Behaviour {
         childTransform.x = 0 + roomPositionX * 150;
         childTransform.y = 0 + roomPositionY * 100;
         self.child.addBehaviour(childTransform);
-        const roomPrefab = new Prefab();
-        if (roomType == 1) {
-            roomPrefab.prefabPath = 'assets//engineTest//prefabs//roomPrefab.yaml'
-        }
-        else { roomPrefab.prefabPath = 'assets//engineTest//prefabs//buildingPrefab.yaml' }
-        self.child.addBehaviour(roomPrefab);
-
-        /* const image=new ImageRenderer();
-         image.imagePath='assets//images//testImage.png'
-         child.addBehaviour(image);*/
         const room = new Room();
         room.positionX = roomPositionX;
         room.positionY = roomPositionY;
         room.RoomType = RoomStatus.canBuild;
-        self.child.addBehaviour(Room);
+       
+        self.child.addBehaviour(room);
+        const roomPrefab = new Prefab();
+        if (roomType == 1) {
+            roomPrefab.prefabPath = 'assets//engineTest//prefabs//buildingPrefab.yaml'
+        }
+        else if(roomType == 2){roomPrefab.prefabPath = 'assets//engineTest//prefabs//roomPrefab.yaml' }
+        self.child.addBehaviour(roomPrefab);
+storeBuildStatus(roomPositionX,roomPositionY,RoomStatus.canBuild)
+        /* const image=new ImageRenderer();
+         image.imagePath='assets//images//testImage.png'
+         child.addBehaviour(image);*/
+       
 
     };
+    //检测旁边的坑状态是否可以转成待开发状态
+ checkNeighbor(x:number,y:number) {
+     console.log(roomPostionArray[0][1])
+    storeBuildStatus(x,y,1)
+console.log(x,y)
+if(x-1<0||x+1>6)return
+  
+    if(roomPostionArray[x-1][y]==0&&x>0){
+        console.log("yes")
+        this.createRoom(x-1,y,RoomStatus.canBuild,this.gameObject)
+        this.createRoom(x,y+1,RoomStatus.canBuild,this.gameObject)
+        
+    }
+   else if(roomPostionArray[x-1][y]==0&&roomPostionArray[x+1][y]==0){
+       console.log("a")
+        this.createRoom(x+1,y,RoomStatus.canBuild,this.gameObject)
+        this.createRoom(x,y+1,RoomStatus.canBuild,this.gameObject)
+        this.createRoom(x-1,y,RoomStatus.canBuild,this.gameObject)
+    }
+    else 
+    {console.log("v")
+        this.createRoom(x,y+1,RoomStatus.canBuild,this.gameObject)
+    }
+    }
+
     //在此定义脚本中的属性
     @number()
     roomtype = RoomStatus.empty;
@@ -93,10 +110,12 @@ export class RoomSet extends Behaviour {
 
     //游戏开始时会执行一次
     onStart(): void {
-        roomStart();
+        roomPostionArray[0][0]=-1
+        roomPostionArray[0][1]=-1
+       
         for (let i = 0; i < 2; i++)
             for (let j = 1; j < 6; j++)
-                this.createRoom(j, i, roomPostionArray[0][j], this.gameObject)
+                this.createRoom(j, i, 2, this.gameObject)
         /* this.gameObject.onClick = () => {
          //this.gameObject.getBehaviour(Room).RoomType=1
          roomPostionArray[2][1]=1

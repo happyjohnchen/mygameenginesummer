@@ -39,7 +39,8 @@ registerBehaviourClass(Prefab);
 
 //注册自定义脚本
 registerBehaviourClass(Player);
-registerBehaviourClass(Room)
+
 registerBehaviourClass(RoomSet)
+registerBehaviourClass(Room)
 const engine = new GameEngine()
 engine.start()
