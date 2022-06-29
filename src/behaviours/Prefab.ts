@@ -1,14 +1,16 @@
 import * as yaml from 'js-yaml';
-import {Behaviour} from "../engine/Behaviour";
-import {string} from "../engine/validators/string";
-import {ResourceManager} from "../engine/ResourceManager";
-import {createGameObject, GameObject} from "../engine";
+import { Behaviour } from "../engine/Behaviour";
+import { string } from "../engine/validators/string";
+import { ResourceManager } from "../engine/ResourceManager";
+import { createGameObject, GameObject } from "../engine";
 
 export class Prefab extends Behaviour {
     @string()
     prefabPath = "";//预制体路径
 
     created = false;
+
+    prefab: GameObject;
 
     onStart() {
         if (!this.prefabPath.endsWith('.yaml')) {
@@ -18,15 +20,11 @@ export class Prefab extends Behaviour {
         const resourceManager = new ResourceManager();
         resourceManager.loadText(this.prefabPath, () => {
             const text = resourceManager.get(this.prefabPath);
-            //console.log(text);
-            const prefab = this.unserilize(text);
-            for (const child of prefab.children) {
-                this.gameObject.addChild(child);
-            }
+            this.prefab = this.unserilize(text);
+            this.gameObject.addChild(this.prefab);
             this.created = true;
         });
     }
-
     private unserilize(text: string): GameObject {
         try {
             let data = yaml.load(text);

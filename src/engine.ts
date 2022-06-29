@@ -21,10 +21,14 @@ request.open("get", url);/*设置请求方法与路径*/
 request.send(null);/*不发送数据到服务器*/
 request.onload = function () {/*XHR对象获取到返回信息后执行*/
     if (request.status == 200) {/*返回状态为200，即为数据获取成功*/
-        const json = JSON.parse(request.responseText);
-        canvas.width = json.canvasWidth;
-        canvas.height = json.canvasHeight;
+        const engineUIConfig = JSON.parse(request.responseText);
+        canvas.width = engineUIConfig.canvasWidth;
+        canvas.height = engineUIConfig.canvasHeight;
         console.log("分辨率:" + canvas.width + "x" + canvas.height);
+        if (!engineUIConfig.showEditor){
+            canvas.width  *= engineUIConfig.launchModeZoomIndex;
+            canvas.height  *= engineUIConfig.launchModeZoomIndex;
+        }
     }
 }
 
@@ -81,7 +85,7 @@ function getQuery(): { [key: string]: string } {
 
 
 export class GameEngine {
-    currentSceneName: string = 'assets/scenes/main.yaml';
+    currentSceneName: string = 'assets/engineTest/scenes/main.yaml';
     rootGameObject = new GameObject();
     lastTime: number = 0;
     storeDuringTime: number = 0;
@@ -354,7 +358,10 @@ export class GameObject {
         this.behaviours.push(behaviour);
         behaviour.gameObject = this;
         behaviour.engine = this.engine;
-        behaviour.onStart()
+        behaviour.onStart();
+        if (this.engine.mode==="play"){
+            behaviour.onPlayStart();
+        }
         if (this.active) {
             behaviour.active = true;
         }

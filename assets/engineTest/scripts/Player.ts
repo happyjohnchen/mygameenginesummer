@@ -1,11 +1,11 @@
-import {Behaviour} from "../../src/engine/Behaviour";
-import {Transform} from "../../src/engine/Transform";
-import {number} from "../../src/engine/validators/number";
-import {GameObject, getGameObjectById} from "../../src/engine";
-import {Sound} from "../../src/behaviours/Sound";
-import {AnimationRenderer} from "../../src/behaviours/AnimationRenderer";
-import {ShapeCircleRenderer} from "../../src/behaviours/ShapeCircleRenderer";
-import {Prefab} from "../../src/behaviours/Prefab";
+import {Behaviour} from "../../../src/engine/Behaviour";
+import {Transform} from "../../../src/engine/Transform";
+import {number} from "../../../src/engine/validators/number";
+import {GameObject, getGameObjectById} from "../../../src/engine";
+import {Sound} from "../../../src/behaviours/Sound";
+import {AnimationRenderer} from "../../../src/behaviours/AnimationRenderer";
+import {ShapeCircleRenderer} from "../../../src/behaviours/ShapeCircleRenderer";
+import {Prefab} from "../../../src/behaviours/Prefab";
 
 export class Player extends Behaviour {
     @number()
@@ -47,6 +47,9 @@ export class Player extends Behaviour {
         }
 
         document.addEventListener('keyup', (e) => {
+            if (this.engine.mode==='edit'){
+                return;
+            }
             //console.log(getGameObjectById('TileMap').getBehaviour(TileMap).tileToWorldPosition(1, 1))
             switch (e.key) {
                 case 'a':
@@ -106,11 +109,11 @@ export class Player extends Behaviour {
                     child.addBehaviour(childRenderer);
                     break;
                 case 'k':
-                    this.engine.loadScene("assets/scenes/main.yaml", "123");
+                    this.engine.loadScene("assets/engineTest/scenes/main.yaml", "123");
                     console.log("player: to main scene")
                     break;
                 case 'j':
-                    this.engine.loadScene("assets/scenes/secondScene.yaml")
+                    this.engine.loadScene("assets/engineTest/scenes/secondScene.yaml")
                     console.log("player: to second scene")
                     break;
                 case 'h':
@@ -123,8 +126,13 @@ export class Player extends Behaviour {
         })
     }
 
+    onPlayStart() {
+        console.log("Player onPlayStart")
+    }
+
     onTick(duringTime: number) {
-        if (getGameObjectById('Prefab').getBehaviour(Prefab).created){
+        const prefab = getGameObjectById('Prefab');
+        if (prefab.getBehaviour(Prefab).created) {
             console.log(getGameObjectById('PrefabSquare').getBehaviour(Transform));
         }
     }
