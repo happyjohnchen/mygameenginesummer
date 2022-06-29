@@ -10,7 +10,13 @@ export class Prefab extends Behaviour {
 
     created = false;
 
-    prefab : GameObject;
+    prefab: GameObject;
+
+    resetPrefab(prefabPath: string) {
+        this.created = false;
+        this.prefabPath = prefabPath;
+        this.onStart();
+    }
 
     onStart() {
         if (!this.prefabPath.endsWith('.yaml')) {

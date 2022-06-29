@@ -7,6 +7,8 @@ export class ImageRenderer extends Behaviour implements Renderer {
     @string()
     imagePath = "";
 
+    created = false;
+
     image: HTMLImageElement
 
     getBounds(): Rectangle {
@@ -20,9 +22,18 @@ export class ImageRenderer extends Behaviour implements Renderer {
         };
     }
 
+    resetImage(imagePath: string) {
+        this.created = false;
+        this.imagePath = imagePath;
+        this.onStart();
+    }
+
     onStart() {
         this.image = new Image();
         this.image.src = this.imagePath;
+        this.image.onload = () => {
+            this.created = true;
+        }
     }
 
     onEnd() {
