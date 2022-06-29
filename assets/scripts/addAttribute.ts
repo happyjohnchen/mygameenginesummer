@@ -3,11 +3,13 @@ import {Behaviour} from "../../src/engine/Behaviour";
 import { number } from "../../src/engine/validators/number";
 import { Attribute } from "./Attribute";
 import {RoomModule, RoomType } from "./modules/RoomModule";
+import {string} from "../../src/engine/validators/string";
 export class addAttribute extends Behaviour  {
     //
     //用来挂载到可点击的增加属性的物品上
 
     private value = 0;
+    @string()
     private type = "water";
     @number()
     addvaluecount = 5;

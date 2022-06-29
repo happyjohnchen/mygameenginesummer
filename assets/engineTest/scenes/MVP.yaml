@@ -288,6 +288,7 @@ children:
           rotation: 0
       - type: RoomClass
         properties:
+          roomtype: water
           primeproducetime: 1
           production: 20
           totalpeopleattribute: 1

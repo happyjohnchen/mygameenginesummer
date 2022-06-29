@@ -6,10 +6,14 @@ import { number } from "../../src/engine/validators/number";
 import { addAttribute } from "./addAttribute";
 import {RoomModule, RoomType } from "./modules/RoomModule";
 import { TimeControllerSystem } from "./TimeControllerSystem";
+import {string} from "../../src/engine/validators/string";
+
 
 export class RoomClass extends Behaviour {
 
-    roomtype= "water";
+    
+    @string()
+    roomtype= "water";// water food energy
     @number()
     primeproducetime = 5;//多少小时产出一次
 
@@ -41,8 +45,14 @@ export class RoomClass extends Behaviour {
     }
 
     //每次屏幕刷新执行
-    onUpdate() {
-
+    onUpdate() { //获取自己的父物体判断是否是自己生成的 这样可以单个调整数值
+        if(getGameObjectById("addAttributePrefab")){
+            const parentgameObject = getGameObjectById("addAttributePrefab").parent.parent;
+            if(parentgameObject==this.gameObject){
+                getGameObjectById("addAttributePrefab").getBehaviour(addAttribute).setvalue(this.production);
+                getGameObjectById("addAttributePrefab").getBehaviour(addAttribute).settype(this.roomtype);
+            }        
+        }
     }
 
     //平均每16ms执行一次   每一个小时产出一个增加
@@ -76,10 +86,10 @@ export class RoomClass extends Behaviour {
 
     createProduction(){ //把type 和 产出值 赋给预制体
         const attributeprefab = new Prefab();
-        attributeprefab.prefabPath = 'assets/engineTest/prefabs/addPrefab.yaml'
-        //attributeprefab.gameObject.getBehaviour(addAttribute).setvalue(this.production);
-        //attributeprefab.gameObject.getBehaviour(addAttribute).settype(this.roomtype);
+        attributeprefab.prefabPath = 'assets/engineTest/prefabs/add'+this.roomtype +'Prefab.yaml'
         this.gameObject.addBehaviour(attributeprefab);
+        
+      
       
     }
 
