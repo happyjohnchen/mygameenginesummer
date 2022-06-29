@@ -6,6 +6,10 @@ import {Sound} from "../../../src/behaviours/Sound";
 import {AnimationRenderer} from "../../../src/behaviours/AnimationRenderer";
 import {ShapeCircleRenderer} from "../../../src/behaviours/ShapeCircleRenderer";
 import {Prefab} from "../../../src/behaviours/Prefab";
+import {GameModule} from "../../scripts/modules/GameModule";
+import {PersonModule, PersonRace} from "../../scripts/modules/PersonModule";
+import {RoomModule, RoomType} from "../../scripts/modules/RoomModule";
+import {ArchiveSystem} from "../../scripts/archiveSystem/ArchiveSystem";
 
 export class Player extends Behaviour {
     @number()
@@ -47,7 +51,7 @@ export class Player extends Behaviour {
         }
 
         document.addEventListener('keyup', (e) => {
-            if (this.engine.mode==='edit'){
+            if (this.engine.mode === 'edit') {
                 return;
             }
             //console.log(getGameObjectById('TileMap').getBehaviour(TileMap).tileToWorldPosition(1, 1))
@@ -124,6 +128,36 @@ export class Player extends Behaviour {
                     break;
             }
         })
+
+
+        const gameModule = new GameModule();
+        const personModule = new PersonModule();
+        const roomModule = new RoomModule();
+
+        personModule.personId = 1;
+        personModule.personName = 'person1';
+        personModule.race = PersonRace.Dwarf;
+        personModule.animationId = 1;
+
+        roomModule.roomId = 1;
+        roomModule.level = 1;
+        roomModule.roomSize = 1;
+        roomModule.roomType = RoomType.WaterFactory;
+        roomModule.position = {x: 1, y: 1};
+        roomModule.people = [1];
+
+        gameModule.gameTime = {day: 1, hour: 10, minute: 10, second: 30, rate: 1.0};
+        gameModule.people = [personModule];
+        gameModule.rooms = [roomModule];
+        gameModule.water = 10;
+        gameModule.food = 12;
+        gameModule.food = 5;
+        gameModule.material = 3;
+
+        ArchiveSystem.saveFile("testGame", gameModule);
+
+        //console.log(ArchiveSystem.readFile('testGame'));
+
     }
 
     onPlayStart() {
@@ -133,7 +167,7 @@ export class Player extends Behaviour {
     onTick(duringTime: number) {
         const prefab = getGameObjectById('Prefab');
         if (prefab.getBehaviour(Prefab).created) {
-            console.log(getGameObjectById('PrefabSquare').getBehaviour(Transform));
+            //console.log(getGameObjectById('PrefabSquare').getBehaviour(Transform));
         }
     }
 
