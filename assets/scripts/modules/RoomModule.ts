@@ -1,10 +1,10 @@
 export class RoomModule {
-    roomId: number;
-    level: number;
-    roomSize: number;
-    roomType: RoomType;
-    position: { x: number, y: number };
-    people: [number];
+    roomId: number = 1;
+    level: number = 1;
+    roomSize: number = 1;
+    roomType: RoomType = RoomType.Entrance;
+    position: RoomPosition = new RoomPosition();
+    people: number[] = [];
 }
 
 export enum RoomType {
@@ -12,4 +12,9 @@ export enum RoomType {
     EnergyFactory,
     FoodFactory,
     Entrance
+}
+
+export class RoomPosition {
+    x: number = 0;
+    y: number = 0;
 }

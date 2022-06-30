@@ -193,18 +193,6 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: -200
-          y: -100
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: Prefab
-        properties:
-          prefabPath: assets/engineTest/prefabs/test2Prefab.yaml
-    id: Prefab2
-  - behaviours:
-      - type: Transform
-        properties:
           x: 0
           y: 0
           scaleX: 1

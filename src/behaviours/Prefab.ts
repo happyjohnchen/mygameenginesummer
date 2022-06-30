@@ -11,23 +11,20 @@ export class Prefab extends Behaviour {
 
     prefab: GameObject;
 
-    resetPrefab(prefabPath: string) {
-        this.gameObject.removeChild(this.prefab);
-        this.created = false;
-        this.prefabPath = prefabPath;
-        this.onStart();
-    }
-
     onStart() {
-        this.prefab = this.unserilize(this.engine.resourceManager.getText(this.prefabPath));
-        this.gameObject.children = [];
-        this.gameObject.addChild(this.prefab);
+        if (this.prefabPath !== "") {
+            this.prefab = this.unserilize(this.engine.resourceManager.getText(this.prefabPath));
+            this.gameObject.children = [];
+            this.gameObject.addChild(this.prefab);
+        }
     }
 
     onTick(duringTime: number) {
-        this.prefab = this.unserilize(this.engine.resourceManager.getText(this.prefabPath));
-        this.gameObject.children = [];
-        this.gameObject.addChild(this.prefab);
+        if (this.unserilize(this.engine.resourceManager.getText(this.prefabPath)) !== this.prefab) {
+            this.gameObject.children = [];
+            this.prefab = this.unserilize(this.engine.resourceManager.getText(this.prefabPath));
+            this.gameObject.addChild(this.prefab);
+        }
     }
 
     private unserilize(text: string): GameObject {

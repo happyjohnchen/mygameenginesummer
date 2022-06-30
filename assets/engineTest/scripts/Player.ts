@@ -18,13 +18,26 @@ export class Player extends Behaviour {
     sceneData?: any;
 
     onStart() {
-        console.log("player onStart, data: " + this.engine.loadSceneData as string);
+        console.log("player onStart");
+    }
+
+    onPlayStart() {
+        console.log("player onPlayerStart, data: " + this.engine.loadSceneData as string);
+
+        //读取存档
         try{
-            const gModule = JSON.parse(decodeURI(this.engine.loadSceneData)) as GameModule;
+            let gameDataJSON = decodeURI(this.engine.loadSceneData);
+            if (ArchiveSystem.encryptArchive){
+                //base64解码
+                gameDataJSON = window.atob(gameDataJSON);
+            }
+            const gModule = JSON.parse(gameDataJSON) as GameModule;//gMoudle是获取到的GameModule对象
             console.log(gModule);
         } catch (e){
-            console.log("Player:loadSceneData没有被解析，因为其不是JSON格式")
+            console.log("Player: loadSceneData没有被解析，因为其不是JSON格式")
         }
+
+
         const transform = this.gameObject.getBehaviour(Transform);
         if (this.engine.loadSceneData && this.engine.loadSceneData !== this.sceneData) {
             this.sceneData = this.engine.loadSceneData;
@@ -54,10 +67,13 @@ export class Player extends Behaviour {
                     console.log("右键");
                     break;
             }
+
+            //点击player读取存档
             ArchiveSystem.readFile((file) => {
                 const reader = new FileReader();
                 reader.readAsText(file);
                 reader.onload=()=>{
+                    //跳转下一个场景并传递参数
                     this.engine.loadScene('assets/engineTest/scenes/secondScene.yaml', reader.result.toString())
                 }
             });
@@ -139,6 +155,9 @@ export class Player extends Behaviour {
                 case 'g':
                     getGameObjectById("YellowCircle").active = true;
                     break;
+                case 'f':
+                    this.gameObject.removeSelf();
+                    break;
             }
         })
 
@@ -164,18 +183,12 @@ export class Player extends Behaviour {
         gameModule.rooms = [roomModule];
         gameModule.water = 10;
         gameModule.food = 12;
-        gameModule.food = 5;
+        gameModule.energy = 5;
         gameModule.material = 3;
 
+        //保存存档
         //ArchiveSystem.saveFile("testGame", gameModule);
 
-
-        //console.log(ArchiveSystem.readFile('testGame'));
-
-    }
-
-    onPlayStart() {
-        console.log("Player onPlayStart")
     }
 
     onTick(duringTime: number) {

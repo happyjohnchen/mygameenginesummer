@@ -15,7 +15,10 @@ import {Sound} from "./behaviours/Sound";
 import {AnimationRenderer} from "./behaviours/AnimationRenderer";
 import {TileMap} from "./behaviours/TileMap";
 import {Prefab} from "./behaviours/Prefab";
-import {RandomSys} from "c:/Users/HP/mygameenginesummer/assets/scripts/RandomSys"
+
+import {TimeControllerSystem} from "../assets/scripts/TimeControllerSystem";
+import {GameController} from "../assets/scripts/GameController";
+import {CameraMouseController} from "../assets/scripts/CameraMouseController";
 
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
@@ -38,7 +41,10 @@ registerBehaviourClass(Prefab);
 
 //注册自定义脚本
 registerBehaviourClass(Player);
-registerBehaviourClass(RandomSys);
+registerBehaviourClass(GameController);
+registerBehaviourClass(TimeControllerSystem);
+registerBehaviourClass(CameraMouseController);
 
-const engine = new GameEngine();
-engine.start();
+
+const engine = new GameEngine()
+engine.start()

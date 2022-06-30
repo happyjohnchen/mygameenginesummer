@@ -1,1 +1,1 @@
-assets/engineTest/scenes/TEST.yaml
+assets/scenes/game.yaml

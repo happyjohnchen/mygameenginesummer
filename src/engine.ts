@@ -148,8 +148,8 @@ export class GameEngine {
     }
 
     loadScene(sceneName: string, data?: string) {
-        data = data ? data : '';
-        window.location.href = window.location.href.split('?')[0] + `?mode=${this.mode}&scene=${sceneName}&data=${data}`;
+        const sceneData = data ? data : '';
+        window.location.href = window.location.href.split('?')[0] + `?mode=${this.mode}&scene=${sceneName}&data=${sceneData}`;
     }
 
     unserilizeAssetsYaml(yamlUrl: string) {
@@ -349,6 +349,15 @@ export class GameObject {
         GameObject.map[this.uuid] = this;
     }
 
+    removeSelf(): GameObject{
+        if (this === this.engine.rootGameObject){
+            //不能删除rootGameObject
+            return null;
+        }
+        this.parent.removeChild(this);
+        return this;
+    }
+
     addChild(child: GameObject) {
         this.children.push(child);
         child.engine = this.engine;
@@ -362,9 +371,9 @@ export class GameObject {
         const index = this.children.indexOf(child);
         console.log("removeChild:", index);
         if (index >= 0) {
+            this.children[index].active = false;
             this.children.splice(index, 1);
         }
-        this.active = false;
     }
 
     upMoveChild(child: GameObject) {
