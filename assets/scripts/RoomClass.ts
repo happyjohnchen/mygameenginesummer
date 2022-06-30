@@ -67,7 +67,8 @@ export class RoomClass extends Behaviour {
         this.lastTime = this.lastTime==60? 0:this.lastTime;
         if(this.nowTime-this.lastTime >=this.calculatePeriod()*60){
             this.createProduction();
-            this.lastTime = this.nowTime;    
+            this.lastTime = this.nowTime;  
+            console.log("走");  
             //console.log(this.lasttime);
         }
     }
@@ -117,11 +118,13 @@ export class RoomClass extends Behaviour {
 
     createProduction(){ //生成产出预制体
         let gameObjectchild = new GameObject()
-        gameObjectchild.parent= this.gameObject;
-        this.gameObject.addChild(gameObjectchild);
+        //gameObjectchild.parent= this.gameObject;
+        this.gameObject.parent.addChild(gameObjectchild);
         const childrenTransform = new Transform();
-        childrenTransform.x = 0 + this.producePos;
-        childrenTransform.y = 0 + this.producePos;
+        childrenTransform.x = this.gameObject.getBehaviour(Transform).x + this.producePos;
+        childrenTransform.y = this.gameObject.getBehaviour(Transform).y + this.producePos;
+        // childrenTransform.x = 0 + this.producePos;
+        // childrenTransform.y = 0 + this.producePos;
         gameObjectchild.addBehaviour(childrenTransform);
         const addAttributeBe = new addAttribute();
         addAttributeBe.setType(this.roomType);

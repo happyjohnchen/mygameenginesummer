@@ -35,8 +35,9 @@ export class test extends Behaviour {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
                 console.log("点击");
-              this.removePerson(16);
-              console.log(this.people);
+              //this.removePerson(16);
+              //console.log(this.people);
+              console.log(this.gameObject.child);
             }
      
         }

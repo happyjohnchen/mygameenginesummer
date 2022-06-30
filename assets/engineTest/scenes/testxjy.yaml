@@ -1,0 +1,78 @@
+behaviours:
+  - type: Transform
+    properties:
+      x: 0
+      y: 0
+      scaleX: 1
+      scaleY: 1
+      rotation: 0
+id: RootGameObject
+children:
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -480
+          y: -270
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ShapeRectRenderer
+        properties:
+          width: 100
+          height: 100
+          color: red
+          customColor: '#ffffff'
+      - type: RoomClass
+        properties:
+          roomType: water
+          primeProduceTime: 1
+          production: 20
+          totalPeopleAttribute: 1
+          coefficient: 0.2
+          radix: 0.2
+          level1Size: 2
+          level2Size: 4
+          level3Size: 5
+    id: waterroom
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -200
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TextRenderer
+        properties:
+          text: 第0天 0:0
+          fontSize: 40
+          font: 微软雅黑
+          fontColor: '#000000'
+      - type: showTime
+        properties:
+          startTime: 8
+    id: time
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TimeControllerSystem
+        properties:
+          timePerTick: 1.6
+          dayHourTime: 16
+          nightTime: 120
+    id: TimeController
