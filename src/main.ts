@@ -13,7 +13,6 @@ import {RoundedRectRenderer} from "./behaviours/RoundedRectRenderer";
 import {Player} from "../assets/engineTest/scripts/Player";
 import {Sound} from "./behaviours/Sound";
 import {AnimationRenderer} from "./behaviours/AnimationRenderer";
-import {TileMap} from "./behaviours/TileMap";
 import {Prefab} from "./behaviours/Prefab";
 
 import {TimeControllerSystem} from "../assets/scripts/TimeControllerSystem";
@@ -42,13 +41,13 @@ registerBehaviourClass(CircleCollider);
 registerBehaviourClass(EdgeCollider);
 registerBehaviourClass(Camera);
 registerBehaviourClass(Sound);
-registerBehaviourClass(TileMap);
 registerBehaviourClass(Prefab);
 
 //注册自定义脚本
 registerBehaviourClass(Player);
 registerBehaviourClass(GameController);
 registerBehaviourClass(TimeControllerSystem);
+
 registerBehaviourClass(AttributeSystem);
 registerBehaviourClass(addAttribute);
 registerBehaviourClass(showTime);
@@ -56,6 +55,7 @@ registerBehaviourClass(RoomClass);
 registerBehaviourClass(changeTimeSpeed);
 
 registerBehaviourClass(test);
+
 
 const engine = new GameEngine()
 engine.start()
