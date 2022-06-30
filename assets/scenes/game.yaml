@@ -31,4 +31,5 @@ children:
           scaleY: 1
           rotation: 0
       - type: Camera
+      - type: CameraMouseController
     id: camera
