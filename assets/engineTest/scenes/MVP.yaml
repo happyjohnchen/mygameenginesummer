@@ -67,9 +67,9 @@ children:
           height: 100
           color: green
           customColor: '#ffffff'
-      - type: addspeed
+      - type: changeTimeSpeed
         properties:
-          thisspped: 2
+          thisSpeed: 2
     id: beisu
     children:
       - behaviours:
@@ -110,9 +110,9 @@ children:
           height: 100
           color: blue
           customColor: '#ffffff'
-      - type: addspeed
+      - type: changeTimeSpeed
         properties:
-          thisspped: 0
+          thisSpeed: 0
     id: pause
     children:
       - behaviours:

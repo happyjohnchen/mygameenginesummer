@@ -21,7 +21,7 @@ import {Attribute} from "../assets/scripts/Attribute";
 import {addAttribute} from "../assets/scripts/addAttribute";
 import {addspeed} from "../assets/scripts/addspeed";
 import {showtime} from "../assets/scripts/showtime";
-
+import {changeTimeSpeed} from "../assets/scripts/changeTimeSpeed";
 import {RoomClass} from "../assets/scripts/RoomClass";
 
 
@@ -52,5 +52,7 @@ registerBehaviourClass(addAttribute);
 registerBehaviourClass(addspeed);
 registerBehaviourClass(showtime);
 registerBehaviourClass(RoomClass);
+registerBehaviourClass(changeTimeSpeed);
+
 const engine = new GameEngine()
 engine.start()
