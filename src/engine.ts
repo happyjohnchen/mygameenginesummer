@@ -25,9 +25,9 @@ request.onload = function () {/*XHR对象获取到返回信息后执行*/
         canvas.width = engineUIConfig.canvasWidth;
         canvas.height = engineUIConfig.canvasHeight;
         console.log("分辨率:" + canvas.width + "x" + canvas.height);
-        if (!engineUIConfig.showEditor){
-            canvas.width  *= engineUIConfig.launchModeZoomIndex;
-            canvas.height  *= engineUIConfig.launchModeZoomIndex;
+        if (!engineUIConfig.showEditor) {
+            canvas.width *= engineUIConfig.launchModeZoomIndex;
+            canvas.height *= engineUIConfig.launchModeZoomIndex;
         }
     }
 }
@@ -95,7 +95,7 @@ export class GameEngine {
 
     public mode: "edit" | "play" = 'edit'
 
-    start() {
+    async start() {
         this.rootGameObject.engine = this;
 
         //获取模式
@@ -120,20 +120,49 @@ export class GameEngine {
         this.addSystem(new CanvasContextRenderingSystem(context));
         this.addSystem(new MouseControlSystem());
 
+        //预加载资源
+        const assetsYaml = './assets/assets.yaml';
+        await this.resourceManager.loadText(assetsYaml);
+        const assetsData = this.unserilizeAssetsYaml(assetsYaml);
+        if (assetsData) {
+            const imageList = assetsData.images;
+            for (const asset of imageList) {
+                await this.resourceManager.loadImage(asset);
+            }
+
+            const prefabList = assetsData.prefabs;
+            for (const prefab of prefabList) {
+                await this.resourceManager.loadText(prefab);
+            }
+
+        }
+
         //获取场景
         const scene = getQuery().scene;
         this.currentSceneName = scene;
         console.log("load scene: " + scene);
 
-        this.resourceManager.loadText(this.currentSceneName, () => {
-            this.rootGameObject.active = true;
-            this.startup();
-        });
+        await this.resourceManager.loadText(this.currentSceneName)
+        this.rootGameObject.active = true;
+        this.startup();
     }
 
     loadScene(sceneName: string, data?: string) {
-        data = data ? data : '';
-        window.location.href = window.location.href.split('?')[0] + `?mode=${this.mode}&scene=${sceneName}&data=${data}`;
+        const sceneData = data ? data : '';
+        window.location.href = window.location.href.split('?')[0] + `?mode=${this.mode}&scene=${sceneName}&data=${sceneData}`;
+    }
+
+    unserilizeAssetsYaml(yamlUrl: string) {
+        const text = this.resourceManager.getText(yamlUrl);
+        try {
+            let data = yaml.load(text);
+            return data;
+
+        } catch (e) {
+            console.log(e)
+            alert('资源清单文件解析失败')
+        }
+        return null;
     }
 
     addSystem(system: System) {
@@ -155,7 +184,7 @@ export class GameEngine {
 
     private startup() {
         this.rootGameObject.addBehaviour(new Transform());
-        const text = this.resourceManager.get(this.currentSceneName);
+        const text = this.resourceManager.getText(this.currentSceneName);
         const scene = this.unserilize(text);
         if (scene) {
             this.rootGameObject.addChild(scene);
@@ -321,6 +350,15 @@ export class GameObject {
         GameObject.map[this.uuid] = this;
     }
 
+    removeSelf(): GameObject{
+        if (this === this.engine.rootGameObject){
+            //不能删除rootGameObject
+            return null;
+        }
+        this.parent.removeChild(this);
+        return this;
+    }
+
     addChild(child: GameObject) {
         this.children.push(child);
         child.engine = this.engine;
@@ -360,7 +398,7 @@ export class GameObject {
         behaviour.gameObject = this;
         behaviour.engine = this.engine;
         behaviour.onStart();
-        if (this.engine.mode==="play"){
+        if (this.engine.mode === "play") {
             behaviour.onPlayStart();
         }
         if (this.active) {

@@ -1,5 +1,5 @@
 import {Behaviour} from "../../src/engine/Behaviour";
-import { number } from "../../src/engine/validators/number";
+import {number} from "../../src/engine/validators/number";
 
 export class TimeControllerSystem extends Behaviour {
 
@@ -14,22 +14,46 @@ export class TimeControllerSystem extends Behaviour {
     @number()
     timePerTick = 1.6;//控制每次ontick的游戏秒数
 
-    private secondTime=0;//秒
-    private minTime=0;//分钟
-    private hourTime=0;//小时
+    private secondTime = 0;//秒
+    private minTime = 0;//分钟
+    private hourTime = 0;//小时
     private isDay = true;
     private dayCount = 1; //经过了多少天
 
     @number()
+
     dayHourTime = 16;//白天总时间
     private speed= 1.0;
+
+
 
     @number()
     nightTime = 120;//夜晚时间长度 目前相当于现实2s
     private nowNightTime = 0;
+
     //游戏开始时会执行一次
     onStart() {
 
+    }
+
+    onPlayStart() {
+        //使用键盘控制倍速
+        window.addEventListener('keyup', (e) => {
+            switch (e.key) {
+                case ' ':
+                    this.speed = 0.0;
+                    break;
+                case '1':
+                    this.speed = 1.0;
+                    break;
+                case '2':
+                    this.speed = 2.0;
+                    break;
+                case '3':
+                    this.speed = 3.0;
+                    break;
+            }
+        });
     }
 
     //每次屏幕刷新执行
@@ -39,60 +63,65 @@ export class TimeControllerSystem extends Behaviour {
 
     //平均每16ms执行一次 60次是1s
     //1次ontick 游戏1.6秒  超过六十秒就-60s 分钟+1 分钟超过60-60s 小时进位 小时等于16时清0变为黑天
-    onTick(duringTime: number) {  
-        if(!this.isDay){//黑夜
-            this.nowNightTime +=1;
-            if(this.nowNightTime>=this.nightTime){
+
+    onTick(duringTime: number) {
+        if (!this.isDay) {
+            //黑夜
+            this.nowNightTime += 1;
+            if (this.nowNightTime >= this.nightTime) {
                 this.isDay = true;
-                this.dayCount +=1;
-                //console.log(this.daycount);
-                
+                this.dayCount += 1;
+                console.log("TimeSystem: 进入第"+this.dayCount+"天")
             }
-        }
-        else{   
-        this.secondTime += this.timePerTick*this.speed;
-        if(this.hourTime>=this.dayHourTime){
-            this.hourTime = 0;
-            this.isDay = false;
-            console.log("黑夜");
-        }
-        if(this.minTime>=60){
-            this.minTime-=60;
-            this.hourTime+=1;
-        }
+        } else {
+            //白天
+            this.secondTime += this.timePerTick * this.speed;
+            if (this.hourTime >= this.dayHourTime) {
+                this.hourTime = 0;
+                this.isDay = false;
+                console.log("TimeSystem: 黑夜");
+            }
+            if (this.minTime >= 60) {
+                this.minTime -= 60;
+                this.hourTime += 1;
+            }
 
-        if(this.secondTime>=60){
-            this.secondTime-=60;
-            this.minTime+=1;
+            if (this.secondTime >= 60) {
+                this.secondTime -= 60;
+                this.minTime += 1;
+            }
+            //console.log(this.totalhourtime+"小时"+this.totalmintime+"分钟"+this.totalsecondtime+"秒");
+
         }
-        //console.log(this.totalhourtime+"小时"+this.totalmintime+"分钟"+this.totalsecondtime+"秒");
-         } 
-       }
+    }
 
-       getSecondTime(){
-        return this.secondTime;           
-       }
 
-       getMinTime(){
+    getSecondTime() {
+        return this.secondTime;
+    }
+
+    getMinTime() {
         return this.minTime;
-       }
+    }
 
-       getHourTime(){
+    getHourTime() {
         return this.hourTime;
-       }
-       getSpeed(){
+    }
+
+    getSpeed() {
         return this.speed;
-       }
+    }
 
-       setSpeed(nowspeed:number){
-        this.speed = nowspeed;
-       }
+    setSpeed(nowSpeed: number) {
+        this.speed = nowSpeed;
+    }
 
-       getDaycount(){
+    getDayCount() {
         return this.dayCount;
-       }
+    }
 
-       getTotalGameSecondTime(){//得到游戏时长 以秒为单位
-        return this.dayCount*this.dayHourTime*3600+this.hourTime*3600+this.minTime*60+this.secondTime;
-       }
+    getTotalGameSecondTime() {//得到游戏时长 以秒为单位
+        return (this.dayCount - 1) * this.dayHourTime * 3600 + this.hourTime * 3600 + this.minTime * 60 + this.secondTime;
+    }
+
 }

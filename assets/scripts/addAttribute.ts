@@ -15,15 +15,12 @@ export class addAttribute extends Behaviour  {
     private addValueCount = 20;
     //游戏开始时会执行一次
     onStart() {//点击会增加数量
-        console.log(this.type);
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
-                console.log(this.type);
                 const a = getGameObjectById(this.type.toString());
                 this.addValueCount = getGameObjectById(this.type+"room").getBehaviour(RoomClass).getProduction();
                 getGameObjectById(this.type).getBehaviour(Attribute).setValue(this.addValueCount);
-                const parent = this.gameObject.parent;
-                parent.removeChild(this.gameObject);           
+                this.gameObject.parent.parent.removeChild(this.gameObject);           
                 
             }
      

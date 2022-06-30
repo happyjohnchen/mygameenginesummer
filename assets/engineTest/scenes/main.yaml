@@ -190,7 +190,10 @@ children:
         properties:
           prefabPath: assets/engineTest/prefabs/testPrefab.yaml
     id: Prefab
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
   - behaviours:
       - type: Transform
         properties:
@@ -225,4 +228,3 @@ children:
               font: 微软雅黑
               fontColor: '#ffffff'
         id: PlayerText
->>>>>>> master:assets/engineTest/scenes/main.yaml

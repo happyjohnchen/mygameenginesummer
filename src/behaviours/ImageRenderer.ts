@@ -10,22 +10,20 @@ export class ImageRenderer extends Behaviour implements Renderer {
     image: HTMLImageElement
 
     getBounds(): Rectangle {
-        const image = new Image();
-        image.src = this.imagePath;
+        this.image = this.engine.resourceManager.getImage(this.imagePath);
         return {
             x: 0,
             y: 0,
-            width: image.width,
-            height: image.height,
+            width: this.image.width,
+            height: this.image.height,
         };
     }
 
     onStart() {
-        this.image = new Image();
-        this.image.src = this.imagePath;
+        this.image = this.engine.resourceManager.getImage(this.imagePath);
     }
 
-    onEnd() {
-        delete this.image;
+    onTick(duringTime: number) {
+        this.image = this.engine.resourceManager.getImage(this.imagePath);
     }
 }

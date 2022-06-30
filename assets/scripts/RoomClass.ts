@@ -7,6 +7,7 @@ import { addAttribute } from "./addAttribute";
 import {RoomModule, RoomType } from "./modules/RoomModule";
 import { TimeControllerSystem } from "./TimeControllerSystem";
 import {string} from "../../src/engine/validators/string";
+import { Transform } from "../../src/engine/Transform";
 
 
 export class RoomClass extends Behaviour {
@@ -30,13 +31,10 @@ export class RoomClass extends Behaviour {
     private lastTime = 0;//经过的时间
     private nowTime = 0;
 
+    private producePos = 0;
+
     onStart() {
-        this.gameObject.onClick = (e) => {
-            if(e.button ==0){
-                //console.log("点击");
-            }
-     
-        }
+    
         
     }
 
@@ -47,14 +45,8 @@ export class RoomClass extends Behaviour {
 
     //每次屏幕刷新执行
     onUpdate() { //获取自己的父物体判断是否是自己生成的 这样可以单个调整数值
-        // if(getGameObjectById("addAttributePrefab")){
-        //     const parentgameObject = getGameObjectById("addAttributePrefab").parent.parent;
-        //     if(parentgameObject==this.gameObject){
-        //         getGameObjectById("addAttributePrefab").getBehaviour(addAttribute).setvalue(this.production);
-        //         //getGameObjectById("addAttributePrefab").getBehaviour(addAttribute).settype(this.roomtype);
-        //     }        
-        // }
-        console.log(this.getRoomType() + "时间周期为："+this.calculatePeriod() + "小时");
+   
+        //console.log(this.getRoomType() + "时间周期为："+this.calculatePeriod() + "小时");
         
     }
 
@@ -80,10 +72,17 @@ export class RoomClass extends Behaviour {
     }
 
     createProduction(){ //把type 和 产出值 赋给预制体
+        let gameObjectchild = new GameObject()
+        gameObjectchild.parent= this.gameObject;
+        this.gameObject.addChild(gameObjectchild);
+        const childrenTransform = new Transform();
+        childrenTransform.x = 0 + this.producePos;
+        childrenTransform.y = 0 + this.producePos;
+        gameObjectchild.addBehaviour(childrenTransform);
         const attributeprefab = new Prefab();
         attributeprefab.prefabPath = 'assets/engineTest/prefabs/add'+this.roomType +'Prefab.yaml'
-        this.gameObject.addBehaviour(attributeprefab);
-        console.log(this.roomType);   
+        gameObjectchild.addBehaviour(attributeprefab);
+        console.log(gameObjectchild);
     }
 
     getProduction(){

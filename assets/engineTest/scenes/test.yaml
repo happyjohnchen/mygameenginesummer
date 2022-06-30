@@ -1,0 +1,57 @@
+behaviours:
+  - type: Transform
+    properties:
+      x: 0
+      y: 0
+      scaleX: 1
+      scaleY: 1
+      rotation: 0
+id: RootGameObject
+children:
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -480
+          y: -270
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+    id: NewGameObject
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 100
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: ShapeRectRenderer
+            properties:
+              width: 100
+              height: 100
+              color: red
+              customColor: '#ffffff'
+        id: NewGameObject
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: Prefab
+            properties:
+              prefabPath: assets/engineTest/prefabs/addwaterPrefab.yaml
+        id: NewGameObject

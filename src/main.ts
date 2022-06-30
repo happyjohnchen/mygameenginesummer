@@ -22,6 +22,7 @@ import {addAttribute} from "../assets/scripts/addAttribute";
 import {showTime} from "../assets/scripts/showTime";
 import {changeTimeSpeed} from "../assets/scripts/changeTimeSpeed";
 import {RoomClass} from "../assets/scripts/RoomClass";
+import {GameController} from "../assets/scripts/GameController";
 
 
 //注册引擎提供的组件
@@ -45,12 +46,14 @@ registerBehaviourClass(Prefab);
 
 //注册自定义脚本
 registerBehaviourClass(Player);
+registerBehaviourClass(GameController);
 registerBehaviourClass(TimeControllerSystem);
 registerBehaviourClass(Attribute);
 registerBehaviourClass(addAttribute);
 registerBehaviourClass(showTime);
 registerBehaviourClass(RoomClass);
 registerBehaviourClass(changeTimeSpeed);
+
 
 const engine = new GameEngine()
 engine.start()
