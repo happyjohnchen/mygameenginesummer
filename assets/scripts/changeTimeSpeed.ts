@@ -1,7 +1,7 @@
 import { getGameObjectById } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
 import { number } from "../../src/engine/validators/number";
-import { Attribute } from "./Attribute";
+import { AttributeSystem } from "./AttributeSystem";
 import { TimeControllerSystem } from "./TimeControllerSystem";
 export class changeTimeSpeed extends Behaviour {
 
