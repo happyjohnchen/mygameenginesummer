@@ -67,7 +67,7 @@ export class TimeControllerSystem extends Behaviour {
             if (this.nowNightTime >= this.nightTime) {
                 this.isDay = true;
                 this.dayCount += 1;
-                console.log("TimeSystem: 进入第"+this.dayCount+"天")
+                console.log("TimeSystem: 进入第" + this.dayCount + "天")
             }
         } else {
             //白天
@@ -88,6 +88,13 @@ export class TimeControllerSystem extends Behaviour {
             }
             //console.log(this.totalhourtime+"小时"+this.totalmintime+"分钟"+this.totalsecondtime+"秒");
         }
+    }
+
+    setInitialTime(day: number, hour: number, minute: number, second: number) {
+        this.dayCount = day;
+        this.hourTime = hour;
+        this.minTime = minute;
+        this.secondTime = second;
     }
 
     getSecondTime() {
