@@ -123,6 +123,9 @@ export class RoomClass extends Behaviour {
         childrenTransform.x = 0 + this.producePos;
         childrenTransform.y = 0 + this.producePos;
         gameObjectchild.addBehaviour(childrenTransform);
+        const addAttributeBe = new addAttribute();
+        addAttributeBe.setType(this.roomType);
+        gameObjectchild.addBehaviour(addAttributeBe);
         const attributeprefab = new Prefab();
         attributeprefab.prefabPath = 'assets/engineTest/prefabs/add'+this.roomType +'Prefab.yaml'
         gameObjectchild.addBehaviour(attributeprefab);

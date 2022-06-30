@@ -22,7 +22,4 @@ children:
           height: 100
           color: red
           customColor: '#ffffff'
-      - type: addAttribute
-        properties:
-          type: energy
     id: addAttributePrefab

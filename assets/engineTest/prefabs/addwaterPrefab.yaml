@@ -22,7 +22,4 @@ children:
           height: 100
           color: green
           customColor: '#ffffff'
-      - type: addAttribute
-        properties:
-          type: water
     id: addAttributePrefab

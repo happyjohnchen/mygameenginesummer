@@ -22,7 +22,4 @@ children:
           height: 100
           color: blue
           customColor: '#ffffff'
-      - type: addAttribute
-        properties:
-          type: food
     id: addAttributePrefab
