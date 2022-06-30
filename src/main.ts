@@ -24,6 +24,7 @@ import {changeTimeSpeed} from "../assets/scripts/changeTimeSpeed";
 import {RoomClass} from "../assets/scripts/RoomClass";
 import {GameController} from "../assets/scripts/GameController";
 
+import {test} from "../assets/scripts/test";
 
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
@@ -54,6 +55,7 @@ registerBehaviourClass(showTime);
 registerBehaviourClass(RoomClass);
 registerBehaviourClass(changeTimeSpeed);
 
+registerBehaviourClass(test);
 
 const engine = new GameEngine()
 engine.start()

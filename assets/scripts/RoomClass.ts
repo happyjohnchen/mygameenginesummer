@@ -17,10 +17,8 @@ export class RoomClass extends Behaviour {
     roomType= "water";// water food energy
     @number()
     primeProduceTime = 5;//多少小时产出一次
-
     @number()
     production = 20;//一次产出多少
-
     @number()
     totalPeopleAttribute = 1;//总人物属性 有一个根据总特质转化的式子
     @number()
@@ -28,24 +26,25 @@ export class RoomClass extends Behaviour {
     @number()
     radix = 0.2;
    
+    //不储存
     private lastTime = 0;//经过的时间
     private nowTime = 0;
-
     private producePos = 0;
 
-    private roomId = 0;
-    private roomLevel = 1;
 
-    private peopleInRoom;
+    //储存 还有个roomtype在上面
+    roomId = 0;
+    roomLevel = 1;
+    peopleInRoom;
+    roompos = new Array();
+    people: number[] = [];//储存进来人的id
 
     onStart() {
-    
-        
     }
 
     //游戏运行模式开始时会执行一次
     onPlayStart() {
-
+        
     }
 
     //每次屏幕刷新执行
@@ -64,6 +63,45 @@ export class RoomClass extends Behaviour {
             this.lastTime = this.nowTime;    
             //console.log(this.lasttime);
         }
+    }
+    calculateSize(){//计算房间容量
+        const sizetable = {
+            1: 2,
+            2: 4,
+            3: 5
+        }
+        return sizetable[this.roomLevel];
+    }
+
+    addPerson(id:number){//记录人物编号 并判断是否超出限额
+        if(this.people.length<this.calculateSize()){
+            //this.people[totalPeople] = id;//把id存起来
+            this.people[this.people.length] = id
+        }
+        else {
+            console.log("已满");
+            return
+        };  
+    }
+
+    removePerson(id:number){//记录人物编号
+        for(var p=0;p<this.people.length;p++){
+            if(this.people[p]==id){
+                this.people.splice(p,1);//删除
+                break;
+            }
+        }
+    }
+    getPeopleCount(){
+        let count = 0;
+        for(let p = 0;p++;p=this.people.length ){
+            count++;
+        }
+        return count;
+    }
+
+    calculateTotalAttribute(){ //计算人物总属性 房间人物该属性之和
+
     }
 
     calculatePeriod(){ //计算消耗周期
@@ -85,6 +123,12 @@ export class RoomClass extends Behaviour {
         console.log(gameObjectchild);
     }
 
+    getProduction(){
+        return this.production;
+    }
+    setProduction(productionNew:number){
+        this.production = productionNew;
+    }
     ///   拿到属性值  ///
     getRoomType(){
         return this.roomType;
@@ -93,15 +137,6 @@ export class RoomClass extends Behaviour {
     setRoomType(type:string){
         this.roomType = type;
     }
-
- 
-    getProduction(){
-        return this.production;
-    }
-    setProduction(productionNew:number){
-        this.production = productionNew;
-    }
-
     getRoomId(){
         return this.roomId;
     }
@@ -116,5 +151,10 @@ export class RoomClass extends Behaviour {
         this.roomLevel = level;
     }
 
-
+    getRoompos(){
+        return this.roompos;
+    }
+    setRoompos(pos:any){
+        this.roompos = pos;
+    }
 }
