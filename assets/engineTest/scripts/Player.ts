@@ -34,7 +34,7 @@ export class Player extends Behaviour {
             const gModule = JSON.parse(gameDataJSON) as GameModule;//gMoudle是获取到的GameModule对象
             console.log(gModule);
         } catch (e){
-            console.log("Player:loadSceneData没有被解析，因为其不是JSON格式")
+            console.log("Player: loadSceneData没有被解析，因为其不是JSON格式")
         }
 
 
@@ -67,10 +67,13 @@ export class Player extends Behaviour {
                     console.log("右键");
                     break;
             }
+
+            //点击player读取存档
             ArchiveSystem.readFile((file) => {
                 const reader = new FileReader();
                 reader.readAsText(file);
                 reader.onload=()=>{
+                    //跳转下一个场景并传递参数
                     this.engine.loadScene('assets/engineTest/scenes/secondScene.yaml', reader.result.toString())
                 }
             });
