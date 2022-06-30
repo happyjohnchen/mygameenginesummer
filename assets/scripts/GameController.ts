@@ -115,8 +115,6 @@ export class GameController extends Behaviour {
         //写入房间列表
         for (const room of this.game.rooms) {
             const roomModule = new RoomModule();
-
-
             gModule.rooms.push(roomModule);
         }
         //写入资源数值

@@ -19,14 +19,25 @@ export class Room extends Behaviour {
     roomStatus
     @boolean()
     canUpGrade
+    
+    clickStatus//0不可点，1可升级，2建起房子，3移动小人选择房间
     //static roomObjects:{ [id:string]: RoomType } = {}
     onStart() {
 
     }
+    setRoomClick(statusNumber:number){
+this.clickStatus=statusNumber
+    }
+
+charaterMoveStatus(){
+    if(this.clickStatus==3)
+    return [this.positionX*150,this.positionY*100]
+}
     //游戏开始时会执行一次
     onPlayStart() {
 
         this.gameObject.onClick = () => {
+            this.charaterMoveStatus()
             let thisRoom = this.gameObject.getBehaviour(Room)
             //想在这里判断点击了物体然后返回到父物体的roomSet中，然后就可以new 一个新的房间（create newroom()），并把新的房间状态改变
             console.log("点之前" + thisRoom.roomStatus)
@@ -36,7 +47,6 @@ export class Room extends Behaviour {
                 thisRoom.roomStatus = 1
 
             }
-
             const tileMapGameObj = getGameObjectById("tileMap")
             thisRoom.roomType = RoomType.WaterFactory
             const roomSet = tileMapGameObj.getBehaviour(RoomSet)
