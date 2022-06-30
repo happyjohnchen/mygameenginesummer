@@ -92,16 +92,15 @@ export class RoomClass extends Behaviour {
             }
         }
     }
-    getPeopleCount(){
-        let count = 0;
-        for(let p = 0;p++;p=this.people.length ){
-            count++;
-        }
-        return count;
-    }
 
     calculateTotalAttribute(){ //计算人物总属性 房间人物该属性之和
-
+        let totalAttribute = 0;
+        for(var p=0;p<this.people.length;p++){
+            //这里写获取该id人物类属性
+            //并作加法
+            //
+        }
+        return totalAttribute;
     }
 
     calculatePeriod(){ //计算消耗周期
@@ -122,6 +121,8 @@ export class RoomClass extends Behaviour {
         gameObjectchild.addBehaviour(attributeprefab);
         console.log(gameObjectchild);
     }
+
+
 
     getProduction(){
         return this.production;
