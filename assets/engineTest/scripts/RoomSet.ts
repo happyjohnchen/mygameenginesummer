@@ -19,11 +19,11 @@ export enum RoomStatus {
 
 child: GameObject
 //数组初始化
-let roomPostionArray = new Array();         //先声明一维
+let roomGameObjectArray = new Array();         //先声明一维
 for (var i = 0; i < 6; i++) {
-    roomPostionArray[i] = new Array(i);    //在声明二维
+    roomGameObjectArray[i] = new Array(i);    //在声明二维
     for (var j = 0; j < 9; j++) {
-        roomPostionArray[i][j] = [0, GameObject];
+        roomGameObjectArray[i][j] = 0;
     }
 }
 let roomTypeArray = new Array();         //先声明一维
@@ -51,7 +51,9 @@ export class RoomSet extends Behaviour {
         const room = new Room();
         room.positionX = roomPositionX;
         room.positionY = roomPositionY;
-        room.RoomType = RoomStatus.canBuild;
+        room.roomStatus = RoomStatus.canBuild;
+        room.roomType = RoomType.noType;
+        room.canUpGrade=true
         self.child.addBehaviour(room);
         const backgroundImage = new ImageRenderer()
         if (roomType == 1) {
@@ -59,72 +61,85 @@ export class RoomSet extends Behaviour {
         }
         else if (roomType == 2) { backgroundImage.imagePath = 'assets/engineTest/images/testImage.png' }
         self.child.addBehaviour(backgroundImage);
-        this.storeBuildStatus(roomPositionX, roomPositionY, RoomStatus.canBuild, self.child)
-     
+        this.storeBuildStatus(roomPositionX, roomPositionY, self.child)
+
     };
     //记录每个坑的状态
-    storeBuildStatus(x: number, y: number, roomStatus: RoomStatus, gameObject: GameObject) {
-        roomPostionArray[x][y] = [roomStatus, gameObject];
-        
+    storeBuildStatus(x: number, y: number, gameObject: GameObject) {
+        roomGameObjectArray[x][y] = gameObject;
+
     }
-    setRoomType(x: number, y: number, roomType: RoomType) {
-        roomTypeArray[x][y] = roomType;
+  
+    getRoomType(gameObeject: GameObject) {
+        return gameObeject.getBehaviour(Room)
+    }
+
+    mergeHouse(clickGameobject: GameObject, neighborGameObject: GameObject) {//房間合在一起
+        const clickRoomData = this.getRoomType(clickGameobject)
+        const neighborRoomData = this.getRoomType(neighborGameObject)
+        if(!neighborRoomData.canUpGrade)return;
+        if (clickRoomData.roomType != neighborRoomData.roomType) return;
+       
+        switch (clickRoomData.roomType) {
+            case 0:
+                clickGameobject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage2.png'
+                neighborGameObject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage21.png'
+        }
+        clickRoomData.canUpGrade=false
+        neighborRoomData.canUpGrade=false
     }
     //检测旁边的坑状态是否一样，相同则合并
     checkMerge(x: number, y: number) {
-
-        if (x > 0 && roomTypeArray[x][y][1] != RoomType.noType) {
-            if (roomPostionArray[x - 1][y][0] == 1 && roomTypeArray[x][y] == roomTypeArray[x - 1][y]) {
-                console.log("merge")
-                switch (roomTypeArray[x][y]) {
-                    case 0:
-                        const gameObeject = roomPostionArray[x - 1][y][1];
-                        gameObeject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage2.png'
-                }
-            }
-            else if (roomPostionArray[x + 1][y][0] == 1 && roomTypeArray[x][y] == roomTypeArray[x + 1][y] && x < 5) {
-                console.log("merge1")
-                switch (roomTypeArray[x][y]) {
-                    case 0:
-                        const gameObeject = roomPostionArray[x][y][1];
-                        gameObeject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage2.png'
-                }
-            }
-
-
-
-
+        let clickRoom: GameObject
+        let leftRoom: GameObject
+        let rightRoom: GameObject
+        clickRoom = roomGameObjectArray[x][y]
+        const clickRoomData = this.getRoomType(clickRoom)
+        if (x > 0 && x < 5) {
+            leftRoom = roomGameObjectArray[x - 1][y]
+            rightRoom = roomGameObjectArray[x + 1][y]
+            this.mergeHouse(clickRoom, leftRoom)
+            this.mergeHouse(clickRoom, rightRoom)
+        }
+        else if (x == 0) {
+            rightRoom = roomGameObjectArray[x + 1][y]
+            this.mergeHouse(clickRoom, rightRoom)
+        }
+        else if (x == 6) {
+            leftRoom = roomGameObjectArray[x - 1][y]
+            this.mergeHouse(leftRoom, clickRoom)
         }
     }
     checkNeighbor(x: number, y: number) {
-        roomPostionArray[x][y][0] = RoomStatus.isBuild
-        console.log(roomPostionArray[x][y][0])
+
+     // const bottomRoomData=roomGameObjectArray[x][y + 1].getBehaviour(Room)
 
         console.log(x, y)
         if (x - 1 < -1 || x + 1 > 6) return
-if(roomPostionArray[x][y + 1][0] == 0){
-        if (x - 1 >= 0 && roomPostionArray[x - 1][y][0] == 0 && roomPostionArray[x + 1][y][0] == 0) {
-console.log('a')
-            this.createRoom(x + 1, y, RoomStatus.canBuild, this.gameObject)
-            this.createRoom(x, y + 1, RoomStatus.canBuild, this.gameObject)
-            this.createRoom(x - 1, y, RoomStatus.canBuild, this.gameObject)
-        }
-        else if (x > 0 && roomPostionArray[x + 1][y][0] == 0) {
-            console.log('b')
-            this.createRoom(x + 1, y, RoomStatus.canBuild, this.gameObject)
-            this.createRoom(x, y + 1, RoomStatus.canBuild, this.gameObject)
+        if ( roomGameObjectArray[x][y+1] == 0) {
+            if (x - 1 >= 0 && roomGameObjectArray[x - 1][y] == 0 && roomGameObjectArray[x + 1][y] == 0) {
+                console.log('a')
+                this.createRoom(x + 1, y, RoomStatus.canBuild, this.gameObject)
+                this.createRoom(x, y + 1, RoomStatus.canBuild, this.gameObject)
+                this.createRoom(x - 1, y, RoomStatus.canBuild, this.gameObject)
+            }
+            else if (x > 0 && roomGameObjectArray[x + 1][y] == 0) {
+                console.log('b')
+                this.createRoom(x + 1, y, RoomStatus.canBuild, this.gameObject)
+                this.createRoom(x, y + 1, RoomStatus.canBuild, this.gameObject)
 
-        }
-        else if (x - 1 >= 0 && roomPostionArray[x - 1][y][0] == 0) {
-            console.log('c')
-            this.createRoom(x - 1, y, RoomStatus.canBuild, this.gameObject)
-            this.createRoom(x, y + 1, RoomStatus.canBuild, this.gameObject)
+            }
+            else if (x - 1 >= 0 && roomGameObjectArray[x - 1][y] == 0) {
+                console.log('c')
+                this.createRoom(x - 1, y, RoomStatus.canBuild, this.gameObject)
+                this.createRoom(x, y + 1, RoomStatus.canBuild, this.gameObject)
 
+            }
+            else {
+                console.log("f")
+                this.createRoom(x, y + 1, RoomStatus.canBuild, this.gameObject)
+            }
         }
-        else  {
-            console.log("f")
-            this.createRoom(x, y + 1, RoomStatus.canBuild, this.gameObject)
-        }}
     }
     //在此定义脚本中的属性
     @number()
@@ -133,40 +148,19 @@ console.log('a')
 
     //游戏开始时会执行一次
     onStart(): void {
-        roomPostionArray[0][0] = -1
-        roomPostionArray[0][1] = -1
+        roomGameObjectArray[0][0] = -1
+        roomGameObjectArray[0][1] = -1
 
         for (let i = 0; i < 2; i++)
             for (let j = 1; j < 6; j++)
                 this.createRoom(j, i, 2, this.gameObject)
-        /* this.gameObject.onClick = () => {
-         //this.gameObject.getBehaviour(Room).RoomType=1
-         roomPostionArray[2][1]=1
-         console.log("click")
-         checkNewRoomCanBuild()
-         this.canUpdateRoom=true;
-        
-         };*/
-
     }
 
     //每次屏幕刷新执行
     onUpdate() {
-
-        /* if(this.canUpdateRoom){
-         for(var i=0;i<9;i++){       
-               for(var j=0;j<6;j++){    
-                   if(roomPostionArray[i][j]==1)  
-                   console.log(i)
-                   this.createRoom(j,i,roomPostionArray[i][j],this.gameObject)
-             this.canUpdateRoom=false;
-            }
-     }
- }*/
     }
 
     //平均每16ms执行一次
     onTick(duringTime: number) {
-
     }
 }
