@@ -55,6 +55,7 @@ export class RoomSet extends Behaviour {
     createRoom(roomPositionX: number, roomPositionY: number, roomType: number, self: any) {
         if (roomType == 0 || roomPositionX + 1 > 6 || roomPositionX - 1 < -1) return;//超出所建的范围
         self.child = new GameObject();
+        
         self.addChild(self.child)
         const childTransform = new Transform();
         childTransform.x = 0 + roomPositionX * 150;
