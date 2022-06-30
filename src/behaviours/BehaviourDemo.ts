@@ -11,11 +11,6 @@ export class BehaviourDemo extends Behaviour {
     }
 
     //游戏运行模式开始时会执行一次
-    onGamePlay() {
-
-    }
-
-    //游戏运行模式开始时会执行一次
     onPlayStart() {
 
     }
