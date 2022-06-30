@@ -130,32 +130,36 @@ export class GameController extends Behaviour {
     }
 
     //创建人
-    addPerson(person: GameObject){
+    addPerson(person: GameObject) {
         this.game.people.push(person);
         this.people.addChild(person);
     }
 
     //删除人
-    removePerson(person: GameObject){
+    removePerson(person: GameObject) {
         const index = this.game.people.indexOf(person);
-        if (index>=0){
-            this.game.people.splice(index,1);
+        if (index >= 0) {
+            this.game.people.splice(index, 1);
         }
         this.people.removeChild(person);
     }
 
     //创建房间
-    addRoom(room: GameObject){
+    addRoom(room: GameObject) {
         this.game.rooms.push(room);
         this.rooms.addChild(room);
     }
 
     //删除房间
-    removeRoom(room: GameObject){
+    removeRoom(room: GameObject) {
         const index = this.game.rooms.indexOf(room);
-        if (index>=0){
-            this.game.rooms.splice(index,1);
+        if (index >= 0) {
+            this.game.rooms.splice(index, 1);
         }
         this.rooms.removeChild(room);
     }
+}
+
+export function getRand(max: number, min: number = 0) {
+    return Math.floor(Math.random() * (max - min + 1));
 }
