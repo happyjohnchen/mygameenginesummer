@@ -12,7 +12,7 @@ import { Transform } from "../../src/engine/Transform";
 
 export class RoomClass extends Behaviour {
 
-    
+    //测试用
     @string()
     roomType= "water";// water food energy
     @number()
@@ -32,6 +32,11 @@ export class RoomClass extends Behaviour {
     private nowTime = 0;
 
     private producePos = 0;
+
+    private roomId = 0;
+    private roomLevel = 1;
+
+    private peopleInRoom;
 
     onStart() {
     
@@ -61,17 +66,12 @@ export class RoomClass extends Behaviour {
         }
     }
 
-    getRoomType(){
-        return this.roomType;
-    }
-
-
     calculatePeriod(){ //计算消耗周期
         let period = this.primeProduceTime - (this.totalPeopleAttribute*this.coefficient) + this.radix;
         return period;
     }
 
-    createProduction(){ //把type 和 产出值 赋给预制体
+    createProduction(){ //生成产出预制体
         let gameObjectchild = new GameObject()
         gameObjectchild.parent= this.gameObject;
         this.gameObject.addChild(gameObjectchild);
@@ -85,7 +85,36 @@ export class RoomClass extends Behaviour {
         console.log(gameObjectchild);
     }
 
+    ///   拿到属性值  ///
+    getRoomType(){
+        return this.roomType;
+    }
+
+    setRoomType(type:string){
+        this.roomType = type;
+    }
+
+ 
     getProduction(){
         return this.production;
     }
+    setProduction(productionNew:number){
+        this.production = productionNew;
+    }
+
+    getRoomId(){
+        return this.roomId;
+    }
+    setRoomid(id:number){
+        this.roomId = id;
+    }
+
+    getRoomLevel(){
+        return this.roomLevel;
+    }
+    setRoomLevel(level:number){
+        this.roomLevel = level;
+    }
+
+
 }

@@ -21,7 +21,6 @@ export class addAttribute extends Behaviour  {
                 this.addValueCount = getGameObjectById(this.type+"room").getBehaviour(RoomClass).getProduction();
                 getGameObjectById(this.type).getBehaviour(Attribute).setValue(this.addValueCount);
                 this.gameObject.parent.parent.removeChild(this.gameObject);           
-                
             }
      
         }
