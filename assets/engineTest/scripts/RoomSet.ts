@@ -41,8 +41,7 @@ for (var i = 0; i < 6; i++) {
 export class RoomSet extends Behaviour {
     //建坑
     createRoom(roomPositionX: number, roomPositionY: number, roomType: number, self: any) {
-        if (roomType == 0 || roomPositionX + 1 > 6 || roomPositionX - 1 < -1) return;
-
+        if (roomType == 0 || roomPositionX + 1 > 6 || roomPositionX - 1 < -1) return;//超出所建的范围
         self.child = new GameObject();
         self.addChild(self.child)
         const childTransform = new Transform();
@@ -53,28 +52,20 @@ export class RoomSet extends Behaviour {
         room.positionX = roomPositionX;
         room.positionY = roomPositionY;
         room.RoomType = RoomStatus.canBuild;
-
         self.child.addBehaviour(room);
         const backgroundImage = new ImageRenderer()
-
-
-
         if (roomType == 1) {
             backgroundImage.imagePath = 'assets/engineTest/images/testImage1.png'
         }
         else if (roomType == 2) { backgroundImage.imagePath = 'assets/engineTest/images/testImage.png' }
         self.child.addBehaviour(backgroundImage);
         this.storeBuildStatus(roomPositionX, roomPositionY, RoomStatus.canBuild, self.child)
-        /* const image=new ImageRenderer();
-         image.imagePath='assets//images//testImage.png'
-         child.addBehaviour(image);*/
-
-
+     
     };
     //记录每个坑的状态
     storeBuildStatus(x: number, y: number, roomStatus: RoomStatus, gameObject: GameObject) {
         roomPostionArray[x][y] = [roomStatus, gameObject];
-        console.log(roomPostionArray[1][1])
+        
     }
     setRoomType(x: number, y: number, roomType: RoomType) {
         roomTypeArray[x][y] = roomType;
