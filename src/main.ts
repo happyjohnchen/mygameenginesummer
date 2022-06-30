@@ -17,7 +17,7 @@ import {TileMap} from "./behaviours/TileMap";
 import {Prefab} from "./behaviours/Prefab";
 
 import {TimeControllerSystem} from "../assets/scripts/TimeControllerSystem";
-import {Attribute} from "../assets/scripts/Attribute";
+import {AttributeSystem} from "../assets/scripts/AttributeSystem";
 import {addAttribute} from "../assets/scripts/addAttribute";
 import {showTime} from "../assets/scripts/showTime";
 import {changeTimeSpeed} from "../assets/scripts/changeTimeSpeed";
@@ -49,7 +49,7 @@ registerBehaviourClass(Prefab);
 registerBehaviourClass(Player);
 registerBehaviourClass(GameController);
 registerBehaviourClass(TimeControllerSystem);
-registerBehaviourClass(Attribute);
+registerBehaviourClass(AttributeSystem);
 registerBehaviourClass(addAttribute);
 registerBehaviourClass(showTime);
 registerBehaviourClass(RoomClass);

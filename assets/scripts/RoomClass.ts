@@ -26,6 +26,13 @@ export class RoomClass extends Behaviour {
     @number()
     radix = 0.2;
    
+    @number()
+    level1Size = 2;
+    @number()
+    level2Size = 4;
+    @number()
+    level3Size = 5;
+
     //不储存
     private lastTime = 0;//经过的时间
     private nowTime = 0;
@@ -48,7 +55,7 @@ export class RoomClass extends Behaviour {
     }
 
     //每次屏幕刷新执行
-    onUpdate() { //获取自己的父物体判断是否是自己生成的 这样可以单个调整数值
+    onUpdate() { 
    
         //console.log(this.getRoomType() + "时间周期为："+this.calculatePeriod() + "小时");
         
@@ -66,9 +73,9 @@ export class RoomClass extends Behaviour {
     }
     calculateSize(){//计算房间容量
         const sizetable = {
-            1: 2,
-            2: 4,
-            3: 5
+            1: this.level1Size,
+            2: this.level2Size,
+            3: this.level3Size
         }
         return sizetable[this.roomLevel];
     }

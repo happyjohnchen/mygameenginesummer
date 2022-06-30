@@ -1,7 +1,7 @@
 import { extractGameObject, getGameObjectById } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
 import { number } from "../../src/engine/validators/number";
-import { Attribute } from "./Attribute";
+import { AttributeSystem } from "./AttributeSystem";
 import {RoomModule, RoomType } from "./modules/RoomModule";
 import {string} from "../../src/engine/validators/string";
 import { RoomClass } from "./RoomClass";
@@ -20,7 +20,7 @@ export class addAttribute extends Behaviour  {
                 const a = getGameObjectById(this.type.toString());
                 //这两行根据之后架构要改 产出多少以及往哪里加
                 this.addValueCount = getGameObjectById(this.type+"room").getBehaviour(RoomClass).getProduction();
-                getGameObjectById(this.type).getBehaviour(Attribute).setValue(this.addValueCount);
+                getGameObjectById(this.type).getBehaviour(AttributeSystem).setValue(this.addValueCount);
                 this.gameObject.parent.parent.removeChild(this.gameObject);           
             }
      

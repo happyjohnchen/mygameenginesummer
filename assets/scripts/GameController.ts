@@ -3,8 +3,6 @@ import {Behaviour} from "../../src/engine/Behaviour";
 export class GameController extends Behaviour {
 
     //在此定义脚本中的属性
-
-
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
 

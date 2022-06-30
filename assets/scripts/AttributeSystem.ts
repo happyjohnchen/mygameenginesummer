@@ -4,10 +4,12 @@ import { number } from "../../src/engine/validators/number";
 import {GameObject, getGameObjectById} from "../../src/engine";
 import { TimeControllerSystem } from "./TimeControllerSystem";
 import { string } from "../../src/engine/validators/string";
-export class Attribute extends Behaviour {
+export class AttributeSystem extends Behaviour {
 
     //在此定义脚本中的属性
     /* 分别挂在到三个属性的物体上，用来实现随时间掉落 且控制上下限
+    最后上下限逻辑要合并到gamecontroller里
+    随房间数量消耗
     */
 
    
