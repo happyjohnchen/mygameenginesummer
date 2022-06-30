@@ -16,11 +16,6 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: TimeControllerSystem
-        properties:
-          timePerTick: 1.6
-          dayHourTime: 16
-          nightTime: 120
     id: GameController
   - behaviours:
       - type: Transform
@@ -33,3 +28,17 @@ children:
       - type: Camera
       - type: CameraMouseController
     id: camera
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TimeControllerSystem
+        properties:
+          timePerTick: 1.6
+          dayHourTime: 16
+          nightTime: 120
+    id: TimeController
