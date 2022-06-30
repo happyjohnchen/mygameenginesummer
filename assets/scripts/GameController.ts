@@ -11,8 +11,8 @@ import {Transform} from "../../src/engine/Transform";
 export class GameController extends Behaviour {
 
     game: GameSet;//游戏资源
-    people: GameObject;//此GameObject持有所有人
-    rooms: GameObject;//此GameObject持有所有房间
+    private people: GameObject;//此GameObject持有所有人
+    private rooms: GameObject;//此GameObject持有所有房间
 
     onPlayStart() {
         //获取人和房间对象
@@ -109,11 +109,13 @@ export class GameController extends Behaviour {
         for (const people of this.game.people) {
             const personModule = new PersonModule();
 
+
             gModule.people.push(personModule);
         }
         //写入房间列表
         for (const room of this.game.rooms) {
             const roomModule = new RoomModule();
+
 
             gModule.rooms.push(roomModule);
         }
