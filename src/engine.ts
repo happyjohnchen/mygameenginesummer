@@ -148,8 +148,8 @@ export class GameEngine {
     }
 
     loadScene(sceneName: string, data?: string) {
-        data = data ? data : '';
-        window.location.href = window.location.href.split('?')[0] + `?mode=${this.mode}&scene=${sceneName}&data=${data}`;
+        const sceneData = data ? data : '';
+        window.location.href = window.location.href.split('?')[0] + `?mode=${this.mode}&scene=${sceneName}&data=${sceneData}`;
     }
 
     unserilizeAssetsYaml(yamlUrl: string) {
