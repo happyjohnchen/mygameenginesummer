@@ -349,6 +349,15 @@ export class GameObject {
         GameObject.map[this.uuid] = this;
     }
 
+    removeSelf(): GameObject{
+        if (this === this.engine.rootGameObject){
+            //不能删除rootGameObject
+            return null;
+        }
+        this.parent.removeChild(this);
+        return this;
+    }
+
     addChild(child: GameObject) {
         this.children.push(child);
         child.engine = this.engine;
