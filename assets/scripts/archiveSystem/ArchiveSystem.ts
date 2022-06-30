@@ -2,6 +2,7 @@ import {GameModule} from "../modules/GameModule"
 
 export class ArchiveSystem {
     static encryptArchive = true;//是否对存档文件加密
+    static fileEncryptSuffix = ".fsa";//加密文件的后缀名
 
     static saveFile(fileName: string, gameModule: GameModule) {
         let content = JSON.stringify(gameModule);
@@ -10,14 +11,14 @@ export class ArchiveSystem {
             content = window.btoa(content);
         }
         const blob = new Blob(['\ufeff' + content], {type: 'text/json,charset-UTF-8'});
-        this.openDownloadDialog(blob, fileName + (this.encryptArchive ? ".fsa" : ".json"));
+        this.openDownloadDialog(blob, fileName + (this.encryptArchive ? this.fileEncryptSuffix : ".json"));
     }
 
     static readFile(onFileRead: (file: File) => void) {
         const head = document.head;
         const selector = document.createElement('input') as HTMLInputElement;
         selector.type = 'file';
-        selector.accept = (this.encryptArchive ? ".fsa" : ".json");
+        selector.accept = (this.encryptArchive ? this.fileEncryptSuffix : ".json");
         selector.style.display = 'none';
         head.appendChild(selector);
         selector.click();
