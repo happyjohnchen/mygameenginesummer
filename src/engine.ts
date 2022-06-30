@@ -371,9 +371,9 @@ export class GameObject {
         const index = this.children.indexOf(child);
         console.log("removeChild:", index);
         if (index >= 0) {
+            this.children[index].active = false;
             this.children.splice(index, 1);
         }
-        this.active = false;
     }
 
     upMoveChild(child: GameObject) {
