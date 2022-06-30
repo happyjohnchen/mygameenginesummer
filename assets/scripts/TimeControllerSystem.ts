@@ -93,6 +93,6 @@ export class TimeControllerSystem extends Behaviour {
        }
 
        gettotalgamesecondtime(){//得到游戏时长 以秒为单位
-        return this.daycount*this.dayhourtime*3600+this.hourtime*3600+this.mintime*60+this.secondtime;
+        return (this.daycount-1)*this.dayhourtime*3600+this.hourtime*3600+this.mintime*60+this.secondtime;
        }
 }
