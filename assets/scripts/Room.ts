@@ -1,10 +1,9 @@
-import { ImageRenderer } from "../../../src/behaviours/ImageRenderer";
-import { Prefab } from "../../../src/behaviours/Prefab";
-import { getGameObjectById } from "../../../src/engine";
-import { Behaviour } from "../../../src/engine/Behaviour";
-import { boolean } from "../../../src/engine/validators/boolean";
-import { number } from "../../../src/engine/validators/number";
-import { RoomType } from "../../scripts/modules/RoomModule";
+import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
+import { getGameObjectById } from "../../src/engine";
+import { Behaviour } from "../../src/engine/Behaviour";
+import { boolean } from "../../src/engine/validators/boolean";
+import { number } from "../../src/engine/validators/number";
+import { RoomType } from "./modules/RoomModule";
 import { RoomSet } from "./RoomSet";
 
 export class Room extends Behaviour {

@@ -1,11 +1,11 @@
 
-import { ImageRenderer } from "../../../src/behaviours/ImageRenderer";
-import { Prefab } from "../../../src/behaviours/Prefab";
-import { GameObject } from "../../../src/engine";
-import { Behaviour } from "../../../src/engine/Behaviour";
-import { Transform } from "../../../src/engine/Transform";
-import { number } from "../../../src/engine/validators/number";
-import { RoomType } from "../../scripts/modules/RoomModule";
+import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
+import { Prefab } from "../../src/behaviours/Prefab";
+import { GameObject } from "../../src/engine";
+import { Behaviour } from "../../src/engine/Behaviour";
+import { Transform } from "../../src/engine/Transform";
+import { number } from "../../src/engine/validators/number";
+import { RoomType } from "./modules/RoomModule";
 import { Room } from "./Room";
 export enum RoomStatus {
 

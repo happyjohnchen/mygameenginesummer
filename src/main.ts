@@ -11,8 +11,8 @@ import {ShapeCircleRenderer} from "./behaviours/ShapeCircleRenderer";
 import {ImageRenderer} from "./behaviours/ImageRenderer";
 import {RoundedRectRenderer} from "./behaviours/RoundedRectRenderer";
 import {Player} from "../assets/engineTest/scripts/Player";
-import {Room} from "../assets/engineTest/scripts/Room";
-import {RoomSet} from "../assets/engineTest/scripts/RoomSet";
+import {Room} from "../assets/scripts/Room";
+import {RoomSet} from "../assets/scripts/RoomSet";
 import {Sound} from "./behaviours/Sound";
 import {AnimationRenderer} from "./behaviours/AnimationRenderer";
 import {TileMap} from "./behaviours/TileMap";
@@ -46,8 +46,8 @@ registerBehaviourClass(Player);
 registerBehaviourClass(GameController);
 registerBehaviourClass(TimeControllerSystem);
 registerBehaviourClass(CameraMouseController);
+registerBehaviourClass(RoomSet);
+registerBehaviourClass(Room);
 
-registerBehaviourClass(RoomSet)
-registerBehaviourClass(Room)
 const engine = new GameEngine()
 engine.start()
