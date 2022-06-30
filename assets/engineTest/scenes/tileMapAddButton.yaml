@@ -1,0 +1,588 @@
+behaviours:
+  - type: Transform
+    properties:
+      x: 0
+      y: 0
+      scaleX: 1
+      scaleY: 1
+      rotation: 0
+id: buildButton
+children:
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -480
+          y: -270
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -200
+          y: -400
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: RoomSet
+        properties:
+          roomtype: 0
+    id: tileMap
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 150
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 1
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 300
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 2
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 450
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 3
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 600
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 4
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 750
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 5
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 150
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 1
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 300
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 2
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 450
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 3
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 600
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 4
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 750
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 5
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 150
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 1
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 300
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 2
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 450
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 3
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 600
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 4
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 750
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 5
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 150
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 1
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 300
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 2
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 450
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 3
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 600
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 4
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 750
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 5
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 150
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 1
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 300
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 2
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 450
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 3
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 600
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 4
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 750
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 5
+              positionY: 0
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 150
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 1
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 300
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 2
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 450
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 3
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 600
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 4
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 750
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: _Room
+            properties:
+              roomType: 4
+              positionX: 5
+              positionY: 1
+              roomStatus: 2
+              canUpGrade: true
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/testImage.png
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ShapeRectRenderer
+        properties:
+          width: 100
+          height: 100
+          color: red
+          customColor: '#ffffff'
+    id: NewGameObject

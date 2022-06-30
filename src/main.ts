@@ -20,7 +20,9 @@ import {Prefab} from "./behaviours/Prefab";
 
 import {TimeControllerSystem} from "../assets/scripts/TimeControllerSystem";
 import {GameController} from "../assets/scripts/GameController";
-
+import{chooseRoomType} from"../assets/engineTest/scripts/chooseRoomType"
+import{ensureChoose} from"../assets/engineTest/scripts/ensureChoose"
+import{setImageStyle} from"../assets/engineTest/scripts/setImageStyle"
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
 registerBehaviourClass(TextRenderer);
@@ -47,5 +49,8 @@ registerBehaviourClass(TimeControllerSystem);
 
 registerBehaviourClass(RoomSet)
 registerBehaviourClass(Room)
+registerBehaviourClass(chooseRoomType )
+registerBehaviourClass(ensureChoose )
+registerBehaviourClass(setImageStyle)
 const engine = new GameEngine()
 engine.start()
