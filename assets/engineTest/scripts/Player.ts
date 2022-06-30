@@ -23,12 +23,21 @@ export class Player extends Behaviour {
 
     onPlayStart() {
         console.log("player onPlayerStart, data: " + this.engine.loadSceneData as string);
+
+        //读取存档
         try{
-            const gModule = JSON.parse(decodeURI(this.engine.loadSceneData)) as GameModule;
+            let gameDataJSON = decodeURI(this.engine.loadSceneData);
+            if (ArchiveSystem.encryptArchive){
+                //base64解码
+                gameDataJSON = window.atob(gameDataJSON);
+            }
+            const gModule = JSON.parse(gameDataJSON) as GameModule;
             console.log(gModule);
         } catch (e){
             console.log("Player:loadSceneData没有被解析，因为其不是JSON格式")
         }
+
+
         const transform = this.gameObject.getBehaviour(Transform);
         if (this.engine.loadSceneData && this.engine.loadSceneData !== this.sceneData) {
             this.sceneData = this.engine.loadSceneData;
@@ -171,10 +180,8 @@ export class Player extends Behaviour {
         gameModule.energy = 5;
         gameModule.material = 3;
 
+        //保存存档
         //ArchiveSystem.saveFile("testGame", gameModule);
-
-
-        //console.log(ArchiveSystem.readFile('testGame'));
 
     }
 

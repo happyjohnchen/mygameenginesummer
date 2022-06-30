@@ -1,19 +1,23 @@
-import {GameModule} from "../modules/GameModule";
-
-import fs from "fs";
+import {GameModule} from "../modules/GameModule"
 
 export class ArchiveSystem {
+    static encryptArchive = true;//是否对存档文件加密
+
     static saveFile(fileName: string, gameModule: GameModule) {
-        const content = JSON.stringify(gameModule);
+        let content = JSON.stringify(gameModule);
+        if (this.encryptArchive){
+            //使用base64编码
+            content = window.btoa(content);
+        }
         const blob = new Blob(['\ufeff' + content], {type: 'text/json,charset-UTF-8'});
-        this.openDownloadDialog(blob, fileName + ".json");
+        this.openDownloadDialog(blob, fileName + (this.encryptArchive ? ".fsa" : ".json"));
     }
 
     static readFile(onFileRead: (file: File) => void) {
         const head = document.head;
         const selector = document.createElement('input') as HTMLInputElement;
         selector.type = 'file';
-        selector.accept = ".json";
+        selector.accept = (this.encryptArchive ? ".fsa" : ".json");
         selector.style.display = 'none';
         head.appendChild(selector);
         selector.click();
