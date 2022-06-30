@@ -12,7 +12,7 @@ export class TimeControllerSystem extends Behaviour {
     */
 
     @number()
-    timepertick = 1.6;//控制每次ontick的游戏秒数
+    timePerTick = 1.6;//控制每次ontick的游戏秒数
 
     private secondTime=0;//秒
     private minTime=0;//分钟
@@ -50,7 +50,7 @@ export class TimeControllerSystem extends Behaviour {
             }
         }
         else{   
-        this.secondTime += this.timepertick*this.speed;
+        this.secondTime += this.timePerTick*this.speed;
         if(this.hourTime>=this.dayHourTime){
             this.hourTime = 0;
             this.isDay = false;
