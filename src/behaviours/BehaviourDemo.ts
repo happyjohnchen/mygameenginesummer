@@ -24,4 +24,9 @@ export class BehaviourDemo extends Behaviour {
     onTick(duringTime: number) {
 
     }
+
+    //删除Behaviour时会执行一次
+    onEnd() {
+
+    }
 }
