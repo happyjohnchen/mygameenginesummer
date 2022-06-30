@@ -30,7 +30,7 @@ export class showtime extends Behaviour {
     onTick(duringTime: number) {
         this.nowhour= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getHourTime()+this.starttime;
         this.nowmin = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
-        this.nowday = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getdaycount();
+        this.nowday = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getDaycount();
         //console.log(getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).gettotalgamesecondtime());
         
     }

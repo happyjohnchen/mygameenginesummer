@@ -12,21 +12,21 @@ export class TimeControllerSystem extends Behaviour {
     */
 
     @number()
-    timepertick = 1.6;//控制每次ontick的游戏秒数
+    timePerTick = 1.6;//控制每次ontick的游戏秒数
 
-    private secondtime=0;//秒
-    private mintime=0;//分钟
-    private hourtime=0;//小时
-    private isday = true;
-    private daycount = 1; //经过了多少天
+    private secondTime=0;//秒
+    private minTime=0;//分钟
+    private hourTime=0;//小时
+    private isDay = true;
+    private dayCount = 1; //经过了多少天
 
     @number()
-    dayhourtime = 16;//白天总时间
+    dayHourTime = 16;//白天总时间
     private speed= 1.0;
 
     @number()
-    nighttime = 120;//夜晚时间长度 目前相当于现实2s
-    private nownighttime = 0;
+    nightTime = 120;//夜晚时间长度 目前相当于现实2s
+    private nowNightTime = 0;
     //游戏开始时会执行一次
     onStart() {
 
@@ -40,59 +40,59 @@ export class TimeControllerSystem extends Behaviour {
     //平均每16ms执行一次 60次是1s
     //1次ontick 游戏1.6秒  超过六十秒就-60s 分钟+1 分钟超过60-60s 小时进位 小时等于16时清0变为黑天
     onTick(duringTime: number) {  
-        if(!this.isday){//黑夜
-            this.nownighttime +=1;
-            if(this.nownighttime>=this.nighttime){
-                this.isday = true;
-                this.daycount +=1;
+        if(!this.isDay){//黑夜
+            this.nowNightTime +=1;
+            if(this.nowNightTime>=this.nightTime){
+                this.isDay = true;
+                this.dayCount +=1;
                 //console.log(this.daycount);
                 
             }
         }
         else{   
-        this.secondtime += this.timepertick*this.speed;
-        if(this.hourtime>=this.dayhourtime){
-            this.hourtime = 0;
-            this.isday = false;
+        this.secondTime += this.timePerTick*this.speed;
+        if(this.hourTime>=this.dayHourTime){
+            this.hourTime = 0;
+            this.isDay = false;
             console.log("黑夜");
         }
-        if(this.mintime>=60){
-            this.mintime-=60;
-            this.hourtime+=1;
+        if(this.minTime>=60){
+            this.minTime-=60;
+            this.hourTime+=1;
         }
 
-        if(this.secondtime>=60){
-            this.secondtime-=60;
-            this.mintime+=1;
+        if(this.secondTime>=60){
+            this.secondTime-=60;
+            this.minTime+=1;
         }
         //console.log(this.totalhourtime+"小时"+this.totalmintime+"分钟"+this.totalsecondtime+"秒");
          } 
        }
 
        getSecondTime(){
-        return this.secondtime;           
+        return this.secondTime;           
        }
 
        getMinTime(){
-        return this.mintime;
+        return this.minTime;
        }
 
        getHourTime(){
-        return this.hourtime;
+        return this.hourTime;
        }
-       getspeed(){
+       getSpeed(){
         return this.speed;
        }
 
-       setspeed(nowspeed:number){
+       setSpeed(nowspeed:number){
         this.speed = nowspeed;
        }
 
-       getdaycount(){
-        return this.daycount;
+       getDaycount(){
+        return this.dayCount;
        }
 
-       gettotalgamesecondtime(){//得到游戏时长 以秒为单位
-        return this.daycount*this.dayhourtime*3600+this.hourtime*3600+this.mintime*60+this.secondtime;
+       getTotalGameSecondTime(){//得到游戏时长 以秒为单位
+        return this.dayCount*this.dayHourTime*3600+this.hourTime*3600+this.minTime*60+this.secondTime;
        }
 }

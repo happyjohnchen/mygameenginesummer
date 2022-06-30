@@ -190,34 +190,7 @@ children:
         properties:
           prefabPath: assets/engineTest/prefabs/testPrefab.yaml
     id: Prefab
-  - behaviours:
-      - type: Transform
-        properties:
-<<<<<<< HEAD
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: TimeControllerSystem
-        properties:
-          timepertick: 1.6
-          dayhourtime: 16
-          nighttime: 120
-    id: TimeController
-=======
-          x: -200
-          y: -100
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: Prefab
-        properties:
-          prefabPath: assets/engineTest/prefabs/test2Prefab.yaml
-    id: Prefab2
-<<<<<<< HEAD:assets/scenes/main.yaml
->>>>>>> master
-=======
+
   - behaviours:
       - type: Transform
         properties:

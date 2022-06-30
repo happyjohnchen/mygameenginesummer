@@ -27,8 +27,8 @@ export class RoomClass extends Behaviour {
     @number()
     radix = 0.2;
    
-    private lasttime = 0;//经过的时间
-    private nowtime = 0;
+    private lastTime = 0;//经过的时间
+    private nowTime = 0;
 
     onStart() {
         this.gameObject.onClick = (e) => {
@@ -60,11 +60,11 @@ export class RoomClass extends Behaviour {
 
     //平均每16ms执行一次   每一个小时产出一个增加
     onTick(duringTime: number) {
-        this.nowtime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
-        this.lasttime = this.lasttime==60? 0:this.lasttime;
-        if(this.nowtime-this.lasttime >=this.calculatePeriod()*60){
+        this.nowTime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
+        this.lastTime = this.lastTime==60? 0:this.lastTime;
+        if(this.nowTime-this.lastTime >=this.calculatePeriod()*60){
             this.createProduction();
-            this.lasttime = this.nowtime;    
+            this.lastTime = this.nowTime;    
             //console.log(this.lasttime);
         }
     }
@@ -86,7 +86,7 @@ export class RoomClass extends Behaviour {
         console.log(this.roomtype);   
     }
 
-    getproduction(){
+    getProduction(){
         return this.production;
     }
 }

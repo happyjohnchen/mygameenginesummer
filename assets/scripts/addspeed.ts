@@ -13,7 +13,7 @@ export class addspeed extends Behaviour {
     onStart() {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
-            getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).setspeed(this.thisspped);
+            getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).setSpeed(this.thisspped);
                 //console.log(a.getBehaviour(Attribute).getvalue());
             }
      

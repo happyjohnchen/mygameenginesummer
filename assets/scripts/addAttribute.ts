@@ -21,8 +21,8 @@ export class addAttribute extends Behaviour  {
             if(e.button ==0){
                 console.log(this.type);
                 const a = getGameObjectById(this.type.toString());
-                this.addvaluecount = getGameObjectById(this.type+"room").getBehaviour(RoomClass).getproduction();
-                getGameObjectById(this.type).getBehaviour(Attribute).setvalue(this.addvaluecount);
+                this.addvaluecount = getGameObjectById(this.type+"room").getBehaviour(RoomClass).getProduction();
+                getGameObjectById(this.type).getBehaviour(Attribute).setValue(this.addvaluecount);
                 const parent = this.gameObject.parent;
                 parent.removeChild(this.gameObject);           
                 
@@ -41,11 +41,11 @@ export class addAttribute extends Behaviour  {
         
     }
 
-    setvalue(value:number){
+    setValue(value:number){
         this.addvaluecount = value;
     }
 
-    settype(roomtype:string){
+    setType(roomtype:string){
         this.type = roomtype;
     }
 }
