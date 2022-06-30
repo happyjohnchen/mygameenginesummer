@@ -1,1 +1,1 @@
-assets/engineTest/scenes/MVP.yaml
+assets/engineTest/scenes/main.yaml

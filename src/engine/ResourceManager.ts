@@ -1,18 +1,45 @@
 export class ResourceManager {
 
-    cache: { [url: string]: string } = {};
+    textCache: { [url: string]: string } = {};
+    imageCache: { [url: string]: HTMLImageElement } = {};
 
-    loadText(url: string, callback: () => void) {
-        const xhr = new XMLHttpRequest();
-        xhr.open('get', url);
-        xhr.send();
-        xhr.onload = () => {
-            this.cache[url] = xhr.responseText;
-            callback();
-        }
+    loadImage(url: string) {
+        return new Promise<void>((resolve, reject) => {
+            const img = document.createElement('img');
+            img.src = url;
+            img.onload = () => {
+                this.imageCache[url] = img;
+                resolve();
+            }
+        })
     }
 
-    get(url: string) {
-        return this.cache[url];
+    loadText(url: string) {
+        return new Promise<void>((resolve, reject) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open('get', url);
+            xhr.send();
+            xhr.onload = () => {
+                this.textCache[url] = xhr.responseText;
+                resolve();
+            }
+        })
+
+    }
+
+    getText(url: string) {
+        const text = this.textCache[url];
+        if (!text) {
+            alert('配置文件加载失败' + url)
+        }
+        return text;
+    }
+
+    getImage(url: string) {
+        const image = this.imageCache[url]
+        if (!image) {
+            alert('图片加载失败' + url)
+        }
+        return image;
     }
 }
