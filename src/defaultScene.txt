@@ -1,1 +1,1 @@
-assets/engineTest/scenes/tileMap.yaml
+assets/scenes/game.yaml
