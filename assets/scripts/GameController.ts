@@ -3,18 +3,13 @@ import {GameSet} from "./GameSet";
 import {ArchiveSystem} from "./archiveSystem/ArchiveSystem";
 import {GameModule} from "./modules/GameModule";
 import {TimeControllerSystem} from "./TimeControllerSystem";
+import {PersonModule} from "./modules/PersonModule";
+import {RoomModule} from "./modules/RoomModule";
 
 export class GameController extends Behaviour {
 
-    //在此定义脚本中的属性
-    game: GameSet;
+    game: GameSet;//游戏资源
 
-    //游戏编辑模式或运行模式开始时会执行一次
-    onStart() {
-
-    }
-
-    //游戏运行模式开始时会执行一次
     onPlayStart() {
         this.readArchive();//读档
     }
@@ -48,9 +43,13 @@ export class GameController extends Behaviour {
         this.game.time.setSpeed(gModule.gameTime.rate);
         this.game.time.setInitialTime(gModule.gameTime.day, gModule.gameTime.hour, gModule.gameTime.minute, gModule.gameTime.second);
         //设定人物列表
+        for (const peopleModule of gModule.people) {
 
+        }
         //设定房间列表
+        for (const roomModule of gModule.rooms) {
 
+        }
         //设定资源数值
         this.game.water = gModule.water;
         this.game.energy = gModule.energy;
@@ -84,9 +83,17 @@ export class GameController extends Behaviour {
         gModule.gameTime.minute = this.game.time.getMinTime();
         gModule.gameTime.second = this.game.time.getSecondTime();
         //写入人列表
+        for (const people of this.game.people) {
+            const personModule = new PersonModule();
 
+            gModule.people.push(personModule);
+        }
         //写入房间列表
+        for (const room of this.game.rooms) {
+            const roomModule = new RoomModule();
 
+            gModule.rooms.push(roomModule);
+        }
         //写入资源数值
         gModule.water = this.game.water;
         gModule.energy = this.game.energy;
