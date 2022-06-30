@@ -32,7 +32,6 @@ children:
           height: 100
           color: blue
           customColor: '#ffffff'
-      - type: RandomSys
     id: addperson
     children:
       - behaviours:

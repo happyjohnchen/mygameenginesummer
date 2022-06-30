@@ -3,6 +3,7 @@ export class PersonModule {
     personName: string = 'New Person';
     race: PersonRace = PersonRace.Human;
     animationId: number = 1;
+    room: number;
 }
 
 export enum PersonRace {
