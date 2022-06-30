@@ -155,6 +155,9 @@ export class Player extends Behaviour {
                 case 'g':
                     getGameObjectById("YellowCircle").active = true;
                     break;
+                case 'f':
+                    this.gameObject.removeSelf();
+                    break;
             }
         })
 
@@ -171,7 +174,7 @@ export class Player extends Behaviour {
         roomModule.roomId = 1;
         roomModule.level = 1;
         roomModule.roomSize = 1;
-        roomModule.roomType = RoomType.WaterFactory;
+        roomModule.roomType = RoomType.Entrance;
         roomModule.position = {x: 1, y: 1};
         roomModule.people = [1];
 

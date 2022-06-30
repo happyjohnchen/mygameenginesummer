@@ -1,30 +1,175 @@
 import {Behaviour} from "../../src/engine/Behaviour";
+import {GameSet} from "./GameSet";
+import {ArchiveSystem} from "./archiveSystem/ArchiveSystem";
+import {GameModule} from "./modules/GameModule";
+import {TimeControllerSystem} from "./TimeControllerSystem";
+import {PersonModule} from "./modules/PersonModule";
+import {RoomModule} from "./modules/RoomModule";
+import {GameObject, getGameObjectById} from "../../src/engine";
+import {Transform} from "../../src/engine/Transform";
 
 export class GameController extends Behaviour {
 
-    //在此定义脚本中的属性
-    //游戏编辑模式或运行模式开始时会执行一次
-    onStart() {
 
-    }
-
-    //游戏运行模式开始时会执行一次
+    game: GameSet;//游戏资源
+    private people: GameObject;//此GameObject持有所有人
+    private rooms: GameObject;//此GameObject持有所有房间
     onPlayStart() {
-
+        //获取人和房间对象
+        this.people = getGameObjectById("People");
+        this.rooms = getGameObjectById("Rooms");
+        //读档
+        this.readArchive();
+        console.log("GameController已就绪，游戏开始");
     }
 
-    //每次屏幕刷新执行
-    onUpdate() {
+    //读取存档
+    readArchive() {
+        //初始化
+        this.game = new GameSet();
+        this.game.time = getGameObjectById("TimeController").getBehaviour(TimeControllerSystem);
+        if (this.engine.loadSceneData === '') {
+            this.createNewScene()
+            return;
+        }
 
+        //读取场景JSON
+        let gModule = new GameModule();
+        console.log("GameController: 读取存档");
+        try {
+            let gameDataJSON = decodeURI(this.engine.loadSceneData);
+            if (ArchiveSystem.encryptArchive) {
+                //base64解码
+                gameDataJSON = window.atob(gameDataJSON);
+            }
+            gModule = JSON.parse(gameDataJSON) as GameModule;//gMoudle是获取到的GameModule对象
+            console.log(gModule);
+        } catch (e) {
+            console.log("GameController: loadSceneData没有被解析，因为其不是JSON格式，将创建一个新场景")
+            this.createNewScene();
+            return;
+        }
+        //设定时间
+        this.game.time.setSpeed(gModule.gameTime.rate);
+        this.game.time.setInitialTime(gModule.gameTime.day, gModule.gameTime.hour, gModule.gameTime.minute, gModule.gameTime.second);
+        //设定人物列表
+        for (const personModule of gModule.people) {
+            const newPerson = new GameObject();
+            this.people.addChild(newPerson);//添加到游戏场景
+            this.game.people.push(newPerson);//添加到game
+            newPerson.addBehaviour(new Transform());
+
+
+        }
+        //设定房间列表
+        for (const roomModule of gModule.rooms) {
+            const newRoom = new GameObject();
+            this.rooms.addChild(newRoom);//添加到游戏场景
+            this.game.rooms.push(newRoom);//添加到game
+            newRoom.addBehaviour(new Transform());
+
+
+        }
+        //设定资源数值
+        this.game.water = gModule.water;
+        this.game.energy = gModule.energy;
+        this.game.food = gModule.food;
+        this.game.material = gModule.material;
+        console.log("GameController: 存档已读取");
     }
 
-    //平均每16ms执行一次
-    onTick(duringTime: number) {
+    //新建场景
+    createNewScene() {
+        console.log("GameController: 创建新存档");
+        //设定时间
+        this.game.time.setSpeed(1.0);
+        this.game.time.setInitialTime(1, 0, 0, 0);
+        //设定人列表为空
+        this.game.people = [];
+        //设定房间有一个大门
 
+        //设定资源数值
+        this.game.water = 0;
+        this.game.energy = 0;
+        this.game.food = 0;
+        this.game.material = 0;
+        console.log("GameController: 新存档创建成功");
     }
 
-    //删除Behaviour时会执行一次
-    onEnd() {
+    //保存存档
+    saveArchive() {
+        const gModule = new GameModule();
+        //写入时间
+        gModule.gameTime.rate = this.game.time.getSpeed();
+        gModule.gameTime.day = this.game.time.getDayCount();
+        gModule.gameTime.hour = this.game.time.getHourTime();
+        gModule.gameTime.minute = this.game.time.getMinTime();
+        gModule.gameTime.second = this.game.time.getSecondTime();
+        //写入人列表
+        for (const people of this.game.people) {
+            const personModule = new PersonModule();
 
+
+            gModule.people.push(personModule);
+        }
+        //写入房间列表
+        for (const room of this.game.rooms) {
+            const roomModule = new RoomModule();
+
+
+            gModule.rooms.push(roomModule);
+        }
+        //写入资源数值
+        gModule.water = this.game.water;
+        gModule.energy = this.game.energy;
+        gModule.food = this.game.food;
+        gModule.material = this.game.material;
+
+        //保存存档
+        ArchiveSystem.saveFile("FalloutGameArchive", gModule);
+    }
+
+    //创建人
+    addPerson(person: GameObject) {
+        this.game.people.push(person);
+        this.people.addChild(person);
+    }
+
+    //删除人
+    removePerson(person: GameObject) {
+        const index = this.game.people.indexOf(person);
+        if (index >= 0) {
+            this.game.people.splice(index, 1);
+        }
+        this.people.removeChild(person);
+    }
+
+    //创建房间
+    addRoom(room: GameObject) {
+        this.game.rooms.push(room);
+        this.rooms.addChild(room);
+    }
+
+    //删除房间
+    removeRoom(room: GameObject) {
+        const index = this.game.rooms.indexOf(room);
+        if (index >= 0) {
+            this.game.rooms.splice(index, 1);
+        }
+        this.rooms.removeChild(room);
+    }
+
+    //用id获取人
+    getPersonById(id: number) {
+        for (const person in this.game.people) {
+
+        }
+    }
+
+    //用id获取房间
+    getPersonByRoom(id: number) {
+        for (const room in this.game.rooms) {
+
+        }
     }
 }

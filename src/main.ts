@@ -11,6 +11,8 @@ import {ShapeCircleRenderer} from "./behaviours/ShapeCircleRenderer";
 import {ImageRenderer} from "./behaviours/ImageRenderer";
 import {RoundedRectRenderer} from "./behaviours/RoundedRectRenderer";
 import {Player} from "../assets/engineTest/scripts/Player";
+import {Room} from "../assets/scripts/Room";
+import {RoomSet} from "../assets/scripts/RoomSet";
 import {Sound} from "./behaviours/Sound";
 import {AnimationRenderer} from "./behaviours/AnimationRenderer";
 import {Prefab} from "./behaviours/Prefab";
@@ -22,6 +24,7 @@ import {showTime} from "../assets/scripts/showTime";
 import {changeTimeSpeed} from "../assets/scripts/changeTimeSpeed";
 import {RoomClass} from "../assets/scripts/RoomClass";
 import {GameController} from "../assets/scripts/GameController";
+import {CameraMouseController} from "../assets/scripts/CameraMouseController";
 
 import {test} from "../assets/scripts/test";
 
@@ -48,6 +51,7 @@ registerBehaviourClass(Player);
 registerBehaviourClass(GameController);
 registerBehaviourClass(TimeControllerSystem);
 
+
 registerBehaviourClass(AttributeSystem);
 registerBehaviourClass(addAttribute);
 registerBehaviourClass(showTime);
@@ -55,6 +59,11 @@ registerBehaviourClass(RoomClass);
 registerBehaviourClass(changeTimeSpeed);
 
 registerBehaviourClass(test);
+
+
+registerBehaviourClass(CameraMouseController);
+registerBehaviourClass(RoomSet);
+registerBehaviourClass(Room);
 
 
 const engine = new GameEngine()

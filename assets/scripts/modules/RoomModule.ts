@@ -11,7 +11,8 @@ export enum RoomType {
     WaterFactory,
     EnergyFactory,
     FoodFactory,
-    Entrance
+    Entrance,
+    noType
 }
 
 export class RoomPosition {

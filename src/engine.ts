@@ -222,13 +222,13 @@ export class GameEngine {
             body.onmousemove = (e) => {
                 if (mouseDown) {
                     //移动cameraEditor
-                    getGameObjectById('cameraEditor').getBehaviour(Transform).x = (mouseDownPosition.x - e.clientX) * 0.02 + mouseDownTransform.x;
-                    getGameObjectById('cameraEditor').getBehaviour(Transform).y = (mouseDownPosition.y - e.clientY) * 0.02 + mouseDownTransform.y;
+                    getGameObjectById('cameraEditor').getBehaviour(Transform).x = (mouseDownPosition.x - e.clientX) * 0.01 + mouseDownTransform.x;
+                    getGameObjectById('cameraEditor').getBehaviour(Transform).y = (mouseDownPosition.y - e.clientY) * 0.01 + mouseDownTransform.y;
                 }
             }
             body.onwheel = (e) => {
-                getGameObjectById('cameraEditor').getBehaviour(Transform).scaleX += e.deltaY / 100;
-                getGameObjectById('cameraEditor').getBehaviour(Transform).scaleY += e.deltaY / 100;
+                getGameObjectById('cameraEditor').getBehaviour(Transform).scaleX += e.deltaY / 5000;
+                getGameObjectById('cameraEditor').getBehaviour(Transform).scaleY += e.deltaY / 5000;
             }
         }
 
@@ -372,9 +372,9 @@ export class GameObject {
         const index = this.children.indexOf(child);
         console.log("removeChild:", index);
         if (index >= 0) {
+            this.children[index].active = false;
             this.children.splice(index, 1);
         }
-        this.active = false;
     }
 
     upMoveChild(child: GameObject) {

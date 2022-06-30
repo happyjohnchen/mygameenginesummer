@@ -26,7 +26,6 @@ export class Prefab extends Behaviour {
             this.gameObject.addChild(this.prefab);
         }
     }
-
     private unserilize(text: string): GameObject {
         try {
             let data = yaml.load(text);

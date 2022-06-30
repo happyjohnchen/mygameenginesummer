@@ -21,6 +21,43 @@ children:
           timePerTick: 1.6
           dayHourTime: 16
           nightTime: 120
+    id: TimeController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+    id: Background
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+    id: Rooms
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+    id: People
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: GameController
     id: GameController
   - behaviours:
       - type: Transform
@@ -31,4 +68,5 @@ children:
           scaleY: 1
           rotation: 0
       - type: Camera
+      - type: CameraMouseController
     id: camera
