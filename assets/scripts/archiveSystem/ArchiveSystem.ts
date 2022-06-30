@@ -1,7 +1,7 @@
 import {GameModule} from "../modules/GameModule"
 
 export class ArchiveSystem {
-    static encryptArchive = true;//是否对存档文件加密
+    static encryptArchive = false;//是否对存档文件加密
     static fileEncryptSuffix = ".fsa";//加密文件的后缀名
 
     static saveFile(fileName: string, gameModule: GameModule) {
