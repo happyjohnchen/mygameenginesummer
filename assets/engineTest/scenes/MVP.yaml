@@ -217,9 +217,9 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: addspeed
+      - type: changeTimeSpeed
         properties:
-          thisspped: 1
+          thisSpeed: 1
       - type: ShapeRectRenderer
         properties:
           width: 100
