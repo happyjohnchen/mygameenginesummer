@@ -18,7 +18,11 @@ export class Player extends Behaviour {
     sceneData?: any;
 
     onStart() {
-        console.log("player onStart, data: " + this.engine.loadSceneData as string);
+        console.log("player onStart");
+    }
+
+    onPlayStart() {
+        console.log("player onPlayerStart, data: " + this.engine.loadSceneData as string);
         try{
             const gModule = JSON.parse(decodeURI(this.engine.loadSceneData)) as GameModule;
             console.log(gModule);
@@ -164,7 +168,7 @@ export class Player extends Behaviour {
         gameModule.rooms = [roomModule];
         gameModule.water = 10;
         gameModule.food = 12;
-        gameModule.food = 5;
+        gameModule.energy = 5;
         gameModule.material = 3;
 
         //ArchiveSystem.saveFile("testGame", gameModule);
@@ -172,10 +176,6 @@ export class Player extends Behaviour {
 
         //console.log(ArchiveSystem.readFile('testGame'));
 
-    }
-
-    onPlayStart() {
-        console.log("Player onPlayStart")
     }
 
     onTick(duringTime: number) {
