@@ -25,5 +25,4 @@ children:
       - type: addAttribute
         properties:
           type: water
-          addvaluecount: 20
     id: addAttributePrefab

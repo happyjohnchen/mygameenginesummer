@@ -34,8 +34,8 @@ children:
           fontColor: '#000000'
       - type: Attribute
         properties:
-          consumepertime: 1
-          oncetime: 1
+          consumePerTime: 1
+          onceTime: 1
     id: water
     children:
       - behaviours:
@@ -155,8 +155,8 @@ children:
           fontColor: '#000000'
       - type: Attribute
         properties:
-          consumepertime: 1
-          oncetime: 1
+          consumePerTime: 1
+          onceTime: 1
     id: energy
     children:
       - behaviours:
@@ -190,8 +190,8 @@ children:
           fontColor: '#000000'
       - type: Attribute
         properties:
-          consumepertime: 1
-          oncetime: 1
+          consumePerTime: 1
+          onceTime: 1
     id: food
     children:
       - behaviours:
@@ -257,9 +257,9 @@ children:
           fontSize: 40
           font: 微软雅黑
           fontColor: '#000000'
-      - type: showtime
+      - type: showTime
         properties:
-          starttime: 8
+          startTime: 8
     id: timeshow
   - behaviours:
       - type: Transform
@@ -271,10 +271,10 @@ children:
           rotation: 0
       - type: RoomClass
         properties:
-          roomtype: water
-          primeproducetime: 1
+          roomType: water
+          primeProduceTime: 1
           production: 20
-          totalpeopleattribute: 1
+          totalPeopleAttribute: 1
           coefficient: 0.2
           radix: 0.2
     id: waterroom
@@ -305,10 +305,10 @@ children:
           rotation: 0
       - type: RoomClass
         properties:
-          roomtype: energy
-          primeproducetime: 1
+          roomType: energy
+          primeProduceTime: 1
           production: 20
-          totalpeopleattribute: 1
+          totalPeopleAttribute: 1
           coefficient: 0.2
           radix: 0.2
     id: energyroom
@@ -339,10 +339,10 @@ children:
           rotation: 0
       - type: RoomClass
         properties:
-          roomtype: food
-          primeproducetime: 1
+          roomType: food
+          primeProduceTime: 1
           production: 20
-          totalpeopleattribute: 1
+          totalPeopleAttribute: 1
           coefficient: 0.2
           radix: 0.2
     id: foodroom

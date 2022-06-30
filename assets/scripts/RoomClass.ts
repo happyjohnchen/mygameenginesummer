@@ -13,15 +13,15 @@ export class RoomClass extends Behaviour {
 
     
     @string()
-    roomtype= "water";// water food energy
+    roomType= "water";// water food energy
     @number()
-    primeproducetime = 5;//多少小时产出一次
+    primeProduceTime = 5;//多少小时产出一次
 
     @number()
     production = 20;//一次产出多少
 
     @number()
-    totalpeopleattribute = 1;//总人物属性 有一个根据总特质转化的式子
+    totalPeopleAttribute = 1;//总人物属性 有一个根据总特质转化的式子
     @number()
     coefficient = 0.2;
     @number()
@@ -70,20 +70,20 @@ export class RoomClass extends Behaviour {
     }
 
     getRoomType(){
-        return this.roomtype;
+        return this.roomType;
     }
 
 
     calculatePeriod(){ //计算消耗周期
-        let period = this.primeproducetime - (this.totalpeopleattribute*this.coefficient) + this.radix;
+        let period = this.primeProduceTime - (this.totalPeopleAttribute*this.coefficient) + this.radix;
         return period;
     }
 
     createProduction(){ //把type 和 产出值 赋给预制体
         const attributeprefab = new Prefab();
-        attributeprefab.prefabPath = 'assets/engineTest/prefabs/add'+this.roomtype +'Prefab.yaml'
+        attributeprefab.prefabPath = 'assets/engineTest/prefabs/add'+this.roomType +'Prefab.yaml'
         this.gameObject.addBehaviour(attributeprefab);
-        console.log(this.roomtype);   
+        console.log(this.roomType);   
     }
 
     getProduction(){

@@ -25,5 +25,4 @@ children:
       - type: addAttribute
         properties:
           type: food
-          addvaluecount: 20
     id: addAttributePrefab

@@ -12,8 +12,7 @@ export class addAttribute extends Behaviour  {
     private value = 0;
     @string()
     private type = "";
-    @number()
-    private addvaluecount = 20;
+    private addValueCount = 20;
     //游戏开始时会执行一次
     onStart() {//点击会增加数量
         console.log(this.type);
@@ -21,8 +20,8 @@ export class addAttribute extends Behaviour  {
             if(e.button ==0){
                 console.log(this.type);
                 const a = getGameObjectById(this.type.toString());
-                this.addvaluecount = getGameObjectById(this.type+"room").getBehaviour(RoomClass).getProduction();
-                getGameObjectById(this.type).getBehaviour(Attribute).setValue(this.addvaluecount);
+                this.addValueCount = getGameObjectById(this.type+"room").getBehaviour(RoomClass).getProduction();
+                getGameObjectById(this.type).getBehaviour(Attribute).setValue(this.addValueCount);
                 const parent = this.gameObject.parent;
                 parent.removeChild(this.gameObject);           
                 
@@ -42,7 +41,7 @@ export class addAttribute extends Behaviour  {
     }
 
     setValue(value:number){
-        this.addvaluecount = value;
+        this.addValueCount = value;
     }
 
     setType(roomtype:string){

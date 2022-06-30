@@ -19,7 +19,7 @@ import {Prefab} from "./behaviours/Prefab";
 import {TimeControllerSystem} from "../assets/scripts/TimeControllerSystem";
 import {Attribute} from "../assets/scripts/Attribute";
 import {addAttribute} from "../assets/scripts/addAttribute";
-import {showtime} from "../assets/scripts/showtime";
+import {showTime} from "../assets/scripts/showTime";
 import {changeTimeSpeed} from "../assets/scripts/changeTimeSpeed";
 import {RoomClass} from "../assets/scripts/RoomClass";
 
@@ -48,7 +48,7 @@ registerBehaviourClass(Player);
 registerBehaviourClass(TimeControllerSystem);
 registerBehaviourClass(Attribute);
 registerBehaviourClass(addAttribute);
-registerBehaviourClass(showtime);
+registerBehaviourClass(showTime);
 registerBehaviourClass(RoomClass);
 registerBehaviourClass(changeTimeSpeed);
 
