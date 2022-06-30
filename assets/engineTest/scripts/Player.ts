@@ -155,6 +155,9 @@ export class Player extends Behaviour {
                 case 'g':
                     getGameObjectById("YellowCircle").active = true;
                     break;
+                case 'f':
+                    this.gameObject.removeSelf();
+                    break;
             }
         })
 

@@ -373,7 +373,6 @@ export class GameObject {
         if (index >= 0) {
             this.children.splice(index, 1);
         }
-        this.active = false;
     }
 
     upMoveChild(child: GameObject) {
