@@ -4,9 +4,10 @@ export class RandomSys extends Behaviour {
 
     //在此定义脚本中的属性
     species;
-    arrSpecies = ["Human","Giant","Dwarf","Spirit"];
     CharecName;
-    arrName = ["Tom","Jerry","Sam","Taylor","Jones","Chris","Kelly","Lane","Tommy","Terry","Vivian","Nancy","Emma","Elvis"];
+    arrSpecies = ["Human","Giant","Dwarf","Spirit"];
+    arrName = ["Tom","Jerry","Sam","Taylor","Jones","Chris","Kelly","Lane","Tommy","Terry",
+               "Vivian","Nancy","Emma","Elvis","Carl","Albert","Harvey","Liam","James","Bruce"];
 
     
     //游戏编辑模式或运行模式开始时会执行一次
