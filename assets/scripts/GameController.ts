@@ -158,8 +158,18 @@ export class GameController extends Behaviour {
         }
         this.rooms.removeChild(room);
     }
-}
 
-export function getRand(max: number, min: number = 0) {
-    return Math.floor(Math.random() * (max - min + 1));
+    //用id获取人
+    getPersonById(id:number){
+        for (const person in this.game.people){
+
+        }
+    }
+
+    //用id获取房间
+    getPersonByRoom(id:number){
+        for (const room in this.game.rooms){
+
+        }
+    }
 }
