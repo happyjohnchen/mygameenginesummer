@@ -35,29 +35,32 @@ export class GameController extends Behaviour {
     }
 
     //读取存档
-    readArchive(){
-        if (this.engine.loadSceneData === ''){
+    readArchive() {
+        //初始化
+        this.game = new GameSet();
+        if (this.engine.loadSceneData === '') {
             //新建场景
 
             return;
         }
 
         //读取场景
-        try{
+        try {
             let gameDataJSON = decodeURI(this.engine.loadSceneData);
-            if (ArchiveSystem.encryptArchive){
+            if (ArchiveSystem.encryptArchive) {
                 //base64解码
                 gameDataJSON = window.atob(gameDataJSON);
             }
             const gModule = JSON.parse(gameDataJSON) as GameModule;//gMoudle是获取到的GameModule对象
             console.log(gModule);
-        } catch (e){
+        } catch (e) {
             console.log("Player: loadSceneData没有被解析，因为其不是JSON格式")
         }
+
     }
 
     //保存存档
-    saveArchive(){
+    saveArchive() {
 
     }
 }
