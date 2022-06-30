@@ -31,7 +31,7 @@ export class Player extends Behaviour {
                 //base64解码
                 gameDataJSON = window.atob(gameDataJSON);
             }
-            const gModule = JSON.parse(gameDataJSON) as GameModule;
+            const gModule = JSON.parse(gameDataJSON) as GameModule;//gMoudle是获取到的GameModule对象
             console.log(gModule);
         } catch (e){
             console.log("Player:loadSceneData没有被解析，因为其不是JSON格式")
