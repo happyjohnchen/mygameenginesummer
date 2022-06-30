@@ -148,8 +148,8 @@ export class GameEngine {
     }
 
     loadScene(sceneName: string, data?: string) {
-        data = data ? data : '';
-        window.location.href = window.location.href.split('?')[0] + `?mode=${this.mode}&scene=${sceneName}&data=${data}`;
+        const sceneData = data ? data : '';
+        window.location.href = window.location.href.split('?')[0] + `?mode=${this.mode}&scene=${sceneName}&data=${sceneData}`;
     }
 
     unserilizeAssetsYaml(yamlUrl: string) {
@@ -347,6 +347,15 @@ export class GameObject {
     constructor() {
         this.uuid = GameObject.CURRENT_UUID++;
         GameObject.map[this.uuid] = this;
+    }
+
+    removeSelf(): GameObject{
+        if (this === this.engine.rootGameObject){
+            //不能删除rootGameObject
+            return null;
+        }
+        this.parent.removeChild(this);
+        return this;
     }
 
     addChild(child: GameObject) {

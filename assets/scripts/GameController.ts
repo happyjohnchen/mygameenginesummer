@@ -1,6 +1,6 @@
 import {Behaviour} from "../../src/engine/Behaviour";
 
-export class BehaviourDemo extends Behaviour {
+export class GameController extends Behaviour {
 
     //在此定义脚本中的属性
 

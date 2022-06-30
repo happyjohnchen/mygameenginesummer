@@ -1,11 +1,11 @@
 export class PersonModule {
-    personId: number;
-    personName: string;
-    race: PersonRace;
-    animationId: number;
+    personId: number = 1;
+    personName: string = 'New Person';
+    race: PersonRace = PersonRace.Human;
+    animationId: number = 1;
 }
 
-export enum PersonRace{
+export enum PersonRace {
     Human,
     Giant,
     Dwarf,
