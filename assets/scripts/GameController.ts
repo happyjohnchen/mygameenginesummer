@@ -5,6 +5,7 @@ import {GameModule} from "./modules/GameModule";
 import {TimeControllerSystem} from "./TimeControllerSystem";
 import {PersonModule} from "./modules/PersonModule";
 import {RoomModule} from "./modules/RoomModule";
+import {getGameObjectById} from "../../src/engine";
 
 export class GameController extends Behaviour {
 
@@ -12,13 +13,14 @@ export class GameController extends Behaviour {
 
     onPlayStart() {
         this.readArchive();//读档
+        console.log("GameController已就绪，游戏开始");
     }
 
     //读取存档
     readArchive() {
         //初始化
         this.game = new GameSet();
-        this.game.time = this.gameObject.getBehaviour(TimeControllerSystem);
+        this.game.time = getGameObjectById("TimeController").getBehaviour(TimeControllerSystem);
         if (this.engine.loadSceneData === '') {
             this.createNewScene()
             return;
@@ -26,6 +28,7 @@ export class GameController extends Behaviour {
 
         //读取场景JSON
         let gModule = new GameModule();
+        console.log("GameController: 读取存档");
         try {
             let gameDataJSON = decodeURI(this.engine.loadSceneData);
             if (ArchiveSystem.encryptArchive) {
@@ -43,7 +46,7 @@ export class GameController extends Behaviour {
         this.game.time.setSpeed(gModule.gameTime.rate);
         this.game.time.setInitialTime(gModule.gameTime.day, gModule.gameTime.hour, gModule.gameTime.minute, gModule.gameTime.second);
         //设定人物列表
-        for (const peopleModule of gModule.people) {
+        for (const personModule of gModule.people) {
 
         }
         //设定房间列表
@@ -55,10 +58,12 @@ export class GameController extends Behaviour {
         this.game.energy = gModule.energy;
         this.game.food = gModule.food;
         this.game.material = gModule.material;
+        console.log("GameController: 存档已读取");
     }
 
     //新建场景
     createNewScene() {
+        console.log("GameController: 创建新存档");
         //设定时间
         this.game.time.setSpeed(1.0);
         this.game.time.setInitialTime(1, 0, 0, 0);
@@ -71,6 +76,7 @@ export class GameController extends Behaviour {
         this.game.energy = 0;
         this.game.food = 0;
         this.game.material = 0;
+        console.log("GameController: 新存档创建成功");
     }
 
     //保存存档
