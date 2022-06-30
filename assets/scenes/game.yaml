@@ -11,6 +11,17 @@ children:
   - behaviours:
       - type: Transform
         properties:
+          x: -480
+          y: -270
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+      - type: CameraMouseController
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
           x: 0
           y: 0
           scaleX: 1
@@ -30,16 +41,32 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: GameController
-    id: GameController
+    id: Background
   - behaviours:
       - type: Transform
         properties:
-          x: -480
-          y: -270
+          x: 0
+          y: 0
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: Camera
-      - type: CameraMouseController
-    id: camera
+    id: Rooms
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+    id: People
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: GameController
+    id: GameController

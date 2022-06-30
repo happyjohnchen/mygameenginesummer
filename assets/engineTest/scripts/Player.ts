@@ -171,7 +171,7 @@ export class Player extends Behaviour {
         roomModule.roomId = 1;
         roomModule.level = 1;
         roomModule.roomSize = 1;
-        roomModule.roomType = RoomType.WaterFactory;
+        roomModule.roomType = RoomType.Entrance;
         roomModule.position = {x: 1, y: 1};
         roomModule.people = [1];
 
