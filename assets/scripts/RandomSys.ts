@@ -6,7 +6,8 @@ export class RandomSys extends Behaviour {
     species;
     arrSpecies = ["Human","Giant","Dwarf","Spirit"];
     CharecName;
-    arrName = "abcdefghijklmnopqrstuvwxyz";
+    arrName = ["Tom","Jerry","Sam","Taylor","Jones","Chris","Kelly","Lane","Tommy","Terry","Vivian","Nancy","Emma","Elvis"];
+
     
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() { 
@@ -20,11 +21,10 @@ export class RandomSys extends Behaviour {
 
     //每次屏幕刷新执行
     onUpdate() {
-        this.species = Math.floor((Math.random()*this.arrSpecies.length));
+        this.getRandomName();
         this.gameObject.onClick = (e) =>{
             if(e.button == 0){
-                this.getRandomName(this.arrName,5);
-                console.log(this.arrSpecies[this.species],this.CharecName);
+                console.log(this.arrSpecies[this.species],this.arrName[this.CharecName]);
             }
         }
     }
@@ -34,11 +34,9 @@ export class RandomSys extends Behaviour {
 
     }
 
-    getRandomName(pradix,randomLength){
-        this.CharecName = " ";
-        for(let i = 0;i<randomLength;i++){
-            let aa = Math.floor(Math.random()*(this.arrName.length));
-            this.CharecName += this.arrName.substring(aa,aa+1);
-        }        
+    getRandomName(){
+        this.species = Math.floor((Math.random()*this.arrSpecies.length));
+        this.CharecName = Math.floor(Math.random()*this.arrName.length);
     }
+    
 }
