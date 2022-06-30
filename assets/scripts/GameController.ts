@@ -5,14 +5,21 @@ import {GameModule} from "./modules/GameModule";
 import {TimeControllerSystem} from "./TimeControllerSystem";
 import {PersonModule} from "./modules/PersonModule";
 import {RoomModule} from "./modules/RoomModule";
-import {getGameObjectById} from "../../src/engine";
+import {GameObject, getGameObjectById} from "../../src/engine";
+import {Transform} from "../../src/engine/Transform";
 
 export class GameController extends Behaviour {
 
     game: GameSet;//游戏资源
+    people: GameObject;//此GameObject持有所有人
+    rooms: GameObject;//此GameObject持有所有房间
 
     onPlayStart() {
-        this.readArchive();//读档
+        //获取人和房间对象
+        this.people = getGameObjectById("People");
+        this.rooms = getGameObjectById("Rooms");
+        //读档
+        this.readArchive();
         console.log("GameController已就绪，游戏开始");
     }
 
@@ -47,10 +54,20 @@ export class GameController extends Behaviour {
         this.game.time.setInitialTime(gModule.gameTime.day, gModule.gameTime.hour, gModule.gameTime.minute, gModule.gameTime.second);
         //设定人物列表
         for (const personModule of gModule.people) {
+            const newPerson = new GameObject();
+            this.people.addChild(newPerson);//添加到游戏场景
+            this.game.people.push(newPerson);//添加到game
+            newPerson.addBehaviour(new Transform());
+
 
         }
         //设定房间列表
         for (const roomModule of gModule.rooms) {
+            const newRoom = new GameObject();
+            this.rooms.addChild(newRoom);//添加到游戏场景
+            this.game.rooms.push(newRoom);//添加到game
+            newRoom.addBehaviour(new Transform());
+
 
         }
         //设定资源数值
@@ -108,5 +125,35 @@ export class GameController extends Behaviour {
 
         //保存存档
         ArchiveSystem.saveFile("FalloutGameArchive", gModule);
+    }
+
+    //创建人
+    addPerson(person: GameObject){
+        this.game.people.push(person);
+        this.people.addChild(person);
+    }
+
+    //删除人
+    removePerson(person: GameObject){
+        const index = this.game.people.indexOf(person);
+        if (index>=0){
+            this.game.people.splice(index,1);
+        }
+        this.people.removeChild(person);
+    }
+
+    //创建房间
+    createRoom(room: GameObject){
+        this.game.rooms.push(room);
+        this.rooms.addChild(room);
+    }
+
+    //删除房间
+    removeRoom(room: GameObject){
+        const index = this.game.rooms.indexOf(room);
+        if (index>=0){
+            this.game.rooms.splice(index,1);
+        }
+        this.rooms.removeChild(room);
     }
 }
