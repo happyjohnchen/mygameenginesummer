@@ -18,6 +18,7 @@ import {Prefab} from "./behaviours/Prefab";
 
 import {TimeControllerSystem} from "../assets/scripts/TimeControllerSystem";
 import {GameController} from "../assets/scripts/GameController";
+import {CameraMouseController} from "../assets/scripts/CameraMouseController";
 
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
@@ -42,6 +43,7 @@ registerBehaviourClass(Prefab);
 registerBehaviourClass(Player);
 registerBehaviourClass(GameController);
 registerBehaviourClass(TimeControllerSystem);
+registerBehaviourClass(CameraMouseController);
 
 
 const engine = new GameEngine()
