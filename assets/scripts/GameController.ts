@@ -7,6 +7,7 @@ import {PersonModule} from "./modules/PersonModule";
 import {RoomModule} from "./modules/RoomModule";
 import {GameObject, getGameObjectById} from "../../src/engine";
 import {Transform} from "../../src/engine/Transform";
+import {randomName} from "./RandomSys";
 
 export class GameController extends Behaviour {
 
@@ -21,6 +22,9 @@ export class GameController extends Behaviour {
         //读档
         this.readArchive();
         console.log("GameController已就绪，游戏开始");
+        for (let i = 0; i < 10; i++) {
+            console.log(randomName());
+        }
     }
 
     //读取存档
@@ -160,15 +164,15 @@ export class GameController extends Behaviour {
     }
 
     //用id获取人
-    getPersonById(id:number){
-        for (const person in this.game.people){
+    getPersonById(id: number) {
+        for (const person in this.game.people) {
 
         }
     }
 
     //用id获取房间
-    getPersonByRoom(id:number){
-        for (const room in this.game.rooms){
+    getPersonByRoom(id: number) {
+        for (const room in this.game.rooms) {
 
         }
     }
