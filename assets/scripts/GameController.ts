@@ -143,7 +143,7 @@ export class GameController extends Behaviour {
     }
 
     //创建房间
-    createRoom(room: GameObject){
+    addRoom(room: GameObject){
         this.game.rooms.push(room);
         this.rooms.addChild(room);
     }
