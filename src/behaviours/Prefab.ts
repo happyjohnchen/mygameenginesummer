@@ -12,9 +12,11 @@ export class Prefab extends Behaviour {
     prefab: GameObject;
 
     onStart() {
-        this.prefab = this.unserilize(this.engine.resourceManager.getText(this.prefabPath));
-        this.gameObject.children = [];
-        this.gameObject.addChild(this.prefab);
+        if (this.prefabPath !== "") {
+            this.prefab = this.unserilize(this.engine.resourceManager.getText(this.prefabPath));
+            this.gameObject.children = [];
+            this.gameObject.addChild(this.prefab);
+        }
     }
 
     onTick(duringTime: number) {
