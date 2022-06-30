@@ -35,13 +35,13 @@ export class Room extends Behaviour {
             if (thisRoom.roomStatus != 1) {
                 this.gameObject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage1.png'
                 thisRoom.roomStatus = 1
-                
+
             }
 
             const tileMapGameObj = getGameObjectById("tileMap")
             thisRoom.roomType = RoomType.WaterFactory
             const roomSet = tileMapGameObj.getBehaviour(RoomSet)
-            roomSet.storeBuildStatus(this.positionX,this.positionY,this.gameObject)
+            roomSet.storeBuildStatus(this.positionX, this.positionY, this.gameObject)
             roomSet.checkNeighbor(this.positionX, this.positionY)
             // roomSet.setRoomType(this.positionX, this.positionY, RoomType.WaterFactory)
             roomSet.checkMerge(this.positionX, this.positionY)
