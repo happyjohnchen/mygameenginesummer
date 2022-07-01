@@ -1,0 +1,378 @@
+behaviours:
+  - type: Transform
+    properties:
+      x: 0
+      y: 0
+      scaleX: 1
+      scaleY: 1
+      rotation: 0
+id: RootGameObject
+children:
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -480
+          y: -270
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 100
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TextRenderer
+        properties:
+          text: '60'
+          fontSize: 40
+          font: 微软雅黑
+          fontColor: '#000000'
+      - type: AttributeSystem
+        properties:
+          consumePerTime: 1
+          onceTime: 1
+    id: water
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -50
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: 水：
+              fontSize: 40
+              font: 微软雅黑
+              fontColor: '#000000'
+        id: 水
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -250
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ShapeRectRenderer
+        properties:
+          width: 100
+          height: 100
+          color: green
+          customColor: '#ffffff'
+      - type: changeTimeSpeed
+        properties:
+          thisSpeed: 2
+    id: beisu
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: 二倍速
+              fontSize: 30
+              font: 微软雅黑
+              fontColor: '#000000'
+        id: text
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+        id: NewGameObject
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: -150
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ShapeRectRenderer
+        properties:
+          width: 100
+          height: 100
+          color: blue
+          customColor: '#ffffff'
+      - type: changeTimeSpeed
+        properties:
+          thisSpeed: 0
+    id: pause
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: 暂停
+              fontSize: 40
+              font: 微软雅黑
+              fontColor: '#000000'
+        id: text
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+        id: NewGameObject
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TextRenderer
+        properties:
+          text: '60'
+          fontSize: 40
+          font: 微软雅黑
+          fontColor: '#000000'
+      - type: AttributeSystem
+        properties:
+          consumePerTime: 1
+          onceTime: 1
+    id: energy
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -100
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: 能源：
+              fontSize: 40
+              font: 微软雅黑
+              fontColor: '#000000'
+        id: 能量
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 150
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TextRenderer
+        properties:
+          text: '60'
+          fontSize: 40
+          font: 微软雅黑
+          fontColor: '#000000'
+      - type: AttributeSystem
+        properties:
+          consumePerTime: 1
+          onceTime: 1
+    id: food
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -100
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: 食物：
+              fontSize: 40
+              font: 微软雅黑
+              fontColor: '#000000'
+        id: 食物
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -400
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: changeTimeSpeed
+        properties:
+          thisSpeed: 1
+      - type: ShapeRectRenderer
+        properties:
+          width: 100
+          height: 100
+          color: green
+          customColor: '#ffffff'
+    id: normal
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: 一倍速
+              fontSize: 30
+              font: 微软雅黑
+              fontColor: '#000000'
+        id: Text
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -200
+          y: -200
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TextRenderer
+        properties:
+          text: 第0天 0:0
+          fontSize: 40
+          font: 微软雅黑
+          fontColor: '#000000'
+      - type: showTime
+        properties:
+          startTime: 8
+    id: timeshow
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 200
+          y: -200
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: RoomClass
+        properties:
+          roomType: water
+          primeProduceTime: 1
+          production: 20
+          totalPeopleAttribute: 1
+          coefficient: 0.2
+          radix: 0.2
+          level1Size: 2
+          level2Size: 4
+          level3Size: 5
+      - type: RoundedRectRenderer
+        properties:
+          width: 100
+          height: 100
+          cornerRadius: 20
+          color: blue
+          customColor: '#ffffff'
+    id: waterroom
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 200
+          y: -50
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: RoomClass
+        properties:
+          roomType: energy
+          primeProduceTime: 1
+          production: 20
+          totalPeopleAttribute: 1
+          coefficient: 0.2
+          radix: 0.2
+          level1Size: 2
+          level2Size: 4
+          level3Size: 5
+    id: energyroom
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: RoundedRectRenderer
+            properties:
+              width: 100
+              height: 100
+              cornerRadius: 20
+              color: green
+              customColor: '#ffffff'
+        id: energyroomobj
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 200
+          y: 100
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: RoomClass
+        properties:
+          roomType: food
+          primeProduceTime: 1
+          production: 20
+          totalPeopleAttribute: 1
+          coefficient: 0.2
+          radix: 0.2
+          level1Size: 2
+          level2Size: 4
+          level3Size: 5
+    id: foodroom
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: RoundedRectRenderer
+            properties:
+              width: 100
+              height: 100
+              cornerRadius: 20
+              color: red
+              customColor: '#ffffff'
+        id: foodobj
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TimeControllerSystem
+        properties:
+          timePerTick: 1.6
+          dayHourTime: 16
+          nightTime: 120
+    id: TimeController

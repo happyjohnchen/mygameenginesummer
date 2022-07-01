@@ -21,8 +21,11 @@ export class TimeControllerSystem extends Behaviour {
     private dayCount = 1; //经过了多少天
 
     @number()
-    dayHourTime = 16;//白天总时间 以小时为单位
-    private speed = 1.0;
+
+    dayHourTime = 16;//白天总时间
+    private speed= 1.0;
+
+
 
     @number()
     nightTime = 120;//夜晚时间长度 目前相当于现实2s
@@ -60,6 +63,7 @@ export class TimeControllerSystem extends Behaviour {
 
     //平均每16ms执行一次 60次是1s
     //1次ontick 游戏1.6秒  超过六十秒就-60s 分钟+1 分钟超过60-60s 小时进位 小时等于16时清0变为黑天
+
     onTick(duringTime: number) {
         if (!this.isDay) {
             //黑夜
@@ -87,6 +91,7 @@ export class TimeControllerSystem extends Behaviour {
                 this.minTime += 1;
             }
             //console.log(this.totalhourtime+"小时"+this.totalmintime+"分钟"+this.totalsecondtime+"秒");
+
         }
     }
 
@@ -124,4 +129,5 @@ export class TimeControllerSystem extends Behaviour {
     getTotalGameSecondTime() {//得到游戏时长 以秒为单位
         return (this.dayCount - 1) * this.dayHourTime * 3600 + this.hourTime * 3600 + this.minTime * 60 + this.secondTime;
     }
+
 }

@@ -15,12 +15,18 @@ import {Room} from "../assets/scripts/Room";
 import {RoomSet} from "../assets/scripts/RoomSet";
 import {Sound} from "./behaviours/Sound";
 import {AnimationRenderer} from "./behaviours/AnimationRenderer";
-import {TileMap} from "./behaviours/TileMap";
 import {Prefab} from "./behaviours/Prefab";
 
 import {TimeControllerSystem} from "../assets/scripts/TimeControllerSystem";
+import {AttributeSystem} from "../assets/scripts/AttributeSystem";
+import {addAttribute} from "../assets/scripts/addAttribute";
+import {showTime} from "../assets/scripts/showTime";
+import {changeTimeSpeed} from "../assets/scripts/changeTimeSpeed";
+import {RoomClass} from "../assets/scripts/RoomClass";
 import {GameController} from "../assets/scripts/GameController";
 import {CameraController} from "../assets/scripts/CameraController";
+
+import {test} from "../assets/scripts/test";
 
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
@@ -38,16 +44,28 @@ registerBehaviourClass(CircleCollider);
 registerBehaviourClass(EdgeCollider);
 registerBehaviourClass(Camera);
 registerBehaviourClass(Sound);
-registerBehaviourClass(TileMap);
 registerBehaviourClass(Prefab);
 
 //注册自定义脚本
 registerBehaviourClass(Player);
 registerBehaviourClass(GameController);
 registerBehaviourClass(TimeControllerSystem);
+
 registerBehaviourClass(CameraController);
+
+
+
+registerBehaviourClass(AttributeSystem);
+registerBehaviourClass(addAttribute);
+registerBehaviourClass(showTime);
+registerBehaviourClass(RoomClass);
+registerBehaviourClass(changeTimeSpeed);
+
+registerBehaviourClass(test);
+
 registerBehaviourClass(RoomSet);
 registerBehaviourClass(Room);
+
 
 const engine = new GameEngine()
 engine.start()

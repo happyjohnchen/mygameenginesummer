@@ -38,6 +38,10 @@ async function startEditor() {
             editorProcess.openDevTools({mode: 'undocked'});
         } else {
             //发行模式
+            const path = require('path').posix;
+            if (process.platform === 'darwin') {
+                app.dock.setIcon(path.join(__dirname, './icon.png'))
+            }
             editorProcess = new BrowserWindow({
                 width: engineUIConfig.canvasWidth * engineUIConfig.launchModeZoomIndex,
                 height: engineUIConfig.canvasHeight * engineUIConfig.launchModeZoomIndex + 28,
@@ -46,7 +50,8 @@ async function startEditor() {
                     contextIsolation: false //允许渲染进程使用Nodejs
                 },
                 autoHideMenuBar: true,
-                title: engineUIConfig.gameName
+                title: engineUIConfig.gameName,
+                icon: path.join(__dirname, './icon.png')
             })
         }
 
@@ -74,7 +79,12 @@ async function startEditor() {
                 })
 
             }
-            const scene = fs.readFileSync('src/defaultScene.txt');
+            let scene;
+            if (engineUIConfig.launchMode) {
+                scene = engineUIConfig.launchModeDefaultScene;
+            } else {
+                scene = fs.readFileSync('src/defaultScene.txt');
+            }
             runtimeView.webContents.loadURL(`http://localhost:3000/index.html?mode=${mode}&scene=${scene}`);
             if (!engineUIConfig.launchMode) {
                 runtimeView.webContents.openDevTools({mode: 'undocked'});
@@ -198,6 +208,3 @@ class WebSocketProxy {
 startup().catch(e => {
     console.log(e)
 })
-
-
-
