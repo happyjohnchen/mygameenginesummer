@@ -87,24 +87,24 @@ export class AttributeSystem extends Behaviour {
     changeAttributeValue(changedValue:number,type:string){ //改变水，食物，能源，材料value 且value最大值最小值不能超过最大值最小值
         switch(type){
             case "water":
-                this.gamecontroller.game.water = this.checkValue(this.water,changedValue);
+                this.gamecontroller.game.water = this.changeValue(this.water,changedValue);
             console.log("目前水属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.water);
             break;
             case "energy":
-                this.gamecontroller.game.energy = this.checkValue(this.energy,changedValue);
+                this.gamecontroller.game.energy = this.changeValue(this.energy,changedValue);
             console.log("目前电属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.energy);
             break;
             case "food":
-                this.gamecontroller.game.food = this.checkValue(this.food,changedValue);
+                this.gamecontroller.game.food = this.changeValue(this.food,changedValue);
             break;
             case"material":
-                this.gamecontroller.game.material = this.checkValue(this.material,changedValue);//可能没有上限 到时候再说
+                this.gamecontroller.game.material = this.changeValue(this.material,changedValue);//可能没有上限 到时候再说
             break;
         }
         
     }
 
-    checkValue(primeValue:number,addValue:number){  //检查超没超过上下限  上下限也可以变为参数
+    changeValue(primeValue:number,addValue:number){  //检查超没超过上下限  上下限也可以变为参数
         let newnumber = addValue+primeValue;
         newnumber = newnumber>this.maxValue?this.maxValue:newnumber;
         newnumber = newnumber<this.minValue?this.minValue:newnumber;
@@ -157,5 +157,14 @@ export class AttributeSystem extends Behaviour {
     }
     
    }
-   
+
+   ConsumeForEnergy(level:number){//计算电力消耗量
+        const consumption = {
+            1: 2,
+            2: 4,
+            3: 7
+        }
+        this.gamecontroller.game.energy = this.changeValue(this.energy,-consumption[level]);
+        console.log(this.gamecontroller.game.energy);
+   }
 }

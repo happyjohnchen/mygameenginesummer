@@ -27,8 +27,9 @@ export class RoomClass extends Behaviour {
 
     roomType = RoomType.WaterFactory;
     //不储存
-    private lastTime = 0;//经过的时间
+    private lastTimeCreate = 0;//产出经过的时间
     private nowTime = 0;
+    private lastTimeConsume = 0;
     private producePos = 0;
     attributeType= "";// water food energy
 
@@ -57,16 +58,21 @@ export class RoomClass extends Behaviour {
         
     }
 
-    //平均每16ms执行一次   每一个小时产出一个增加
+    //平均每16ms执行一次   产出 增加
     onTick(duringTime: number) {
         // let totalAttribute = this.calculateTotalAttribute();//到时候接人的时候补充算法替换
         let createPeriod = getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateCreatePeriod(this.roomLevel,this.totalPeopleAttribute);
         this.nowTime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
         //this.lastTime = this.lastTime==60? 0:this.lastTime;
-        if(this.nowTime-this.lastTime >=createPeriod*60*60){
+        if(this.nowTime-this.lastTimeCreate >=createPeriod*60*60){
             this.createProduction();
-            this.lastTime = this.nowTime;  
+            this.lastTimeCreate = this.nowTime;  
         }
+        if(this.nowTime-this.lastTimeConsume >=1*60*60){//1小时消耗
+            getGameObjectById("AttributeController").getBehaviour(AttributeSystem).ConsumeForEnergy(this.roomLevel);
+            this.lastTimeConsume = this.nowTime;  
+        }
+
         console.log("生产周期:"+createPeriod);
     }
 
