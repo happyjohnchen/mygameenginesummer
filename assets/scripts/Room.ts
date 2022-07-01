@@ -59,7 +59,7 @@ export class Room extends Behaviour {
         let thisRoomModule=thisRoomGameObject.getBehaviour(Room).roomModule
         let xPosition=thisRoomModule.position.x
         let yPosition=thisRoomModule.position.y
-        if(thisRoomModule.level>1){
+        if(thisRoomModule.level==1){
 
         }
         else if(thisRoomModule.level>1){
@@ -84,19 +84,12 @@ export class Room extends Behaviour {
     upgradeRoom(roomGameObject: GameObject) {//升级房间
         
         let roomModule = roomGameObject.getBehaviour(Room).roomModule
-        console.log(roomModule.roomStatus)
-        if (roomModule.roomStatus ==RoomStatus.canBuild) {
-            //升级成一级
-            console.log("up")
-            this.gameObject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage1.png'
-            roomModule.roomStatus = 1
-            roomModule.level = 1//建造升级
-            //roomModule.roomType=roomType
-            //roomGameObject.addBehaviour(RoomClass)
-        }
-        else if (roomModule.level == 1) {
+        console.log(roomModule.level)
+     
+        if (roomModule.level == 1) {
             console.log("up1")
             roomModule.level++
+            
         }
         else if (roomModule.level == 2) {
             console.log("up2")
@@ -104,8 +97,18 @@ export class Room extends Behaviour {
             let gameController = getGameObjectById("GameController").getBehaviour(GameController)
             let neighborRoom = gameController.getRoomById(roomModule.neighbourId)
             neighborRoom.getBehaviour(Room).roomModule.level++
+           
         }
-        
+        else if (roomModule.roomStatus ==RoomStatus.canBuild) {
+            //升级成一级
+            console.log("up")
+            this.gameObject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage1.png'
+            roomModule.roomStatus = 1
+            roomModule.level = 1//建造升级
+            //roomModule.roomType=roomType
+            //roomGameObject.addBehaviour(RoomClass)
+           
+        }
     }
 clickAndGetRoomID(){//点击room返回room的roomid
     console.log(this.gameObject.getBehaviour(Room).roomModule.roomId)
@@ -130,7 +133,9 @@ const id =this.clickAndGetRoomID()
             //想在这里判断点击了物体然后返回到父物体的roomSet中，然后就可以new 一个新的房间（create newroom()），并把新的房间状态改变
             //console.log("点之前" + thisRoomModule.roomStatus)
             //console.log("点之后" + thisRoomModule.roomStatus)
+            console.log("level:"+thisRoom.roomModule.level)
             this.upgradeRoom(this.gameObject)
+            console.log("level:"+thisRoom.roomModule.level)
             const tileMapGameObj = getGameObjectById("tileMap")
 
             //王璐：在这里是升级，然后需要先选ui进行什么操作再升级,这只是个示例，你需要从ui获取roomType的值

@@ -1,7 +1,7 @@
 
 export class RoomModule {
     roomId: number = 1;
-    level: number = 1;
+    level: number = 0;
     roomSize: number = 1;
     roomType: RoomType = RoomType.Entrance;
     position: RoomPosition = new RoomPosition();

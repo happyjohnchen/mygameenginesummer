@@ -79,7 +79,7 @@ export class RoomSet extends Behaviour {
     }
 
     getRoomBehabiour(gameObeject: GameObject) {
-        console.log(gameObeject)
+       // console.log(gameObeject)
         return gameObeject.getBehaviour(Room)
     }
     removeRoomClass(gameObeject: GameObject) {
@@ -87,12 +87,16 @@ export class RoomSet extends Behaviour {
     }
     mergeHouse(clickGameobject: GameObject, neighborGameObject: GameObject) {//房間合在一起
         let clickRoom = this.getRoomBehabiour(clickGameobject)
-        let neighborRoom = this.getRoomBehabiour(clickGameobject)
+        let neighborRoom = this.getRoomBehabiour(neighborGameObject)
         const clickRoomData = clickRoom.roomModule
         const neighborRoomData = neighborRoom.roomModule
-        if (neighborRoomData.level != 1) return;
-        if (clickRoomData.roomType != neighborRoomData.roomType) return;
+        console.log(clickRoom)
+        if (neighborRoomData.level == 1&&clickRoomData.roomType == neighborRoomData.roomType){
         console.log("merge")
+        console.log("1:")
+        console.log(clickRoom)
+        console.log("2:")
+        console.log(neighborRoom)
         clickRoomData.neighbourId = neighborRoomData.roomId
         neighborRoomData.neighbourId = clickRoomData.roomId
         clickRoom.upgradeRoom(clickGameobject)
@@ -103,7 +107,7 @@ export class RoomSet extends Behaviour {
                 clickGameobject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage2.png'
                 neighborGameObject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage21.png'
         }
-
+    }
     }
     setRoomImage(roomtype: RoomType, roomStatus: RoomStatus) {
         let imagePath: string
@@ -169,6 +173,8 @@ export class RoomSet extends Behaviour {
         clickRoom = gameController.getRoomByPosition(position)
         if (position.x > 0 && position.x < 5) {
             leftRoom = gameController.getRoomByPosition(leftPositon)
+            console.log("left")
+            console.log(leftRoom)
             rightRoom = gameController.getRoomByPosition(rightPositon)
             if (leftRoom != null)
                 this.mergeHouse(clickRoom, leftRoom)
@@ -176,10 +182,14 @@ export class RoomSet extends Behaviour {
                 this.mergeHouse(clickRoom, rightRoom)
         }
         else if (position.x == 0) {
+            console.log("left1")
+            console.log(rightRoom)
             rightRoom = gameController.getRoomByPosition(rightPositon)
             this.mergeHouse(clickRoom, rightRoom)
         }
         else if (position.x == 6) {
+            console.log("left2")
+            console.log(leftRoom)
             leftRoom = gameController.getRoomByPosition(leftPositon)
             this.mergeHouse(leftRoom, clickRoom)
         }
