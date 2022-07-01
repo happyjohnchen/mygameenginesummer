@@ -25,7 +25,7 @@ request.onload = function () {/*XHR对象获取到返回信息后执行*/
         canvas.width = engineUIConfig.canvasWidth;
         canvas.height = engineUIConfig.canvasHeight;
         console.log("分辨率:" + canvas.width + "x" + canvas.height);
-        if (!engineUIConfig.showEditor) {
+        if (engineUIConfig.launchMode) {
             canvas.width *= engineUIConfig.launchModeZoomIndex;
             canvas.height *= engineUIConfig.launchModeZoomIndex;
         }

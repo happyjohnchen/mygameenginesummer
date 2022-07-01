@@ -24,7 +24,7 @@ async function startEditor() {
         const fs = require('fs');
         const engineUIConfig = JSON.parse(fs.readFileSync('engineUIConfig.json').toString());
         let editorProcess;
-        if (engineUIConfig.showEditor) {
+        if (!engineUIConfig.launchMode) {
             //编辑器模式
             editorProcess = new BrowserWindow({
                 width: engineUIConfig.canvasWidth + engineUIConfig.hierarchyPanelWidth + engineUIConfig.inspectorPanelWidth,
@@ -50,14 +50,14 @@ async function startEditor() {
             })
         }
 
-        const timeout = engineUIConfig.showEditor ? 3000 : 0;
+        const timeout = engineUIConfig.launchMode ? 0 : 3000;
         setTimeout(() => {
             runtimeView = new BrowserView();
             editorProcess.setBrowserView(runtimeView);
             const fs = require('fs');
             const engineUIConfig = JSON.parse(fs.readFileSync('engineUIConfig.json').toString());
             let mode = 'edit';
-            if (engineUIConfig.showEditor) {
+            if (!engineUIConfig.launchMode) {
                 runtimeView.setBounds({
                     x: engineUIConfig.hierarchyPanelWidth,
                     y: engineUIConfig.controlPanelHeight,
@@ -76,7 +76,7 @@ async function startEditor() {
             }
             const scene = fs.readFileSync('src/defaultScene.txt');
             runtimeView.webContents.loadURL(`http://localhost:3000/index.html?mode=${mode}&scene=${scene}`);
-            if (engineUIConfig.showEditor) {
+            if (!engineUIConfig.launchMode) {
                 runtimeView.webContents.openDevTools({mode: 'undocked'});
             }
         }, timeout)
