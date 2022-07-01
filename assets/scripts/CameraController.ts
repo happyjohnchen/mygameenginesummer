@@ -1,4 +1,4 @@
-import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
+import { ImageRenderer, ImageRenderer as imageRenderer } from "../../src/behaviours/ImageRenderer";
 import { ShapeRectRenderer } from "../../src/behaviours/ShapeRectRenderer";
 import { createGameObject, GameObject, getBehaviourClassByName, getGameObjectById, hasGameObjectById } from "../../src/engine";
 import { Behaviour } from "../../src/engine/Behaviour";
@@ -20,16 +20,15 @@ export class CameraController extends Behaviour {
     @number()
     speed = 5;
 
+    canvas = document.getElementById('game') as HTMLCanvasElement;
 
 
 
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
 
-
-
         const myCameraTransform = this.gameObject.getBehaviour(Transform);
-        let mouseDownTransform = new Transform();
+        //let mouseDownTransform = new Transform();
         //let mouseDown = false;
         const body = document.body;
         const mouseDownPosition = { x: 0, y: 0 };
@@ -48,6 +47,7 @@ export class CameraController extends Behaviour {
     //游戏运行模式开始时会执行一次
     onPlayStart() {
         this.checkBackground()
+        this.checkBackgroundRenderer()
 
         this.leftController = new GameObject();
         this.gameObject.addChild(this.leftController);
@@ -56,17 +56,19 @@ export class CameraController extends Behaviour {
         transformLeft.y = 100;
         transformLeft.rotation = -90
         this.leftController.addBehaviour(transformLeft);
-        const imageLeft = new ImageRenderer()
+        const imageLeft = new imageRenderer()
         imageLeft.imagePath = 'assets/images/arr1_trans.png'
         this.leftController.addBehaviour(imageLeft)
 
         this.leftController.onHoverIn = (e) => {
             this.direction = 1;
             this.isHonver = false;
+            imageLeft.imagePath = 'assets/images/arr1.png'
             console.log("left Controller")
         }
         this.leftController.onHoverOut = (e) => {
             this.direction = 0;
+            imageLeft.imagePath = 'assets/images/arr1_trans.png'
             this.isHonver = false;
             //console.log("left Controller")
         }
@@ -79,18 +81,20 @@ export class CameraController extends Behaviour {
         transformRight.y = -105;
         transformRight.rotation = 90
         this.rightController.addBehaviour(transformRight);
-        const imageRight = new ImageRenderer()
+        const imageRight = new imageRenderer()
         imageRight.imagePath = 'assets/images/arr1_trans.png'
         this.rightController.addBehaviour(imageRight)
 
         this.rightController.onHoverIn = (e) => {
             this.direction = 2;
             this.isHonver = false;
+            imageRight.imagePath = 'assets/images/arr1.png'
             console.log("right Controller")
         }
         this.rightController.onHoverOut = (e) => {
             this.direction = 0;
             this.isHonver = false;
+            imageRight.imagePath = 'assets/images/arr1_trans.png'
             //console.log("left Controller")
         }
 
@@ -102,18 +106,20 @@ export class CameraController extends Behaviour {
         transformUp.y = -275;
         transformUp.rotation =0
         this.upController.addBehaviour(transformUp);
-        const imageup = new ImageRenderer()
-        imageup.imagePath = 'assets/images/arr1_trans.png'
-        this.upController.addBehaviour(imageup)
+        const imageUp = new imageRenderer()
+        imageUp.imagePath = 'assets/images/arr1_trans.png'
+        this.upController.addBehaviour(imageUp)
 
         this.upController.onHoverIn = (e) => {
             this.direction = 3;
             this.isHonver = false;
+            imageUp.imagePath = 'assets/images/arr1.png'
             console.log("up Controller")
         }
         this.upController.onHoverOut = (e) => {
             this.direction = 0;
             this.isHonver = false;
+            imageUp.imagePath = 'assets/images/arr1_trans.png'
             //console.log("left Controller")
         }
 
@@ -124,18 +130,20 @@ export class CameraController extends Behaviour {
         transformDown.y = 275;
         transformDown.rotation = 180
         this.downController.addBehaviour(transformDown);
-        const imagedown = new ImageRenderer()
-        imagedown.imagePath = 'assets/images/arr1_trans.png'
-        this.downController.addBehaviour(imagedown)
+        const imageDown = new imageRenderer()
+        imageDown.imagePath = 'assets/images/arr1_trans.png'
+        this.downController.addBehaviour(imageDown)
 
         this.downController.onHoverIn = (e) => {
             this.direction = 4;
             this.isHonver = false;
+            imageDown.imagePath = 'assets/images/arr1.png'
             console.log("down Controller")
         }
         this.downController.onHoverOut = (e) => {
             this.direction = 0;
             this.isHonver = false;
+            imageDown.imagePath = 'assets/images/arr1_trans.png'
             //console.log("left Controller")
         }
     }
@@ -175,7 +183,7 @@ export class CameraController extends Behaviour {
             this.gameObject.parent.addChild(child)
             this.myBackGround = child
         }
-        if (!this.myBackGround.hasBehaviour(ImageRenderer)) {
+        if (!this.myBackGround.hasBehaviour(imageRenderer)) {
             // const imageRenderer  =  new ImageRenderer();
             // imageRenderer.imagePath = 'assets/engineTest/images/testImage.png'
             // this.myBackGround.addBehaviour(imageRenderer);
@@ -184,9 +192,11 @@ export class CameraController extends Behaviour {
 
     checkBackgroundRenderer() {
 
-        /* if(!this.myBackGround.hasBehaviour(ImageRenderer))
+        if(!this.myBackGround.hasBehaviour(imageRenderer))
         {
-            this.myBackGround.addBehaviour(new ImageRenderer)
-        } */
+            const imageRenderer =  new ImageRenderer()
+            imageRenderer.imagePath = "assets/engineTest/images/th.jpg"
+            this.myBackGround.addBehaviour(imageRenderer);
+        }
     }
 }
