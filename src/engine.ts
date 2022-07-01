@@ -533,6 +533,9 @@ export function getGameObjectById(id: string) {
     return gameObjects[id]
 }
 
+export function hasGameObjectById(id: string): boolean{
+    return gameObjects[id] !== null;
+}
 
 // rootGameObject
 // A.active:true->false
