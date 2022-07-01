@@ -4,7 +4,7 @@ import { ArchiveSystem } from "./archiveSystem/ArchiveSystem";
 import { GameModule } from "./modules/GameModule";
 import { TimeControllerSystem } from "./TimeControllerSystem";
 import { PersonModule } from "./modules/PersonModule";
-import { RoomModule } from "./modules/RoomModule";
+import { RoomModule, RoomPosition } from "./modules/RoomModule";
 import { GameObject, getGameObjectById } from "../../src/engine";
 import { Transform } from "../../src/engine/Transform";
 import { Room } from "./Room";
@@ -168,6 +168,7 @@ export class GameController extends Behaviour {
 
     //用id获取房间
     getRoomById(id: number) {
+        if(id==-1)return;
         for (const room of this.game.rooms) {
             if (room.getBehaviour(Room).roomModule.roomId == id) {
                 return room
@@ -176,5 +177,19 @@ export class GameController extends Behaviour {
                 console.log("没有这个Room")
             }
         }
+    }
+    //用Position获取房间
+    getRoomByPosition(position:RoomPosition){
+        for (const room of this.game.rooms) {
+            let roomPosition=room.getBehaviour(Room).roomModule.position
+            let positonX=roomPosition.x
+            let positonY=roomPosition.y
+            if (positonX == position.x&&positonY==position.y) {
+                console.log(position)
+                return room
+            }
+            
+        }
+        
     }
 }

@@ -8,6 +8,7 @@ export class RoomModule {
     people: number[] = [];
     neighbourId:number;
     roomStatus:RoomStatus
+    
 }
 
 export enum RoomType {

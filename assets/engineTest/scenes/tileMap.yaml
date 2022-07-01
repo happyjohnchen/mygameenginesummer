@@ -55,7 +55,7 @@ children:
       - type: Transform
         properties:
           x: 0
-          y: 0
+          y: -500
           scaleX: 1
           scaleY: 1
           rotation: 0
@@ -63,34 +63,3 @@ children:
         properties:
           roomtype: 0
     id: tileMap
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: ShapeRectRenderer
-        properties:
-          width: 10
-          height: 10
-          color: red
-          customColor: '#ffffff'
-    id: person
-    children:
-      - behaviours:
-          - type: Transform
-            properties:
-              x: 200
-              y: 0
-              scaleX: 1
-              scaleY: 1
-              rotation: 0
-          - type: ShapeCircleRenderer
-            properties:
-              radius: 100
-              color: red
-              customColor: '#ffffff'
-        id: NewGameObject
-
