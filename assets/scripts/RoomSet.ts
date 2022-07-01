@@ -42,7 +42,7 @@ export class RoomSet extends Behaviour {
     createRoom(roomPositionX: number, roomPositionY: number, roomType: number) {
         if (roomType == 0 || roomPositionX + 1 > 6 || roomPositionX - 1 < -1) return;//超出所建的范围
         this.roomSetID++;
-        
+
         //console.log(gameController1.rooms)
         let roomChild = new GameObject();
         //this.gameObject.addChild(roomChild)
@@ -82,12 +82,12 @@ export class RoomSet extends Behaviour {
         console.log(gameObeject)
         return gameObeject.getBehaviour(Room)
     }
-    removeRoomClass(gameObeject:GameObject){
-//gameObeject.removeBehaviour(Roomclass);
+    removeRoomClass(gameObeject: GameObject) {
+        //gameObeject.removeBehaviour(Roomclass);
     }
     mergeHouse(clickGameobject: GameObject, neighborGameObject: GameObject) {//房間合在一起
-        let clickRoom=this.getRoomBehabiour(clickGameobject)
-        let neighborRoom=this.getRoomBehabiour(clickGameobject)
+        let clickRoom = this.getRoomBehabiour(clickGameobject)
+        let neighborRoom = this.getRoomBehabiour(clickGameobject)
         const clickRoomData = clickRoom.roomModule
         const neighborRoomData = neighborRoom.roomModule
         if (neighborRoomData.level != 1) return;
@@ -105,22 +105,31 @@ export class RoomSet extends Behaviour {
         }
 
     }
-   /* setRoomImage(roomtype:RoomType,roomStatus:RoomStatus){
-        let imagePath:string 
+    setRoomImage(roomtype: RoomType, roomStatus: RoomStatus) {
+        let imagePath: string
         switch (roomStatus) {//加图片
             case 1:
                 imagePath = 'assets/engineTest/images/testImage2.png'//灰色透明图片
-            case 2
+                break;
+            case 2:
+                {
+                    switch (roomtype) {
+                        case 1: imagePath = 'assets/engineTest/images/testImage2.png'//WaterFactory
+                            break;
+                        case 2: imagePath = 'assets/engineTest/images/testImage2.png'//EnergyFactory
+                            break;
+                        case 3: imagePath = 'assets/engineTest/images/testImage2.png'//FoodFactory
+                            break;
+                    }
+                    break;
+                }
         }
-        switch (clickRoomData.roomType) {//加图片
-            case 0:
-                clickGameobject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage2.png'
-                neighborGameObject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage21.png'
-        }
-    }*/
-  /*  createRoomFromData(roomModule:RoomModule){//从存档里恢复room
+        return imagePath
+    }
+    
+    createRoomFromData(roomModule: RoomModule) {//从存档里恢复room
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
-        let saveRoom=new GameObject()
+        let saveRoom = new GameObject()
         gameController.addRoom(saveRoom)
         const childTransform = new Transform();
         childTransform.x = 0 + roomModule.position.x * 150;
@@ -130,22 +139,15 @@ export class RoomSet extends Behaviour {
         room.roomModule = roomModule
         saveRoom.addBehaviour(room);
         const backgroundImage = new ImageRenderer()
-        if (roomType == 1) {
-            backgroundImage.imagePath = 'assets/engineTest/images/testImage1.png'
-        }
-        else if (roomType == 2) { backgroundImage.imagePath = 'assets/engineTest/images/testImage.png' }
+        backgroundImage.imagePath=this.setRoomImage(roomModule.roomType,roomModule.roomStatus)
         saveRoom.addBehaviour(backgroundImage);
-        this.storeBuildStatus(roomPositionX, roomPositionY, roomChild)
-
-        let roomChild = new GameObject();
-        roomChild.addBehaviour(Room)
-    }*/
+    }
     getRoomByXY(x: number, y: number) {//根据xy获取room
 
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
         let roomPositon = new RoomPosition()
-        roomPositon.x=x
-        roomPositon.y=y
+        roomPositon.x = x
+        roomPositon.y = y
         let room = gameController.getRoomByPosition(roomPositon)
         if (room)
             return room
@@ -187,7 +189,7 @@ export class RoomSet extends Behaviour {
         let bottomRoom = this.getRoomByXY(position.x, position.y + 1)
         let leftRoom = this.getRoomByXY(position.x - 1, position.y)
         let rightRoom = this.getRoomByXY(position.x + 1, position.y)
-   
+
 
         if (bottomRoom == null) {
             if (position.x - 1 >= 0 && leftRoom == null && rightRoom == null) {
@@ -203,7 +205,7 @@ export class RoomSet extends Behaviour {
                 this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
 
             }
-            else if (position.x - 1 >= 0 && leftRoom == null&&position.y!=1) {
+            else if (position.x - 1 >= 0 && leftRoom == null && position.y != 1) {
                 console.log('c')
                 this.createRoom(position.x - 1, position.y, RoomStatus.canBuild)
                 this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
