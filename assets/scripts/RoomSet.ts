@@ -110,6 +110,7 @@ export class RoomSet extends Behaviour {
         if (x > 0 && x < 5) {
             leftRoom = this.roomGameObjectArray[x - 1][y]
             rightRoom = this.roomGameObjectArray[x + 1][y]
+            if(this.roomGameObjectArray[x - 1][y]!==-1)
             this.mergeHouse(clickRoom, leftRoom)
             this.mergeHouse(clickRoom, rightRoom)
         }

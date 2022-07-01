@@ -44,12 +44,14 @@ charaterMoveStatus(){
 }
 changeRoomName(roomType:RoomType){//根据roomtype的值切换物体名字
 this.gameObject.id=findKey(RoomType,roomType)
+
 }
 
     //游戏开始时会执行一次
     onPlayStart() {
 
         this.gameObject.onClick = () => {
+            console.log(this.gameObject)
             this.charaterMoveStatus()
             let thisRoom = this.gameObject.getBehaviour(Room)
             //想在这里判断点击了物体然后返回到父物体的roomSet中，然后就可以new 一个新的房间（create newroom()），并把新的房间状态改变
@@ -62,6 +64,8 @@ this.gameObject.id=findKey(RoomType,roomType)
             }
             const tileMapGameObj = getGameObjectById("tileMap")
             thisRoom.roomType = RoomType.WaterFactory
+            thisRoom.changeRoomName(thisRoom.roomType)
+            console.log(this.gameObject.id)
             const roomSet = tileMapGameObj.getBehaviour(RoomSet)
             roomSet.storeBuildStatus(this.positionX, this.positionY, this.gameObject)
             roomSet.checkNeighbor(this.positionX, this.positionY)
