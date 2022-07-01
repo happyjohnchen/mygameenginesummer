@@ -10,20 +10,22 @@ export class CameraController extends Behaviour {
     //在此定义脚本中的属性
 
     myBackGround: GameObject;
-    leftController;
-    rightController;
+    leftController: GameObject;
+    rightController: GameObject;
+    upController: GameObject;
+    downController: GameObject;
     isHonver = false;
     direction: number;
-    
+
     @number()
     speed = 5;
-    
+
 
 
 
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
-        
+
 
 
         const myCameraTransform = this.gameObject.getBehaviour(Transform);
@@ -34,22 +36,6 @@ export class CameraController extends Behaviour {
         document.oncontextmenu = () => {
             return false;
         }
-        /* body.onmousedown = (e) => {
-            mouseDown = true;
-            mouseDownPosition.x = e.clientX;
-            mouseDownPosition.y = e.clientY;
-            mouseDownTransform = myCameraTransform;
-        }
-        body.onmouseup = (e) => {
-            mouseDown = false
-        }
-        body.onmousemove = (e) => {
-            if (mouseDown) {
-                //移动
-                this.gameObject.getBehaviour(Transform).x = (mouseDownPosition.x - e.clientX) * 0.01 + mouseDownTransform.x;
-                this.gameObject.getBehaviour(Transform).y = (mouseDownPosition.y - e.clientY) * 0.01 + mouseDownTransform.y;
-            }
-        } */
         body.onwheel = (e) => {
             this.gameObject.getBehaviour(Transform).scaleX += e.deltaY / 5000;
             this.gameObject.getBehaviour(Transform).scaleY += e.deltaY / 5000;
@@ -108,6 +94,50 @@ export class CameraController extends Behaviour {
             //console.log("left Controller")
         }
 
+
+        this.upController = new GameObject();
+        this.gameObject.addChild(this.upController);
+        const transformUp = new Transform();
+        transformUp.x = -80;
+        transformUp.y = -275;
+        transformUp.rotation =0
+        this.upController.addBehaviour(transformUp);
+        const imageup = new ImageRenderer()
+        imageup.imagePath = 'assets/images/arr1_trans.png'
+        this.upController.addBehaviour(imageup)
+
+        this.upController.onHoverIn = (e) => {
+            this.direction = 3;
+            this.isHonver = false;
+            console.log("up Controller")
+        }
+        this.upController.onHoverOut = (e) => {
+            this.direction = 0;
+            this.isHonver = false;
+            //console.log("left Controller")
+        }
+
+        this.downController = new GameObject();
+        this.gameObject.addChild(this.downController);
+        const transformDown = new Transform();
+        transformDown.x = 100;
+        transformDown.y = 275;
+        transformDown.rotation = 180
+        this.downController.addBehaviour(transformDown);
+        const imagedown = new ImageRenderer()
+        imagedown.imagePath = 'assets/images/arr1_trans.png'
+        this.downController.addBehaviour(imagedown)
+
+        this.downController.onHoverIn = (e) => {
+            this.direction = 4;
+            this.isHonver = false;
+            console.log("down Controller")
+        }
+        this.downController.onHoverOut = (e) => {
+            this.direction = 0;
+            this.isHonver = false;
+            //console.log("left Controller")
+        }
     }
 
     //每次屏幕刷新执行
@@ -123,6 +153,12 @@ export class CameraController extends Behaviour {
                 break;
             case 2:
                 this.gameObject.getBehaviour(Transform).x = this.gameObject.getBehaviour(Transform).x + this.speed;
+                break;
+            case 3:
+                this.gameObject.getBehaviour(Transform).y = this.gameObject.getBehaviour(Transform).y - this.speed;
+                break;
+            case 4:
+                this.gameObject.getBehaviour(Transform).y = this.gameObject.getBehaviour(Transform).y + this.speed;
                 break;
 
         }
