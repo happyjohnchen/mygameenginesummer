@@ -5,7 +5,16 @@ import { boolean } from "../../src/engine/validators/boolean";
 import { number } from "../../src/engine/validators/number";
 import { RoomType } from "./modules/RoomModule";
 import { RoomSet } from "./RoomSet";
-
+type Compare<T, U> = (a: T, b: U) => boolean;
+function findKey<T, U extends T[keyof T]>(
+    record: T,
+    value: U,
+    compare: Compare<T[keyof T], U> = (a, b) => a === b
+   ): keyof T | undefined {
+     return (Object.keys(record) as Array<keyof T>).find(k =>
+      compare(record[k], value)
+     );
+   }
 export class Room extends Behaviour {
 
     //在此定义脚本中的属性
@@ -33,6 +42,10 @@ charaterMoveStatus(){
     if(this.clickStatus==3)
     return [this.positionX*150,this.positionY*100]
 }
+changeRoomName(roomType:RoomType){//根据roomtype的值切换物体名字
+this.gameObject.id=findKey(RoomType,roomType)
+}
+
     //游戏开始时会执行一次
     onPlayStart() {
 
