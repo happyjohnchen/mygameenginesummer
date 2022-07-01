@@ -21,22 +21,22 @@ export class AttributeSystem extends Behaviour {
      private Primevalue = 60;//初始数值
      private gameobject;
 
-     private water;
-     private energy;
-     private food;
+     private water = 0;
+     private energy = 0;
+     private food = 0;
 
      @number()
      consumePerTime = 1;//一次消耗多少
-
      private lastTime = 0;//经过的时间
      private nowTime = 0;
      @number()
-     onceTime = 1;//多少小时消耗一次
+     onceConsumeTime = 1;//多少小时消耗一次
      @number()
      primeProduceTime = 5;//基础时间
      
      @number()
      maxValue = 100;
+
      minValue= 0;
 
      @number()
@@ -47,30 +47,33 @@ export class AttributeSystem extends Behaviour {
     //游戏开始时会执行一次
     onStart() { //游戏开始时的数值
         
-        this.gameObject.getBehaviour(TextRenderer).text= this.Primevalue.toString();
+        //this.gameObject.getBehaviour(TextRenderer).text= this.Primevalue.toString();
         //拿到数值
-        this.water = getGameObjectById("GameController").getBehaviour(GameController).game.water;
-        this.food = getGameObjectById("GameController").getBehaviour(GameController).game.food;
-        this.energy = getGameObjectById("GameController").getBehaviour(GameController).game.energy;
+        
+        // this.water = getGameObjectById("GameController").getBehaviour(GameController).game.water;
+        // this.food = getGameObjectById("GameController").getBehaviour(GameController).game.food;
+        // this.energy = getGameObjectById("GameController").getBehaviour(GameController).game.energy;
 
     }
 
     //每次屏幕刷新执行 显示数值
     onUpdate() {
-        this.gameObject.getBehaviour(TextRenderer).text= this.Primevalue.toString();
+        //this.gameObject.getBehaviour(TextRenderer).text= this.Primevalue.toString();
     }
 
     //平均每16ms执行一次 每oncetime小时掉一次
     onTick(duringTime: number) {
-        this.nowTime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
-        this.lastTime = this.lastTime==60? 0:this.lastTime;
-        if(this.nowTime-this.lastTime >=this. onceTime*60){
-            this.setValue(-this.consumePerTime);
-            this.lastTime = this.nowTime;    
-            //console.log(this.lasttime);
-        }
-        //console.log(this.lasttime);
-        
+        // this.nowTime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
+        // this.lastTime = this.lastTime==60? 0:this.lastTime;
+        // if(this.nowTime-this.lastTime >=this. onceConsumeTime*60){
+        //     this.setValue(-this.consumePerTime);
+        //     this.lastTime = this.nowTime;    
+        //     //console.log(this.lasttime);
+        // }
+        // //console.log(this.lasttime);
+        this.water = getGameObjectById("GameController").getBehaviour(GameController).game.water;
+        this.food = getGameObjectById("GameController").getBehaviour(GameController).game.food;
+        this.energy = getGameObjectById("GameController").getBehaviour(GameController).game.energy;
     }
 
     getValue(){

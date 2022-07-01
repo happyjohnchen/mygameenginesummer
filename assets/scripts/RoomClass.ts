@@ -67,14 +67,14 @@ export class RoomClass extends Behaviour {
     //平均每16ms执行一次   每一个小时产出一个增加
     onTick(duringTime: number) {
         // let totalAttribute = this.calculateTotalAttribute();//到时候接人的时候补充算法替换
-        // let createPeriod = this.AttributeSystem.getBehaviour(AttributeSystem).calculateCreatePeriod(this.totalPeopleAttribute);
-        this.nowTime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
-        this.lastTime = this.lastTime==60? 0:this.lastTime;
-        if(this.nowTime-this.lastTime >=1*60){
+        let createPeriod = getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateCreatePeriod(this.totalPeopleAttribute);
+        this.nowTime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
+        //this.lastTime = this.lastTime==60? 0:this.lastTime;
+        if(this.nowTime-this.lastTime >=createPeriod*60*60){
             this.createProduction();
             this.lastTime = this.nowTime;  
         }
-        console.log("生产周期:"+1);
+        console.log("生产周期:"+createPeriod);
     }
 
     changeType(room:RoomType){//转换房间属性
