@@ -5,6 +5,7 @@ export class RoomModule {
     roomType: RoomType = RoomType.Entrance;
     position: RoomPosition = new RoomPosition();
     people: number[] = [];
+    neighbourId:number;
 }
 
 export enum RoomType {

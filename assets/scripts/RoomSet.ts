@@ -1,9 +1,11 @@
 import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
 import { Prefab } from "../../src/behaviours/Prefab";
-import { GameObject } from "../../src/engine";
+import { GameObject, getGameObjectById } from "../../src/engine";
 import { Behaviour } from "../../src/engine/Behaviour";
 import { Transform } from "../../src/engine/Transform";
 import { number } from "../../src/engine/validators/number";
+import { GameController } from "./GameController";
+import { GameSet } from "./GameSet";
 import { RoomType } from "./modules/RoomModule";
 import { Room } from "./Room";
 export enum RoomStatus {
@@ -23,7 +25,7 @@ export class RoomSet extends Behaviour {
 
     //数组初始化
     roomGameObjectArray = new Array();
-
+    roomID
     makeRoomGameObjectArray() {
         for (var i = 0; i < 6; i++) {
             this.roomGameObjectArray[i] = new Array(i);    //在声明二维
@@ -34,6 +36,10 @@ export class RoomSet extends Behaviour {
     }
     //游戏开始时会执行一次
     onStart(): void {
+
+    }
+    onPlayStart() {
+        this.roomID = 0
         this.makeRoomGameObjectArray()
         this.roomGameObjectArray[0][0] = -1
         this.roomGameObjectArray[0][1] = -1
@@ -42,7 +48,6 @@ export class RoomSet extends Behaviour {
             for (let j = 1; j < 6; j++)
                 this.createRoom(j, i, 2, this.gameObject)
     }
-
     //每次屏幕刷新执行
     onUpdate() {
     }
@@ -53,27 +58,35 @@ export class RoomSet extends Behaviour {
 
     createRoom(roomPositionX: number, roomPositionY: number, roomType: number, self: any) {
         if (roomType == 0 || roomPositionX + 1 > 6 || roomPositionX - 1 < -1) return;//超出所建的范围
-        self.child = new GameObject();
-        self.addChild(self.child)
+        this.roomID++;
+        let gameController1 = new GameSet()
+        console.log(gameController1.rooms)
+        let roomChild = new GameObject();
+        //self.addChild(self.child)
+
+        let gameController = getGameObjectById("GameController").getBehaviour(GameController)
+        console.log(gameController.game)
+        gameController.addRoom(roomChild)
         const childTransform = new Transform();
         childTransform.x = 0 + roomPositionX * 150;
         childTransform.y = 0 + roomPositionY * 100;
-        self.child.addBehaviour(childTransform);
+        roomChild.addBehaviour(childTransform);
         const room = new Room();
         room.positionX = roomPositionX;
         room.positionY = roomPositionY;
         room.roomStatus = RoomStatus.canBuild;
         room.roomType = RoomType.noType;
         room.canUpGrade = true
-        room.roomGrade=0
-        self.child.addBehaviour(room);
+        room.level = 0
+        room.roomID = this.roomID
+        roomChild.addBehaviour(room);
         const backgroundImage = new ImageRenderer()
         if (roomType == 1) {
             backgroundImage.imagePath = 'assets/engineTest/images/testImage1.png'
         }
         else if (roomType == 2) { backgroundImage.imagePath = 'assets/engineTest/images/testImage.png' }
-        self.child.addBehaviour(backgroundImage);
-        this.storeBuildStatus(roomPositionX, roomPositionY, self.child)
+        roomChild.addBehaviour(backgroundImage);
+        this.storeBuildStatus(roomPositionX, roomPositionY, roomChild)
 
     };
     //记录每个坑的状态
@@ -82,19 +95,21 @@ export class RoomSet extends Behaviour {
 
     }
 
-    getRoomType(gameObeject: GameObject) {
+    getRoomBehabiour(gameObeject: GameObject) {
         return gameObeject.getBehaviour(Room)
     }
 
     mergeHouse(clickGameobject: GameObject, neighborGameObject: GameObject) {//房間合在一起
-        const clickRoomData = this.getRoomType(clickGameobject)
-        const neighborRoomData = this.getRoomType(neighborGameObject)
+        const clickRoomData = this.getRoomBehabiour(clickGameobject)
+        const neighborRoomData = this.getRoomBehabiour(neighborGameObject)
         if (!neighborRoomData.canUpGrade) return;
         if (clickRoomData.roomType != neighborRoomData.roomType) return;
-
+        clickRoomData.neighbourId = neighborRoomData.roomID
+        neighborRoomData.neighbourId = clickRoomData.roomID
         switch (clickRoomData.roomType) {
             case 0:
                 clickGameobject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage2.png'
+
                 neighborGameObject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage21.png'
         }
         clickRoomData.canUpGrade = false
@@ -106,12 +121,12 @@ export class RoomSet extends Behaviour {
         let leftRoom: GameObject
         let rightRoom: GameObject
         clickRoom = this.roomGameObjectArray[x][y]
-        const clickRoomData = this.getRoomType(clickRoom)
+        const clickRoomData = this.getRoomBehabiour(clickRoom)
         if (x > 0 && x < 5) {
             leftRoom = this.roomGameObjectArray[x - 1][y]
             rightRoom = this.roomGameObjectArray[x + 1][y]
-            if(this.roomGameObjectArray[x - 1][y]!==-1)
-            this.mergeHouse(clickRoom, leftRoom)
+            if (this.roomGameObjectArray[x - 1][y] !== -1)
+                this.mergeHouse(clickRoom, leftRoom)
             this.mergeHouse(clickRoom, rightRoom)
         }
         else if (x == 0) {
