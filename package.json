@@ -6,15 +6,14 @@
   "scripts": {
     "start": "electron .",
     "generate-icons": "electron-icon-builder --input=./icon.png --output=icon --flatten",
-    "packageDarwin": "electron-packager . 'Hosts' --platform=darwin --arch=x64 --icon=./icon/icons/icon.icns --out=./dist --asar --app-version=1.0.0 --ignore=\"(dist|docs|.gitignore|LICENSE|README.md|webpack.config*|node_modules)\"",
-    "packageWin": "electron-packager . 'Hosts' --platform=win32 --arch=x64 --icon=./icon/icons/icon.ico --out=./dist --asar --app-version=1.0.0 --ignore=\"(dist|docs|.gitignore|LICENSE|README.md|webpack.config.js|node_modules)\"",
-    "packageLinux": "electron-packager . 'Hosts' --platform=linux --arch=x64 --out=./dist --asar --app-version=1.0.0 --ignore=\"(dist|docs|.gitignore|LICENSE|README.md|webpack.config.js|node_modules)\""
+    "packageDarwin": "electron-packager . 'FalloutShelter' --platform=darwin --arch=x64 --icon=./icon/icons/icon.icns --out=./dist --asar --app-version=1.0.0 --ignore=\"(dist|docs|.gitignore|LICENSE|README.md|webpack.config*|node_modules)\"",
+    "packageWin": "electron-packager . 'FalloutShelter' --platform=win32 --arch=x64 --icon=./icon/icons/icon.ico --out=./dist --asar --app-version=1.0.0 --ignore=\"(dist|docs|.gitignore|LICENSE|README.md|webpack.config.js|node_modules)\"",
+    "packageLinux": "electron-packager . 'FalloutShelter' --platform=linux --arch=x64 --out=./dist --asar --app-version=1.0.0 --ignore=\"(dist|docs|.gitignore|LICENSE|README.md|webpack.config.js|node_modules)\""
   },
   "devDependencies": {
     "electron-icon-builder": "^2.0.1",
     "electron-packager": "^15.5.1",
-    "typescript": "^4.5.5",
-    "vite": "^2.8.0"
+    "typescript": "^4.5.5"
   },
   "dependencies": {
     "@flyover/box2d": "^1.0.1",
@@ -23,7 +22,8 @@
     "copy-paste": "^1.3.0",
     "electron": "^18.3.5",
     "js-yaml": "^4.1.0",
-    "ws": "^7.4.6"
+    "ws": "^7.4.6",
+    "vite": "^2.8.0"
   },
   "config": {
     "forge": {
