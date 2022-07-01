@@ -67,7 +67,7 @@ export class RoomClass extends Behaviour {
     //平均每16ms执行一次   每一个小时产出一个增加
     onTick(duringTime: number) {
         // let totalAttribute = this.calculateTotalAttribute();//到时候接人的时候补充算法替换
-        let createPeriod = getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateCreatePeriod(this.totalPeopleAttribute);
+        let createPeriod = getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateCreatePeriod(this.roomLevel,this.totalPeopleAttribute);
         this.nowTime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
         //this.lastTime = this.lastTime==60? 0:this.lastTime;
         if(this.nowTime-this.lastTime >=createPeriod*60*60){
@@ -132,18 +132,16 @@ export class RoomClass extends Behaviour {
     //     return period;
     // }
 
-    createProduction(){ //生成相应属性产出预制体
+    createProduction(){ //生成相应属性产出预制体  同时还要产出材料（还没写）
         this.attributeType = this.changeType(this.roomType);
         console.log(this.attributeType)
-        if(this.attributeType!=null){
+        if(this.attributeType!=null){//是否能产出
             let gameObjectchild = new GameObject()
             //gameObjectchild.parent= this.gameObject;
             this.gameObject.parent.addChild(gameObjectchild);
             const childrenTransform = new Transform();
             childrenTransform.x = this.gameObject.getBehaviour(Transform).x + this.producePos;
             childrenTransform.y = this.gameObject.getBehaviour(Transform).y + this.producePos;
-            // childrenTransform.x = 0 + this.producePos;
-            // childrenTransform.y = 0 + this.producePos;
             gameObjectchild.addBehaviour(childrenTransform);
             const addAttributeBe = new addAttribute();
             addAttributeBe.setType(this.attributeType);

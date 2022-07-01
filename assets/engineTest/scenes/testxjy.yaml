@@ -6,6 +6,7 @@ behaviours:
       scaleX: 1
       scaleY: 1
       rotation: 0
+  - type: test
 id: RootGameObject
 children:
   - behaviours:
@@ -75,7 +76,14 @@ children:
           cornerRadius: 20
           color: red
           customColor: '#ffffff'
-    id: test
+      - type: RoomClass
+        properties:
+          production: 20
+          totalPeopleAttribute: 1
+          level1Size: 2
+          level2Size: 4
+          level3Size: 5
+    id: WaterFactory
   - behaviours:
       - type: Transform
         properties:
@@ -90,14 +98,17 @@ children:
           height: 100
           color: blue
           customColor: '#ffffff'
-      - type: RoomClass
-        properties:
-          production: 20
-          totalPeopleAttribute: 4
-          level1Size: 2
-          level2Size: 4
-          level3Size: 5
     id: WaterFactory
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: test
+    id: NewGameObject
   - behaviours:
       - type: Transform
         properties:

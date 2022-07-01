@@ -9,6 +9,7 @@ import { TimeControllerSystem } from "./TimeControllerSystem";
 import {string} from "../../src/engine/validators/string";
 import { Transform } from "../../src/engine/Transform";
 import { RoomClass } from "./RoomClass";
+import { AttributeSystem } from "./AttributeSystem";
 
 
 export class test extends Behaviour {
@@ -36,9 +37,7 @@ export class test extends Behaviour {
     onPlayStart() {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
-                getGameObjectById("WaterFactory").getBehaviour(RoomClass).setRoomType(RoomType.EnergyFactory);
-                getGameObjectById("WaterFactory").getBehaviour(RoomClass).createProduction;
-                console.log("点击");
+                //console.log( getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateCreatePeriod(3,2));
                 
             }
      

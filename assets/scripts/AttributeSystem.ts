@@ -5,6 +5,7 @@ import {GameObject, getGameObjectById} from "../../src/engine";
 import { TimeControllerSystem } from "./TimeControllerSystem";
 import { string } from "../../src/engine/validators/string";
 import { GameController } from "./GameController";
+import { RoomType } from "./modules/RoomModule";
 export class AttributeSystem extends Behaviour {
 
     //在此定义脚本中的属性
@@ -33,12 +34,9 @@ export class AttributeSystem extends Behaviour {
      onceConsumeTime = 1;//多少小时消耗一次
      @number()
      primeProduceTime = 5;//基础时间
-     
      @number()
      maxValue = 100;
-
      minValue= 0;
-
      @number()
      coefficient = 0.2;
      @number()
@@ -61,7 +59,7 @@ export class AttributeSystem extends Behaviour {
         //this.gameObject.getBehaviour(TextRenderer).text= this.Primevalue.toString();
     }
 
-    //平均每16ms执行一次 每oncetime小时掉一次
+    //实时更新游戏里的值
     onTick(duringTime: number) {
         // this.nowTime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
         // this.lastTime = this.lastTime==60? 0:this.lastTime;
@@ -95,8 +93,43 @@ export class AttributeSystem extends Behaviour {
         this.consumePerTime = consume;
    }
 
-   calculateCreatePeriod(totalAttribute:number){
-    let period = this.primeProduceTime - (totalAttribute*this.coefficient) + this.radix;
+   calculateCreatePeriod(roomlevel:number,totalAttribute:number){//计算产出周期
+    const primeTimeTable = {
+        1:5,
+        2:5,
+        3:7
+    }
+    let period = primeTimeTable[roomlevel] - (totalAttribute*this.coefficient) + this.radix;
     return period;
    }
+
+   calculateProduction(roomlevel:number,type:string){ //计算产出
+    const energyTable = {
+        1: 30,
+        2: 70,
+        3: 154
+    }
+
+    const foodWaterTable = {
+        1: 20,
+        2: 45,
+        3: 98
+    }
+    const materialTable = {
+        1:10,
+        2:25,
+        3:40
+    }
+    switch(type){
+        case("energy"):
+            return energyTable[roomlevel];
+        case("material"):
+            return materialTable[roomlevel];
+        default:
+            return foodWaterTable[roomlevel];
+
+    }
+
+   }
+   
 }
