@@ -66,6 +66,7 @@ export class RoomSet extends Behaviour {
         room.roomStatus = RoomStatus.canBuild;
         room.roomType = RoomType.noType;
         room.canUpGrade = true
+        room.roomGrade=0
         self.child.addBehaviour(room);
         const backgroundImage = new ImageRenderer()
         if (roomType == 1) {

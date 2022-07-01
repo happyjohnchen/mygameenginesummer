@@ -19,7 +19,9 @@ export class Room extends Behaviour {
     roomStatus
     @boolean()
     canUpGrade
-    
+    @number()
+    roomGrade
+
     clickStatus//0不可点，1可升级，2建起房子，3移动小人选择房间
     //static roomObjects:{ [id:string]: RoomType } = {}
     onStart() {
@@ -35,9 +37,14 @@ charaterMoveStatus(){
 }
 changeRoomName(roomType:RoomType){//根据roomtype的值切换物体名字
 this.gameObject.id=findKey(RoomType,roomType)
-
 }
 
+destroyRoom(){//1.单独的房间销毁；2.已升级的房间销毁
+    let thisRoom = this.gameObject.getBehaviour(Room)
+    if(thisRoom.roomGrade==1){
+    
+    }
+}
     //游戏开始时会执行一次
     onPlayStart() {
 
