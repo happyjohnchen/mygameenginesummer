@@ -56,8 +56,13 @@ export class CanvasContextRenderingSystem extends System {
         //camera坐标表示中心点
         cameraTransform.x = camera.getBehaviour(Transform).x - camera.getBehaviour(Transform).scaleX * this.engineUIConfig.canvasWidth / 2;
         cameraTransform.y = camera.getBehaviour(Transform).y - camera.getBehaviour(Transform).scaleY * this.engineUIConfig.canvasHeight / 2;
-        cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX;
-        cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY;
+        if (this.engineUIConfig.launchMode){
+            cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX / this.engineUIConfig.launchModeZoomIndex;
+            cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY / this.engineUIConfig.launchModeZoomIndex;
+        }else {
+            cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX;
+            cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY;
+        }
         cameraTransform.rotation = camera.getBehaviour(Transform).rotation;
 
         //更新矩阵
