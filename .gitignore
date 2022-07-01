@@ -7,3 +7,4 @@ createEngineUIConfig.ts
 out/
 assets/assets.yaml
 icon
+src/defaultScene.txt
