@@ -39,8 +39,8 @@ export class RoomSet extends Behaviour {
     onTick(duringTime: number) {
     }
 
-    createRoom(roomPositionX: number, roomPositionY: number, roomType: number) {
-        if (roomType == 0 || roomPositionX + 1 > 6 || roomPositionX - 1 < -1) return;//超出所建的范围
+    createRoom(roomPositionX: number, roomPositionY: number, roomStatus: number) {
+        if ( roomPositionX + 1 > 6 || roomPositionX - 1 < -1) return;//超出所建的范围
         this.roomSetID++;
 
         //console.log(gameController1.rooms)
@@ -64,10 +64,10 @@ export class RoomSet extends Behaviour {
         room.roomModule = RModule
         roomChild.addBehaviour(room);
         const backgroundImage = new ImageRenderer()
-        if (roomType == 1) {
-            backgroundImage.imagePath = 'assets/engineTest/images/testImage1.png'
+        if (roomStatus == RoomStatus.canBuild) {
+            backgroundImage.imagePath = 'assets/engineTest/images/testImage.png'
         }
-        else if (roomType == 2) { backgroundImage.imagePath = 'assets/engineTest/images/testImage.png' }
+       
         roomChild.addBehaviour(backgroundImage);
         this.storeBuildStatus(roomPositionX, roomPositionY, roomChild)
 
@@ -109,24 +109,25 @@ export class RoomSet extends Behaviour {
         let imagePath: string
         switch (roomStatus) {//加图片
             case 1:
+                switch (roomtype) {
+                    case 1: imagePath = 'assets/engineTest/images/testImage1.png'//WaterFactory
+                        break;
+                    case 2: imagePath = 'assets/engineTest/images/testImage2.png'//EnergyFactory
+                        break;
+                    case 3: imagePath = 'assets/engineTest/images/testImage2.png'//FoodFactory
+                        break;
+                }
+                break;
+
+            case 2:
+
                 imagePath = 'assets/engineTest/images/testImage2.png'//灰色透明图片
                 break;
-            case 2:
-                {
-                    switch (roomtype) {
-                        case 1: imagePath = 'assets/engineTest/images/testImage2.png'//WaterFactory
-                            break;
-                        case 2: imagePath = 'assets/engineTest/images/testImage2.png'//EnergyFactory
-                            break;
-                        case 3: imagePath = 'assets/engineTest/images/testImage2.png'//FoodFactory
-                            break;
-                    }
-                    break;
-                }
+
         }
         return imagePath
     }
-    
+
     createRoomFromData(roomModule: RoomModule) {//从存档里恢复room
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
         let saveRoom = new GameObject()
@@ -139,7 +140,7 @@ export class RoomSet extends Behaviour {
         room.roomModule = roomModule
         saveRoom.addBehaviour(room);
         const backgroundImage = new ImageRenderer()
-        backgroundImage.imagePath=this.setRoomImage(roomModule.roomType,roomModule.roomStatus)
+        backgroundImage.imagePath = this.setRoomImage(roomModule.roomType, roomModule.roomStatus)
         saveRoom.addBehaviour(backgroundImage);
     }
     getRoomByXY(x: number, y: number) {//根据xy获取room

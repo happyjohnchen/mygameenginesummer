@@ -35,7 +35,7 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: 0
+          x: -400
           y: 0
           scaleX: 1
           scaleY: 1
@@ -54,7 +54,7 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: 0
+          x: -200
           y: -500
           scaleX: 1
           scaleY: 1

@@ -178,11 +178,10 @@ export class GameController extends Behaviour {
         if(id==-1)return;
         for (const room of this.game.rooms) {
             if (room.getBehaviour(Room).roomModule.roomId == id) {
+                console.log(room)
                 return room
             }
-            else {
-                console.log("没有这个Room")
-            }
+           
         }
     }
     //用Position获取房间
