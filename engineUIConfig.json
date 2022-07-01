@@ -5,6 +5,7 @@
   "assetsPanelHeight": 350,
   "hierarchyPanelWidth": 400,
   "inspectorPanelWidth": 400,
-  "showEditor" : true,
+  "gameName": "Fallout Shelter",
+  "launchMode" : false,
   "launchModeZoomIndex": 1.0
 }

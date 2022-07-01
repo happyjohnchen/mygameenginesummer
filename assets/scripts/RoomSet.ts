@@ -1,4 +1,3 @@
-
 import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
 import { Prefab } from "../../src/behaviours/Prefab";
 import { GameObject } from "../../src/engine";

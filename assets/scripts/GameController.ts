@@ -165,7 +165,7 @@ export class GameController extends Behaviour {
     }
 
     //用id获取房间
-    getPersonByRoom(id: number) {
+    getRoomById(id: number) {
         for (const room in this.game.rooms) {
 
         }

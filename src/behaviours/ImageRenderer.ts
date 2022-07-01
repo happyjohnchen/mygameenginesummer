@@ -20,7 +20,9 @@ export class ImageRenderer extends Behaviour implements Renderer {
     }
 
     onStart() {
-        this.image = this.engine.resourceManager.getImage(this.imagePath);
+        if (this.imagePath!==""){
+            this.image = this.engine.resourceManager.getImage(this.imagePath);
+        }
     }
 
     onTick(duringTime: number) {
