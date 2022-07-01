@@ -21,6 +21,7 @@ export class GameController extends Behaviour {
         //读档
         this.readArchive();
         console.log("GameController已就绪，游戏开始");
+        console.log(this.game.water);
     }
 
     //读取存档

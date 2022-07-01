@@ -5,7 +5,7 @@ export class GameModule {
     gameTime: GameTimeModule = new GameTimeModule();//时间
     people: PersonModule[] = [];//所有人
     rooms: RoomModule[] = [];//所有房间
-    water: number = 0;//水
+    water: number = 50;//水
     energy: number = 0;//能量
     food: number = 0;//食物
     material: number = 0;//材料

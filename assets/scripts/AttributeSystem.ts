@@ -4,17 +4,26 @@ import { number } from "../../src/engine/validators/number";
 import {GameObject, getGameObjectById} from "../../src/engine";
 import { TimeControllerSystem } from "./TimeControllerSystem";
 import { string } from "../../src/engine/validators/string";
+import { GameController } from "./GameController";
 export class AttributeSystem extends Behaviour {
 
     //在此定义脚本中的属性
     /* 分别挂在到三个属性的物体上，用来实现随时间掉落 且控制上下限
-    最后上下限逻辑要合并到gamecontroller里
     随房间数量消耗
+
+    用来控制三个属性得加减
+    三个属性随时间掉落并赋值
+
     */
 
+    
    
-     private value = 60;//初始数值
+     private Primevalue = 60;//初始数值
      private gameobject;
+
+     private water;
+     private energy;
+     private food;
 
      @number()
      consumePerTime = 1;//一次消耗多少
@@ -31,12 +40,17 @@ export class AttributeSystem extends Behaviour {
     //游戏开始时会执行一次
     onStart() { //游戏开始时的数值
         
-        this.gameObject.getBehaviour(TextRenderer).text= this.value.toString();
+        this.gameObject.getBehaviour(TextRenderer).text= this.Primevalue.toString();
+        //拿到数值
+        this.water = getGameObjectById("GameController").getBehaviour(GameController).game.water;
+        this.food = getGameObjectById("GameController").getBehaviour(GameController).game.food;
+        this.energy = getGameObjectById("GameController").getBehaviour(GameController).game.energy;
+
     }
 
     //每次屏幕刷新执行 显示数值
     onUpdate() {
-        this.gameObject.getBehaviour(TextRenderer).text= this.value.toString();
+        this.gameObject.getBehaviour(TextRenderer).text= this.Primevalue.toString();
     }
 
     //平均每16ms执行一次 每oncetime小时掉一次
@@ -53,14 +67,14 @@ export class AttributeSystem extends Behaviour {
     }
 
     getValue(){
-        return this.value;
+        return this.Primevalue;
     }
 
     setValue(changedvalue:number){ //改变value 且value最大值最小值不能超过最大值最小值
-        let newnumber = this.value+changedvalue;
+        let newnumber = this.Primevalue+changedvalue;
         newnumber = newnumber>this.maxValue?this.maxValue:newnumber;
         newnumber = newnumber<this.minValue?this.minValue:newnumber;
-        this.value = newnumber;
+        this.Primevalue = newnumber;
     }
 
     getConsumePerTime(){

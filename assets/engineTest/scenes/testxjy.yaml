@@ -76,3 +76,13 @@ children:
           dayHourTime: 16
           nightTime: 120
     id: TimeController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: GameController
+    id: GameController

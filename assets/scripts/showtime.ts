@@ -4,6 +4,7 @@ import { number } from "../../src/engine/validators/number";
 import {GameObject, getGameObjectById} from "../../src/engine";
 import { TimeControllerSystem } from "./TimeControllerSystem";
 import { string } from "../../src/engine/validators/string";
+import { GameController } from "./GameController";
 export class showTime extends Behaviour {
 
     //在此定义脚本中的属性
@@ -26,13 +27,15 @@ export class showTime extends Behaviour {
         this.gameObject.getBehaviour(TextRenderer).text = "第"+this.nowday + "天" + " " + this.nowhour + ":" + this.nowmin;
     }
 
-    //平均每16ms执行一次 拿到时间
+    //平均每16ms执行一次 从gamecontroller拿到时间
     onTick(duringTime: number) {
-        this.nowhour= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getHourTime()+this.startTime;
-        this.nowmin = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
-        this.nowday = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getDayCount();
+        // this.nowhour= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getHourTime()+this.startTime;
+        // this.nowmin = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
+        // this.nowday = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getDayCount();
         //console.log(getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).gettotalgamesecondtime());
-        
+        this.nowhour = getGameObjectById("GameController").getBehaviour(GameController).game.time.getHourTime()+this.startTime;
+        this.nowmin = getGameObjectById("GameController").getBehaviour(GameController).game.time.getMinTime();
+        this.nowday = getGameObjectById("GameController").getBehaviour(GameController).game.time.getDayCount();
     }
 
     
