@@ -17,9 +17,7 @@ export class addAttribute extends Behaviour  {
     onStart() {//点击会增加数量
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
-                //这两行根据之后架构要改 产出多少以及往哪里加
-                //this.addValueCount = getGameObjectById(this.type+"room").getBehaviour(RoomClass).getProduction();
-                // getGameObjectById("AttributeController").getBehaviour(AttributeSystem).setValue(this.addValueCount);
+                getGameObjectById("AttributeController").getBehaviour(AttributeSystem).changeAttributeValue(this.addValueCount,this.type);
                 console.log("生成"+this.type+"数量"+this.addValueCount);
                 this.gameObject.parent.removeChild(this.gameObject);           
             }
