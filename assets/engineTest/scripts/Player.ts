@@ -1,7 +1,7 @@
 import {Behaviour} from "../../../src/engine/Behaviour";
 import {Transform} from "../../../src/engine/Transform";
 import {number} from "../../../src/engine/validators/number";
-import {GameObject, getGameObjectById} from "../../../src/engine";
+import {GameObject, getGameObjectById, hasGameObjectById} from "../../../src/engine";
 import {Sound} from "../../../src/behaviours/Sound";
 import {AnimationRenderer} from "../../../src/behaviours/AnimationRenderer";
 import {ShapeCircleRenderer} from "../../../src/behaviours/ShapeCircleRenderer";
@@ -47,18 +47,20 @@ export class Player extends Behaviour {
         this.gameObject.onHoverIn = (e) => {
             //鼠标移入
             console.log("Player onHoverIn");
+            alert("hoverIn")
         }
 
         this.gameObject.onHoverOut = (e) => {
             //鼠标移出
             console.log("Player onHoverOut");
+            alert("hoverOut")
         }
 
         this.gameObject.onClick = (e) => {
             //鼠标点击
             switch (e.button) {
                 case 0:
-                    console.log("左键");
+                    alert("左键");
                     break;
                 case 1:
                     console.log("中键");
@@ -67,6 +69,7 @@ export class Player extends Behaviour {
                     console.log("右键");
                     break;
             }
+            return;
 
             //点击player读取存档
             ArchiveSystem.readFile((file) => {
@@ -83,48 +86,71 @@ export class Player extends Behaviour {
             if (this.engine.mode === 'edit') {
                 return;
             }
+            const camera = getGameObjectById('camera');
             //console.log(getGameObjectById('TileMap').getBehaviour(TileMap).tileToWorldPosition(1, 1))
             switch (e.key) {
                 case 'a':
-                    transform.x -= this.speed;
+                    camera.getBehaviour(Transform).x -= this.speed;
                     break;
                 case 'd':
-                    transform.x += this.speed;
+                    camera.getBehaviour(Transform).x += this.speed;
                     break;
                 case 'w':
-                    transform.y -= this.speed;
+                    camera.getBehaviour(Transform).y -= this.speed;
                     break;
                 case 's':
-                    transform.y += this.speed;
+                    camera.getBehaviour(Transform).y += this.speed;
+                    break;
+                case 'q':
+                    camera.getBehaviour(Transform).scaleX += 0.1;
+                    camera.getBehaviour(Transform).scaleY += 0.1;
+                    break;
+                case 'e':
+                    camera.getBehaviour(Transform).scaleX -= 0.1;
+                    camera.getBehaviour(Transform).scaleY -= 0.1;
                     break;
                 case 'z':
                     //发出声音，并自动循环播放
-                    getGameObjectById("sound").getBehaviour(Sound).play();
-                    getGameObjectById("sound").getBehaviour(Sound).loopPlay = true;
+                    if (hasGameObjectById('sound')){
+                        getGameObjectById("sound").getBehaviour(Sound).play();
+                        getGameObjectById("sound").getBehaviour(Sound).loopPlay = true;
+                    }
                     break;
                 case 'x':
                     //暂停播放
-                    getGameObjectById("sound").getBehaviour(Sound).pause();
+                    if (hasGameObjectById('sound')) {
+                        getGameObjectById("sound").getBehaviour(Sound).pause();
+                    }
                     break;
                 case 'c':
                     //取消循环播放
-                    getGameObjectById("sound").getBehaviour(Sound).loopPlay = false;
+                    if (hasGameObjectById('sound')) {
+                        getGameObjectById("sound").getBehaviour(Sound).loopPlay = false;
+                    }
                     break;
                 case 'v':
                     //暂停动画
-                    getGameObjectById("animation").getBehaviour(AnimationRenderer).pauseAnimation = true;
+                    if (hasGameObjectById('animation')) {
+                        getGameObjectById("animation").getBehaviour(AnimationRenderer).pauseAnimation = true;
+                    }
                     break;
                 case 'b':
                     //恢复动画
-                    getGameObjectById("animation").getBehaviour(AnimationRenderer).pauseAnimation = false;
+                    if (hasGameObjectById('animation')) {
+                        getGameObjectById("animation").getBehaviour(AnimationRenderer).pauseAnimation = false;
+                    }
                     break;
                 case 'n':
                     //隐藏动画
-                    getGameObjectById("animation").active = false;
+                    if (hasGameObjectById('animation')) {
+                        getGameObjectById("animation").active = false;
+                    }
                     break;
                 case 'm':
                     //显示动画
-                    getGameObjectById("animation").active = true;
+                    if (hasGameObjectById('animation')) {
+                        getGameObjectById("animation").active = true;
+                    }
                     break;
                 case 'l':
                     //在player周围随机生成绿点
@@ -150,10 +176,14 @@ export class Player extends Behaviour {
                     console.log("player: to second scene")
                     break;
                 case 'h':
-                    getGameObjectById("YellowCircle").active = false;
+                    if (hasGameObjectById('YellowCircle')) {
+                        getGameObjectById("YellowCircle").active = false;
+                    }
                     break;
                 case 'g':
-                    getGameObjectById("YellowCircle").active = true;
+                    if (hasGameObjectById('YellowCircle')) {
+                        getGameObjectById("YellowCircle").active = true;
+                    }
                     break;
                 case 'f':
                     this.gameObject.removeSelf();
@@ -192,9 +222,9 @@ export class Player extends Behaviour {
     }
 
     onTick(duringTime: number) {
-        const prefab = getGameObjectById('Prefab');
-        if (prefab.getBehaviour(Prefab).created) {
-            //console.log(getGameObjectById('PrefabSquare').getBehaviour(Transform));
+        if (hasGameObjectById('Prefab')){
+            const prefab = getGameObjectById('Prefab');
+
         }
     }
 

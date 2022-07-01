@@ -10,7 +10,6 @@ export class ImageRenderer extends Behaviour implements Renderer {
     image: HTMLImageElement
 
     getBounds(): Rectangle {
-        this.image = this.engine.resourceManager.getImage(this.imagePath);
         return {
             x: 0,
             y: 0,

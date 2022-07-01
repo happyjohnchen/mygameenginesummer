@@ -1,5 +1,12 @@
 import {GameObject, getGameObjectById} from "../../engine";
-import {checkPointInCircle, checkPointInRectangle, invertMatrix, Point, pointAppendMatrix} from "../math";
+import {
+    checkPointInCircle,
+    checkPointInRectangle,
+    invertMatrix,
+    matrixAppendMatrix,
+    Point,
+    pointAppendMatrix
+} from "../math";
 import {Transform} from "../Transform";
 import {System} from "./System";
 
@@ -23,7 +30,7 @@ export class MouseControlSystem extends System {
         window.addEventListener('mousedown', (e) => {
             const point = {x: e.clientX, y: e.clientY};
             const camera = getGameObjectById('camera');
-            if (!camera){
+            if (!camera) {
                 return;
             }
             const cameraTransform = new Transform();
@@ -31,15 +38,23 @@ export class MouseControlSystem extends System {
             //camera坐标表示中心点
             cameraTransform.x = camera.getBehaviour(Transform).x - camera.getBehaviour(Transform).scaleX * this.engineUIConfig.canvasWidth / 2;
             cameraTransform.y = camera.getBehaviour(Transform).y - camera.getBehaviour(Transform).scaleY * this.engineUIConfig.canvasHeight / 2;
-            cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX;
-            cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY;
+            if (this.engineUIConfig.launchMode) {
+                cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX / this.engineUIConfig.launchModeZoomIndex;
+                cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY / this.engineUIConfig.launchModeZoomIndex;
+            } else {
+                cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX;
+                cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY;
+            }
             cameraTransform.rotation = camera.getBehaviour(Transform).rotation;
             //更新矩阵
             cameraTransform.globalMatrix.updateFromTransformProperties(cameraTransform.x, cameraTransform.y, cameraTransform.scaleX, cameraTransform.scaleY, cameraTransform.rotation);
 
             //画布坐标转化为摄像机坐标
+            point.x *= cameraTransform.scaleX;
+            point.y *= cameraTransform.scaleY;
             point.x += cameraTransform.x;
             point.y += cameraTransform.y;
+
             let result = this.hitTest(this.rootGameObject, point);
             if (result) {
                 while (result) {
@@ -56,8 +71,8 @@ export class MouseControlSystem extends System {
         });
         window.addEventListener('mousemove', (e) => {
             const point = {x: e.clientX, y: e.clientY};
-            const camera = getGameObjectById('camera')
-            if (!camera){
+            const camera = getGameObjectById('camera');
+            if (!camera) {
                 return;
             }
             const cameraTransform = new Transform();
@@ -65,34 +80,41 @@ export class MouseControlSystem extends System {
             //camera坐标表示中心点
             cameraTransform.x = camera.getBehaviour(Transform).x - camera.getBehaviour(Transform).scaleX * this.engineUIConfig.canvasWidth / 2;
             cameraTransform.y = camera.getBehaviour(Transform).y - camera.getBehaviour(Transform).scaleY * this.engineUIConfig.canvasHeight / 2;
-            cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX;
-            cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY;
+            if (this.engineUIConfig.launchMode) {
+                cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX / this.engineUIConfig.launchModeZoomIndex;
+                cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY / this.engineUIConfig.launchModeZoomIndex;
+            } else {
+                cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX;
+                cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY;
+            }
             cameraTransform.rotation = camera.getBehaviour(Transform).rotation;
             //更新矩阵
             cameraTransform.globalMatrix.updateFromTransformProperties(cameraTransform.x, cameraTransform.y, cameraTransform.scaleX, cameraTransform.scaleY, cameraTransform.rotation);
 
             //画布坐标转化为摄像机坐标
+            point.x *= cameraTransform.scaleX;
+            point.y *= cameraTransform.scaleY;
             point.x += cameraTransform.x;
             point.y += cameraTransform.y;
-            const visit = (gameObject: GameObject) => {
-                if (gameObject.hovered !== this.hoverTest(gameObject, point)) {
-                    gameObject.hovered = this.hoverTest(gameObject, point);
-                    if (gameObject.hovered && gameObject.onHoverIn) {
-                        gameObject.onHoverIn(e);
-                    } else if (!gameObject.hovered && gameObject.onHoverOut) {
-                        gameObject.onHoverOut(e);
-                    }
-                }
-                for (const child of gameObject.children) {
-                    visit(child);
+
+            const visit = (gameObject: GameObject, point: Point, e) => {
+                // console.log("visit"+gameObject.uuid);
+                this.hoverTest(gameObject, point, e);
+                const length = gameObject.children.length;
+                for (let childIndex = length - 1; childIndex >= 0; childIndex--) {
+                    const child = gameObject.children[childIndex];
+                    const childTransform = child.getBehaviour(Transform);
+                    const childLocalMatrix = childTransform.localMatrix;
+                    const childInvertLocalMatrix = invertMatrix(childLocalMatrix);
+                    const newPoint = pointAppendMatrix(point, childInvertLocalMatrix);
+                    visit(child, newPoint, e);
                 }
             }
-            visit(this.rootGameObject);
+            visit(this.rootGameObject, point, e);
         })
     }
 
     hitTest(gameObject: GameObject, point: Point): GameObject {
-
         if (gameObject.renderer) {
             const bounds = gameObject.renderer.getBounds();
             let result = null;
@@ -123,7 +145,19 @@ export class MouseControlSystem extends System {
         }
     }
 
-    hoverTest(gameObject: GameObject, point: Point): boolean {
+    hoverTest(gameObject: GameObject, point: Point, e) {
+        // console.log(gameObject.id + this.mouseInTest(gameObject, point));
+        if (gameObject.hovered !== this.mouseInTest(gameObject, point)) {
+            gameObject.hovered = this.mouseInTest(gameObject, point);
+            if (gameObject.hovered && gameObject.onHoverIn) {
+                gameObject.onHoverIn(e);
+            } else if (!gameObject.hovered && gameObject.onHoverOut) {
+                gameObject.onHoverOut(e);
+            }
+        }
+    }
+
+    mouseInTest(gameObject: GameObject, point: Point): boolean {
         if (gameObject.renderer) {
             const bounds = gameObject.renderer.getBounds();
             let result = false;
@@ -132,20 +166,7 @@ export class MouseControlSystem extends System {
             } else if (bounds.radius) {
                 result = checkPointInCircle(point, bounds);
             }
-            if (result) {
-                return result;
-            }
-        }
-        const length = gameObject.children.length;
-        for (let childIndex = length - 1; childIndex >= 0; childIndex--) {
-            const child = gameObject.children[childIndex];
-            const childTransform = child.getBehaviour(Transform);
-            const childLocalMatrix = childTransform.localMatrix;
-            const childInvertLocalMatrix = invertMatrix(childLocalMatrix);
-            const newPoint = pointAppendMatrix(point, childInvertLocalMatrix);
-            if (this.hoverTest(child, newPoint)) {
-                return true;
-            }
+            return result;
         }
         return false;
     }
