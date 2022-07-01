@@ -3,18 +3,9 @@ import { getGameObjectById } from "../../src/engine";
 import { Behaviour } from "../../src/engine/Behaviour";
 import { boolean } from "../../src/engine/validators/boolean";
 import { number } from "../../src/engine/validators/number";
+import { findKey } from "./findEnumKey";
 import { RoomType } from "./modules/RoomModule";
 import { RoomSet } from "./RoomSet";
-type Compare<T, U> = (a: T, b: U) => boolean;
-function findKey<T, U extends T[keyof T]>(
-    record: T,
-    value: U,
-    compare: Compare<T[keyof T], U> = (a, b) => a === b
-   ): keyof T | undefined {
-     return (Object.keys(record) as Array<keyof T>).find(k =>
-      compare(record[k], value)
-     );
-   }
 export class Room extends Behaviour {
 
     //在此定义脚本中的属性
