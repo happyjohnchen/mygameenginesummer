@@ -167,4 +167,8 @@ export class AttributeSystem extends Behaviour {
         this.gamecontroller.game.energy = this.changeValue(this.energy,-consumption[level]);
         console.log(this.gamecontroller.game.energy);
    }
+
+   consumeForFoodWater(){//计算水和食物消耗
+
+   }
 }

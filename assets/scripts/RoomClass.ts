@@ -126,11 +126,6 @@ export class RoomClass extends Behaviour {
         return totalAttribute;
     }
 
-    // calculatePeriod(){ //计算消耗周期
-    //     let period = this.primeProduceTime - (this.totalPeopleAttribute*this.coefficient) + this.radix;
-    //     return period;
-    // }
-
     createProduction(){ //生成相应属性产出预制体  同时还要产出材料（还没写）
         this.attributeType = this.changeType(this.roomType);
         console.log(this.attributeType)
