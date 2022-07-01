@@ -70,18 +70,3 @@ children:
       - type: Camera
       - type: CameraMouseController
     id: camera
-  - behaviours:
-      - type: Transform
-        properties:
-          x: -475
-          y: -265
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: ShapeRectRenderer
-        properties:
-          width: 950
-          height: 530
-          color: red
-          customColor: '#ffffff'
-    id: NewGameObject
