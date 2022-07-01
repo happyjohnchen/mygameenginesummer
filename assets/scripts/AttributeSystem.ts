@@ -93,14 +93,6 @@ export class AttributeSystem extends Behaviour {
         return newNumber;
     }
 
-    getConsumePerTime(){
-        return this.consumePerTime;
-    }
-    
-   setConsumePerTime(consume:number){
-        this.consumePerTime = consume;
-   }
-
    calculateCreatePeriod(roomlevel:number,totalAttribute:number){//计算产出周期
     const primeTimeTable = {
         1:5,
