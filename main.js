@@ -45,7 +45,8 @@ async function startEditor() {
                     nodeIntegration: true,  //允许渲染进程使用Nodejs
                     contextIsolation: false //允许渲染进程使用Nodejs
                 },
-                autoHideMenuBar: true
+                autoHideMenuBar: true,
+                title: engineUIConfig.gameName
             })
         }
 
