@@ -32,10 +32,17 @@ export class AttributeSystem extends Behaviour {
      private nowTime = 0;
      @number()
      onceTime = 1;//多少小时消耗一次
-
-
+     @number()
+     primeProduceTime = 5;//基础时间
+     
+     @number()
      maxValue = 100;
      minValue= 0;
+
+     @number()
+     coefficient = 0.2;
+     @number()
+     radix = 0.2;
 
     //游戏开始时会执行一次
     onStart() { //游戏开始时的数值
@@ -83,5 +90,10 @@ export class AttributeSystem extends Behaviour {
     
    setConsumePerTime(consume:number){
         this.consumePerTime = consume;
+   }
+
+   calculateCreatePeriod(totalAttribute:number){
+    let period = this.primeProduceTime - (totalAttribute*this.coefficient) + this.radix;
+    return period;
    }
 }

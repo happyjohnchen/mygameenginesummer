@@ -34,16 +34,12 @@ children:
           customColor: '#ffffff'
       - type: RoomClass
         properties:
-          roomType: water
-          primeProduceTime: 1
           production: 20
           totalPeopleAttribute: 1
-          coefficient: 0.2
-          radix: 0.2
           level1Size: 2
           level2Size: 4
           level3Size: 5
-    id: waterroom
+    id: WaterFactory
   - behaviours:
       - type: Transform
         properties:
@@ -86,3 +82,29 @@ children:
           rotation: 0
       - type: GameController
     id: GameController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 200
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: RoundedRectRenderer
+        properties:
+          width: 100
+          height: 100
+          cornerRadius: 20
+          color: red
+          customColor: '#ffffff'
+      - type: test
+    id: test
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+    id: AttributeController

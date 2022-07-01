@@ -8,6 +8,7 @@ import {RoomModule, RoomType } from "./modules/RoomModule";
 import { TimeControllerSystem } from "./TimeControllerSystem";
 import {string} from "../../src/engine/validators/string";
 import { Transform } from "../../src/engine/Transform";
+import { RoomClass } from "./RoomClass";
 
 
 export class test extends Behaviour {
@@ -27,6 +28,7 @@ export class test extends Behaviour {
     roompos = new Array();
     people: number[] = [16,32];//储存进来人的id
 
+    gameObejecttest;
     onStart() {
     }
 
@@ -34,10 +36,10 @@ export class test extends Behaviour {
     onPlayStart() {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
+                getGameObjectById("WaterFactory").getBehaviour(RoomClass).setRoomType(RoomType.EnergyFactory);
+                getGameObjectById("WaterFactory").getBehaviour(RoomClass).createProduction;
                 console.log("点击");
-              //this.removePerson(16);
-              //console.log(this.people);
-              console.log(this.gameObject.child);
+                
             }
      
         }

@@ -90,9 +90,9 @@ export class GameController extends Behaviour {
         //设定房间有一个大门
 
         //设定资源数值
-        this.game.water = 0;
-        this.game.energy = 0;
-        this.game.food = 0;
+        this.game.water = 50;
+        this.game.energy = 50;
+        this.game.food = 50;
         this.game.material = 0;
         console.log("GameController: 新存档创建成功");
     }

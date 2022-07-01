@@ -17,10 +17,9 @@ export class addAttribute extends Behaviour  {
     onStart() {//点击会增加数量
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
-                const a = getGameObjectById(this.type.toString());
                 //这两行根据之后架构要改 产出多少以及往哪里加
-                this.addValueCount = getGameObjectById(this.type+"room").getBehaviour(RoomClass).getProduction();
-                getGameObjectById(this.type).getBehaviour(AttributeSystem).setValue(this.addValueCount);
+                //this.addValueCount = getGameObjectById(this.type+"room").getBehaviour(RoomClass).getProduction();
+                // getGameObjectById("AttributeController").getBehaviour(AttributeSystem).setValue(this.addValueCount);
                 this.gameObject.parent.removeChild(this.gameObject);           
             }
      
@@ -43,5 +42,8 @@ export class addAttribute extends Behaviour  {
 
     setType(roomtype:string){
         this.type = roomtype;
+    }
+    setPrefabProduction(pro:number){
+        this.addValueCount = pro;
     }
 }
