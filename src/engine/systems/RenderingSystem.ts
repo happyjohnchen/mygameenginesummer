@@ -56,10 +56,10 @@ export class CanvasContextRenderingSystem extends System {
         //camera坐标表示中心点
         cameraTransform.x = camera.getBehaviour(Transform).x - camera.getBehaviour(Transform).scaleX * this.engineUIConfig.canvasWidth / 2;
         cameraTransform.y = camera.getBehaviour(Transform).y - camera.getBehaviour(Transform).scaleY * this.engineUIConfig.canvasHeight / 2;
-        if (this.engineUIConfig.launchMode){
+        if (this.engineUIConfig.launchMode) {
             cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX / this.engineUIConfig.launchModeZoomIndex;
             cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY / this.engineUIConfig.launchModeZoomIndex;
-        }else {
+        } else {
             cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX;
             cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY;
         }
@@ -162,7 +162,7 @@ export class CanvasContextRenderingSystem extends System {
                         context.restore();
                     }
                 }
-                if (child.id === 'camera' && child.chosen) {
+                if (child.id === 'camera' && child.engine.mode === 'edit') {
                     //绘制照相机范围
                     const transform = child.getBehaviour(Transform);
                     const matrix = matrixAppendMatrix(transform.globalMatrix, invertCameraTransform);
@@ -185,11 +185,6 @@ export class CanvasContextRenderingSystem extends System {
             }
         }
 
-        visitChildren(this
-
-            .rootGameObject
-        );
-
-
+        visitChildren(this.rootGameObject);
     }
 }
