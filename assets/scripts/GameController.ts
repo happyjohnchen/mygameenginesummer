@@ -11,10 +11,13 @@ import {Transform} from "../../src/engine/Transform";
 export class GameController extends Behaviour {
 
 
-    game: GameSet;//游戏资源
+    game: GameSet = new GameSet();//游戏资源
     private people: GameObject;//此GameObject持有所有人
     private rooms: GameObject;//此GameObject持有所有房间
     onPlayStart() {
+        //获取时间系统
+        this.game.time = getGameObjectById("TimeController").getBehaviour(TimeControllerSystem);
+        console.log(this.game.time)
         //获取人和房间对象
         this.people = getGameObjectById("People");
         this.rooms = getGameObjectById("Rooms");
@@ -25,7 +28,7 @@ export class GameController extends Behaviour {
     }
 
     //读取存档
-    readArchive() {
+    private readArchive() {
         //初始化
         this.game = new GameSet();
         this.game.time = getGameObjectById("TimeController").getBehaviour(TimeControllerSystem);
@@ -80,7 +83,7 @@ export class GameController extends Behaviour {
     }
 
     //新建场景
-    createNewScene() {
+    private createNewScene() {
         console.log("GameController: 创建新存档");
         //设定时间
         this.game.time.setSpeed(1.0);
@@ -168,7 +171,7 @@ export class GameController extends Behaviour {
     }
 
     //用id获取房间
-    getPersonByRoom(id: number) {
+    getRoomById(id: number) {
         for (const room in this.game.rooms) {
 
         }

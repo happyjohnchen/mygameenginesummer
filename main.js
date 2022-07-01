@@ -24,7 +24,7 @@ async function startEditor() {
         const fs = require('fs');
         const engineUIConfig = JSON.parse(fs.readFileSync('engineUIConfig.json').toString());
         let editorProcess;
-        if (engineUIConfig.showEditor) {
+        if (!engineUIConfig.launchMode) {
             //编辑器模式
             editorProcess = new BrowserWindow({
                 width: engineUIConfig.canvasWidth + engineUIConfig.hierarchyPanelWidth + engineUIConfig.inspectorPanelWidth,
@@ -38,24 +38,31 @@ async function startEditor() {
             editorProcess.openDevTools({mode: 'undocked'});
         } else {
             //发行模式
+            const path = require('path').posix;
+            if (process.platform === 'darwin') {
+                app.dock.setIcon(path.join(__dirname, './icon.png'))
+            }
             editorProcess = new BrowserWindow({
                 width: engineUIConfig.canvasWidth * engineUIConfig.launchModeZoomIndex,
-                height: engineUIConfig.canvasHeight * engineUIConfig.launchModeZoomIndex + 35,
+                height: engineUIConfig.canvasHeight * engineUIConfig.launchModeZoomIndex + 28,
                 webPreferences: {
                     nodeIntegration: true,  //允许渲染进程使用Nodejs
                     contextIsolation: false //允许渲染进程使用Nodejs
-                }
+                },
+                autoHideMenuBar: true,
+                title: engineUIConfig.gameName,
+                icon: path.join(__dirname, './icon.png')
             })
         }
 
-        const timeout = engineUIConfig.showEditor ? 3000 : 0;
+        const timeout = engineUIConfig.launchMode ? 0 : 3000;
         setTimeout(() => {
             runtimeView = new BrowserView();
             editorProcess.setBrowserView(runtimeView);
             const fs = require('fs');
             const engineUIConfig = JSON.parse(fs.readFileSync('engineUIConfig.json').toString());
             let mode = 'edit';
-            if (engineUIConfig.showEditor) {
+            if (!engineUIConfig.launchMode) {
                 runtimeView.setBounds({
                     x: engineUIConfig.hierarchyPanelWidth,
                     y: engineUIConfig.controlPanelHeight,
@@ -67,14 +74,19 @@ async function startEditor() {
                 runtimeView.setBounds({
                     x: 0,
                     y: 0,
-                    width: engineUIConfig.canvasWidth,
-                    height: engineUIConfig.canvasHeight
+                    width: engineUIConfig.canvasWidth * engineUIConfig.launchModeZoomIndex,
+                    height: engineUIConfig.canvasHeight * engineUIConfig.launchModeZoomIndex
                 })
 
             }
-            const scene = fs.readFileSync('src/defaultScene.txt');
+            let scene;
+            if (engineUIConfig.launchMode) {
+                scene = engineUIConfig.launchModeDefaultScene;
+            } else {
+                scene = fs.readFileSync('src/defaultScene.txt');
+            }
             runtimeView.webContents.loadURL(`http://localhost:3000/index.html?mode=${mode}&scene=${scene}`);
-            if (engineUIConfig.showEditor) {
+            if (!engineUIConfig.launchMode) {
                 runtimeView.webContents.openDevTools({mode: 'undocked'});
             }
         }, timeout)

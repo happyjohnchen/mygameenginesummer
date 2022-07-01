@@ -10,7 +10,6 @@ export class ImageRenderer extends Behaviour implements Renderer {
     image: HTMLImageElement
 
     getBounds(): Rectangle {
-        this.image = this.engine.resourceManager.getImage(this.imagePath);
         return {
             x: 0,
             y: 0,
@@ -20,7 +19,9 @@ export class ImageRenderer extends Behaviour implements Renderer {
     }
 
     onStart() {
-        this.image = this.engine.resourceManager.getImage(this.imagePath);
+        if (this.imagePath!==""){
+            this.image = this.engine.resourceManager.getImage(this.imagePath);
+        }
     }
 
     onTick(duringTime: number) {

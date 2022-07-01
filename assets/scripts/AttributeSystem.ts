@@ -88,7 +88,7 @@ export class AttributeSystem extends Behaviour {
         switch(type){
             case "water":
                 this.gamecontroller.game.water = this.checkValue(this.water,changedValue);
-            //console.log("目前水属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.water);
+            console.log("目前水属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.water);
             break;
             case "energy":
                 this.gamecontroller.game.energy = this.checkValue(this.energy,changedValue);
