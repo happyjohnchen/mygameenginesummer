@@ -20,6 +20,7 @@ export class addAttribute extends Behaviour  {
                 //这两行根据之后架构要改 产出多少以及往哪里加
                 //this.addValueCount = getGameObjectById(this.type+"room").getBehaviour(RoomClass).getProduction();
                 // getGameObjectById("AttributeController").getBehaviour(AttributeSystem).setValue(this.addValueCount);
+                console.log("生成"+this.type+"数量"+this.addValueCount);
                 this.gameObject.parent.removeChild(this.gameObject);           
             }
      

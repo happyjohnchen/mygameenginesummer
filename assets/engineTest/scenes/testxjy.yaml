@@ -78,8 +78,7 @@ children:
           customColor: '#ffffff'
       - type: RoomClass
         properties:
-          production: 20
-          totalPeopleAttribute: 1
+          totalPeopleAttribute: 20
           level1Size: 2
           level2Size: 4
           level3Size: 5
@@ -103,11 +102,17 @@ children:
       - type: Transform
         properties:
           x: 0
-          y: 0
+          y: -150
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: test
+      - type: RoundedRectRenderer
+        properties:
+          width: 100
+          height: 100
+          cornerRadius: 20
+          color: red
+          customColor: '#ffffff'
     id: NewGameObject
   - behaviours:
       - type: Transform

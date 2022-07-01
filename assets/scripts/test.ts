@@ -37,7 +37,7 @@ export class test extends Behaviour {
     onPlayStart() {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
-                //console.log( getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateCreatePeriod(3,2));
+                //console.log( getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateProduction(3,"water"));
                 
             }
      

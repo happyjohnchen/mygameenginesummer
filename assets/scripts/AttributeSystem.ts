@@ -25,6 +25,7 @@ export class AttributeSystem extends Behaviour {
      private water = 0;
      private energy = 0;
      private food = 0;
+     private material= 0;
 
      @number()
      consumePerTime = 1;//一次消耗多少
@@ -72,13 +73,14 @@ export class AttributeSystem extends Behaviour {
         this.water = getGameObjectById("GameController").getBehaviour(GameController).game.water;
         this.food = getGameObjectById("GameController").getBehaviour(GameController).game.food;
         this.energy = getGameObjectById("GameController").getBehaviour(GameController).game.energy;
+        this.material = getGameObjectById("GameController").getBehaviour(GameController).game.material;
     }
 
-    getValue(){
-        return this.Primevalue;
-    }
+    // getValue(){
+    //     return this.Primevalue;
+    // }
 
-    setValue(changedvalue:number){ //改变value 且value最大值最小值不能超过最大值最小值
+    setAttributeValue(changedvalue:number){ //改变水，食物，能源value 且value最大值最小值不能超过最大值最小值
         let newnumber = this.Primevalue+changedvalue;
         newnumber = newnumber>this.maxValue?this.maxValue:newnumber;
         newnumber = newnumber<this.minValue?this.minValue:newnumber;
@@ -129,7 +131,7 @@ export class AttributeSystem extends Behaviour {
             return foodWaterTable[roomlevel];
 
     }
-
+    
    }
    
 }

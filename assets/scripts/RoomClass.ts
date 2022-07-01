@@ -14,16 +14,9 @@ import { AttributeSystem } from "./AttributeSystem";
 export class RoomClass extends Behaviour {
 
     //测试用
-    // @number()
-    // primeProduceTime = 5;//多少小时产出一次
-    @number()
     production = 20;//一次产出多少
     @number()
     totalPeopleAttribute = 1;//总人物属性 有一个根据总特质转化的式子
-    // @number()
-    // coefficient = 0.2;
-    // @number()
-    // radix = 0.2;
    
     @number()
     level1Size = 2;
@@ -37,7 +30,7 @@ export class RoomClass extends Behaviour {
     private lastTime = 0;//经过的时间
     private nowTime = 0;
     private producePos = 0;
-    attributeType= "water";// water food energy
+    attributeType= "";// water food energy
 
 
     //储存 还有个roomtype在上面
@@ -136,7 +129,7 @@ export class RoomClass extends Behaviour {
         this.attributeType = this.changeType(this.roomType);
         console.log(this.attributeType)
         if(this.attributeType!=null){//是否能产出
-            let gameObjectchild = new GameObject()
+            let gameObjectchild = new GameObject() //产出三种属性
             //gameObjectchild.parent= this.gameObject;
             this.gameObject.parent.addChild(gameObjectchild);
             const childrenTransform = new Transform();
@@ -145,7 +138,8 @@ export class RoomClass extends Behaviour {
             gameObjectchild.addBehaviour(childrenTransform);
             const addAttributeBe = new addAttribute();
             addAttributeBe.setType(this.attributeType);
-            addAttributeBe.setPrefabProduction(this.production);
+            const attributeproduction = getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateProduction(this.roomLevel,this.attributeType);
+            addAttributeBe.setPrefabProduction(attributeproduction);
             gameObjectchild.addBehaviour(addAttributeBe);
             const attributeprefab = new Prefab();
             attributeprefab.prefabPath = 'assets/engineTest/prefabs/add'+this.attributeType +'Prefab.yaml'
