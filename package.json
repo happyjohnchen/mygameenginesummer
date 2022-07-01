@@ -5,14 +5,9 @@
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "generate-icons": "electron-icon-builder --input=./icon.png --output=icon --flatten",
-    "packageDarwin": "electron-packager . 'FalloutShelter' --platform=darwin --arch=x64 --icon=./icon/icons/icon.icns --out=./dist --asar --app-version=1.0.0 --ignore=\"(dist|docs|.gitignore|LICENSE|README.md|webpack.config*|node_modules)\"",
-    "packageWin": "electron-packager . 'FalloutShelter' --platform=win32 --arch=x64 --icon=./icon/icons/icon.ico --out=./dist --asar --app-version=1.0.0 --ignore=\"(dist|docs|.gitignore|LICENSE|README.md|webpack.config.js|node_modules)\"",
-    "packageLinux": "electron-packager . 'FalloutShelter' --platform=linux --arch=x64 --out=./dist --asar --app-version=1.0.0 --ignore=\"(dist|docs|.gitignore|LICENSE|README.md|webpack.config.js|node_modules)\""
-  },
+    "generate-icons": "electron-icon-builder --input=./icon.png --output=icon --flatten"},
   "devDependencies": {
     "electron-icon-builder": "^2.0.1",
-    "electron-packager": "^15.5.1",
     "typescript": "^4.5.5"
   },
   "dependencies": {
