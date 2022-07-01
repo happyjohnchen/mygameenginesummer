@@ -46,7 +46,9 @@ export class AnimationRenderer extends Behaviour implements Renderer {
 
     onStart() {
         this.currentNum = 0;
-        this.currentImage = this.engine.resourceManager.getImage(this.imagePathPrefix + this.startNum + this.imagePathSuffix);
+        if (this.imagePathPrefix!==""&&this.imagePathSuffix!==""){
+            this.currentImage = this.engine.resourceManager.getImage(this.imagePathPrefix + this.startNum + this.imagePathSuffix);
+        }
     }
 
     onTick(duringTime: number) {
