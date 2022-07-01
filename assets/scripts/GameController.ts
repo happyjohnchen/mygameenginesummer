@@ -1,12 +1,13 @@
-import {Behaviour} from "../../src/engine/Behaviour";
-import {GameSet} from "./GameSet";
-import {ArchiveSystem} from "./archiveSystem/ArchiveSystem";
-import {GameModule} from "./modules/GameModule";
-import {TimeControllerSystem} from "./TimeControllerSystem";
-import {PersonModule} from "./modules/PersonModule";
-import {RoomModule} from "./modules/RoomModule";
-import {GameObject, getGameObjectById} from "../../src/engine";
-import {Transform} from "../../src/engine/Transform";
+import { Behaviour } from "../../src/engine/Behaviour";
+import { GameSet } from "./GameSet";
+import { ArchiveSystem } from "./archiveSystem/ArchiveSystem";
+import { GameModule } from "./modules/GameModule";
+import { TimeControllerSystem } from "./TimeControllerSystem";
+import { PersonModule } from "./modules/PersonModule";
+import { RoomModule } from "./modules/RoomModule";
+import { GameObject, getGameObjectById } from "../../src/engine";
+import { Transform } from "../../src/engine/Transform";
+import { Room } from "./Room";
 
 export class GameController extends Behaviour {
 
@@ -27,6 +28,7 @@ export class GameController extends Behaviour {
     readArchive() {
         //初始化
         this.game = new GameSet();
+
         this.game.time = getGameObjectById("TimeController").getBehaviour(TimeControllerSystem);
         if (this.engine.loadSceneData === '') {
             this.createNewScene()
@@ -166,8 +168,13 @@ export class GameController extends Behaviour {
 
     //用id获取房间
     getRoomById(id: number) {
-        for (const room in this.game.rooms) {
-
+        for (const room of this.game.rooms) {
+            if (room.getBehaviour(Room).roomModule.roomId == id) {
+                return room
+            }
+            else {
+                console.log("没有这个Room")
+            }
         }
     }
 }

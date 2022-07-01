@@ -1,3 +1,4 @@
+
 export class RoomModule {
     roomId: number = 1;
     level: number = 1;
@@ -6,6 +7,7 @@ export class RoomModule {
     position: RoomPosition = new RoomPosition();
     people: number[] = [];
     neighbourId:number;
+    roomStatus:RoomStatus
 }
 
 export enum RoomType {
@@ -15,7 +17,14 @@ export enum RoomType {
     Entrance,
     noType
 }
+export enum RoomStatus {
 
+    empty = 0,
+
+    isBuild = 1,
+
+    canBuild = 2
+}
 export class RoomPosition {
     x: number = 0;
     y: number = 0;

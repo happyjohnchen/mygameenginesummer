@@ -6,16 +6,9 @@ import { Transform } from "../../src/engine/Transform";
 import { number } from "../../src/engine/validators/number";
 import { GameController } from "./GameController";
 import { GameSet } from "./GameSet";
-import { RoomType } from "./modules/RoomModule";
+import { RoomModule, RoomPosition, RoomStatus, RoomType } from "./modules/RoomModule";
 import { Room } from "./Room";
-export enum RoomStatus {
 
-    empty = 0,
-
-    isBuild = 1,
-
-    canBuild = 2
-}
 export class RoomSet extends Behaviour {
     //建坑
     //在此定义脚本中的属性
@@ -25,7 +18,7 @@ export class RoomSet extends Behaviour {
 
     //数组初始化
     roomGameObjectArray = new Array();
-    roomID
+    roomSetID
     makeRoomGameObjectArray() {
         for (var i = 0; i < 6; i++) {
             this.roomGameObjectArray[i] = new Array(i);    //在声明二维
@@ -39,7 +32,7 @@ export class RoomSet extends Behaviour {
 
     }
     onPlayStart() {
-        this.roomID = 0
+        this.roomSetID = 0
         this.makeRoomGameObjectArray()
         this.roomGameObjectArray[0][0] = -1
         this.roomGameObjectArray[0][1] = -1
@@ -58,7 +51,7 @@ export class RoomSet extends Behaviour {
 
     createRoom(roomPositionX: number, roomPositionY: number, roomType: number, self: any) {
         if (roomType == 0 || roomPositionX + 1 > 6 || roomPositionX - 1 < -1) return;//超出所建的范围
-        this.roomID++;
+        this.roomSetID++;
         let gameController1 = new GameSet()
         console.log(gameController1.rooms)
         let roomChild = new GameObject();
@@ -72,13 +65,13 @@ export class RoomSet extends Behaviour {
         childTransform.y = 0 + roomPositionY * 100;
         roomChild.addBehaviour(childTransform);
         const room = new Room();
-        room.positionX = roomPositionX;
-        room.positionY = roomPositionY;
-        room.roomStatus = RoomStatus.canBuild;
-        room.roomType = RoomType.noType;
-        room.canUpGrade = true
-        room.level = 0
-        room.roomID = this.roomID
+        let RModule = new RoomModule()
+        RModule.level = 0
+        RModule.position = {x: roomPositionX, y: roomPositionY}
+        RModule.roomId = this.roomSetID
+        RModule.roomType = RoomType.noType
+        RModule.roomStatus=RoomStatus.canBuild;
+        room.roomModule=RModule
         roomChild.addBehaviour(room);
         const backgroundImage = new ImageRenderer()
         if (roomType == 1) {
@@ -100,20 +93,21 @@ export class RoomSet extends Behaviour {
     }
 
     mergeHouse(clickGameobject: GameObject, neighborGameObject: GameObject) {//房間合在一起
-        const clickRoomData = this.getRoomBehabiour(clickGameobject)
-        const neighborRoomData = this.getRoomBehabiour(neighborGameObject)
-        if (!neighborRoomData.canUpGrade) return;
+        const clickRoomData = this.getRoomBehabiour(clickGameobject).roomModule
+        const neighborRoomData = this.getRoomBehabiour(neighborGameObject).roomModule
+        if (neighborRoomData.level!=1) return;
         if (clickRoomData.roomType != neighborRoomData.roomType) return;
         clickRoomData.neighbourId = neighborRoomData.roomID
         neighborRoomData.neighbourId = clickRoomData.roomID
+        clickRoomData.level = 2
+        neighborRoomData.level = 2
         switch (clickRoomData.roomType) {
             case 0:
                 clickGameobject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage2.png'
 
                 neighborGameObject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage21.png'
         }
-        clickRoomData.canUpGrade = false
-        neighborRoomData.canUpGrade = false
+   
     }
     //检测旁边的坑状态是否一样，相同则合并
     checkMerge(x: number, y: number) {
