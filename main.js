@@ -40,11 +40,12 @@ async function startEditor() {
             //发行模式
             editorProcess = new BrowserWindow({
                 width: engineUIConfig.canvasWidth * engineUIConfig.launchModeZoomIndex,
-                height: engineUIConfig.canvasHeight * engineUIConfig.launchModeZoomIndex + 35,
+                height: engineUIConfig.canvasHeight * engineUIConfig.launchModeZoomIndex + 28,
                 webPreferences: {
                     nodeIntegration: true,  //允许渲染进程使用Nodejs
                     contextIsolation: false //允许渲染进程使用Nodejs
-                }
+                },
+                autoHideMenuBar: true
             })
         }
 
