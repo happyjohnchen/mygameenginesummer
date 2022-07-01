@@ -8,6 +8,7 @@ import { RoomModule, RoomPosition } from "./modules/RoomModule";
 import { GameObject, getGameObjectById } from "../../src/engine";
 import { Transform } from "../../src/engine/Transform";
 import { Room } from "./Room";
+import { RoomSet } from "./RoomSet";
 
 export class GameController extends Behaviour {
 
@@ -68,11 +69,12 @@ export class GameController extends Behaviour {
         }
         //设定房间列表
         for (const roomModule of gModule.rooms) {
-            const newRoom = new GameObject();
+            getGameObjectById("tileMap").getBehaviour(RoomSet).createRoomFromData(roomModule)
+           /* const newRoom = new GameObject();  
             this.rooms.addChild(newRoom);//添加到游戏场景
             this.game.rooms.push(newRoom);//添加到game
-            newRoom.addBehaviour(new Transform());
-
+            newRoom.addBehaviour(new Transform());*/
+          
 
         }
         //设定资源数值
@@ -119,7 +121,9 @@ export class GameController extends Behaviour {
         }
         //写入房间列表
         for (const room of this.game.rooms) {
-            const roomModule = new RoomModule();
+            const roomModule=room.getBehaviour(Room).roomModule
+            //const roomModule = new RoomModule();
+            
             gModule.rooms.push(roomModule);
         }
         //写入资源数值
