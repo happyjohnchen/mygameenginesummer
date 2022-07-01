@@ -51,12 +51,18 @@ export class CanvasContextRenderingSystem extends System {
         } else {
             camera = getGameObjectById('cameraEditor');
         }
-        let cameraTransform;
-        if(camera){
-            cameraTransform = camera.getBehaviour(Transform);
-        }else {
-            cameraTransform = new Transform();
-        }
+        const cameraTransform = new Transform();
+
+        //camera坐标表示中心点
+        cameraTransform.x = camera.getBehaviour(Transform).x - camera.getBehaviour(Transform).scaleX * this.engineUIConfig.canvasWidth / 2;
+        cameraTransform.y = camera.getBehaviour(Transform).y - camera.getBehaviour(Transform).scaleY * this.engineUIConfig.canvasHeight / 2;
+        cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX;
+        cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY;
+        cameraTransform.rotation = camera.getBehaviour(Transform).rotation;
+
+        //更新矩阵
+        cameraTransform.globalMatrix.updateFromTransformProperties(cameraTransform.x, cameraTransform.y, cameraTransform.scaleX, cameraTransform.scaleY, cameraTransform.rotation);
+
         const invertCameraTransform = invertMatrix(cameraTransform.globalMatrix);
 
         function visitChildren(gameObject: GameObject) {
@@ -167,7 +173,7 @@ export class CanvasContextRenderingSystem extends System {
                     context.save();
                     context.strokeStyle = "blue";
                     context.lineWidth = 3;
-                    context.strokeRect(0, 0, canvas.width, canvas.height);
+                    context.strokeRect(0 - canvas.width / 2, 0 - canvas.height / 2, canvas.width, canvas.height);
                     context.restore();
                 }
                 visitChildren(child)

@@ -4,6 +4,20 @@ import {Transform} from "../Transform";
 import {System} from "./System";
 
 export class MouseControlSystem extends System {
+    engineUIConfig;
+
+    constructor() {
+        super();
+        const url = "engineUIConfig.json";
+        const request = new XMLHttpRequest();
+        request.open("get", url);/*设置请求方法与路径*/
+        request.send(null);/*不发送数据到服务器*/
+        request.onload = () => {/*XHR对象获取到返回信息后执行*/
+            if (request.status == 200) {/*返回状态为200，即为数据获取成功*/
+                this.engineUIConfig = JSON.parse(request.responseText);
+            }
+        }
+    }
 
     onStart() {
         window.addEventListener('mousedown', (e) => {
@@ -12,7 +26,17 @@ export class MouseControlSystem extends System {
             if (!camera){
                 return;
             }
-            const cameraTransform = camera.getBehaviour(Transform);
+            const cameraTransform = new Transform();
+
+            //camera坐标表示中心点
+            cameraTransform.x = camera.getBehaviour(Transform).x - camera.getBehaviour(Transform).scaleX * this.engineUIConfig.canvasWidth / 2;
+            cameraTransform.y = camera.getBehaviour(Transform).y - camera.getBehaviour(Transform).scaleY * this.engineUIConfig.canvasHeight / 2;
+            cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX;
+            cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY;
+            cameraTransform.rotation = camera.getBehaviour(Transform).rotation;
+            //更新矩阵
+            cameraTransform.globalMatrix.updateFromTransformProperties(cameraTransform.x, cameraTransform.y, cameraTransform.scaleX, cameraTransform.scaleY, cameraTransform.rotation);
+
             //画布坐标转化为摄像机坐标
             point.x += cameraTransform.x;
             point.y += cameraTransform.y;
@@ -36,7 +60,17 @@ export class MouseControlSystem extends System {
             if (!camera){
                 return;
             }
-            const cameraTransform = camera.getBehaviour(Transform);
+            const cameraTransform = new Transform();
+
+            //camera坐标表示中心点
+            cameraTransform.x = camera.getBehaviour(Transform).x - camera.getBehaviour(Transform).scaleX * this.engineUIConfig.canvasWidth / 2;
+            cameraTransform.y = camera.getBehaviour(Transform).y - camera.getBehaviour(Transform).scaleY * this.engineUIConfig.canvasHeight / 2;
+            cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX;
+            cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY;
+            cameraTransform.rotation = camera.getBehaviour(Transform).rotation;
+            //更新矩阵
+            cameraTransform.globalMatrix.updateFromTransformProperties(cameraTransform.x, cameraTransform.y, cameraTransform.scaleX, cameraTransform.scaleY, cameraTransform.rotation);
+
             //画布坐标转化为摄像机坐标
             point.x += cameraTransform.x;
             point.y += cameraTransform.y;
