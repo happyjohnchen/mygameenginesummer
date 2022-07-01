@@ -316,6 +316,7 @@ export class GameObject {
     _chosen: boolean = false;
 
     engine: GameEngine;
+    child: any;
 
     get active() {
         return this._active;

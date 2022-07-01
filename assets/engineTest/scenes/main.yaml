@@ -190,6 +190,10 @@ children:
         properties:
           prefabPath: assets/engineTest/prefabs/testPrefab.yaml
     id: Prefab
+<<<<<<< HEAD
+
+=======
+>>>>>>> master
   - behaviours:
       - type: Transform
         properties:

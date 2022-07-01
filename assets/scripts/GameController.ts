@@ -12,10 +12,10 @@ import { RoomSet } from "./RoomSet";
 
 export class GameController extends Behaviour {
 
+
     game: GameSet = new GameSet();//游戏资源
     private people: GameObject;//此GameObject持有所有人
     private rooms: GameObject;//此GameObject持有所有房间
-
     onPlayStart() {
         //获取时间系统
         this.game.time = getGameObjectById("TimeController").getBehaviour(TimeControllerSystem);
@@ -26,6 +26,7 @@ export class GameController extends Behaviour {
         //读档
         this.readArchive();
         console.log("GameController已就绪，游戏开始");
+        console.log(this.game.water);
     }
 
     //读取存档
@@ -96,9 +97,9 @@ export class GameController extends Behaviour {
         //设定房间有一个大门
 
         //设定资源数值
-        this.game.water = 0;
-        this.game.energy = 0;
-        this.game.food = 0;
+        this.game.water = 50;
+        this.game.energy = 50;
+        this.game.food = 50;
         this.game.material = 0;
         console.log("GameController: 新存档创建成功");
     }

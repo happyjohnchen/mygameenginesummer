@@ -7,6 +7,7 @@ import { findKey } from "./findEnumKey";
 import { GameController } from "./GameController";
 import { GameSet } from "./GameSet";
 import { RoomModule, RoomPosition, RoomStatus, RoomType } from "./modules/RoomModule";
+import { RoomClass } from "./RoomClass";
 import { RoomSet } from "./RoomSet";
 export class Room extends Behaviour {
 
@@ -74,7 +75,8 @@ export class Room extends Behaviour {
 
     }
     clearRoomValue(room: GameObject) {
-        //room.removeBehaviour(RoomClass)//合完许佳阳的放出来这2句
+        let roomClass= room.getBehaviour(RoomClass)
+        room.removeBehaviour( roomClass)//合完许佳阳的放出来这2句
         //room.getBehaviour(ImageRenderer).imagePath="灰色图片的路径"
         let roomModule = room.getBehaviour(Room).roomModule
         roomModule.level = 0;
@@ -109,8 +111,10 @@ export class Room extends Behaviour {
             roomModule.roomStatus = 1
             roomModule.level = 1//建造升级
             //roomModule.roomType=roomType
-            //roomGameObject.addBehaviour(RoomClass)
-
+            roomGameObject.addBehaviour(new RoomClass())
+            let roomClass=roomGameObject.getBehaviour(RoomClass)
+roomClass.setRoomid(roomModule.roomId)
+roomClass.setRoomType(roomModule.roomType)
         }
     }
     clickAndGetRoomID() {//点击room返回room的roomid
