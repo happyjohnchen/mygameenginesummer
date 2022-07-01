@@ -7,5 +7,6 @@
   "inspectorPanelWidth": 400,
   "gameName": "Fallout Shelter",
   "launchMode" : false,
-  "launchModeZoomIndex": 1.5
+  "launchModeZoomIndex": 1.5,
+  "launchModeDefaultScene": "assets/scenes/game.yaml"
 }

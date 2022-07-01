@@ -74,7 +74,12 @@ async function startEditor() {
                 })
 
             }
-            const scene = fs.readFileSync('src/defaultScene.txt');
+            let scene;
+            if (engineUIConfig.launchMode){
+                scene = engineUIConfig.launchModeDefaultScene;
+            }else {
+                scene = fs.readFileSync('src/defaultScene.txt');
+            }
             runtimeView.webContents.loadURL(`http://localhost:3000/index.html?mode=${mode}&scene=${scene}`);
             if (!engineUIConfig.launchMode) {
                 runtimeView.webContents.openDevTools({mode: 'undocked'});
