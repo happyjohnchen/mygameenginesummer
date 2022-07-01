@@ -63,3 +63,20 @@ children:
         properties:
           roomtype: 0
     id: tileMap
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: AttributeSystem
+        properties:
+          consumePerTime: 1
+          onceConsumeTime: 1
+          primeProduceTime: 5
+          maxValue: 100
+          coefficient: 0.2
+          radix: 0.2
+    id: AttributeController
