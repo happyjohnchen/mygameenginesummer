@@ -43,6 +43,8 @@ export class AttributeSystem extends Behaviour {
      @number()
      radix = 0.2;
 
+     gamecontroller:GameController
+
     //游戏开始时会执行一次
     onStart() { //游戏开始时的数值
         
@@ -58,6 +60,8 @@ export class AttributeSystem extends Behaviour {
     //每次屏幕刷新执行 显示数值
     onUpdate() {
         //this.gameObject.getBehaviour(TextRenderer).text= this.Primevalue.toString();
+        this.gamecontroller = getGameObjectById("GameController").getBehaviour(GameController);
+
     }
 
     //实时更新游戏里的值
@@ -70,21 +74,41 @@ export class AttributeSystem extends Behaviour {
         //     //console.log(this.lasttime);
         // }
         // //console.log(this.lasttime);
-        this.water = getGameObjectById("GameController").getBehaviour(GameController).game.water;
-        this.food = getGameObjectById("GameController").getBehaviour(GameController).game.food;
-        this.energy = getGameObjectById("GameController").getBehaviour(GameController).game.energy;
-        this.material = getGameObjectById("GameController").getBehaviour(GameController).game.material;
+        this.water = this.gamecontroller.game.water;
+        this.food = this.gamecontroller.game.food;
+        this.energy = this.gamecontroller.game.energy;
+        this.material = this.gamecontroller.game.material;
     }
 
     // getValue(){
     //     return this.Primevalue;
     // }
 
-    setAttributeValue(changedvalue:number){ //改变水，食物，能源value 且value最大值最小值不能超过最大值最小值
-        let newnumber = this.Primevalue+changedvalue;
+    changeAttributeValue(changedValue:number,type:string){ //改变水，食物，能源，材料value 且value最大值最小值不能超过最大值最小值
+        switch(type){
+            case "water":
+                this.gamecontroller.game.water = this.checkValue(this.water,changedValue);
+            //console.log("目前水属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.water);
+            break;
+            case "energy":
+                this.gamecontroller.game.energy = this.checkValue(this.energy,changedValue);
+            console.log("目前电属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.energy);
+            break;
+            case "food":
+                this.gamecontroller.game.food = this.checkValue(this.food,changedValue);
+            break;
+            case"material":
+                this.gamecontroller.game.material = this.checkValue(this.material,changedValue);//可能没有上限 到时候再说
+            break;
+        }
+        
+    }
+
+    checkValue(primeValue:number,addValue:number){  //检查超没超过上下限  上下限也可以变为参数
+        let newnumber = addValue+primeValue;
         newnumber = newnumber>this.maxValue?this.maxValue:newnumber;
         newnumber = newnumber<this.minValue?this.minValue:newnumber;
-        this.Primevalue = newnumber;
+        return newnumber;
     }
 
     getConsumePerTime(){

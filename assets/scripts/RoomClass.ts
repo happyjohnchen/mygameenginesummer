@@ -25,7 +25,7 @@ export class RoomClass extends Behaviour {
     @number()
     level3Size = 5;
 
-    roomType = RoomType.WaterFactory;
+    roomType = RoomType.EnergyFactory;
     //不储存
     private lastTime = 0;//经过的时间
     private nowTime = 0;
