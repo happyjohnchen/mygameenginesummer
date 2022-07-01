@@ -69,8 +69,8 @@ async function startEditor() {
                 runtimeView.setBounds({
                     x: 0,
                     y: 0,
-                    width: engineUIConfig.canvasWidth,
-                    height: engineUIConfig.canvasHeight
+                    width: engineUIConfig.canvasWidth * engineUIConfig.launchModeZoomIndex,
+                    height: engineUIConfig.canvasHeight * engineUIConfig.launchModeZoomIndex
                 })
 
             }
