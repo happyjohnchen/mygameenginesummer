@@ -71,7 +71,7 @@ children:
           scaleY: 1
           rotation: 0
       - type: Camera
-      - type: CameraController
+      - type: CameraMouseController
         properties:
           speed: 3
     id: camera

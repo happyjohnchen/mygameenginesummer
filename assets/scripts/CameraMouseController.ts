@@ -6,7 +6,7 @@ import { Rectangle } from "../../src/engine/math";
 import { Transform } from "../../src/engine/Transform";
 import { number } from "../../src/engine/validators/number";
 
-export class CameraController extends Behaviour {
+export class CameraMouseController extends Behaviour {
 
     //在此定义脚本中的属性
 
@@ -162,17 +162,19 @@ export class CameraController extends Behaviour {
                 }
                 break;
             case 2:
-                if (this.gameObject.getBehaviour(Transform).x + 0.5 * this.canvas.width - this.myBackGround.getBehaviour(Transform).x  - this.backgroundImageRectangle.width <= 0) {
+                if (this.gameObject.getBehaviour(Transform).x + 0.5 * this.canvas.width - this.myBackGround.getBehaviour(Transform).x - this.backgroundImageRectangle.width <= 0) {
                     this.gameObject.getBehaviour(Transform).x = this.gameObject.getBehaviour(Transform).x + this.speed;
                 }
 
                 break;
             case 3:
-                if(this.gameObject.getBehaviour(Transform).y - 0.5 * this.canvas.height - this.myBackGround.getBehaviour(Transform).y >= 0)
-                this.gameObject.getBehaviour(Transform).y = this.gameObject.getBehaviour(Transform).y - this.speed;
+                if (this.gameObject.getBehaviour(Transform).y - 0.5 * this.canvas.height - this.myBackGround.getBehaviour(Transform).y >= 0)
+                    this.gameObject.getBehaviour(Transform).y = this.gameObject.getBehaviour(Transform).y - this.speed;
                 break;
             case 4:
-                this.gameObject.getBehaviour(Transform).y = this.gameObject.getBehaviour(Transform).y + this.speed;
+                if (this.gameObject.getBehaviour(Transform).y + 0.5 * this.canvas.height - this.myBackGround.getBehaviour(Transform).y - this.backgroundImageRectangle.height <= 0) {
+                    this.gameObject.getBehaviour(Transform).y = this.gameObject.getBehaviour(Transform).y + this.speed;
+                }
                 break;
 
         }

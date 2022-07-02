@@ -24,7 +24,7 @@ import {showTime} from "../assets/scripts/showTime";
 import {changeTimeSpeed} from "../assets/scripts/changeTimeSpeed";
 import {RoomClass} from "../assets/scripts/RoomClass";
 import {GameController} from "../assets/scripts/GameController";
-import {CameraController} from "../assets/scripts/CameraController";
+import {CameraMouseController} from "../assets/scripts/CameraMouseController";
 
 import {test} from "../assets/scripts/test";
 
@@ -51,7 +51,7 @@ registerBehaviourClass(Player);
 registerBehaviourClass(GameController);
 registerBehaviourClass(TimeControllerSystem);
 
-registerBehaviourClass(CameraController);
+registerBehaviourClass(CameraMouseController);
 
 
 
