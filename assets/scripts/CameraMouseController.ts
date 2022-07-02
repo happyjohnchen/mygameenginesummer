@@ -36,8 +36,14 @@ export class CameraMouseController extends Behaviour {
             return false;
         }
         body.onwheel = (e) => {
-            this.gameObject.getBehaviour(Transform).scaleX += e.deltaY / 5000;
-            this.gameObject.getBehaviour(Transform).scaleY += e.deltaY / 5000;
+            if (e.deltaY < 0 ||
+                this.gameObject.getBehaviour(Transform).x - 0.5 * this.canvas.width * this.gameObject.getBehaviour(Transform).scaleX - this.myBackGround.getBehaviour(Transform).x > 0 &&
+                this.gameObject.getBehaviour(Transform).x + 0.5 * this.canvas.width * this.gameObject.getBehaviour(Transform).scaleX - this.myBackGround.getBehaviour(Transform).x - this.backgroundImageRectangle.width <= 0 &&
+                this.gameObject.getBehaviour(Transform).y - 0.5 * this.canvas.height * this.gameObject.getBehaviour(Transform).scaleY - this.myBackGround.getBehaviour(Transform).y > 0 &&
+                this.gameObject.getBehaviour(Transform).y + 0.5 * this.canvas.height * this.gameObject.getBehaviour(Transform).scaleX - this.myBackGround.getBehaviour(Transform).y - this.backgroundImageRectangle.height < 0) {
+                this.gameObject.getBehaviour(Transform).scaleX += e.deltaY / 5000;
+                this.gameObject.getBehaviour(Transform).scaleY += e.deltaY / 5000;
+            }
         }
         console.log("camara controller is prepared.")
 
@@ -168,11 +174,11 @@ export class CameraMouseController extends Behaviour {
 
                 break;
             case 3:
-                if (this.gameObject.getBehaviour(Transform).y - 0.5 * this.canvas.height - this.myBackGround.getBehaviour(Transform).y >= 0)
+                if (this.gameObject.getBehaviour(Transform).y - 0.5 * this.canvas.height * this.gameObject.getBehaviour(Transform).scaleY - this.myBackGround.getBehaviour(Transform).y >= 0)
                     this.gameObject.getBehaviour(Transform).y = this.gameObject.getBehaviour(Transform).y - this.speed;
                 break;
             case 4:
-                if (this.gameObject.getBehaviour(Transform).y + 0.5 * this.canvas.height - this.myBackGround.getBehaviour(Transform).y - this.backgroundImageRectangle.height <= 0) {
+                if (this.gameObject.getBehaviour(Transform).y + 0.5 * this.canvas.height * this.gameObject.getBehaviour(Transform).scaleX - this.myBackGround.getBehaviour(Transform).y - this.backgroundImageRectangle.height <= 0) {
                     this.gameObject.getBehaviour(Transform).y = this.gameObject.getBehaviour(Transform).y + this.speed;
                 }
                 break;
