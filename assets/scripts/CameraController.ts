@@ -2,6 +2,7 @@ import { ImageRenderer, ImageRenderer as imageRenderer } from "../../src/behavio
 import { ShapeRectRenderer } from "../../src/behaviours/ShapeRectRenderer";
 import { createGameObject, GameObject, getBehaviourClassByName, getGameObjectById, hasGameObjectById } from "../../src/engine";
 import { Behaviour } from "../../src/engine/Behaviour";
+import { Rectangle } from "../../src/engine/math";
 import { Transform } from "../../src/engine/Transform";
 import { number } from "../../src/engine/validators/number";
 
@@ -16,6 +17,7 @@ export class CameraController extends Behaviour {
     downController: GameObject;
     isHonver = false;
     direction: number;
+    backgroundImageRectangle: Rectangle
 
     @number()
     speed = 5;
@@ -28,8 +30,6 @@ export class CameraController extends Behaviour {
     onStart() {
 
         const myCameraTransform = this.gameObject.getBehaviour(Transform);
-        //let mouseDownTransform = new Transform();
-        //let mouseDown = false;
         const body = document.body;
         const mouseDownPosition = { x: 0, y: 0 };
         document.oncontextmenu = () => {
@@ -104,7 +104,7 @@ export class CameraController extends Behaviour {
         const transformUp = new Transform();
         transformUp.x = -80;
         transformUp.y = -275;
-        transformUp.rotation =0
+        transformUp.rotation = 0
         this.upController.addBehaviour(transformUp);
         const imageUp = new imageRenderer()
         imageUp.imagePath = 'assets/images/arr1_trans.png'
@@ -157,7 +157,9 @@ export class CameraController extends Behaviour {
     onTick(duringTime: number) {
         switch (this.direction) {
             case 1:
-                this.gameObject.getBehaviour(Transform).x = this.gameObject.getBehaviour(Transform).x - this.speed;
+                if (this.gameObject.getBehaviour(Transform).x - 0.5 * this.canvas.width - this.myBackGround.getBehaviour(Transform).x >= 0) {
+                    this.gameObject.getBehaviour(Transform).x = this.gameObject.getBehaviour(Transform).x - this.speed;
+                }
                 break;
             case 2:
                 this.gameObject.getBehaviour(Transform).x = this.gameObject.getBehaviour(Transform).x + this.speed;
@@ -183,20 +185,16 @@ export class CameraController extends Behaviour {
             this.gameObject.parent.addChild(child)
             this.myBackGround = child
         }
-        if (!this.myBackGround.hasBehaviour(imageRenderer)) {
-            // const imageRenderer  =  new ImageRenderer();
-            // imageRenderer.imagePath = 'assets/engineTest/images/testImage.png'
-            // this.myBackGround.addBehaviour(imageRenderer);
-        }
+
     }
 
     checkBackgroundRenderer() {
 
-        if(!this.myBackGround.hasBehaviour(imageRenderer))
-        {
-            const imageRenderer =  new ImageRenderer()
+        if (!this.myBackGround.hasBehaviour(imageRenderer)) {
+            const imageRenderer = new ImageRenderer()
             imageRenderer.imagePath = "assets/engineTest/images/th.jpg"
             this.myBackGround.addBehaviour(imageRenderer);
         }
+        this.backgroundImageRectangle = this.myBackGround.getBehaviour(imageRenderer).getBounds();
     }
 }
