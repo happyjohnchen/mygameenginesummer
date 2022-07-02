@@ -168,6 +168,7 @@ export class CameraController extends Behaviour {
 
                 break;
             case 3:
+                if(this.gameObject.getBehaviour(Transform).y - 0.5 * this.canvas.height - this.myBackGround.getBehaviour(Transform).y >= 0)
                 this.gameObject.getBehaviour(Transform).y = this.gameObject.getBehaviour(Transform).y - this.speed;
                 break;
             case 4:
