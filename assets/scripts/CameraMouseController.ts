@@ -157,7 +157,7 @@ export class CameraMouseController extends Behaviour {
     onTick(duringTime: number) {
         switch (this.direction) {
             case 1:
-                if (this.gameObject.getBehaviour(Transform).x - 0.5 * this.canvas.width - this.myBackGround.getBehaviour(Transform).x >= 0) {
+                if (this.gameObject.getBehaviour(Transform).x - 0.5 * this.canvas.width * this.gameObject.getBehaviour(Transform).scaleX - this.myBackGround.getBehaviour(Transform).x >= 0) {
                     this.gameObject.getBehaviour(Transform).x = this.gameObject.getBehaviour(Transform).x - this.speed;
                 }
                 break;
