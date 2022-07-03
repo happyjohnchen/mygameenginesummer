@@ -39,8 +39,8 @@ export class addAttribute extends Behaviour  {
         this.addValueCount = value;
     }
 
-    setType(roomtype:string){
-        this.type = roomtype;
+    setType(arributeType:string){
+        this.type = arributeType;
     }
     setPrefabProduction(pro:number){
         this.addValueCount = pro;
