@@ -75,3 +75,15 @@ children:
         properties:
           speed: 3
     id: camera
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: RoomSet
+        properties:
+          roomtype: 0
+    id: tileMap
