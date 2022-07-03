@@ -44,19 +44,14 @@ export class AttributeSystem extends Behaviour {
      radix = 0.2;
 
      gamecontroller:GameController
-
     //游戏开始时会执行一次
     onStart() { //游戏开始时的数值
         
-        //this.gameObject.getBehaviour(TextRenderer).text= this.Primevalue.toString();
-        //拿到数值
-        
-        // this.water = getGameObjectById("GameController").getBehaviour(GameController).game.water;
-        // this.food = getGameObjectById("GameController").getBehaviour(GameController).game.food;
-        // this.energy = getGameObjectById("GameController").getBehaviour(GameController).game.energy;
 
     }
-
+    onPlayStart(){
+        //this.game = this.gamecontroller.game;
+    }
     //每次屏幕刷新执行 显示数值
     onUpdate() {
         //this.gameObject.getBehaviour(TextRenderer).text= this.Primevalue.toString();
@@ -64,20 +59,7 @@ export class AttributeSystem extends Behaviour {
 
     }
 
-    //实时更新游戏里的值
     onTick(duringTime: number) {
-        // this.nowTime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getMinTime();
-        // this.lastTime = this.lastTime==60? 0:this.lastTime;
-        // if(this.nowTime-this.lastTime >=this. onceConsumeTime*60){
-        //     this.setValue(-this.consumePerTime);
-        //     this.lastTime = this.nowTime;    
-        //     //console.log(this.lasttime);
-        // }
-        // //console.log(this.lasttime);
-        this.water = this.gamecontroller.game.water;
-        this.food = this.gamecontroller.game.food;
-        this.energy = this.gamecontroller.game.energy;
-        this.material = this.gamecontroller.game.material;
     }
 
     // getValue(){
@@ -87,37 +69,29 @@ export class AttributeSystem extends Behaviour {
     changeAttributeValue(changedValue:number,type:string){ //改变水，食物，能源，材料value 且value最大值最小值不能超过最大值最小值
         switch(type){
             case "water":
-                this.gamecontroller.game.water = this.changeValue(this.water,changedValue);
+                this.gamecontroller.game.water = this.changeValue(this.gamecontroller.game.water,changedValue);
             console.log("目前水属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.water);
             break;
             case "energy":
-                this.gamecontroller.game.energy = this.changeValue(this.energy,changedValue);
+                this.gamecontroller.game.energy = this.changeValue(this.gamecontroller.game.energy,changedValue);
             console.log("目前电属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.energy);
             break;
             case "food":
-                this.gamecontroller.game.food = this.changeValue(this.food,changedValue);
+                this.gamecontroller.game.food = this.changeValue(this.gamecontroller.game.food,changedValue);
             break;
             case"material":
-                this.gamecontroller.game.material = this.changeValue(this.material,changedValue);//可能没有上限 到时候再说
+                this.gamecontroller.game.material = this.changeValue(this.gamecontroller.game.material,changedValue);//可能没有上限 到时候再说
             break;
         }
         
     }
 
     changeValue(primeValue:number,addValue:number){  //检查超没超过上下限  上下限也可以变为参数
-        let newnumber = addValue+primeValue;
-        newnumber = newnumber>this.maxValue?this.maxValue:newnumber;
-        newnumber = newnumber<this.minValue?this.minValue:newnumber;
-        return newnumber;
+        let newNumber = addValue+primeValue;
+        newNumber = newNumber>this.maxValue?this.maxValue:newNumber;
+        newNumber = newNumber<this.minValue?this.minValue:newNumber;
+        return newNumber;
     }
-
-    getConsumePerTime(){
-        return this.consumePerTime;
-    }
-    
-   setConsumePerTime(consume:number){
-        this.consumePerTime = consume;
-   }
 
    calculateCreatePeriod(roomlevel:number,totalAttribute:number){//计算产出周期
     const primeTimeTable = {
@@ -164,11 +138,12 @@ export class AttributeSystem extends Behaviour {
             2: 4,
             3: 7
         }
-        this.gamecontroller.game.energy = this.changeValue(this.energy,-consumption[level]);
-        console.log(this.gamecontroller.game.energy);
+        this.gamecontroller.game.energy = this.changeValue(this.gamecontroller.game.energy,-consumption[level]);
+        console.log("目前电量"+this.gamecontroller.game.energy);
    }
 
    consumeForFoodWater(){//计算水和食物消耗
-
+    this.gamecontroller.game.water = this.changeValue(this.gamecontroller.game.water,-1);
+    this.gamecontroller.game.food= this.changeValue(this.gamecontroller.game.food,-1);
    }
 }

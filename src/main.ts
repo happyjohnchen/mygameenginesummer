@@ -51,6 +51,9 @@ registerBehaviourClass(Player);
 registerBehaviourClass(GameController);
 registerBehaviourClass(TimeControllerSystem);
 
+registerBehaviourClass(CameraMouseController);
+
+
 
 registerBehaviourClass(AttributeSystem);
 registerBehaviourClass(addAttribute);
@@ -60,8 +63,6 @@ registerBehaviourClass(changeTimeSpeed);
 
 registerBehaviourClass(test);
 
-
-registerBehaviourClass(CameraMouseController);
 registerBehaviourClass(RoomSet);
 registerBehaviourClass(Room);
 

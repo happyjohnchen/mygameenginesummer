@@ -25,11 +25,14 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: 0
-          y: 0
+          x: -1000
+          y: -500
           scaleX: 1
           scaleY: 1
           rotation: 0
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/engineTest/images/th.jpg
     id: Background
   - behaviours:
       - type: Transform
@@ -69,6 +72,8 @@ children:
           rotation: 0
       - type: Camera
       - type: CameraMouseController
+        properties:
+          speed: 3
     id: camera
   - behaviours:
       - type: Transform
