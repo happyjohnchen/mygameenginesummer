@@ -130,23 +130,8 @@ export class RoomClass extends Behaviour {
         this.attributeType = this.changeType(this.roomType);
         //console.log(this.attributeType)
         if(this.attributeType!=null){//是否能产出
-            // let gameObjectchild = new GameObject() //产出三种属性
-            // //gameObjectchild.parent= this.gameObject;
-            // this.gameObject.parent.addChild(gameObjectchild);
-            // const childrenTransform = new Transform();
-            // childrenTransform.x = this.gameObject.getBehaviour(Transform).x + this.producePos;
-            // childrenTransform.y = this.gameObject.getBehaviour(Transform).y + this.producePos;
-            // gameObjectchild.addBehaviour(childrenTransform);
-            // const addAttributeBe = new addAttribute();
-            // addAttributeBe.setType(this.attributeType);
-            // const attributeproduction = getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateProduction(this.roomLevel,this.attributeType);
-            // addAttributeBe.setPrefabProduction(attributeproduction);
-            // gameObjectchild.addBehaviour(addAttributeBe);
-            // const attributeprefab = new Prefab();
-            // attributeprefab.prefabPath = 'assets/engineTest/prefabs/add'+this.attributeType +'Prefab.yaml'
-            // gameObjectchild.addBehaviour(attributeprefab);
-            this.createPrefab(this.attributeType);
-            //this.createPrefab("material");
+            //this.createPrefab(this.attributeType);
+            this.createPrefab("material");
             //下面是生成材料预制体
         }
         console.log("create");
@@ -155,7 +140,6 @@ export class RoomClass extends Behaviour {
 
     createPrefab(type:string){//生成对应属性得预制体  water food energy material
         let gameObjectchild = new GameObject() //产出三种属性
-        //gameObjectchild.parent= this.gameObject;
         this.gameObject.parent.addChild(gameObjectchild);
         const childrenTransform = new Transform();
         childrenTransform.x = this.gameObject.getBehaviour(Transform).x + this.producePos;
@@ -167,7 +151,7 @@ export class RoomClass extends Behaviour {
         addAttributeBe.setPrefabProduction(attributeproduction);
         gameObjectchild.addBehaviour(addAttributeBe);
         const attributeprefab = new Prefab();
-        attributeprefab.prefabPath = 'assets/engineTest/prefabs/add'+type +'Prefab.yaml'
+        attributeprefab.prefabPath = 'assets/engineTest/prefabs/add'+type+'Prefab.yaml'
         gameObjectchild.addBehaviour(attributeprefab);
     }
 
