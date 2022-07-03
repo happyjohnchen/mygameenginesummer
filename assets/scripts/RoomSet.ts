@@ -40,7 +40,7 @@ export class RoomSet extends Behaviour {
     }
 
     createRoom(roomPositionX: number, roomPositionY: number, roomStatus: number) {
-        if ( roomPositionX + 1 > 6 || roomPositionX - 1 < -1) return;//超出所建的范围
+        if (roomPositionX + 1 > 6 || roomPositionX - 1 < -1) return;//超出所建的范围
         this.roomSetID++;
 
         //console.log(gameController1.rooms)
@@ -67,7 +67,7 @@ export class RoomSet extends Behaviour {
         if (roomStatus == RoomStatus.canBuild) {
             backgroundImage.imagePath = 'assets/engineTest/images/testImage.png'
         }
-       
+
         roomChild.addBehaviour(backgroundImage);
         this.storeBuildStatus(roomPositionX, roomPositionY, roomChild)
 
@@ -79,7 +79,7 @@ export class RoomSet extends Behaviour {
     }
 
     getRoomBehabiour(gameObeject: GameObject) {
-       // console.log(gameObeject)
+        // console.log(gameObeject)
         return gameObeject.getBehaviour(Room)
     }
     removeRoomClass(gameObeject: GameObject) {
@@ -91,23 +91,23 @@ export class RoomSet extends Behaviour {
         const clickRoomData = clickRoom.roomModule
         const neighborRoomData = neighborRoom.roomModule
         console.log(clickRoom)
-        if (neighborRoomData.level == 1&&clickRoomData.roomType == neighborRoomData.roomType){
-        console.log("merge")
-        console.log("1:")
-        console.log(clickRoom)
-        console.log("2:")
-        console.log(neighborRoom)
-        clickRoomData.neighbourId = neighborRoomData.roomId
-        neighborRoomData.neighbourId = clickRoomData.roomId
-        clickRoom.upgradeRoom(clickGameobject)
-        neighborRoom.upgradeRoom(neighborGameObject)
-        this.removeRoomClass(neighborGameObject)//右边的房间去掉roomclass的behaviour
-        switch (clickRoomData.roomType) {//加图片
-            case 0:
-                clickGameobject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage2.png'
-                neighborGameObject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage21.png'
+        if (neighborRoomData.level == 1 && clickRoomData.roomType == neighborRoomData.roomType) {
+            console.log("merge")
+            console.log("1:")
+            console.log(clickRoom)
+            console.log("2:")
+            console.log(neighborRoom)
+            clickRoomData.neighbourId = neighborRoomData.roomId
+            neighborRoomData.neighbourId = clickRoomData.roomId
+            clickRoom.upgradeRoom(clickGameobject)
+            neighborRoom.upgradeRoom(neighborGameObject)
+            this.removeRoomClass(neighborGameObject)//右边的房间去掉roomclass的behaviour
+            switch (clickRoomData.roomType) {//加图片
+                case 0:
+                    clickGameobject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage2.png'
+                    neighborGameObject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage21.png'
+            }
         }
-    }
     }
     setRoomImage(roomtype: RoomType, roomStatus: RoomStatus) {
         let imagePath: string
@@ -200,34 +200,34 @@ export class RoomSet extends Behaviour {
         let bottomRoom = this.getRoomByXY(position.x, position.y + 1)
         let leftRoom = this.getRoomByXY(position.x - 1, position.y)
         let rightRoom = this.getRoomByXY(position.x + 1, position.y)
+        let topRoom = this.getRoomByXY(position.x, position.y - 1);
+        if (position.x - 1 >= 0 && leftRoom == null && position.y != 1) this.createRoom(position.x - 1, position.y, RoomStatus.canBuild);
+        if (position.x < 5 && rightRoom == null) this.createRoom(position.x + 1, position.y, RoomStatus.canBuild);
+        if (bottomRoom == null) this.createRoom(position.x, position.y + 1, RoomStatus.canBuild);
+        if (topRoom == null && position.y > 2) this.createRoom(position.x, position.y - 1, RoomStatus.canBuild);
+        /*if (position.x - 1 >= 0 && leftRoom == null && rightRoom == null&&bottomRoom == null) {
+             console.log('a')
+             console.log(rightRoom)
+             this.createRoom(position.x + 1, position.y, RoomStatus.canBuild)
+             this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
+             this.createRoom(position.x - 1, position.y, RoomStatus.canBuild)
+         }
+         else if (position.x > 0 && rightRoom == null&&bottomRoom == null) {
+             console.log('b')
+             this.createRoom(position.x + 1, position.y, RoomStatus.canBuild)
+             this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
 
-if(position.x - 1 >= 0&&leftRoom == null&&position.y!=1) this.createRoom(position.x - 1, position.y, RoomStatus.canBuild);
-if(position.x<5&& rightRoom == null)this.createRoom(position.x + 1, position.y, RoomStatus.canBuild);
-if(bottomRoom == null)  this.createRoom(position.x, position.y + 1, RoomStatus.canBuild);
-        
-           /*if (position.x - 1 >= 0 && leftRoom == null && rightRoom == null&&bottomRoom == null) {
-                console.log('a')
-                console.log(rightRoom)
-                this.createRoom(position.x + 1, position.y, RoomStatus.canBuild)
-                this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
-                this.createRoom(position.x - 1, position.y, RoomStatus.canBuild)
-            }
-            else if (position.x > 0 && rightRoom == null&&bottomRoom == null) {
-                console.log('b')
-                this.createRoom(position.x + 1, position.y, RoomStatus.canBuild)
-                this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
+         }
+         else if (position.x - 1 >= 0 && leftRoom == null && position.y != 1&&bottomRoom == null) {
+             console.log('c')
+             this.createRoom(position.x - 1, position.y, RoomStatus.canBuild)
+             this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
 
-            }
-            else if (position.x - 1 >= 0 && leftRoom == null && position.y != 1&&bottomRoom == null) {
-                console.log('c')
-                this.createRoom(position.x - 1, position.y, RoomStatus.canBuild)
-                this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
-
-            }
-            else {
-                console.log("f")
-                this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
-            }
-        }*/
+         }
+         else {
+             console.log("f")
+             this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
+         }
+     }*/
     }
 }
