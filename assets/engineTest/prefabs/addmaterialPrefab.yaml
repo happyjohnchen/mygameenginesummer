@@ -16,10 +16,7 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: ShapeRectRenderer
+      - type: ImageRenderer
         properties:
-          width: 100
-          height: 100
-          color: red
-          customColor: '#ffffff'
+          imagePath: assets/engineTest/images/testImage1.png
     id: addAttributePrefab

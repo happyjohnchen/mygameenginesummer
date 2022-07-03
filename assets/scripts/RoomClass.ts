@@ -130,9 +130,8 @@ export class RoomClass extends Behaviour {
         this.attributeType = this.changeType(this.roomType);
         //console.log(this.attributeType)
         if(this.attributeType!=null){//是否能产出
-            //this.createPrefab(this.attributeType);
+            this.createPrefab(this.attributeType);
             this.createPrefab("material");
-            //下面是生成材料预制体
         }
         console.log("create");
     }
