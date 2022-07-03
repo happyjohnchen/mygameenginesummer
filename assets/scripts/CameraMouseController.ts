@@ -28,7 +28,10 @@ export class CameraMouseController extends Behaviour {
 
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
+
+        const myCameraTransform = this.gameObject.getBehaviour(Transform);
         const body = document.body;
+        const mouseDownPosition = { x: 0, y: 0 };
         document.oncontextmenu = () => {
             return false;
         }
@@ -185,24 +188,20 @@ export class CameraMouseController extends Behaviour {
     }
 
     checkBackground() {
-        if (hasGameObjectById('Background')) {
+        if (hasGameObjectById('background')) {
             this.myBackGround = getGameObjectById('Background')
-            console.log("Find Background")
         }
         else {
             const child = new GameObject();
-            child.id = 'Background'
-            console.log(this.gameObject.parent + "11111")
+            child.id = 'background'
             this.gameObject.parent.addChild(child)
             this.myBackGround = child
-            console.log(this.myBackGround)
         }
 
     }
 
     checkBackgroundRenderer() {
-        console.log("!!!")
-        console.log(this.myBackGround)
+
         if (!this.myBackGround.hasBehaviour(imageRenderer)) {
             const imageRenderer = new ImageRenderer()
             imageRenderer.imagePath = "assets/engineTest/images/th.jpg"
