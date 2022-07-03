@@ -43,9 +43,8 @@ export class PersonSet extends Behaviour {
         const newPerson = new GameObject();
         this.gameObject.addChild(newPerson);
         const personTnfomation = new PersonClass();
-        //personTnfomation.personId 
-
+        personTnfomation.personId = this.gameController.get
 
     }
-    
+
 }

@@ -1,11 +1,14 @@
 import { Behaviour } from "../../src/engine/Behaviour";
+import { PersonRace } from "./modules/PersonModule";
 
 export class PersonClass extends Behaviour {
 
     //在此定义脚本中的属性
     personId: number
     personName: string
+    animationId: number
     room: Behaviour
+    personRace: PersonRace
 
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
@@ -35,7 +38,7 @@ export class PersonClass extends Behaviour {
     }
 
     setAnimation(){
-        
+
     }
 
     
