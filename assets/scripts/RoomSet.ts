@@ -201,22 +201,24 @@ export class RoomSet extends Behaviour {
         let leftRoom = this.getRoomByXY(position.x - 1, position.y)
         let rightRoom = this.getRoomByXY(position.x + 1, position.y)
 
-
-        if (bottomRoom == null) {
-            if (position.x - 1 >= 0 && leftRoom == null && rightRoom == null) {
+if(position.x - 1 >= 0&&leftRoom == null&&position.y!=1) this.createRoom(position.x - 1, position.y, RoomStatus.canBuild);
+if(position.x<5&& rightRoom == null)this.createRoom(position.x + 1, position.y, RoomStatus.canBuild);
+if(bottomRoom == null)  this.createRoom(position.x, position.y + 1, RoomStatus.canBuild);
+        
+           /*if (position.x - 1 >= 0 && leftRoom == null && rightRoom == null&&bottomRoom == null) {
                 console.log('a')
                 console.log(rightRoom)
                 this.createRoom(position.x + 1, position.y, RoomStatus.canBuild)
                 this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
                 this.createRoom(position.x - 1, position.y, RoomStatus.canBuild)
             }
-            else if (position.x > 0 && rightRoom == null) {
+            else if (position.x > 0 && rightRoom == null&&bottomRoom == null) {
                 console.log('b')
                 this.createRoom(position.x + 1, position.y, RoomStatus.canBuild)
                 this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
 
             }
-            else if (position.x - 1 >= 0 && leftRoom == null && position.y != 1) {
+            else if (position.x - 1 >= 0 && leftRoom == null && position.y != 1&&bottomRoom == null) {
                 console.log('c')
                 this.createRoom(position.x - 1, position.y, RoomStatus.canBuild)
                 this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
@@ -226,6 +228,6 @@ export class RoomSet extends Behaviour {
                 console.log("f")
                 this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
             }
-        }
+        }*/
     }
 }
