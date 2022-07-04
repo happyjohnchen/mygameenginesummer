@@ -96,7 +96,7 @@ export class RoomClass extends Behaviour {
         return sizetable[this.roomLevel];
     }
 
-    addPersonInRoom(id:number){//记录人物编号 并判断是否超出限额
+    addPerson(id:number){//记录人物编号 并判断是否超出限额
         if(this.people.length<this.calculateSize()){
             //this.people[totalPeople] = id;//把id存起来
             this.people[this.people.length] = id

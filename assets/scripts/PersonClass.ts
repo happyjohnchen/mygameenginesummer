@@ -1,14 +1,15 @@
 import { Behaviour } from "../../src/engine/Behaviour";
-import { PersonRace } from "./modules/PersonModule";
+import { PersonModule, PersonRace } from "./modules/PersonModule";
 
 export class PersonClass extends Behaviour {
 
+    personModule: PersonModule
     //在此定义脚本中的属性
-    personId: number
+    /* personId: number
     personName: string
     animationId: number
     room: Behaviour
-    personRace: PersonRace
+    personRace: PersonRace */
 
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
@@ -19,6 +20,7 @@ export class PersonClass extends Behaviour {
     onPlayStart() {
         this.gameObject.onClick = () => {
             //移动房间
+            return this.gameObject;
         }
     }
 
@@ -29,7 +31,6 @@ export class PersonClass extends Behaviour {
 
     //平均每16ms执行一次
     onTick(duringTime: number) {
-
     }
 
     //删除Behaviour时会执行一次
@@ -37,9 +38,9 @@ export class PersonClass extends Behaviour {
 
     }
 
-    setAnimation(){
+    setAnimation() {
 
     }
 
-    
+
 }
