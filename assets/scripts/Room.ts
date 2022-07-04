@@ -121,6 +121,7 @@ roomClass.setRoomType(roomModule.roomType)
         console.log(this.gameObject.getBehaviour(Room).roomModule.roomId)
         return this.gameObject.getBehaviour(Room).roomModule.roomId
     }
+    
     //游戏开始时会执行一次
     onPlayStart() {
 

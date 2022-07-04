@@ -8,7 +8,28 @@ import { GameController } from "./GameController";
 import { GameSet } from "./GameSet";
 import { RoomModule, RoomPosition, RoomStatus, RoomType } from "./modules/RoomModule";
 import { Room } from "./Room";
+export function setRoomImage(roomtype: RoomType, roomStatus: RoomStatus) {
+    let imagePath: string
+    switch (roomStatus) {//加图片
+        case 1:
+            switch (roomtype) {
+                case 1: imagePath = 'assets/engineTest/images/testImage1.png'//WaterFactory
+                    break;
+                case 2: imagePath = 'assets/engineTest/images/testImage2.png'//EnergyFactory
+                    break;
+                case 3: imagePath = 'assets/engineTest/images/testImage2.png'//FoodFactory
+                    break;
+            }
+            break;
 
+        case 2:
+
+            imagePath = 'assets/engineTest/images/testImage2.png'//灰色透明图片
+            break;
+
+    }
+    return imagePath
+}
 export class RoomSet extends Behaviour {
     //建坑
     //在此定义脚本中的属性
@@ -109,44 +130,9 @@ export class RoomSet extends Behaviour {
             }
         }
     }
-    setRoomImage(roomtype: RoomType, roomStatus: RoomStatus) {
-        let imagePath: string
-        switch (roomStatus) {//加图片
-            case 1:
-                switch (roomtype) {
-                    case 1: imagePath = 'assets/engineTest/images/testImage1.png'//WaterFactory
-                        break;
-                    case 2: imagePath = 'assets/engineTest/images/testImage2.png'//EnergyFactory
-                        break;
-                    case 3: imagePath = 'assets/engineTest/images/testImage2.png'//FoodFactory
-                        break;
-                }
-                break;
+  
 
-            case 2:
-
-                imagePath = 'assets/engineTest/images/testImage2.png'//灰色透明图片
-                break;
-
-        }
-        return imagePath
-    }
-
-    createRoomFromData(roomModule: RoomModule) {//从存档里恢复room
-        let gameController = getGameObjectById("GameController").getBehaviour(GameController)
-        let saveRoom = new GameObject()
-        gameController.addRoom(saveRoom)
-        const childTransform = new Transform();
-        childTransform.x = 0 + roomModule.position.x * 150;
-        childTransform.y = -200 + roomModule.position.y * 100;
-        saveRoom.addBehaviour(childTransform);
-        const room = new Room();
-        room.roomModule = roomModule
-        saveRoom.addBehaviour(room);
-        const backgroundImage = new ImageRenderer()
-        backgroundImage.imagePath = this.setRoomImage(roomModule.roomType, roomModule.roomStatus)
-        saveRoom.addBehaviour(backgroundImage);
-    }
+    
     getRoomByXY(x: number, y: number) {//根据xy获取room
 
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
