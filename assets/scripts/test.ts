@@ -9,6 +9,7 @@ import {string} from "../../src/engine/validators/string";
 import { Transform } from "../../src/engine/Transform";
 import { RoomClass } from "./RoomClass";
 import { AttributeSystem } from "./AttributeSystem";
+import { PersonRace } from "./modules/PersonModule";
 
 
 export class Test extends Behaviour {
@@ -29,16 +30,18 @@ export class Test extends Behaviour {
     people: number[] = [16,32];//储存进来人的id
 
     gameObejecttest;
+    
     onStart() {
-        this.gameObject.active = false;
+
     }
 
     //游戏运行模式开始时会执行一次
     onPlayStart() {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
-                //console.log( getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateProduction(3,"water"));
-                console.log(RoomType.WaterFactory);
+                
+            const a=getGameObjectById("AttributeController").getBehaviour(AttributeSystem).getPeopleAttribute(PersonRace.Giant,RoomType.EnergyFactory);
+            console.log("人的属性"+a);
             }
      
        }

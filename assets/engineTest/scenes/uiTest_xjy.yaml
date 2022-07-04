@@ -128,6 +128,7 @@ children:
           color: red
           customColor: '#ffffff'
       - type: UiUnfold
+      - type: Test
     id: BuildButton
   - behaviours:
       - type: Transform

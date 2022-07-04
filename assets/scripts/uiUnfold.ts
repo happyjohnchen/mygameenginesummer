@@ -3,6 +3,7 @@ import { GameObject, getGameObjectById } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
 import { Transform } from "../../src/engine/Transform";
 import { string } from "../../src/engine/validators/string";
+import { PersonRace } from "./modules/PersonModule";
 
 export class UiUnfold extends Behaviour {
 
@@ -20,15 +21,6 @@ export class UiUnfold extends Behaviour {
         getGameObjectById("CreateUi").active = false;  
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
-                // let gameObjectchild = new GameObject() 
-                // this.gameObject.parent.addChild(gameObjectchild);
-                // const childrenTransform = new Transform();
-                // childrenTransform.x = this.gameObject.getBehaviour(Transform).x ;
-                // childrenTransform.y = this.gameObject.getBehaviour(Transform).y ;
-                // gameObjectchild.addBehaviour(childrenTransform);
-                // const prefab = new Prefab();
-                // prefab.prefabPath = this.prefabsPath;
-                // gameObjectchild.addBehaviour(prefab);
                 getGameObjectById("CreateUi").active = true;     
             }
      

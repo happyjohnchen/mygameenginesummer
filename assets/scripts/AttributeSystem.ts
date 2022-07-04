@@ -6,6 +6,7 @@ import { TimeControllerSystem } from "./TimeControllerSystem";
 import { string } from "../../src/engine/validators/string";
 import { GameController } from "./GameController";
 import { RoomType } from "./modules/RoomModule";
+import { PersonRace } from "./modules/PersonModule";
 export class AttributeSystem extends Behaviour {
 
     //在此定义脚本中的属性
@@ -172,6 +173,35 @@ export class AttributeSystem extends Behaviour {
         else{
             //触发提醒ui
             return false;
+        }
+   }
+
+   getPeopleAttribute(peopletype:PersonRace,roomType:RoomType){ //根据人种得到对应属性值
+        const waterForPeople = {  //0123分别对应 人 巨人 矮人 精灵
+            0:2,
+            1:1,
+            2:1,
+            3:4
+        }
+        const energyForPeople = {
+            0:2,
+            1:4,
+            2:1,
+            3:1
+        }
+        const foodForPeople = {
+            0:2,
+            1:1,
+            2:4,
+            3:1
+        }
+        switch(roomType){
+            case RoomType.WaterFactory:
+                return waterForPeople[peopletype];
+            case RoomType.EnergyFactory:
+                return energyForPeople[peopletype];
+            case RoomType.FoodFactory:
+                return foodForPeople[peopletype];
         }
    }
 }

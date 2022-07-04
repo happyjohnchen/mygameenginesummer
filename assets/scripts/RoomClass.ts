@@ -35,9 +35,9 @@ export class RoomClass extends Behaviour {
 
     roomId = 0;
     roomLevel = 1;
-    peopleInRoom;
+    //peopleInRoom;
     //roompos = new Array();
-    people: number[] = [];//储存进来人的id
+    peopleInRoom: number[] = [];//储存进来人的id
     private attributeSystem
 
     waterInRoom = 0;  //用来计算存进来的人物值
@@ -62,7 +62,7 @@ export class RoomClass extends Behaviour {
     //每次屏幕刷新执行
     onUpdate() { 
    
-        //console.log(this.getRoomType() + "时间周期为："+this.calculatePeriod() + "小时");
+       
         
     }
 
@@ -104,9 +104,9 @@ export class RoomClass extends Behaviour {
     }
 
     addPersonForRoom(id:number){//记录人物编号 并判断是否超出限额
-        if(this.people.length<this.calculateSize()){
+        if(this.peopleInRoom.length<this.calculateSize()){
             //this.people[totalPeople] = id;//把id存起来
-            this.people[this.people.length] = id
+            this.peopleInRoom[this.peopleInRoom.length] = id
         }
         else {
             console.log("已满");
@@ -115,9 +115,9 @@ export class RoomClass extends Behaviour {
     }
 
     removePersonForRoom(id:number){//记录人物编号
-        for(var p=0;p<this.people.length;p++){
-            if(this.people[p]==id){
-                this.people.splice(p,1);//删除
+        for(var p=0;p<this.peopleInRoom.length;p++){
+            if(this.peopleInRoom[p]==id){
+                this.peopleInRoom.splice(p,1);//删除
                 break;
             }
         }
@@ -125,7 +125,7 @@ export class RoomClass extends Behaviour {
 
     calculateTotalAttribute(){ //计算人物总属性 房间人物该属性之和
         let totalAttribute = 0;
-        for(var p=0;p<this.people.length;p++){
+        for(var p=0;p<this.peopleInRoom.length;p++){
             //这里写获取该id人物类属性
             //并作加法
             //
