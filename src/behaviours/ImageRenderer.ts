@@ -13,13 +13,13 @@ export class ImageRenderer extends Behaviour implements Renderer {
         return {
             x: 0,
             y: 0,
-            width: this.image.width,
-            height: this.image.height,
+            width: this.image ? this.image.width : 0,
+            height: this.image ? this.image.height : 0,
         };
     }
 
     onStart() {
-        if (this.imagePath!==""){
+        if (this.imagePath !== "") {
             this.image = this.engine.resourceManager.getImage(this.imagePath);
         }
     }
