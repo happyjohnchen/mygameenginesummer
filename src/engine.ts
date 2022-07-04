@@ -97,10 +97,12 @@ export class GameEngine {
     resourceManager = new ResourceManager();
     systems: System[] = [];
     loadSceneData: string = '';
+    ready: boolean = false;
 
     public mode: "edit" | "play" = 'edit'
 
     async start() {
+        this.ready = false;
         this.rootGameObject.engine = this;
 
         //获取模式
@@ -192,9 +194,30 @@ export class GameEngine {
     }
 
     private startup() {
+        this.ready = false;
         this.rootGameObject.addBehaviour(new Transform());
         const text = this.resourceManager.getText(this.currentSceneName);
         const scene = this.unserilize(text);
+
+        this.ready = true;//所有GameObject和Behaviour已经就绪
+
+        //启动每一个behaviour
+        function visit(gameObject: GameObject, mode: 'edit' | 'play') {
+            for (const behaviour of gameObject.behaviours) {
+                console.log(behaviour)
+                behaviour.onStart();
+                if (mode === "play") {
+                    behaviour.onPlayStart();
+                }
+            }
+            console.log(gameObject.children)
+            for (const child of gameObject.children) {
+                console.log(child)
+                visit(child, mode);
+            }
+        }
+        visit(this.rootGameObject, this.mode);
+
         if (scene) {
             this.rootGameObject.addChild(scene);
         }
@@ -406,9 +429,11 @@ export class GameObject {
         this.behaviours.push(behaviour);
         behaviour.gameObject = this;
         behaviour.engine = this.engine;
-        behaviour.onStart();
-        if (this.engine.mode === "play") {
-            behaviour.onPlayStart();
+        if (this.engine.ready) {
+            behaviour.onStart();
+            if (this.engine.mode === "play") {
+                behaviour.onPlayStart();
+            }
         }
         if (this.active) {
             behaviour.active = true;
