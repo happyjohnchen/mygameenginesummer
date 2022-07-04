@@ -254,15 +254,12 @@ export class GameEngine {
         //启动每一个behaviour
         function visit(gameObject: GameObject, mode: 'edit' | 'play') {
             for (const behaviour of gameObject.behaviours) {
-                console.log(behaviour)
                 behaviour.onStart();
                 if (mode === "play") {
                     behaviour.onPlayStart();
                 }
             }
-            console.log(gameObject.children)
             for (const child of gameObject.children) {
-                console.log(child)
                 visit(child, mode);
             }
         }
