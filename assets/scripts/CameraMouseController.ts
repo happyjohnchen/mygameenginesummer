@@ -1,9 +1,6 @@
 import {ImageRenderer, ImageRenderer as imageRenderer} from "../../src/behaviours/ImageRenderer";
-import {ShapeRectRenderer} from "../../src/behaviours/ShapeRectRenderer";
 import {
-    createGameObject,
     GameObject,
-    getBehaviourClassByName,
     getGameObjectById,
     hasGameObjectById
 } from "../../src/engine";
@@ -21,7 +18,7 @@ export class CameraMouseController extends Behaviour {
     rightController: GameObject;
     upController: GameObject;
     downController: GameObject;
-    isHonver = false;
+    isHover = false;
     direction: number;
     backgroundImageRectangle: Rectangle
 
@@ -77,14 +74,14 @@ export class CameraMouseController extends Behaviour {
 
         this.leftController.onHoverIn = (e) => {
             this.direction = 1;
-            this.isHonver = false;
+            this.isHover = false;
             imageLeft.imagePath = 'assets/images/arr1.png'
             console.log("left Controller")
         }
         this.leftController.onHoverOut = (e) => {
             this.direction = 0;
             imageLeft.imagePath = 'assets/images/arr1_trans.png'
-            this.isHonver = false;
+            this.isHover = false;
             //console.log("left Controller")
         }
 
@@ -102,13 +99,13 @@ export class CameraMouseController extends Behaviour {
 
         this.rightController.onHoverIn = (e) => {
             this.direction = 2;
-            this.isHonver = false;
+            this.isHover = false;
             imageRight.imagePath = 'assets/images/arr1.png'
             console.log("right Controller")
         }
         this.rightController.onHoverOut = (e) => {
             this.direction = 0;
-            this.isHonver = false;
+            this.isHover = false;
             imageRight.imagePath = 'assets/images/arr1_trans.png'
             //console.log("left Controller")
         }
@@ -127,13 +124,13 @@ export class CameraMouseController extends Behaviour {
 
         this.upController.onHoverIn = (e) => {
             this.direction = 3;
-            this.isHonver = false;
+            this.isHover = false;
             imageUp.imagePath = 'assets/images/arr1.png'
             console.log("up Controller")
         }
         this.upController.onHoverOut = (e) => {
             this.direction = 0;
-            this.isHonver = false;
+            this.isHover = false;
             imageUp.imagePath = 'assets/images/arr1_trans.png'
             //console.log("left Controller")
         }
@@ -151,13 +148,13 @@ export class CameraMouseController extends Behaviour {
 
         this.downController.onHoverIn = (e) => {
             this.direction = 4;
-            this.isHonver = false;
+            this.isHover = false;
             imageDown.imagePath = 'assets/images/arr1.png'
             console.log("down Controller")
         }
         this.downController.onHoverOut = (e) => {
             this.direction = 0;
-            this.isHonver = false;
+            this.isHover = false;
             imageDown.imagePath = 'assets/images/arr1_trans.png'
             //console.log("left Controller")
         }
