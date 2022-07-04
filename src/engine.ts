@@ -523,7 +523,7 @@ export function createGameObject(data: any, gameEngine: GameEngine): GameObject 
                 value = behaviourData.properties[key];
             } else {
                 if (metadata.type === 'string') {
-                    value = metadata.defaultValue;
+                    value = '';
                 } else if (metadata.type === 'boolean') {
                     value = false;
                 } else {
