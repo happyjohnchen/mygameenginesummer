@@ -1,4 +1,3 @@
-import { whitespaceFilter } from "_@microsoft_fast-foundation@2.46.9@@microsoft/fast-foundation";
 import { Prefab } from "../../src/behaviours/Prefab";
 import { GameObject, getGameObjectById,createGameObject } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
@@ -12,7 +11,7 @@ import { RoomClass } from "./RoomClass";
 import { AttributeSystem } from "./AttributeSystem";
 
 
-export class test extends Behaviour {
+export class Test extends Behaviour {
 
   
    

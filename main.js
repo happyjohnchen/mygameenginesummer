@@ -1,3 +1,5 @@
+const { generateMainTs } = require("./main/generate-main");
+
 async function startupCompiler() {
     const {createServer} = require('vite');
     const server = await createServer({
@@ -146,6 +148,7 @@ function generateAssetsYaml() {
 }
 
 async function startup() {
+    generateMainTs();
     generateAssetsYaml();
     new WebSocketProxy().start();
     await startupCompiler();
