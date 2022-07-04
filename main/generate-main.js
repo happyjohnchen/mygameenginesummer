@@ -7,7 +7,6 @@ function generateMainTs() {
         tsConfigFilePath: "./tsconfig.json",
     });
     const sourceFiles = project.getSourceFiles();
-    console.log(sourceFiles)
     const behaviourClassDeclarations = sourceFiles.map(extractBehaviours).flat();
 
     const output = project.createSourceFile("./src/main-1.ts");
