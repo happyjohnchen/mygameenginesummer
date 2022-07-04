@@ -19,6 +19,7 @@ export class Player extends Behaviour {
 
     onStart() {
         console.log("player onStart");
+        console.log(getGameObjectById('sound').getBehaviour(Sound))
     }
 
     onPlayStart() {

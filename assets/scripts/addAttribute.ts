@@ -5,7 +5,7 @@ import { AttributeSystem } from "./AttributeSystem";
 import {RoomModule, RoomType } from "./modules/RoomModule";
 import {string} from "../../src/engine/validators/string";
 import { RoomClass } from "./RoomClass";
-export class addAttribute extends Behaviour  {
+export class AddAttribute extends Behaviour  {
     //
     //用来挂载到可点击的增加属性的物品上
 
@@ -39,8 +39,8 @@ export class addAttribute extends Behaviour  {
         this.addValueCount = value;
     }
 
-    setType(roomtype:string){
-        this.type = roomtype;
+    setType(arributeType:string){
+        this.type = arributeType;
     }
     setPrefabProduction(pro:number){
         this.addValueCount = pro;

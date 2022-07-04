@@ -1,10 +1,13 @@
-import { ImageRenderer, ImageRenderer as imageRenderer } from "../../src/behaviours/ImageRenderer";
-import { ShapeRectRenderer } from "../../src/behaviours/ShapeRectRenderer";
-import { createGameObject, GameObject, getBehaviourClassByName, getGameObjectById, hasGameObjectById } from "../../src/engine";
-import { Behaviour } from "../../src/engine/Behaviour";
-import { Rectangle } from "../../src/engine/math";
-import { Transform } from "../../src/engine/Transform";
-import { number } from "../../src/engine/validators/number";
+import {ImageRenderer, ImageRenderer as imageRenderer} from "../../src/behaviours/ImageRenderer";
+import {
+    GameObject,
+    getGameObjectById,
+    hasGameObjectById
+} from "../../src/engine";
+import {Behaviour} from "../../src/engine/Behaviour";
+import {Rectangle} from "../../src/engine/math";
+import {Transform} from "../../src/engine/Transform";
+import {number} from "../../src/engine/validators/number";
 
 export class CameraMouseController extends Behaviour {
 
@@ -15,34 +18,37 @@ export class CameraMouseController extends Behaviour {
     rightController: GameObject;
     upController: GameObject;
     downController: GameObject;
-    isHonver = false;
+    isHover = false;
     direction: number;
     backgroundImageRectangle: Rectangle
 
     @number()
     speed = 5;
 
-    canvas = document.getElementById('game') as HTMLCanvasElement;
+    canvas = {width: 960, height: 540};
 
-
+    cameraTransform: Transform;
 
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
 
-        const myCameraTransform = this.gameObject.getBehaviour(Transform);
+        this.cameraTransform = this.gameObject.getBehaviour(Transform);
         const body = document.body;
-        const mouseDownPosition = { x: 0, y: 0 };
         document.oncontextmenu = () => {
             return false;
         }
         body.onwheel = (e) => {
-            if (e.deltaY < 0 ||
-                this.gameObject.getBehaviour(Transform).x - 0.5 * this.canvas.width * this.gameObject.getBehaviour(Transform).scaleX - this.myBackGround.getBehaviour(Transform).x > 0 &&
-                this.gameObject.getBehaviour(Transform).x + 0.5 * this.canvas.width * this.gameObject.getBehaviour(Transform).scaleX - this.myBackGround.getBehaviour(Transform).x - this.backgroundImageRectangle.width <= 0 &&
-                this.gameObject.getBehaviour(Transform).y - 0.5 * this.canvas.height * this.gameObject.getBehaviour(Transform).scaleY - this.myBackGround.getBehaviour(Transform).y > 0 &&
-                this.gameObject.getBehaviour(Transform).y + 0.5 * this.canvas.height * this.gameObject.getBehaviour(Transform).scaleX - this.myBackGround.getBehaviour(Transform).y - this.backgroundImageRectangle.height < 0) {
-                this.gameObject.getBehaviour(Transform).scaleX += e.deltaY / 5000;
-                this.gameObject.getBehaviour(Transform).scaleY += e.deltaY / 5000;
+            if ((e.deltaY < 0 && this.cameraTransform.scaleX > 0.5) ||
+                (e.deltaY > 0 &&
+                    this.cameraTransform.x - 0.5 * this.canvas.width * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).x > 0 &&
+                    this.cameraTransform.x + 0.5 * this.canvas.width * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).x - this.backgroundImageRectangle.width <= 0 &&
+                    this.cameraTransform.y - 0.5 * this.canvas.height * this.cameraTransform.scaleY - this.myBackGround.getBehaviour(Transform).y > 0 &&
+                    this.cameraTransform.y + 0.5 * this.canvas.height * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).y - this.backgroundImageRectangle.height < 0)
+            ) {
+                console.log(e.deltaY)
+                console.log(this.cameraTransform.scaleX)
+                this.cameraTransform.scaleX += e.deltaY / 5000;
+                this.cameraTransform.scaleY += e.deltaY / 5000;
             }
         }
         console.log("camara controller is prepared.")
@@ -58,7 +64,7 @@ export class CameraMouseController extends Behaviour {
         this.leftController = new GameObject();
         this.gameObject.addChild(this.leftController);
         const transformLeft = new Transform();
-        transformLeft.x = - 490;
+        transformLeft.x = -490;
         transformLeft.y = 100;
         transformLeft.rotation = -90
         this.leftController.addBehaviour(transformLeft);
@@ -68,14 +74,14 @@ export class CameraMouseController extends Behaviour {
 
         this.leftController.onHoverIn = (e) => {
             this.direction = 1;
-            this.isHonver = false;
+            this.isHover = false;
             imageLeft.imagePath = 'assets/images/arr1.png'
             console.log("left Controller")
         }
         this.leftController.onHoverOut = (e) => {
             this.direction = 0;
             imageLeft.imagePath = 'assets/images/arr1_trans.png'
-            this.isHonver = false;
+            this.isHover = false;
             //console.log("left Controller")
         }
 
@@ -93,13 +99,13 @@ export class CameraMouseController extends Behaviour {
 
         this.rightController.onHoverIn = (e) => {
             this.direction = 2;
-            this.isHonver = false;
+            this.isHover = false;
             imageRight.imagePath = 'assets/images/arr1.png'
             console.log("right Controller")
         }
         this.rightController.onHoverOut = (e) => {
             this.direction = 0;
-            this.isHonver = false;
+            this.isHover = false;
             imageRight.imagePath = 'assets/images/arr1_trans.png'
             //console.log("left Controller")
         }
@@ -118,13 +124,13 @@ export class CameraMouseController extends Behaviour {
 
         this.upController.onHoverIn = (e) => {
             this.direction = 3;
-            this.isHonver = false;
+            this.isHover = false;
             imageUp.imagePath = 'assets/images/arr1.png'
             console.log("up Controller")
         }
         this.upController.onHoverOut = (e) => {
             this.direction = 0;
-            this.isHonver = false;
+            this.isHover = false;
             imageUp.imagePath = 'assets/images/arr1_trans.png'
             //console.log("left Controller")
         }
@@ -142,13 +148,13 @@ export class CameraMouseController extends Behaviour {
 
         this.downController.onHoverIn = (e) => {
             this.direction = 4;
-            this.isHonver = false;
+            this.isHover = false;
             imageDown.imagePath = 'assets/images/arr1.png'
             console.log("down Controller")
         }
         this.downController.onHoverOut = (e) => {
             this.direction = 0;
-            this.isHonver = false;
+            this.isHover = false;
             imageDown.imagePath = 'assets/images/arr1_trans.png'
             //console.log("left Controller")
         }
@@ -163,23 +169,23 @@ export class CameraMouseController extends Behaviour {
     onTick(duringTime: number) {
         switch (this.direction) {
             case 1:
-                if (this.gameObject.getBehaviour(Transform).x - 0.5 * this.canvas.width * this.gameObject.getBehaviour(Transform).scaleX - this.myBackGround.getBehaviour(Transform).x >= 0) {
-                    this.gameObject.getBehaviour(Transform).x = this.gameObject.getBehaviour(Transform).x - this.speed;
+                if (this.cameraTransform.x - 0.5 * this.canvas.width * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).x >= 0) {
+                    this.cameraTransform.x = this.cameraTransform.x - this.speed;
                 }
                 break;
             case 2:
-                if (this.gameObject.getBehaviour(Transform).x + 0.5 * this.canvas.width * this.gameObject.getBehaviour(Transform).scaleX - this.myBackGround.getBehaviour(Transform).x - this.backgroundImageRectangle.width <= 0) {
-                    this.gameObject.getBehaviour(Transform).x = this.gameObject.getBehaviour(Transform).x + this.speed;
+                if (this.cameraTransform.x + 0.5 * this.canvas.width * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).x - this.backgroundImageRectangle.width <= 0) {
+                    this.cameraTransform.x = this.cameraTransform.x + this.speed;
                 }
 
                 break;
             case 3:
-                if (this.gameObject.getBehaviour(Transform).y - 0.5 * this.canvas.height * this.gameObject.getBehaviour(Transform).scaleY - this.myBackGround.getBehaviour(Transform).y >= 0)
-                    this.gameObject.getBehaviour(Transform).y = this.gameObject.getBehaviour(Transform).y - this.speed;
+                if (this.cameraTransform.y - 0.5 * this.canvas.height * this.cameraTransform.scaleY - this.myBackGround.getBehaviour(Transform).y >= 0)
+                    this.cameraTransform.y = this.cameraTransform.y - this.speed;
                 break;
             case 4:
-                if (this.gameObject.getBehaviour(Transform).y + 0.5 * this.canvas.height * this.gameObject.getBehaviour(Transform).scaleX - this.myBackGround.getBehaviour(Transform).y - this.backgroundImageRectangle.height <= 0) {
-                    this.gameObject.getBehaviour(Transform).y = this.gameObject.getBehaviour(Transform).y + this.speed;
+                if (this.cameraTransform.y + 0.5 * this.canvas.height * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).y - this.backgroundImageRectangle.height <= 0) {
+                    this.cameraTransform.y = this.cameraTransform.y + this.speed;
                 }
                 break;
 
@@ -190,8 +196,7 @@ export class CameraMouseController extends Behaviour {
     checkBackground() {
         if (hasGameObjectById('background')) {
             this.myBackGround = getGameObjectById('Background')
-        }
-        else {
+        } else {
             const child = new GameObject();
             child.id = 'background'
             this.gameObject.parent.addChild(child)

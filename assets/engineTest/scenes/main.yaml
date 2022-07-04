@@ -16,6 +16,40 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
+      - type: ShapeRectRenderer
+        properties:
+          width: 100
+          height: 100
+          color: red
+          customColor: '#ffffff'
+      - type: Player
+        properties:
+          speed: 10
+    id: Player
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 20
+              y: 40
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: Player
+              fontSize: 20
+              font: 微软雅黑
+              fontColor: '#ffffff'
+        id: PlayerText
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
       - type: Camera
     id: camera
   - behaviours:
@@ -68,6 +102,7 @@ children:
           width: 400
           height: 10
           color: blue
+          customColor: ''
       - type: Walkable
         properties:
           speed: 2
@@ -148,6 +183,7 @@ children:
         properties:
           soundPath: assets/engineTest/sounds/start.mp3
           autoPlay: false
+          _loopPlay: true
     id: sound
   - behaviours:
       - type: Transform
@@ -163,7 +199,8 @@ children:
           imagePathSuffix: .png
           startNum: 1
           endNum: 10
-          frameForEachImage: 50
+          frameForEachImage: 10
+          _pauseAnimation: false
     id: animation
   - behaviours:
       - type: Transform
@@ -190,37 +227,3 @@ children:
         properties:
           prefabPath: assets/engineTest/prefabs/testPrefab.yaml
     id: Prefab
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: ShapeRectRenderer
-        properties:
-          width: 100
-          height: 100
-          color: red
-          customColor: '#ffffff'
-      - type: Player
-        properties:
-          speed: 10
-    id: Player
-    children:
-      - behaviours:
-          - type: Transform
-            properties:
-              x: 20
-              y: 40
-              scaleX: 1
-              scaleY: 1
-              rotation: 0
-          - type: TextRenderer
-            properties:
-              text: Player
-              fontSize: 20
-              font: 微软雅黑
-              fontColor: '#ffffff'
-        id: PlayerText
