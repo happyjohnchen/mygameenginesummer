@@ -215,7 +215,7 @@ export class GameController extends Behaviour {
     }
     //人数
     getPeopleCount() {
-        return this.peopleCount
+        return this.game.people.length
 
     }
 }

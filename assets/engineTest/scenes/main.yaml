@@ -163,7 +163,7 @@ children:
           imagePathSuffix: .png
           startNum: 1
           endNum: 10
-          frameForEachImage: 10
+          frameForEachImage: 50
     id: animation
   - behaviours:
       - type: Transform

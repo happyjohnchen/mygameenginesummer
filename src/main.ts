@@ -27,6 +27,9 @@ import {GameController} from "../assets/scripts/GameController";
 import {CameraMouseController} from "../assets/scripts/CameraMouseController";
 
 import {test} from "../assets/scripts/test";
+import { TileMap } from './behaviours/TileMap';
+import { PersonClass } from '../assets/scripts/PersonClass';
+import { PersonSet } from '../assets/scripts/PersonSet';
 
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
@@ -45,6 +48,7 @@ registerBehaviourClass(EdgeCollider);
 registerBehaviourClass(Camera);
 registerBehaviourClass(Sound);
 registerBehaviourClass(Prefab);
+registerBehaviourClass(TileMap);
 
 //注册自定义脚本
 registerBehaviourClass(Player);
@@ -65,6 +69,9 @@ registerBehaviourClass(test);
 
 registerBehaviourClass(RoomSet);
 registerBehaviourClass(Room);
+
+registerBehaviourClass(PersonClass);
+registerBehaviourClass(PersonSet);
 
 
 const engine = new GameEngine()

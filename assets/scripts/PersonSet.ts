@@ -5,7 +5,8 @@ import { GameController } from "./GameController";
 import { TimeControllerSystem } from "./TimeControllerSystem";
 import { Transform } from "../../src/engine/Transform";
 import { number } from "../../src/engine/validators/number";
-import { randomRace } from "./RandomSys";
+import { randomName, randomRace } from "./RandomSys";
+import { PersonRace } from "./modules/PersonModule";
 
 export class PersonSet extends Behaviour {
 
@@ -62,11 +63,26 @@ export class PersonSet extends Behaviour {
         const transform = new Transform();
         transform.x = this.startPostionX;
         transform.y = this.startPositonY;
+        const personClass = new PersonClass()
         let race = randomRace()
+        let name = randomName()
         switch (race) {
             case 1:
+                personClass.personModule.race = PersonRace.Human;
+                personClass.personModule.personName = name;
                 break;
             case 2:
+                personClass.personModule.race = PersonRace.Giant;
+                personClass.personModule.personName = name;
+                break;
+            case 3:
+                personClass.personModule.race = PersonRace.Dwarf;
+                personClass.personModule.personName = name;
+                break;
+            case 4:
+                personClass.personModule.race = PersonRace.Spirit;
+                personClass.personModule.personName = name;
+                break;
 
         }
 
