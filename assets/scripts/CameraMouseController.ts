@@ -1,10 +1,16 @@
-import { ImageRenderer, ImageRenderer as imageRenderer } from "../../src/behaviours/ImageRenderer";
-import { ShapeRectRenderer } from "../../src/behaviours/ShapeRectRenderer";
-import { createGameObject, GameObject, getBehaviourClassByName, getGameObjectById, hasGameObjectById } from "../../src/engine";
-import { Behaviour } from "../../src/engine/Behaviour";
-import { Rectangle } from "../../src/engine/math";
-import { Transform } from "../../src/engine/Transform";
-import { number } from "../../src/engine/validators/number";
+import {ImageRenderer, ImageRenderer as imageRenderer} from "../../src/behaviours/ImageRenderer";
+import {ShapeRectRenderer} from "../../src/behaviours/ShapeRectRenderer";
+import {
+    createGameObject,
+    GameObject,
+    getBehaviourClassByName,
+    getGameObjectById,
+    hasGameObjectById
+} from "../../src/engine";
+import {Behaviour} from "../../src/engine/Behaviour";
+import {Rectangle} from "../../src/engine/math";
+import {Transform} from "../../src/engine/Transform";
+import {number} from "../../src/engine/validators/number";
 
 export class CameraMouseController extends Behaviour {
 
@@ -22,8 +28,7 @@ export class CameraMouseController extends Behaviour {
     @number()
     speed = 5;
 
-    canvas = document.getElementById('game') as HTMLCanvasElement;
-
+    canvas = {width: 960, height: 540};
 
 
     //游戏编辑模式或运行模式开始时会执行一次
@@ -31,7 +36,7 @@ export class CameraMouseController extends Behaviour {
 
         const myCameraTransform = this.gameObject.getBehaviour(Transform);
         const body = document.body;
-        const mouseDownPosition = { x: 0, y: 0 };
+        const mouseDownPosition = {x: 0, y: 0};
         document.oncontextmenu = () => {
             return false;
         }
@@ -58,7 +63,7 @@ export class CameraMouseController extends Behaviour {
         this.leftController = new GameObject();
         this.gameObject.addChild(this.leftController);
         const transformLeft = new Transform();
-        transformLeft.x = - 490;
+        transformLeft.x = -490;
         transformLeft.y = 100;
         transformLeft.rotation = -90
         this.leftController.addBehaviour(transformLeft);
@@ -190,8 +195,7 @@ export class CameraMouseController extends Behaviour {
     checkBackground() {
         if (hasGameObjectById('background')) {
             this.myBackGround = getGameObjectById('Background')
-        }
-        else {
+        } else {
             const child = new GameObject();
             child.id = 'background'
             this.gameObject.parent.addChild(child)
