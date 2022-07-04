@@ -31,6 +31,18 @@ children:
       - behaviours:
           - type: Transform
             properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/uitestbg.png
+        id: background
+      - behaviours:
+          - type: Transform
+            properties:
               x: 100
               y: 100
               scaleX: 1
@@ -76,6 +88,21 @@ children:
               customColor: '#ffffff'
           - type: UiCreateRoom
         id: FoodFactory
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 300
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: ShapeCircleRenderer
+            properties:
+              radius: 20
+              color: red
+              customColor: '#ffffff'
+          - type: UiCloseForCreate
+        id: close
   - behaviours:
       - type: Transform
         properties:
@@ -91,5 +118,4 @@ children:
           color: red
           customColor: '#ffffff'
       - type: UiUnfold
-      - type: Test
     id: BuildButton

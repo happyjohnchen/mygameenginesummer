@@ -1,16 +1,19 @@
-import {Behaviour} from "../../src/engine/Behaviour";
-import {GameSet} from "./GameSet";
-import {ArchiveSystem} from "./archiveSystem/ArchiveSystem";
-import {GameModule} from "./modules/GameModule";
-import {TimeControllerSystem} from "./TimeControllerSystem";
-import {PersonModule} from "./modules/PersonModule";
-import {RoomModule} from "./modules/RoomModule";
-import {GameObject, getGameObjectById} from "../../src/engine";
-import {Transform} from "../../src/engine/Transform";
+import { Behaviour } from "../../src/engine/Behaviour";
+import { GameSet } from "./GameSet";
+import { ArchiveSystem } from "./archiveSystem/ArchiveSystem";
+import { GameModule } from "./modules/GameModule";
+import { TimeControllerSystem } from "./TimeControllerSystem";
+import { PersonModule } from "./modules/PersonModule";
+import { RoomModule, RoomPosition } from "./modules/RoomModule";
+import { GameObject, getGameObjectById } from "../../src/engine";
+import { Transform } from "../../src/engine/Transform";
+import { Room } from "./Room";
+import { RoomSet } from "./RoomSet";
+import {number} from "../../src/engine/validators/number";
+import {string} from "../../src/engine/validators/string";
 
 export class GameController extends Behaviour {
-
-
+    
     game: GameSet = new GameSet();//游戏资源
     private people: GameObject;//此GameObject持有所有人
     private rooms: GameObject;//此GameObject持有所有房间
@@ -31,6 +34,7 @@ export class GameController extends Behaviour {
     private readArchive() {
         //初始化
         this.game = new GameSet();
+
         this.game.time = getGameObjectById("TimeController").getBehaviour(TimeControllerSystem);
         if (this.engine.loadSceneData === '') {
             this.createNewScene()
@@ -67,11 +71,12 @@ export class GameController extends Behaviour {
         }
         //设定房间列表
         for (const roomModule of gModule.rooms) {
-            const newRoom = new GameObject();
+            getGameObjectById("tileMap").getBehaviour(RoomSet).createRoomFromData(roomModule)
+           /* const newRoom = new GameObject();  
             this.rooms.addChild(newRoom);//添加到游戏场景
             this.game.rooms.push(newRoom);//添加到game
-            newRoom.addBehaviour(new Transform());
-
+            newRoom.addBehaviour(new Transform());*/
+          
 
         }
         //设定资源数值
@@ -118,9 +123,9 @@ export class GameController extends Behaviour {
         }
         //写入房间列表
         for (const room of this.game.rooms) {
-            const roomModule = new RoomModule();
-
-
+            const roomModule=room.getBehaviour(Room).roomModule
+            //const roomModule = new RoomModule();
+            
             gModule.rooms.push(roomModule);
         }
         //写入资源数值
@@ -172,8 +177,27 @@ export class GameController extends Behaviour {
 
     //用id获取房间
     getRoomById(id: number) {
-        for (const room in this.game.rooms) {
-
+        if(id==-1)return;
+        for (const room of this.game.rooms) {
+            if (room.getBehaviour(Room).roomModule.roomId == id) {
+                console.log(room)
+                return room
+            }
+           
         }
+    }
+    //用Position获取房间
+    getRoomByPosition(position:RoomPosition){
+        for (const room of this.game.rooms) {
+            let roomPosition=room.getBehaviour(Room).roomModule.position
+            let positonX=roomPosition.x
+            let positonY=roomPosition.y
+            if (positonX == position.x&&positonY==position.y) {
+                console.log(position)
+                return room
+            }
+            
+        }
+        
     }
 }

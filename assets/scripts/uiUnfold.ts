@@ -17,6 +17,7 @@ export class UiUnfold extends Behaviour {
 
     //游戏运行模式开始时会执行一次  点击ui 生成预制体ui
     onPlayStart() {
+        getGameObjectById("CreateUi").active = false;  
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
                 // let gameObjectchild = new GameObject() 

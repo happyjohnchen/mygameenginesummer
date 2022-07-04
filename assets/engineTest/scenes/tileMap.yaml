@@ -11,13 +11,15 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: 0
-          y: 0
+          x: -1000
+          y: -500
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: Camera
-    id: camera
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/engineTest/images/th.jpg
+    id: Background
   - behaviours:
       - type: Transform
         properties:
@@ -26,8 +28,70 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
+      - type: TimeControllerSystem
+        properties:
+          timePerTick: 1.6
+          dayHourTime: 16
+          nightTime: 120
+    id: TimeController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+      - type: CameraMouseController
+        properties:
+          speed: 5
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -400
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+    id: Rooms
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: AttributeSystem
+        properties:
+          consumePerTime: 1
+          onceConsumeTime: 1
+          primeProduceTime: 5
+          maxValue: 100
+          coefficient: 0.2
+          radix: 0.2
+    id: AttributeController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: GameController
+    id: GameController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -200
+          y: -500
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
       - type: RoomSet
         properties:
           roomtype: 0
     id: tileMap
- 
