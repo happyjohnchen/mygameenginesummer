@@ -1,12 +1,13 @@
 import { AnimationRenderer } from "../../src/behaviours/AnimationRenderer";
 import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
 import { Behaviour } from "../../src/engine/Behaviour";
+import { Transform } from "../../src/engine/Transform";
 import { PersonModule, PersonRace } from "./modules/PersonModule";
 import { RoomModule, RoomType } from "./modules/RoomModule";
 
 export class PersonClass extends Behaviour {
 
-    personModule: PersonModule
+    personModule: PersonModule = new PersonModule()
     //在此定义脚本中的属性
     /* personId: number
     personName: string
@@ -16,6 +17,8 @@ export class PersonClass extends Behaviour {
 
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
+        //this.personModule = new PersonModule()
+        console.log(this.personModule)
         this.personModule.race = PersonRace.Human;
 
     }
@@ -48,6 +51,11 @@ export class PersonClass extends Behaviour {
         animationRenderer.startNum = 1;
         animationRenderer.endNum = 4;
 
+    }
+    setPostion(x: number, y: number) {
+        const transform = this.gameObject.getBehaviour(Transform)
+        transform.x = x;
+        transform.y = y;
     }
 
 

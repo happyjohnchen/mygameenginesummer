@@ -11,12 +11,37 @@ children:
   - behaviours:
       - type: Transform
         properties:
+          x: -1000
+          y: -500
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/engineTest/images/th.jpg
+    id: Background
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+        id: NewGameObject
+  - behaviours:
+      - type: Transform
+        properties:
           x: 0
           y: 0
           scaleX: 1
           scaleY: 1
           rotation: 0
       - type: Camera
+      - type: CameraMouseController
+        properties:
+          speed: 5
     id: camera
   - behaviours:
       - type: Transform
@@ -26,4 +51,42 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
-    id: Background
+      - type: PersonSet
+        properties:
+          startPostionX: 100
+          startPositonY: -100
+      - type: GameController
+    id: PersonSet
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+    id: People
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TimeControllerSystem
+        properties:
+          timePerTick: 1.6
+          dayHourTime: 16
+          nightTime: 120
+    id: TimeController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: GameController
+    id: GameController

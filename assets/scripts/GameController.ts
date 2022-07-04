@@ -26,10 +26,11 @@ export class GameController extends Behaviour {
     onPlayStart() {
         //获取时间系统
         this.game.time = getGameObjectById("TimeController").getBehaviour(TimeControllerSystem);
-        console.log(this.game.time)
+        console.log("!!!!!!!!!" +this.game.time)
         //获取人和房间对象
         this.people = getGameObjectById("People");
         this.rooms = getGameObjectById("Rooms");
+        console.log(this.people);
         //读档
         this.readArchive();
         console.log("GameController已就绪，游戏开始");
@@ -103,6 +104,7 @@ export class GameController extends Behaviour {
     private createNewScene() {
         console.log("GameController: 创建新存档");
         //设定时间
+        console.log(this.game)
         this.game.time.setSpeed(1.0);
         this.game.time.setInitialTime(1, 0, 0, 0);
         //设定人列表为空
@@ -184,8 +186,11 @@ export class GameController extends Behaviour {
 
     //用id获取人
     getPersonById(id: number) {
-        for (const person in this.game.people) {
-
+        for (const person of this.game.people) {
+            if( person.getBehaviour(PersonClass).personModule.personId = id)
+            {
+                return person;
+            }
         }
     }
 
