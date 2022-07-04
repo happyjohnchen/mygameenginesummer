@@ -1,4 +1,4 @@
-const { generateMainTs } = require("./main/generate-main");
+const {generateMainTs} = require("./main/generate-main");
 
 async function startupCompiler() {
     const {createServer} = require('vite');
@@ -124,7 +124,6 @@ function generateAssetsYaml() {
                 readFiles(fullPath);
             }
         }
-
     }
 
     readFiles('assets');
@@ -148,8 +147,11 @@ function generateAssetsYaml() {
 }
 
 async function startup() {
+    console.log("正在加载Behaviours...");
     generateMainTs();
+    console.log("获取场景、预制体和图片资产...");
     generateAssetsYaml();
+    console.log("所有资产已经获取，引擎开始启动...");
     new WebSocketProxy().start();
     await startupCompiler();
     await startEditor();

@@ -28,6 +28,11 @@ request.onload = function () {/*XHR对象获取到返回信息后执行*/
         if (engineUIConfig.launchMode) {
             canvas.width *= engineUIConfig.launchModeZoomIndex;
             canvas.height *= engineUIConfig.launchModeZoomIndex;
+            const loadingImage = new Image();
+            loadingImage.src = engineUIConfig.launchModeLoadingImage;
+            loadingImage.onload = () => {
+                context.drawImage(loadingImage, 0, 0, canvas.width, canvas.height);
+            }
         }
     }
 }
@@ -121,6 +126,8 @@ export class GameEngine {
         this.addSystem(new MouseControlSystem());
 
         //预加载资源
+        console.log("引擎预加载资源中，请稍后...");
+        const startTime = new Date();
         const assetsYaml = './assets/assets.yaml';
         await this.resourceManager.loadText(assetsYaml);
         const assetsData = this.unserilizeAssetsYaml(assetsYaml);
@@ -136,6 +143,8 @@ export class GameEngine {
             }
 
         }
+        const endTime = new Date();
+        console.log("资源加载完毕，用时" + (endTime.getTime() - startTime.getTime()) / 1000 + "s");
 
         //获取场景
         const scene = getQuery().scene;
@@ -245,7 +254,7 @@ export class GameEngine {
             return createGameObject(data, this);
         } catch (e) {
             console.log(e)
-            console.log("配置文件解析失败", text);
+            console.log("配置文件解析失败\n", text);
             alert('配置文件解析失败')
         }
         return null;
@@ -350,8 +359,8 @@ export class GameObject {
         GameObject.map[this.uuid] = this;
     }
 
-    removeSelf(): GameObject{
-        if (this === this.engine.rootGameObject){
+    removeSelf(): GameObject {
+        if (this === this.engine.rootGameObject) {
             //不能删除rootGameObject
             return null;
         }
@@ -509,7 +518,18 @@ export function createGameObject(data: any, gameEngine: GameEngine): GameObject 
         // 既然如此，【序列化】哪些属性，也应该根据同样的 metadata(decorator) 来确定
         for (const metadata of __metadatas) {
             const key = metadata.key;
-            const value = behaviourData.properties[key]
+            let value;
+            if (behaviourData.properties && behaviourData.properties[key]) {
+                value = behaviourData.properties[key];
+            } else {
+                if (metadata.type === 'string') {
+                    value = metadata.defaultValue;
+                } else if (metadata.type === 'boolean') {
+                    value = false;
+                } else {
+                    value = 0;
+                }
+            }
             metadata.validator(value);
             behaviour[key] = value
         }
@@ -534,7 +554,7 @@ export function getGameObjectById(id: string) {
     return gameObjects[id]
 }
 
-export function hasGameObjectById(id: string): boolean{
+export function hasGameObjectById(id: string): boolean {
     return gameObjects[id] !== null;
 }
 

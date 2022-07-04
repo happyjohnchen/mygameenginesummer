@@ -148,6 +148,7 @@ children:
         properties:
           soundPath: assets/engineTest/sounds/start.mp3
           autoPlay: false
+          _loopPlay: true
     id: sound
   - behaviours:
       - type: Transform
@@ -164,6 +165,7 @@ children:
           startNum: 1
           endNum: 10
           frameForEachImage: 10
+          _pauseAnimation: false
     id: animation
   - behaviours:
       - type: Transform

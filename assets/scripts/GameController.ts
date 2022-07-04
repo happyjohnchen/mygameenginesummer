@@ -9,8 +9,13 @@ import { GameObject, getGameObjectById } from "../../src/engine";
 import { Transform } from "../../src/engine/Transform";
 import { Room } from "./Room";
 import { RoomSet } from "./RoomSet";
+import {number} from "../../src/engine/validators/number";
+import {string} from "../../src/engine/validators/string";
 
 export class GameController extends Behaviour {
+
+    @string()
+    strTest = '12';
 
 
     game: GameSet = new GameSet();//游戏资源
