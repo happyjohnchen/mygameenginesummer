@@ -9,7 +9,6 @@ export class UiUnfold extends Behaviour {
 
     //展示出ui
 
-    prefabsPath = "" // 预制体路径
 
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {

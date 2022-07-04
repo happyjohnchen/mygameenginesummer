@@ -19,7 +19,7 @@ export class UiCreateRoom extends Behaviour {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){//点击调用选择房间 同时关闭ui
                 this.chooseRoom();
-                //getGameObjectById("CreateUi").active = false;
+                getGameObjectById("CreateUi").active = false;
             }
         }
     }
