@@ -19,14 +19,14 @@ import {Prefab} from "./behaviours/Prefab";
 
 import {TimeControllerSystem} from "../assets/scripts/TimeControllerSystem";
 import {AttributeSystem} from "../assets/scripts/AttributeSystem";
-import {addAttribute} from "../assets/scripts/addAttribute";
-import {showTime} from "../assets/scripts/showTime";
-import {changeTimeSpeed} from "../assets/scripts/changeTimeSpeed";
+import {AddAttribute} from "../assets/scripts/AddAttribute";
+import {ShowTime} from "../assets/scripts/ShowTime";
+import {ChangeTimeSpeed} from "../assets/scripts/ChangeTimeSpeed";
 import {RoomClass} from "../assets/scripts/RoomClass";
 import {GameController} from "../assets/scripts/GameController";
 import {CameraMouseController} from "../assets/scripts/CameraMouseController";
 
-import {test} from "../assets/scripts/test";
+import {Test} from "../assets/scripts/Test";
 
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
@@ -53,12 +53,12 @@ registerBehaviourClass(TimeControllerSystem);
 
 
 registerBehaviourClass(AttributeSystem);
-registerBehaviourClass(addAttribute);
-registerBehaviourClass(showTime);
+registerBehaviourClass(AddAttribute);
+registerBehaviourClass(ShowTime);
 registerBehaviourClass(RoomClass);
-registerBehaviourClass(changeTimeSpeed);
+registerBehaviourClass(ChangeTimeSpeed);
 
-registerBehaviourClass(test);
+registerBehaviourClass(Test);
 
 
 registerBehaviourClass(CameraMouseController);

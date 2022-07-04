@@ -4,7 +4,7 @@ import {Behaviour} from "../../src/engine/Behaviour";
 import { Transform } from "../../src/engine/Transform";
 import { string } from "../../src/engine/validators/string";
 
-export class BehaviourDemo extends Behaviour {
+export class UiUnfold extends Behaviour {
 
     //展示出ui
 

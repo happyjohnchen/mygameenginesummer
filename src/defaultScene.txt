@@ -1,1 +1,1 @@
-assets/engineTest/prefabs/buildUiPrefab.yaml
+assets/engineTest/scenes/testxjy.yaml

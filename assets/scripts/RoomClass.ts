@@ -3,7 +3,7 @@ import { Prefab } from "../../src/behaviours/Prefab";
 import { GameObject, getGameObjectById,createGameObject } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
 import { number } from "../../src/engine/validators/number";
-import { addAttribute } from "./addAttribute";
+import { AddAttribute } from "./AddAttribute";
 import {RoomModule, RoomType } from "./modules/RoomModule";
 import { TimeControllerSystem } from "./TimeControllerSystem";
 import {string} from "../../src/engine/validators/string";
@@ -144,7 +144,7 @@ export class RoomClass extends Behaviour {
         childrenTransform.x = this.gameObject.getBehaviour(Transform).x + this.producePos;
         childrenTransform.y = this.gameObject.getBehaviour(Transform).y + this.producePos;
         gameObjectchild.addBehaviour(childrenTransform);
-        const addAttributeBe = new addAttribute();
+        const addAttributeBe = new AddAttribute();
         addAttributeBe.setType(type);
         const attributeproduction = getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateProduction(this.roomLevel,type);
         addAttributeBe.setPrefabProduction(attributeproduction);
