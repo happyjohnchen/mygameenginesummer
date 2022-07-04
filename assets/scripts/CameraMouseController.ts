@@ -32,6 +32,10 @@ export class CameraMouseController extends Behaviour {
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
 
+    }
+
+    //游戏运行模式开始时会执行一次
+    onPlayStart() {
         this.cameraTransform = this.gameObject.getBehaviour(Transform);
         const body = document.body;
         document.oncontextmenu = () => {
@@ -53,11 +57,6 @@ export class CameraMouseController extends Behaviour {
         }
         console.log("camara controller is prepared.")
 
-
-    }
-
-    //游戏运行模式开始时会执行一次
-    onPlayStart() {
         this.checkBackground()
         this.checkBackgroundRenderer()
 
