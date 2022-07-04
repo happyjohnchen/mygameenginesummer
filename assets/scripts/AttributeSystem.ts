@@ -50,7 +50,8 @@ export class AttributeSystem extends Behaviour {
 
     }
     onPlayStart(){
-        //this.game = this.gamecontroller.game;
+        this.nowTime = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
+        this.lastTime = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
     }
     //每次屏幕刷新执行 显示数值
     onUpdate() {
@@ -59,12 +60,14 @@ export class AttributeSystem extends Behaviour {
 
     }
 
-    onTick(duringTime: number) {
+    onTick(duringTime: number) {//一小时进行消耗
+        this.nowTime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
+        if(this.nowTime-this.lastTime >=1*60*60){
+            this.consumeForFoodWater();
+            this.lastTime = this.nowTime;  
+        }
     }
 
-    // getValue(){
-    //     return this.Primevalue;
-    // }
 
     changeAttributeValue(changedValue:number,type:string){ //改变水，食物，能源，材料value 且value最大值最小值不能超过最大值最小值
         switch(type){
@@ -88,10 +91,15 @@ export class AttributeSystem extends Behaviour {
         
     }
 
-    changeValue(primeValue:number,addValue:number){  //检查超没超过上下限  上下限也可以变为参数
+    changeValue(primeValue:number,addValue:number){  //三种属性检查超没超过上下限  上下限也可以变为参数
         let newNumber = addValue+primeValue;
         newNumber = newNumber>this.maxValue?this.maxValue:newNumber;
         newNumber = newNumber<this.minValue?this.minValue:newNumber;
+        if(newNumber==0)
+        {
+            console.log("数值为0，游戏结束")
+            this.gamecontroller.game.time.setSpeed(0);
+        }
         return newNumber;
     }
 
@@ -144,9 +152,12 @@ export class AttributeSystem extends Behaviour {
         console.log("目前电量"+this.gamecontroller.game.energy);
    }
 
-   consumeForFoodWater(){//计算水和食物消耗
-    this.gamecontroller.game.water = this.changeValue(this.gamecontroller.game.water,-1);
-    this.gamecontroller.game.food= this.changeValue(this.gamecontroller.game.food,-1);
+   consumeForFoodWater(){//计算水和食物消耗 
+    const peopleCount = this.gamecontroller.game.people.length;//拿到人的总数
+    this.gamecontroller.game.water= this.changeValue(this.gamecontroller.game.water,-peopleCount);//减去人数总数的数值
+    this.gamecontroller.game.food= this.changeValue(this.gamecontroller.game.food,-peopleCount);
+    console.log(peopleCount);
+    console.log("水"+this.gamecontroller.game.water);
    }
 
    consumeForMaterial(consume:number){//判断是否可以消耗 不可以则返回false 可以返回true

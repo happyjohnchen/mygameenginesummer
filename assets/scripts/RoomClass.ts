@@ -49,6 +49,7 @@ export class RoomClass extends Behaviour {
 
     //游戏运行模式开始时会执行一次
     onPlayStart() {
+        this.nowTime = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
         this.lastTimeConsume = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
         this.lastTimeCreate= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
     }
@@ -65,7 +66,6 @@ export class RoomClass extends Behaviour {
         // let totalAttribute = this.calculateTotalAttribute();//到时候接人的时候补充算法替换
         let createPeriod = getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateCreatePeriod(this.roomLevel,this.totalPeopleAttribute);
         this.nowTime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
-        //this.lastTime = this.lastTime==60? 0:this.lastTime;
         if(this.nowTime-this.lastTimeCreate >=createPeriod*60*60){
             this.createProduction();
             this.lastTimeCreate = this.nowTime;  
