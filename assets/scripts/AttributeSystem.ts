@@ -156,7 +156,7 @@ export class AttributeSystem extends Behaviour {
     const peopleCount = this.gamecontroller.game.people.length;//拿到人的总数
     this.gamecontroller.game.water= this.changeValue(this.gamecontroller.game.water,-peopleCount);//减去人数总数的数值
     this.gamecontroller.game.food= this.changeValue(this.gamecontroller.game.food,-peopleCount);
-    console.log(peopleCount);
+    console.log("水和食物消耗"+peopleCount);
     console.log("水"+this.gamecontroller.game.water);
    }
 

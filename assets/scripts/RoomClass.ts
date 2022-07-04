@@ -9,6 +9,7 @@ import { TimeControllerSystem } from "./TimeControllerSystem";
 import {string} from "../../src/engine/validators/string";
 import { Transform } from "../../src/engine/Transform";
 import { AttributeSystem } from "./AttributeSystem";
+import { GameController } from "./GameController";
 
 
 export class RoomClass extends Behaviour {
@@ -37,21 +38,25 @@ export class RoomClass extends Behaviour {
     peopleInRoom;
     //roompos = new Array();
     people: number[] = [];//储存进来人的id
-    AttributeSystem:GameObject
+    private attributeSystem
 
     waterInRoom = 0;  //用来计算存进来的人物值
     energyInRoom = 0;
     foodInRoom = 0;
-
+    private gamecontroller
+    private timeController
     onStart() {//拿到
-        //this.AttributeSystem = getGameObjectById("AttributeController");
+        
     }
 
     //游戏运行模式开始时会执行一次
     onPlayStart() {
-        this.nowTime = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
-        this.lastTimeConsume = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
-        this.lastTimeCreate= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
+        this.attributeSystem = getGameObjectById("AttributeController").getBehaviour(AttributeSystem);
+        this.gamecontroller = getGameObjectById("GameController").getBehaviour(GameController);
+        this.timeController = getGameObjectById("TimeController").getBehaviour(TimeControllerSystem);
+        this.nowTime = this.timeController.getTotalGameSecondTime();
+        this.lastTimeConsume = this.timeController.getTotalGameSecondTime();
+        this.lastTimeCreate= this.timeController.getTotalGameSecondTime();
     }
 
     //每次屏幕刷新执行
@@ -64,14 +69,14 @@ export class RoomClass extends Behaviour {
     //平均每16ms执行一次   产出 增加
     onTick(duringTime: number) {
         // let totalAttribute = this.calculateTotalAttribute();//到时候接人的时候补充算法替换
-        let createPeriod = getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateCreatePeriod(this.roomLevel,this.totalPeopleAttribute);
-        this.nowTime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
+        let createPeriod = this.attributeSystem.calculateCreatePeriod(this.roomLevel,this.totalPeopleAttribute);
+        this.nowTime= this.timeController.getTotalGameSecondTime();
         if(this.nowTime-this.lastTimeCreate >=createPeriod*60*60){
             this.createProduction();
             this.lastTimeCreate = this.nowTime;  
         }
         if(this.nowTime-this.lastTimeConsume >=1*60*60){//1小时消耗
-            getGameObjectById("AttributeController").getBehaviour(AttributeSystem).ConsumeForEnergy(this.roomLevel);
+            this.attributeSystem.ConsumeForEnergy(this.roomLevel);
             this.lastTimeConsume = this.nowTime;  
         }
 
@@ -148,7 +153,7 @@ export class RoomClass extends Behaviour {
         gameObjectchild.addBehaviour(childrenTransform);
         const addAttributeBe = new AddAttribute();
         addAttributeBe.setType(type);
-        const attributeproduction = getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateProduction(this.roomLevel,type);
+        const attributeproduction = this.attributeSystem.calculateProduction(this.roomLevel,type);
         addAttributeBe.setPrefabProduction(attributeproduction);
         gameObjectchild.addBehaviour(addAttributeBe);
         const attributeprefab = new Prefab();
