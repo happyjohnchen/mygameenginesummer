@@ -14,11 +14,7 @@ import {string} from "../../src/engine/validators/string";
 import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
 
 export class GameController extends Behaviour {
-
-    @string()
-    strTest = '12';
-
-
+    
     game: GameSet = new GameSet();//游戏资源
     private people: GameObject;//此GameObject持有所有人
     private rooms: GameObject;//此GameObject持有所有房间
