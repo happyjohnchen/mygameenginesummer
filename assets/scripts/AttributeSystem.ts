@@ -37,7 +37,7 @@ export class AttributeSystem extends Behaviour {
      @number()
      primeProduceTime = 5;//基础时间
      @number()
-     maxValue = 100;
+     maxValue = 1000;
      minValue= 0;
      @number()
      coefficient = 0.2;

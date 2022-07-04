@@ -123,6 +123,11 @@ export class RoomClass extends Behaviour {
         }
     }
 
+    setPeopleInRoom(){ //刷新人物位置
+
+    }
+
+
     calculateTotalAttribute(){ //计算人物总属性 房间人物该属性之和
         let totalAttribute = 0;
         for(var p=0;p<this.peopleInRoom.length;p++){
