@@ -8,5 +8,5 @@
   "gameName": "Fallout Shelter",
   "launchMode" : false,
   "launchModeZoomIndex": 1.5,
-  "launchModeDefaultScene": "assets/scenes/game.yaml"
+  "launchModeDefaultScene": "assets/scenes/menu.yaml"
 }
