@@ -103,18 +103,20 @@ export class RoomClass extends Behaviour {
         return sizetable[this.roomLevel];
     }
 
-    addPersonForRoom(id:number){//记录人物编号 并判断是否超出限额
+    addPersonInRoom(id:number){//记录人物编号 并判断是否超出限额
         if(this.peopleInRoom.length<this.calculateSize()){
             //this.people[totalPeople] = id;//把id存起来
             this.peopleInRoom[this.peopleInRoom.length] = id
+            this.setPeopleInRoom;
+            return true;
         }
         else {
             console.log("已满");
-            return
+            return false;
         };  
     }
 
-    removePersonForRoom(id:number){//记录人物编号
+    removePersonInRoom(id:number){//记录人物编号
         for(var p=0;p<this.peopleInRoom.length;p++){
             if(this.peopleInRoom[p]==id){
                 this.peopleInRoom.splice(p,1);//删除
@@ -124,7 +126,7 @@ export class RoomClass extends Behaviour {
     }
 
     setPeopleInRoom(){ //刷新人物位置
-
+        
     }
 
 
