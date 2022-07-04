@@ -27,7 +27,8 @@ import {GameController} from "../assets/scripts/GameController";
 import {CameraMouseController} from "../assets/scripts/CameraMouseController";
 
 import {Test} from "../assets/scripts/Test";
-
+import {UiUnfold} from "../assets/scripts/UiUnfold";
+import {UiCreateRoom} from "../assets/scripts/UiCreateRoom";
 //注册引擎提供的组件
 registerBehaviourClass(Transform);
 registerBehaviourClass(TextRenderer);
@@ -65,6 +66,8 @@ registerBehaviourClass(CameraMouseController);
 registerBehaviourClass(RoomSet);
 registerBehaviourClass(Room);
 
+registerBehaviourClass(UiUnfold);
+registerBehaviourClass(UiCreateRoom);
 
 const engine = new GameEngine()
 engine.start()

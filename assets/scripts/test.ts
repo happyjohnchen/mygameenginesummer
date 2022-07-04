@@ -31,6 +31,7 @@ export class Test extends Behaviour {
 
     gameObejecttest;
     onStart() {
+        this.gameObject.active = false;
     }
 
     //游戏运行模式开始时会执行一次
@@ -38,10 +39,11 @@ export class Test extends Behaviour {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
                 //console.log( getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateProduction(3,"water"));
-                
+                console.log(RoomType.WaterFactory);
             }
      
-        }
+       }
+  
     }
 
     //每次屏幕刷新执行

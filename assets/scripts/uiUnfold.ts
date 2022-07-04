@@ -1,5 +1,5 @@
 import { Prefab } from "../../src/behaviours/Prefab";
-import { GameObject } from "../../src/engine";
+import { GameObject, getGameObjectById } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
 import { Transform } from "../../src/engine/Transform";
 import { string } from "../../src/engine/validators/string";
@@ -8,7 +8,6 @@ export class UiUnfold extends Behaviour {
 
     //展示出ui
 
-    @string()
     prefabsPath = "" // 预制体路径
 
     //游戏编辑模式或运行模式开始时会执行一次
@@ -20,15 +19,16 @@ export class UiUnfold extends Behaviour {
     onPlayStart() {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
-                let gameObjectchild = new GameObject() 
-                this.gameObject.parent.addChild(gameObjectchild);
-                const childrenTransform = new Transform();
-                childrenTransform.x = this.gameObject.getBehaviour(Transform).x ;
-                childrenTransform.y = this.gameObject.getBehaviour(Transform).y ;
-                gameObjectchild.addBehaviour(childrenTransform);
-                const prefab = new Prefab();
-                prefab.prefabPath = this.prefabsPath;
-                gameObjectchild.addBehaviour(prefab);     
+                // let gameObjectchild = new GameObject() 
+                // this.gameObject.parent.addChild(gameObjectchild);
+                // const childrenTransform = new Transform();
+                // childrenTransform.x = this.gameObject.getBehaviour(Transform).x ;
+                // childrenTransform.y = this.gameObject.getBehaviour(Transform).y ;
+                // gameObjectchild.addBehaviour(childrenTransform);
+                // const prefab = new Prefab();
+                // prefab.prefabPath = this.prefabsPath;
+                // gameObjectchild.addBehaviour(prefab);
+                getGameObjectById("CreateUi").active = true;     
             }
      
         }

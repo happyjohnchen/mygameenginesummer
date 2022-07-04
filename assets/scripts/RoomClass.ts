@@ -48,7 +48,8 @@ export class RoomClass extends Behaviour {
 
     //游戏运行模式开始时会执行一次
     onPlayStart() {
-
+        this.lastTimeConsume = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
+        this.lastTimeCreate= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
     }
 
     //每次屏幕刷新执行
