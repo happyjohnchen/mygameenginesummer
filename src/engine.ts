@@ -199,25 +199,6 @@ export class GameEngine {
         const text = this.resourceManager.getText(this.currentSceneName);
         const scene = this.unserilize(text);
 
-        this.ready = true;//所有GameObject和Behaviour已经就绪
-
-        //启动每一个behaviour
-        function visit(gameObject: GameObject, mode: 'edit' | 'play') {
-            for (const behaviour of gameObject.behaviours) {
-                console.log(behaviour)
-                behaviour.onStart();
-                if (mode === "play") {
-                    behaviour.onPlayStart();
-                }
-            }
-            console.log(gameObject.children)
-            for (const child of gameObject.children) {
-                console.log(child)
-                visit(child, mode);
-            }
-        }
-        visit(this.rootGameObject, this.mode);
-
         if (scene) {
             this.rootGameObject.addChild(scene);
         }
@@ -267,6 +248,25 @@ export class GameEngine {
         for (const system of this.systems) {
             system.onStart();
         }
+
+        this.ready = true;//所有GameObject和Behaviour已经就绪
+
+        //启动每一个behaviour
+        function visit(gameObject: GameObject, mode: 'edit' | 'play') {
+            for (const behaviour of gameObject.behaviours) {
+                console.log(behaviour)
+                behaviour.onStart();
+                if (mode === "play") {
+                    behaviour.onPlayStart();
+                }
+            }
+            console.log(gameObject.children)
+            for (const child of gameObject.children) {
+                console.log(child)
+                visit(child, mode);
+            }
+        }
+        visit(this.rootGameObject, this.mode);
 
         this.enterFrame(0);
     }
