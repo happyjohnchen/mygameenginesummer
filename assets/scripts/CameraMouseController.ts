@@ -49,8 +49,6 @@ export class CameraMouseController extends Behaviour {
                     this.cameraTransform.y - 0.5 * this.canvas.height * this.cameraTransform.scaleY - this.myBackGround.getBehaviour(Transform).y > 0 &&
                     this.cameraTransform.y + 0.5 * this.canvas.height * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).y - this.backgroundImageRectangle.height < 0)
             ) {
-                console.log(e.deltaY)
-                console.log(this.cameraTransform.scaleX)
                 this.cameraTransform.scaleX += e.deltaY / 5000;
                 this.cameraTransform.scaleY += e.deltaY / 5000;
             }
