@@ -13,7 +13,7 @@ export class PersonClass extends Behaviour {
 
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
-
+        
     }
 
     //游戏运行模式开始时会执行一次

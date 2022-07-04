@@ -9,6 +9,8 @@ import { GameObject, getGameObjectById } from "../../src/engine";
 import { Transform } from "../../src/engine/Transform";
 import { Room } from "./Room";
 import { RoomSet } from "./RoomSet";
+import { PersonSet } from "./PersonSet";
+import { PersonClass } from "./PersonClass";
 
 export class GameController extends Behaviour {
 
@@ -66,11 +68,14 @@ export class GameController extends Behaviour {
         //设定人物列表
         for (const personModule of gModule.people) {
             const newPerson = new GameObject();
+            const personInfo = new PersonClass();
+            personInfo.personModule = personModule;
+            newPerson.addBehaviour(personInfo)
             this.people.addChild(newPerson);//添加到游戏场景
             this.game.people.push(newPerson);//添加到game
             newPerson.addBehaviour(new Transform());
 
-            this.peopleCount++;
+            // this.peopleCount++;
 
 
         }
