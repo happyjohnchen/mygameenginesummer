@@ -3,7 +3,7 @@ import {Behaviour} from "../../src/engine/Behaviour";
 import { number } from "../../src/engine/validators/number";
 import { AttributeSystem } from "./AttributeSystem";
 import { TimeControllerSystem } from "./TimeControllerSystem";
-export class changeTimeSpeed extends Behaviour {
+export class ChangeTimeSpeed extends Behaviour {
 
     //点击按钮更改速度
 

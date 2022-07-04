@@ -78,9 +78,11 @@ export class AttributeSystem extends Behaviour {
             break;
             case "food":
                 this.gamecontroller.game.food = this.changeValue(this.gamecontroller.game.food,changedValue);
+                console.log("目前食物属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.energy);
             break;
             case"material":
                 this.gamecontroller.game.material = this.changeValue(this.gamecontroller.game.material,changedValue);//可能没有上限 到时候再说
+                console.log("目前材料属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.material);
             break;
         }
         

@@ -6,7 +6,6 @@ behaviours:
       scaleX: 1
       scaleY: 1
       rotation: 0
-  - type: test
 id: RootGameObject
 children:
   - behaviours:
@@ -33,7 +32,7 @@ children:
           fontSize: 40
           font: 微软雅黑
           fontColor: '#000000'
-      - type: showTime
+      - type: ShowTime
         properties:
           startTime: 8
     id: time
