@@ -39,14 +39,14 @@ export class AnimationRenderer extends Behaviour implements Renderer {
         return {
             x: 0,
             y: 0,
-            width: this.currentImage.width,
-            height: this.currentImage.height,
+            width: this.currentImage ? this.currentImage.width : 0,
+            height: this.currentImage ? this.currentImage.height : 0,
         };
     }
 
     onStart() {
         this.currentNum = 0;
-        if (this.imagePathPrefix!==""&&this.imagePathSuffix!==""){
+        if (this.imagePathPrefix !== "" && this.imagePathSuffix !== "") {
             this.currentImage = this.engine.resourceManager.getImage(this.imagePathPrefix + this.startNum + this.imagePathSuffix);
         }
     }
