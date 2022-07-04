@@ -2,7 +2,7 @@ import { Prefab } from "../../src/behaviours/Prefab";
 import { GameObject, getGameObjectById,createGameObject } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
 import { number } from "../../src/engine/validators/number";
-import { addAttribute } from "./addAttribute";
+import { AddAttribute } from "./AddAttribute";
 import {RoomModule, RoomType } from "./modules/RoomModule";
 import { TimeControllerSystem } from "./TimeControllerSystem";
 import {string} from "../../src/engine/validators/string";

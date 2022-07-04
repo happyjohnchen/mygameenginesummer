@@ -5,7 +5,7 @@ import {GameObject, getGameObjectById} from "../../src/engine";
 import { TimeControllerSystem } from "./TimeControllerSystem";
 import { string } from "../../src/engine/validators/string";
 import { GameController } from "./GameController";
-export class showTime extends Behaviour {
+export class ShowTime extends Behaviour {
 
     //在此定义脚本中的属性
     /* 显示时间*/

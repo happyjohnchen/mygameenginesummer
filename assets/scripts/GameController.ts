@@ -9,10 +9,11 @@ import { GameObject, getGameObjectById } from "../../src/engine";
 import { Transform } from "../../src/engine/Transform";
 import { Room } from "./Room";
 import { RoomSet } from "./RoomSet";
+import {number} from "../../src/engine/validators/number";
+import {string} from "../../src/engine/validators/string";
 
 export class GameController extends Behaviour {
-
-
+    
     game: GameSet = new GameSet();//游戏资源
     private people: GameObject;//此GameObject持有所有人
     private rooms: GameObject;//此GameObject持有所有房间

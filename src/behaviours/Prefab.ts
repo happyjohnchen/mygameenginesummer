@@ -32,7 +32,7 @@ export class Prefab extends Behaviour {
             return createGameObject(data, this.engine);
         } catch (e) {
             console.log(e)
-            console.log("配置文件解析失败", text);
+            console.log("配置文件解析失败\n", text);
             alert('配置文件解析失败')
         }
         return null;

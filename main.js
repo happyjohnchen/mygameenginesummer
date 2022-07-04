@@ -1,4 +1,4 @@
-const { generateMainTs } = require("./main/generate-main");
+const {generateMainTs} = require("./main/generate-main");
 
 async function startupCompiler() {
     const {createServer} = require('vite');
@@ -124,7 +124,6 @@ function generateAssetsYaml() {
                 readFiles(fullPath);
             }
         }
-
     }
 
     readFiles('assets');
@@ -148,8 +147,11 @@ function generateAssetsYaml() {
 }
 
 async function startup() {
+    console.log("Loading Behaviours...");
     generateMainTs();
+    console.log("Reading scenes, prefabs and images...");
     generateAssetsYaml();
+    console.log("All assets has been read, launching game engine...");
     new WebSocketProxy().start();
     await startupCompiler();
     await startEditor();
