@@ -148,4 +148,15 @@ export class AttributeSystem extends Behaviour {
     this.gamecontroller.game.water = this.changeValue(this.gamecontroller.game.water,-1);
     this.gamecontroller.game.food= this.changeValue(this.gamecontroller.game.food,-1);
    }
+
+   consumeForMaterial(consume:number){//判断是否可以消耗 不可以则返回false 可以返回true
+    if(consume<=this.gamecontroller.game.material){
+        this.gamecontroller.game.material -= consume;//减去消耗
+        return true;
+    }
+        else{
+            //触发提醒ui
+            return false;
+        }
+   }
 }

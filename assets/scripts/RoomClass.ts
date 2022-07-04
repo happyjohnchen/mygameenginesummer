@@ -26,21 +26,22 @@ export class RoomClass extends Behaviour {
     level3Size = 5;
 
     roomType = RoomType.WaterFactory;
-    //不储存
+
     private lastTimeCreate = 0;//产出经过的时间
     private nowTime = 0;
     private lastTimeConsume = 0;
-    private producePos = 0;
     attributeType= "";// water food energy
 
-
-    //储存 还有个roomtype在上面
     roomId = 0;
     roomLevel = 1;
     peopleInRoom;
     //roompos = new Array();
     people: number[] = [];//储存进来人的id
     AttributeSystem:GameObject
+
+    waterInRoom = 0;  //用来计算存进来的人物值
+    energyInRoom = 0;
+    foodInRoom = 0;
 
     onStart() {//拿到
         //this.AttributeSystem = getGameObjectById("AttributeController");
@@ -97,7 +98,7 @@ export class RoomClass extends Behaviour {
         return sizetable[this.roomLevel];
     }
 
-    addPerson(id:number){//记录人物编号 并判断是否超出限额
+    addPersonForRoom(id:number){//记录人物编号 并判断是否超出限额
         if(this.people.length<this.calculateSize()){
             //this.people[totalPeople] = id;//把id存起来
             this.people[this.people.length] = id
@@ -108,7 +109,7 @@ export class RoomClass extends Behaviour {
         };  
     }
 
-    removePerson(id:number){//记录人物编号
+    removePersonForRoom(id:number){//记录人物编号
         for(var p=0;p<this.people.length;p++){
             if(this.people[p]==id){
                 this.people.splice(p,1);//删除
@@ -142,8 +143,8 @@ export class RoomClass extends Behaviour {
         let gameObjectchild = new GameObject() //产出三种属性
         this.gameObject.parent.addChild(gameObjectchild);
         const childrenTransform = new Transform();
-        childrenTransform.x = this.gameObject.getBehaviour(Transform).x + this.producePos;
-        childrenTransform.y = this.gameObject.getBehaviour(Transform).y + this.producePos;
+        childrenTransform.x = this.gameObject.getBehaviour(Transform).x ;
+        childrenTransform.y = this.gameObject.getBehaviour(Transform).y ;
         gameObjectchild.addBehaviour(childrenTransform);
         const addAttributeBe = new AddAttribute();
         addAttributeBe.setType(type);

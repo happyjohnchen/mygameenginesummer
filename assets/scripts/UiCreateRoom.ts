@@ -1,14 +1,16 @@
-import { getGameObjectById } from "../../src/engine";
+import { GameObject, getGameObjectById } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
+import { AttributeSystem } from "./AttributeSystem";
 import {RoomModule, RoomType } from "./modules/RoomModule";
 export class UiCreateRoom extends Behaviour {
 
     //点击方块 返回值
     private roomTypeForUi;
 
+    attibuteSystem:GameObject
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
-
+        this.attibuteSystem = getGameObjectById("AttributeController");
     }
 
     //游戏运行模式开始时会执行一次
@@ -17,7 +19,7 @@ export class UiCreateRoom extends Behaviour {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){//点击调用选择房间 同时关闭ui
                 this.chooseRoom();
-                getGameObjectById("CreateUi").active = false;
+                //getGameObjectById("CreateUi").active = false;
             }
         }
     }
@@ -39,11 +41,20 @@ export class UiCreateRoom extends Behaviour {
     }
 
     chooseRoom(){//选择房间 调用创建函数
+        
         const roomTypeTable = {
             "WaterFactory" : RoomType.WaterFactory,
             "EnergyFactory" : RoomType.EnergyFactory,
             "FoodFactory" :RoomType.FoodFactory
         }
-         return roomTypeTable[this.roomTypeForUi]; //这个值就是返回的房间类型 邓海欣在这里写用这个值干什么
+        console.log(this.attibuteSystem.getBehaviour(AttributeSystem).consumeForMaterial(100));
+        if(this.attibuteSystem.getBehaviour(AttributeSystem).consumeForMaterial(100)==true){
+            return roomTypeTable[this.roomTypeForUi]; //这个值就是返回的房间类型 邓海欣在这里写用这个值干什么  return 你根据需求 可以改
+        }
+        else{
+            console.log("材料不够")
+        }
+        
+         
     }
 }
