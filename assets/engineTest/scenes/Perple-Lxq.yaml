@@ -20,16 +20,6 @@ children:
         properties:
           imagePath: assets/engineTest/images/th.jpg
     id: Background
-    children:
-      - behaviours:
-          - type: Transform
-            properties:
-              x: 0
-              y: 0
-              scaleX: 1
-              scaleY: 1
-              rotation: 0
-        id: NewGameObject
   - behaviours:
       - type: Transform
         properties:

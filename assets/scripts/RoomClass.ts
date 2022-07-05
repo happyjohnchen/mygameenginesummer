@@ -57,6 +57,8 @@ export class RoomClass extends Behaviour {
         this.nowTime = this.timeController.getTotalGameSecondTime();
         this.lastTimeConsume = this.timeController.getTotalGameSecondTime();
         this.lastTimeCreate= this.timeController.getTotalGameSecondTime();
+
+        
     }
 
     //每次屏幕刷新执行

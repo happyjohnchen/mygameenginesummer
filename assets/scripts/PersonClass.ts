@@ -21,6 +21,7 @@ export class PersonClass extends Behaviour {
         console.log(this.personModule)
         this.personModule.race = PersonRace.Human;
 
+        
     }
 
     //游戏运行模式开始时会执行一次
@@ -29,6 +30,7 @@ export class PersonClass extends Behaviour {
             //移动房间
             return this.gameObject;
         }
+        
     }
 
     //每次屏幕刷新执行
@@ -47,7 +49,8 @@ export class PersonClass extends Behaviour {
 
     setAnimation(roomType: RoomType) {
         const animationRenderer = this.gameObject.getBehaviour(AnimationRenderer);
-        animationRenderer.imagePathPrefix = " assets/images/PeopleAnimations/testAnimation/" + roomType.toString + '-' + this.personModule.race.toString;
+        animationRenderer.imagePathPrefix = " assets/images/PeopleAnimations/testAnimation/" + roomType.toString() + '-' + this.personModule.race.toString() +'-';
+        animationRenderer.imagePathSuffix = '.png'
         animationRenderer.startNum = 1;
         animationRenderer.endNum = 4;
 

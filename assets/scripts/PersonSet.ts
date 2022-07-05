@@ -7,6 +7,8 @@ import { Transform } from "../../src/engine/Transform";
 import { number } from "../../src/engine/validators/number";
 import { randomName, randomRace } from "./RandomSys";
 import { PersonRace } from "./modules/PersonModule";
+import { RoomType } from "./modules/RoomModule";
+import { AnimationRenderer } from "../../src/behaviours/AnimationRenderer";
 
 export class PersonSet extends Behaviour {
 
@@ -21,7 +23,7 @@ export class PersonSet extends Behaviour {
     gameController: GameController
     private nowTime: number
     lastTimeCreate = 0
-    private createPeriod = 600
+    private createPeriod = 1000
     //private createPeriod = 15 * 60 * 60
 
 
@@ -52,8 +54,6 @@ export class PersonSet extends Behaviour {
     //平均每16ms执行一次
     onTick(duringTime: number) {
         this.nowTime = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
-        console.log(this.nowTime);
-        console.log("this!!!!!" + this)
         if (this.nowTime - this.lastTimeCreate >= this.createPeriod) {
             this.lastTimeCreate = this.nowTime;
             this.newPerson();
@@ -75,7 +75,7 @@ export class PersonSet extends Behaviour {
         console.log("newPerson" + personClass)
         let race = randomRace()
         let name = randomName()
-        switch (race) {
+       /*  switch (race) {
             case 1:
                 personClass.personModule.race = PersonRace.Human;
                 personClass.personModule.personName = name;
@@ -97,15 +97,24 @@ export class PersonSet extends Behaviour {
                 console.log("case 4")
                 break;
 
-        }
+        } */
+        personClass.personModule.race = PersonRace.Human;
+        personClass.personModule.personName = name;
 
 
         this.gameObject.addChild(newPerson);
         personClass.personModule.personId = this.gameController.getPeopleCount();
+        newPerson.addBehaviour(new AnimationRenderer);
+        
         console.log("Name & Race" + personClass)
         newPerson.addBehaviour(personClass);
         newPerson.addBehaviour(transform);
         this.gameController.addPerson(newPerson);
+        console.log(newPerson.getBehaviour(AnimationRenderer))
+        personClass.setAnimation(RoomType.WaterFactory)
+        console.log(newPerson.getBehaviour(Transform))
+
+        
     }
 
 }
