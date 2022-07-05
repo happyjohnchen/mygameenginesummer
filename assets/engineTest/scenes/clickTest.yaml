@@ -1,0 +1,52 @@
+behaviours:
+  - type: Transform
+    properties:
+      x: 0
+      y: 0
+      scaleX: 1
+      scaleY: 1
+      rotation: 0
+id: RootGameObject
+children:
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ShapeRectRenderer
+        properties:
+          width: 200
+          height: 200
+          color: green
+          customColor: '#ffffff'
+      - type: FatherTest
+    id: Father
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 100
+              y: 100
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: ShapeCircleRenderer
+            properties:
+              radius: 100
+              color: red
+              customColor: '#ffffff'
+          - type: ChildTest
+        id: Child

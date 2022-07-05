@@ -55,6 +55,7 @@ export class PersonClass extends Behaviour {
         animationRenderer.imagePathSuffix = '.png'
         animationRenderer.startNum = 1;
         animationRenderer.endNum = 4;
+        animationRenderer.frameForEachImage = 20;
 
     }
     setPostion(x: number, y: number) {

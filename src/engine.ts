@@ -263,6 +263,7 @@ export class GameEngine {
                 visit(child, mode);
             }
         }
+
         visit(this.rootGameObject, this.mode);
 
         this.enterFrame(0);
@@ -328,6 +329,8 @@ export class GameObject {
 
     onClick?: Function;
 
+    preventOnClickBubble = false;
+
     onHoverIn?: Function;
 
     onHoverOut?: Function;
@@ -392,6 +395,18 @@ export class GameObject {
         this.children.push(child);
         child.engine = this.engine;
         child.parent = this;
+        for (const behaviour of child.behaviours){
+            behaviour.engine = this.engine;
+            if (this.engine.ready) {
+                behaviour.onStart();
+                if (this.engine.mode === "play") {
+                    behaviour.onPlayStart();
+                }
+            }
+            if (this.active) {
+                behaviour.active = true;
+            }
+        }
         if (this.active) {
             child.active = true;
         }
@@ -425,15 +440,17 @@ export class GameObject {
     addBehaviour(behaviour: Behaviour) {
         this.behaviours.push(behaviour);
         behaviour.gameObject = this;
-        behaviour.engine = this.engine;
-        if (this.engine.ready) {
-            behaviour.onStart();
-            if (this.engine.mode === "play") {
-                behaviour.onPlayStart();
+        if (this.engine) {
+            behaviour.engine = this.engine;
+            if (this.engine.ready) {
+                behaviour.onStart();
+                if (this.engine.mode === "play") {
+                    behaviour.onPlayStart();
+                }
             }
-        }
-        if (this.active) {
-            behaviour.active = true;
+            if (this.active) {
+                behaviour.active = true;
+            }
         }
     }
 

@@ -26,7 +26,7 @@ export class PersonSet extends Behaviour {
     private createPeriod = 1000
     //private createPeriod = 15 * 60 * 60
 
-
+    first = true;
 
 
 
@@ -36,7 +36,6 @@ export class PersonSet extends Behaviour {
         //this.gameObject.addBehaviour(this.gameController)
         console.log(this.gameController);
         console.log(this.gameObject)
-
     }
 
     //游戏运行模式开始时会执行一次
@@ -44,7 +43,7 @@ export class PersonSet extends Behaviour {
         console.log(this.gameObject)
         //this.gameController.addPerson(this.gameObject);
         this.peopleCount = this.gameController.getPeopleCount();
-        this.newPerson();
+        //this.newPerson();
     }
 
     //每次屏幕刷新执行
@@ -55,9 +54,10 @@ export class PersonSet extends Behaviour {
     //平均每16ms执行一次
     onTick(duringTime: number) {
         this.nowTime = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
-        if (this.nowTime - this.lastTimeCreate >= this.createPeriod) {
+        if (this.nowTime - this.lastTimeCreate >= this.createPeriod && this.first) {
             this.lastTimeCreate = this.nowTime;
             this.newPerson();
+            this.first = false
             //console.log("OnTick" + this.newPerson);
         }
     }
