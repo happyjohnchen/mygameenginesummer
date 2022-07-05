@@ -32,9 +32,7 @@ export class PersonSet extends Behaviour {
     onStart() {
         this.gameController = getGameObjectById('GameController').getBehaviour(GameController);
         //this.gameObject.addBehaviour(this.gameController)
-        console.log(this.gameController);
-        console.log(this.gameObject)
-        
+        console.log(this.gameController);        
     }
 
     //游戏运行模式开始时会执行一次
