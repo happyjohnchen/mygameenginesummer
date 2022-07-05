@@ -16,7 +16,65 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: ImageRenderer
-        properties:
-          imagePath: assets/engineTest/images/testImage.png
-    id: background
+    id: CreateUi
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/engineTest/images/uitestbg.png
+        id: background
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 0
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: ShapeRectRenderer
+            properties:
+              width: 50
+              height: 50
+              color: blue
+              customColor: '#ffffff'
+          - type: UiCreateRoom
+        id: WaterFactory
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 200
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: ShapeRectRenderer
+            properties:
+              width: 50
+              height: 50
+              color: green
+              customColor: '#ffffff'
+          - type: UiCreateRoom
+        id: EnergyFactory
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 100
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: ShapeRectRenderer
+            properties:
+              width: 50
+              height: 50
+              color: red
+              customColor: '#ffffff'
+          - type: UiCreateRoom
+        id: FoodFactory

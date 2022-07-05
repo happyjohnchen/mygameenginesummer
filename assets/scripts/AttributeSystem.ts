@@ -6,6 +6,7 @@ import { TimeControllerSystem } from "./TimeControllerSystem";
 import { string } from "../../src/engine/validators/string";
 import { GameController } from "./GameController";
 import { RoomType } from "./modules/RoomModule";
+import { PersonRace } from "./modules/PersonModule";
 export class AttributeSystem extends Behaviour {
 
     //在此定义脚本中的属性
@@ -36,62 +37,74 @@ export class AttributeSystem extends Behaviour {
      @number()
      primeProduceTime = 5;//基础时间
      @number()
-     maxValue = 100;
+     maxValue = 1000;
      minValue= 0;
      @number()
      coefficient = 0.2;
      @number()
      radix = 0.2;
 
-     gamecontroller:GameController
+     private gamecontroller
+     private timeController
+     private game
     //游戏开始时会执行一次
     onStart() { //游戏开始时的数值
         
-
+       
     }
     onPlayStart(){
-        //this.game = this.gamecontroller.game;
+        this.gamecontroller = getGameObjectById("GameController").getBehaviour(GameController);
+        this.timeController = getGameObjectById("TimeController").getBehaviour(TimeControllerSystem);
+        this.game = this.gamecontroller.game;
+        this.nowTime = this.timeController.getTotalGameSecondTime();
+        this.lastTime = this.timeController.getTotalGameSecondTime();
     }
     //每次屏幕刷新执行 显示数值
     onUpdate() {
-        //this.gameObject.getBehaviour(TextRenderer).text= this.Primevalue.toString();
-        this.gamecontroller = getGameObjectById("GameController").getBehaviour(GameController);
+        
 
     }
 
-    onTick(duringTime: number) {
+    onTick(duringTime: number) {//一小时进行消耗
+        this.nowTime= this.timeController.getTotalGameSecondTime();
+        if(this.nowTime-this.lastTime >=1*60*60){
+            this.consumeForFoodWater();
+            this.lastTime = this.nowTime;  
+        }
     }
 
-    // getValue(){
-    //     return this.Primevalue;
-    // }
 
     changeAttributeValue(changedValue:number,type:string){ //改变水，食物，能源，材料value 且value最大值最小值不能超过最大值最小值
         switch(type){
             case "water":
-                this.gamecontroller.game.water = this.changeValue(this.gamecontroller.game.water,changedValue);
-            console.log("目前水属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.water);
+                this.game.water = this.changeValue(this.game.water,changedValue);
+            console.log("目前水属性值"+this.game.water);
             break;
             case "energy":
-                this.gamecontroller.game.energy = this.changeValue(this.gamecontroller.game.energy,changedValue);
-            console.log("目前电属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.energy);
+                this.game.energy = this.changeValue(this.game.energy,changedValue);
+            console.log("目前电属性值"+this.game.energy);
             break;
             case "food":
-                this.gamecontroller.game.food = this.changeValue(this.gamecontroller.game.food,changedValue);
-                console.log("目前食物属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.energy);
+                this.game.food = this.changeValue(this.game.food,changedValue);
+                console.log("目前食物属性值"+this.game.energy);
             break;
             case"material":
-                this.gamecontroller.game.material = this.changeValue(this.gamecontroller.game.material,changedValue);//可能没有上限 到时候再说
-                console.log("目前材料属性值"+getGameObjectById("GameController").getBehaviour(GameController).game.material);
+            this.game.material = this.changeValue(this.game.material,changedValue);//可能没有上限 到时候再说
+                console.log("目前材料属性值"+this.game.material);
             break;
         }
         
     }
 
-    changeValue(primeValue:number,addValue:number){  //检查超没超过上下限  上下限也可以变为参数
+    changeValue(primeValue:number,addValue:number){  //三种属性检查超没超过上下限  上下限也可以变为参数
         let newNumber = addValue+primeValue;
         newNumber = newNumber>this.maxValue?this.maxValue:newNumber;
         newNumber = newNumber<this.minValue?this.minValue:newNumber;
+        if(newNumber==0)
+        {
+            console.log("数值为0，游戏结束")
+            this.game.time.setSpeed(0);
+        }
         return newNumber;
     }
 
@@ -140,12 +153,55 @@ export class AttributeSystem extends Behaviour {
             2: 4,
             3: 7
         }
-        this.gamecontroller.game.energy = this.changeValue(this.gamecontroller.game.energy,-consumption[level]);
-        console.log("目前电量"+this.gamecontroller.game.energy);
+        this.game.energy = this.changeValue(this.game.energy,-consumption[level]);
+        console.log("目前电量"+this.game.energy);
    }
 
-   consumeForFoodWater(){//计算水和食物消耗
-    this.gamecontroller.game.water = this.changeValue(this.gamecontroller.game.water,-1);
-    this.gamecontroller.game.food= this.changeValue(this.gamecontroller.game.food,-1);
+   consumeForFoodWater(){//计算水和食物消耗 
+    const peopleCount = this.game.people.length;//拿到人的总数
+    this.game.water= this.changeValue(this.game.water,-peopleCount);//减去人数总数的数值
+    this.game.food= this.changeValue(this.game.food,-peopleCount);
+    console.log("水和食物消耗"+peopleCount);
+    console.log("水"+this.game.water);
+   }
+
+   consumeForMaterial(consume:number){//判断是否可以消耗 不可以则返回false 可以返回true
+    if(consume<=this.game.material){
+        this.game.material -= consume;//减去消耗
+        return true;
+    }
+        else{
+            //触发提醒ui
+            return false;
+        }
+   }
+
+   getPeopleAttribute(peopletype:PersonRace,roomType:RoomType){ //根据人种得到对应属性值
+        const waterForPeople = {  //0123分别对应 人 巨人 矮人 精灵
+            0:2,
+            1:1,
+            2:1,
+            3:4
+        }
+        const energyForPeople = {
+            0:2,
+            1:4,
+            2:1,
+            3:1
+        }
+        const foodForPeople = {
+            0:2,
+            1:1,
+            2:4,
+            3:1
+        }
+        switch(roomType){
+            case RoomType.WaterFactory:
+                return waterForPeople[peopletype];
+            case RoomType.EnergyFactory:
+                return energyForPeople[peopletype];
+            case RoomType.FoodFactory:
+                return foodForPeople[peopletype];
+        }
    }
 }

@@ -9,6 +9,7 @@ import { TimeControllerSystem } from "./TimeControllerSystem";
 import {string} from "../../src/engine/validators/string";
 import { Transform } from "../../src/engine/Transform";
 import { AttributeSystem } from "./AttributeSystem";
+import { GameController } from "./GameController";
 
 
 export class RoomClass extends Behaviour {
@@ -26,50 +27,56 @@ export class RoomClass extends Behaviour {
     level3Size = 5;
 
     roomType = RoomType.WaterFactory;
-    //不储存
+
     private lastTimeCreate = 0;//产出经过的时间
     private nowTime = 0;
     private lastTimeConsume = 0;
-    private producePos = 0;
     attributeType= "";// water food energy
 
-
-    //储存 还有个roomtype在上面
     roomId = 0;
     roomLevel = 1;
-    peopleInRoom;
+    //peopleInRoom;
     //roompos = new Array();
-    people: number[] = [];//储存进来人的id
-    AttributeSystem:GameObject
+    peopleInRoom: number[] = [];//储存进来人的id
+    private attributeSystem
 
+    waterInRoom = 0;  //用来计算存进来的人物值
+    energyInRoom = 0;
+    foodInRoom = 0;
+    private gamecontroller
+    private timeController
     onStart() {//拿到
-        //this.AttributeSystem = getGameObjectById("AttributeController");
+        
     }
 
     //游戏运行模式开始时会执行一次
     onPlayStart() {
-
+        this.attributeSystem = getGameObjectById("AttributeController").getBehaviour(AttributeSystem);
+        this.gamecontroller = getGameObjectById("GameController").getBehaviour(GameController);
+        this.timeController = getGameObjectById("TimeController").getBehaviour(TimeControllerSystem);
+        this.nowTime = this.timeController.getTotalGameSecondTime();
+        this.lastTimeConsume = this.timeController.getTotalGameSecondTime();
+        this.lastTimeCreate= this.timeController.getTotalGameSecondTime();
     }
 
     //每次屏幕刷新执行
     onUpdate() { 
    
-        //console.log(this.getRoomType() + "时间周期为："+this.calculatePeriod() + "小时");
+       
         
     }
 
     //平均每16ms执行一次   产出 增加
     onTick(duringTime: number) {
         // let totalAttribute = this.calculateTotalAttribute();//到时候接人的时候补充算法替换
-        let createPeriod = getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateCreatePeriod(this.roomLevel,this.totalPeopleAttribute);
-        this.nowTime= getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
-        //this.lastTime = this.lastTime==60? 0:this.lastTime;
+        let createPeriod = this.attributeSystem.calculateCreatePeriod(this.roomLevel,this.totalPeopleAttribute);
+        this.nowTime= this.timeController.getTotalGameSecondTime();
         if(this.nowTime-this.lastTimeCreate >=createPeriod*60*60){
             this.createProduction();
             this.lastTimeCreate = this.nowTime;  
         }
         if(this.nowTime-this.lastTimeConsume >=1*60*60){//1小时消耗
-            getGameObjectById("AttributeController").getBehaviour(AttributeSystem).ConsumeForEnergy(this.roomLevel);
+            this.attributeSystem.ConsumeForEnergy(this.roomLevel);
             this.lastTimeConsume = this.nowTime;  
         }
 
@@ -96,29 +103,36 @@ export class RoomClass extends Behaviour {
         return sizetable[this.roomLevel];
     }
 
-    addPerson(id:number){//记录人物编号 并判断是否超出限额
-        if(this.people.length<this.calculateSize()){
+    addPersonInRoom(id:number){//记录人物编号 并判断是否超出限额
+        if(this.peopleInRoom.length<this.calculateSize()){
             //this.people[totalPeople] = id;//把id存起来
-            this.people[this.people.length] = id
+            this.peopleInRoom[this.peopleInRoom.length] = id
+            this.setPeopleInRoom;
+            return true;
         }
         else {
             console.log("已满");
-            return
+            return false;
         };  
     }
 
-    removePerson(id:number){//记录人物编号
-        for(var p=0;p<this.people.length;p++){
-            if(this.people[p]==id){
-                this.people.splice(p,1);//删除
+    removePersonInRoom(id:number){//记录人物编号
+        for(var p=0;p<this.peopleInRoom.length;p++){
+            if(this.peopleInRoom[p]==id){
+                this.peopleInRoom.splice(p,1);//删除
                 break;
             }
         }
     }
 
+    setPeopleInRoom(){ //刷新人物位置
+        
+    }
+
+
     calculateTotalAttribute(){ //计算人物总属性 房间人物该属性之和
         let totalAttribute = 0;
-        for(var p=0;p<this.people.length;p++){
+        for(var p=0;p<this.peopleInRoom.length;p++){
             //这里写获取该id人物类属性
             //并作加法
             //
@@ -141,12 +155,12 @@ export class RoomClass extends Behaviour {
         let gameObjectchild = new GameObject() //产出三种属性
         this.gameObject.parent.addChild(gameObjectchild);
         const childrenTransform = new Transform();
-        childrenTransform.x = this.gameObject.getBehaviour(Transform).x + this.producePos;
-        childrenTransform.y = this.gameObject.getBehaviour(Transform).y + this.producePos;
+        childrenTransform.x = this.gameObject.getBehaviour(Transform).x ;
+        childrenTransform.y = this.gameObject.getBehaviour(Transform).y ;
         gameObjectchild.addBehaviour(childrenTransform);
         const addAttributeBe = new AddAttribute();
         addAttributeBe.setType(type);
-        const attributeproduction = getGameObjectById("AttributeController").getBehaviour(AttributeSystem).calculateProduction(this.roomLevel,type);
+        const attributeproduction = this.attributeSystem.calculateProduction(this.roomLevel,type);
         addAttributeBe.setPrefabProduction(attributeproduction);
         gameObjectchild.addBehaviour(addAttributeBe);
         const attributeprefab = new Prefab();

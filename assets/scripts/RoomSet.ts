@@ -8,6 +8,7 @@ import { GameController } from "./GameController";
 import { GameSet } from "./GameSet";
 import { RoomModule, RoomPosition, RoomStatus, RoomType } from "./modules/RoomModule";
 import { Room } from "./Room";
+import { RoomClass } from "./RoomClass";
 
 export class RoomSet extends Behaviour {
     //建坑
@@ -146,6 +147,16 @@ export class RoomSet extends Behaviour {
         const backgroundImage = new ImageRenderer()
         backgroundImage.imagePath = this.setRoomImage(roomModule.roomType, roomModule.roomStatus)
         saveRoom.addBehaviour(backgroundImage);
+        //挂roomclass脚本
+        const roomclass = new RoomClass();
+        roomclass.setRoomType(roomModule.roomType);
+        roomclass.setRoomid(roomModule.roomId);
+        roomclass.setRoomLevel(roomModule.roomSize);
+        roomclass.peopleInRoom = roomModule.people;
+        saveRoom.addBehaviour(roomclass);
+        //下面补充房间人物位置
+        saveRoom.getBehaviour(RoomClass).setPeopleInRoom();//渲染人物位置
+        
     }
     getRoomByXY(x: number, y: number) {//根据xy获取room
 
