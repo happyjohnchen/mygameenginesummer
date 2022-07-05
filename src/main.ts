@@ -1,5 +1,5 @@
 import { Player } from "../assets/engineTest/scripts/Player";
-import { AddAttribute } from "../assets/scripts/AddAttribute";
+import { AddAttribute } from "../assets/scripts/addAttribute";
 import { AttributeSystem } from "../assets/scripts/AttributeSystem";
 import { ButtonNewGame } from "../assets/scripts/ButtonNewGame";
 import { ButtonReadArchive } from "../assets/scripts/ButtonReadArchive";

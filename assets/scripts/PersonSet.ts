@@ -36,7 +36,7 @@ export class PersonSet extends Behaviour {
         //this.gameObject.addBehaviour(this.gameController)
         console.log(this.gameController);
         console.log(this.gameObject)
-        
+
     }
 
     //游戏运行模式开始时会执行一次
@@ -72,49 +72,52 @@ export class PersonSet extends Behaviour {
         transform.x = this.startPostionX;
         transform.y = this.startPositonY;
         const personClass = new PersonClass()
-        console.log("newPerson" + personClass)
         let race = randomRace()
         let name = randomName()
-       /*  switch (race) {
-            case 1:
+        switch (race) {
+            case 0:
                 personClass.personModule.race = PersonRace.Human;
                 personClass.personModule.personName = name;
-                console.log("case 1" + PersonRace.Human)
+                console.log("case 0 :" + PersonRace.Human)
+                break;
+            case 1:
+                personClass.personModule.race = PersonRace.Giant;
+                personClass.personModule.personName = name;
+                console.log("case 1")
                 break;
             case 2:
-                personClass.personModule.race = PersonRace.Giant;
+                personClass.personModule.race = PersonRace.Dwarf;
                 personClass.personModule.personName = name;
                 console.log("case 2")
                 break;
             case 3:
-                personClass.personModule.race = PersonRace.Dwarf;
+                personClass.personModule.race = PersonRace.Spirit;
                 personClass.personModule.personName = name;
                 console.log("case 3")
                 break;
-            case 4:
-                personClass.personModule.race = PersonRace.Spirit;
-                personClass.personModule.personName = name;
-                console.log("case 4")
-                break;
+            default:
+                console.log("Wrong!!!" + race)
 
-        } */
-        personClass.personModule.race = PersonRace.Human;
+        }
+        /* personClass.personModule.race = PersonRace.Human;
         personClass.personModule.personName = name;
-
+ */
 
         this.gameObject.addChild(newPerson);
         personClass.personModule.personId = this.gameController.getPeopleCount();
-        newPerson.addBehaviour(new AnimationRenderer);
-        
-        console.log("Name & Race" + personClass)
+        //newPerson.addBehaviour(new AnimationRenderer);
+
+        //console.log("Name & Race" + personClass)
         newPerson.addBehaviour(personClass);
         newPerson.addBehaviour(transform);
         this.gameController.addPerson(newPerson);
-        console.log(newPerson.getBehaviour(AnimationRenderer))
-        personClass.setAnimation(RoomType.WaterFactory)
-        console.log(newPerson.getBehaviour(Transform))
+        //console.log(newPerson.getBehaviour(AnimationRenderer))
+        //personClass.setAnimation(RoomType.WaterFactory)
+        console.log("PersonSet!!!")
+        console.log(newPerson.getBehaviour(PersonClass))
+        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
-        
+
     }
 
 }
