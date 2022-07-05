@@ -144,9 +144,11 @@ export class RoomClass extends Behaviour {
         for(var p=0;p<this.peopleInRoom.length;p++){
             //这里赋值
             const person= this.gamecontroller.getPersonById(this.peopleInRoom[p]);//拿到人
+            console.log(person);
             const xPos = this.leftPositionX + this.getToLeftPositionX(this.roomType,p);
             const yPos = this.bottomPositionY + this.getToBottomPositionY();
             person.getBehaviour(PersonClass).setPostion(xPos,yPos);
+            
             //动画 等xq测试完就放出来
             //person.getBehaviour(PersonClass).setAnimation(this.roomType);
             
