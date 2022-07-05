@@ -49,7 +49,7 @@ export class PersonClass extends Behaviour {
 
     setAnimation(roomType: RoomType) {
         const animationRenderer = this.gameObject.getBehaviour(AnimationRenderer);
-        animationRenderer.imagePathPrefix = " assets/images/PeopleAnimations/testAnimation/" + roomType.toString() + '-' + this.personModule.race.toString() +'-';
+        animationRenderer.imagePathPrefix = "assets/images/PeopleAnimations/testAnimation/" + roomType.toString() + '-' + this.personModule.race.toString() +'-';
         animationRenderer.imagePathSuffix = '.png'
         animationRenderer.startNum = 1;
         animationRenderer.endNum = 4;
