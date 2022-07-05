@@ -10,6 +10,7 @@ import {string} from "../../src/engine/validators/string";
 import { Transform } from "../../src/engine/Transform";
 import { AttributeSystem } from "./AttributeSystem";
 import { GameController } from "./GameController";
+import { PersonClass } from "./PersonClass";
 
 
 export class RoomClass extends Behaviour {
@@ -17,7 +18,7 @@ export class RoomClass extends Behaviour {
     //测试用
     production = 20;//一次产出多少
     @number()
-    totalPeopleAttribute = 1;//总人物属性 有一个根据总特质转化的式子
+    totalPeopleAttribute = 0;//总人物属性 有一个根据总特质转化的式子
    
     @number()
     level1Size = 2;
@@ -26,7 +27,7 @@ export class RoomClass extends Behaviour {
     @number()
     level3Size = 5;
 
-    roomType = RoomType.WaterFactory;
+    roomType = RoomType.FoodFactory;
 
     private lastTimeCreate = 0;//产出经过的时间
     private nowTime = 0;
@@ -68,8 +69,10 @@ export class RoomClass extends Behaviour {
 
     //平均每16ms执行一次   产出 增加
     onTick(duringTime: number) {
-        // let totalAttribute = this.calculateTotalAttribute();//到时候接人的时候补充算法替换
+        //let totalAttribute = this.calculateTotalAttribute();
+        //let createPeriod = this.attributeSystem.caslculateCreatePeriod(this.roomLevel,totalAttribute);
         let createPeriod = this.attributeSystem.calculateCreatePeriod(this.roomLevel,this.totalPeopleAttribute);
+        console.log("生产周期"+createPeriod);
         this.nowTime= this.timeController.getTotalGameSecondTime();
         if(this.nowTime-this.lastTimeCreate >=createPeriod*60*60){
             this.createProduction();
@@ -80,7 +83,6 @@ export class RoomClass extends Behaviour {
             this.lastTimeConsume = this.nowTime;  
         }
 
-        console.log("生产周期:"+createPeriod);
     }
 
     changeType(room:RoomType){//转换房间属性
@@ -108,18 +110,22 @@ export class RoomClass extends Behaviour {
             //this.people[totalPeople] = id;//把id存起来
             this.peopleInRoom[this.peopleInRoom.length] = id
             this.setPeopleInRoom;
+            this.calculateTotalAttribute();//改变一次属性值
+            //这里写分配位置函数
             return true;
         }
         else {
             console.log("已满");
             return false;
-        };  
+        }; 
+        
     }
 
     removePersonInRoom(id:number){//记录人物编号
         for(var p=0;p<this.peopleInRoom.length;p++){
             if(this.peopleInRoom[p]==id){
                 this.peopleInRoom.splice(p,1);//删除
+                this.calculateTotalAttribute();
                 break;
             }
         }
@@ -135,9 +141,12 @@ export class RoomClass extends Behaviour {
         for(var p=0;p<this.peopleInRoom.length;p++){
             //这里写获取该id人物类属性
             //并作加法
-            //
+            const person= this.gamecontroller.getPersonById(this.peopleInRoom[p]);//拿到人
+            totalAttribute+= this.attributeSystem.getPeopleAttribute(person.getBehaviour(PersonClass).personModule.race,this.roomType);
+            
         }
-        return totalAttribute;
+        console.log("现在总属性"+totalAttribute);
+        this.totalPeopleAttribute =  totalAttribute;
     }
 
     createProduction(){ //生成相应属性产出预制体  同时还要产出材料（还没写）
@@ -147,7 +156,6 @@ export class RoomClass extends Behaviour {
             this.createPrefab(this.attributeType);
             this.createPrefab("material");
         }
-        console.log("create");
     }
 
 
