@@ -44,6 +44,7 @@ export class PersonSet extends Behaviour {
         console.log(this.gameObject)
         //this.gameController.addPerson(this.gameObject);
         this.peopleCount = this.gameController.getPeopleCount();
+        this.newPerson();
     }
 
     //每次屏幕刷新执行
@@ -105,14 +106,14 @@ export class PersonSet extends Behaviour {
 
         this.gameObject.addChild(newPerson);
         personClass.personModule.personId = this.gameController.getPeopleCount();
-        //newPerson.addBehaviour(new AnimationRenderer);
+        newPerson.addBehaviour(new AnimationRenderer);
 
         //console.log("Name & Race" + personClass)
         newPerson.addBehaviour(personClass);
         newPerson.addBehaviour(transform);
         this.gameController.addPerson(newPerson);
-        //console.log(newPerson.getBehaviour(AnimationRenderer))
-        //personClass.setAnimation(RoomType.WaterFactory)
+        console.log(newPerson.getBehaviour(AnimationRenderer))
+        personClass.setAnimation(RoomType.WaterFactory)
         console.log("PersonSet!!!")
         console.log(newPerson.getBehaviour(PersonClass))
         console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")

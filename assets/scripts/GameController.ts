@@ -187,7 +187,7 @@ export class GameController extends Behaviour {
     //用id获取人
     getPersonById(id: number) {
         for (const person of this.game.people) {
-            if( person.getBehaviour(PersonClass).personModule.personId = id)
+            if( person.getBehaviour(PersonClass).personModule.personId == id)
             {
                 return person;
             }
