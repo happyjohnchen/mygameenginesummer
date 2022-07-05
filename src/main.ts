@@ -1,5 +1,7 @@
+import { ChildTest } from "../assets/engineTest/scripts/Child";
+import { FatherTest } from "../assets/engineTest/scripts/Father";
 import { Player } from "../assets/engineTest/scripts/Player";
-import { AddAttribute } from "../assets/scripts/addAttribute";
+import { AddAttribute } from "../assets/scripts/AddAttribute";
 import { AttributeSystem } from "../assets/scripts/AttributeSystem";
 import { ButtonNewGame } from "../assets/scripts/ButtonNewGame";
 import { ButtonReadArchive } from "../assets/scripts/ButtonReadArchive";
@@ -71,6 +73,8 @@ registerBehaviourClass(TimeControllerSystem);
 registerBehaviourClass(UiCloseForCreate);
 registerBehaviourClass(UiCreateRoom);
 registerBehaviourClass(UiUnfold);
+registerBehaviourClass(ChildTest);
+registerBehaviourClass(FatherTest);
 registerBehaviourClass(Player);
 const engine = new GameEngine();
 engine.start();

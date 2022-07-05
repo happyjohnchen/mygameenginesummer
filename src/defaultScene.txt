@@ -1,1 +1,1 @@
-assets/engineTest/scenes/Perple-Lxq.yaml
+assets/scenes/game.yaml
