@@ -3,7 +3,6 @@ import {
     checkPointInCircle,
     checkPointInRectangle,
     invertMatrix,
-    matrixAppendMatrix,
     Point,
     pointAppendMatrix
 } from "../math";
@@ -61,7 +60,12 @@ export class MouseControlSystem extends System {
                     if (result.onClick) {
                         result.onClick(e);
                     }
-                    result = result.parent;
+                    if (result.preventOnClickBubble){
+                        //禁止冒泡
+                        result = null;
+                    } else {
+                        result = result.parent;
+                    }
                 }
             } else {
                 if (this.rootGameObject.onClick) {
@@ -124,6 +128,18 @@ export class MouseControlSystem extends System {
                 result = checkPointInCircle(point, bounds);
             }
             if (result) {
+                const length = gameObject.children.length;
+                for (let childIndex = length - 1; childIndex >= 0; childIndex--) {
+                    const child = gameObject.children[childIndex];
+                    const childTransform = child.getBehaviour(Transform);
+                    const childLocalMatrix = childTransform.localMatrix;
+                    const childInvertLocalMatrix = invertMatrix(childLocalMatrix);
+                    const newPoint = pointAppendMatrix(point, childInvertLocalMatrix);
+                    const resultChild = this.hitTest(child, newPoint);
+                    if (resultChild) {
+                        return resultChild;
+                    }
+                }
                 return gameObject;
             } else {
                 return null;
