@@ -1,6 +1,7 @@
 dist
 node_modules
 TODO
+.DS_Store
 .idea
 createEngineUIConfig.ts
 out/
