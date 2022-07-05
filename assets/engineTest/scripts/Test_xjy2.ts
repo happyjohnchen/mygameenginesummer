@@ -14,14 +14,13 @@ import { PersonClass } from "../../scripts/PersonClass";
 import { GameController } from "../../scripts/GameController";
 
 
-export class Test_xjy extends Behaviour {
+export class Test_xjy2  extends Behaviour {
 
-  
-   
     private gamecontroller
     
     onStart() {
         this.gamecontroller = getGameObjectById("GameController").getBehaviour(GameController);
+        
     }
 
     //游戏运行模式开始时会执行一次
@@ -29,11 +28,12 @@ export class Test_xjy extends Behaviour {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
                 console.log("点击判断")
-                getGameObjectById("PersonOne").getBehaviour(PersonClass).personModule.personId = 1;
-                getGameObjectById("PersonOne").getBehaviour(PersonClass).personModule.race = PersonRace.Dwarf;
-                this.gamecontroller.addPerson(getGameObjectById("PersonOne"));
-                getGameObjectById("WaterFactory").getBehaviour(RoomClass).addPersonInRoom(1);
+                getGameObjectById("Person2").getBehaviour(PersonClass).personModule.personId = 2;
+                getGameObjectById("Person2").getBehaviour(PersonClass).personModule.race = PersonRace.Human;
+                this.gamecontroller.addPerson(getGameObjectById("Person2"));
+                getGameObjectById("WaterFactory").getBehaviour(RoomClass).addPersonInRoom(2);
                 console.log(getGameObjectById("WaterFactory").getBehaviour(RoomClass).peopleInRoom);
+                console.log("2种族"+this.gamecontroller.getPersonById(2).getBehaviour(PersonClass).personModule.race);
             }
      
        }
