@@ -164,7 +164,7 @@ export class RoomClass extends Behaviour {
         addAttributeBe.setPrefabProduction(attributeproduction);
         gameObjectchild.addBehaviour(addAttributeBe);
         const attributeprefab = new Prefab();
-        attributeprefab.prefabPath = 'assets/engineTest/prefabs/add'+type+'Prefab.yaml'
+        attributeprefab.prefabPath = 'assets/prefabs/add'+type+'Prefab.yaml'
         gameObjectchild.addBehaviour(attributeprefab);
     }
 
