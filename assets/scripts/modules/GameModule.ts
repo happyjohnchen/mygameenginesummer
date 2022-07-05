@@ -1,5 +1,5 @@
-import {PersonModule} from "./PersonModule";
-import {RoomModule} from "./RoomModule";
+import { PersonModule } from "./PersonModule";
+import { RoomModule } from "./RoomModule";
 
 export class GameModule {
     gameTime: GameTimeModule = new GameTimeModule();//时间
@@ -9,6 +9,7 @@ export class GameModule {
     energy: number = 50;//能量
     food: number = 50;//食物
     material: number = 0;//材料
+    newPersonTime: number = 0;
 }
 
 export class GameTimeModule {
