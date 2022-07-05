@@ -160,7 +160,7 @@ export class RoomClass extends Behaviour {
             case RoomType.WaterFactory:
                 const waterPos={
                     0: 0,
-                    1: 0.1,
+                    1: 10,
                     2: 0.5,
                     3: 0.7,
                     4: 1
