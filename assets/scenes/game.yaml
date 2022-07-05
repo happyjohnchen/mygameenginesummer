@@ -75,6 +75,40 @@ children:
         properties:
           speed: 3
     id: camera
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 370
+              y: 200
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: RoundedRectRenderer
+            properties:
+              width: 50
+              height: 50
+              cornerRadius: 20
+              color: custom
+              customColor: '#ffffff'
+          - type: UiSaveArchive
+        id: ButtonSaveArchive
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 5
+                  y: 10
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: TextRenderer
+                properties:
+                  text: 保存
+                  fontSize: 20
+                  font: 微软雅黑
+                  fontColor: '#000000'
+            id: TextSaveArchive
   - behaviours:
       - type: Transform
         properties:

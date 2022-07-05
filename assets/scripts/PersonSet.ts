@@ -7,6 +7,8 @@ import { Transform } from "../../src/engine/Transform";
 import { number } from "../../src/engine/validators/number";
 import { randomName, randomRace } from "./RandomSys";
 import { PersonRace } from "./modules/PersonModule";
+import { RoomType } from "./modules/RoomModule";
+import { AnimationRenderer } from "../../src/behaviours/AnimationRenderer";
 
 export class PersonSet extends Behaviour {
 
@@ -21,10 +23,10 @@ export class PersonSet extends Behaviour {
     gameController: GameController
     private nowTime: number
     lastTimeCreate = 0
-    private createPeriod = 600
+    private createPeriod = 1000
     //private createPeriod = 15 * 60 * 60
 
-
+    first = true;
 
 
 
@@ -32,7 +34,8 @@ export class PersonSet extends Behaviour {
     onStart() {
         this.gameController = getGameObjectById('GameController').getBehaviour(GameController);
         //this.gameObject.addBehaviour(this.gameController)
-        console.log(this.gameController);        
+        console.log(this.gameController);
+        console.log(this.gameObject)
     }
 
     //游戏运行模式开始时会执行一次
@@ -40,6 +43,7 @@ export class PersonSet extends Behaviour {
         console.log(this.gameObject)
         //this.gameController.addPerson(this.gameObject);
         this.peopleCount = this.gameController.getPeopleCount();
+        //this.newPerson();
     }
 
     //每次屏幕刷新执行
@@ -50,11 +54,10 @@ export class PersonSet extends Behaviour {
     //平均每16ms执行一次
     onTick(duringTime: number) {
         this.nowTime = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
-        console.log(this.nowTime);
-        console.log("this!!!!!" + this)
-        if (this.nowTime - this.lastTimeCreate >= this.createPeriod) {
+        if (this.nowTime - this.lastTimeCreate >= this.createPeriod && this.first) {
             this.lastTimeCreate = this.nowTime;
             this.newPerson();
+            this.first = false
             //console.log("OnTick" + this.newPerson);
         }
     }
@@ -70,40 +73,52 @@ export class PersonSet extends Behaviour {
         transform.x = this.startPostionX;
         transform.y = this.startPositonY;
         const personClass = new PersonClass()
-        console.log("newPerson" + personClass)
         let race = randomRace()
         let name = randomName()
         switch (race) {
-            case 1:
+            case 0:
                 personClass.personModule.race = PersonRace.Human;
                 personClass.personModule.personName = name;
-                console.log("case 1" + PersonRace.Human)
+                console.log("case 0 :" + PersonRace.Human)
+                break;
+            case 1:
+                personClass.personModule.race = PersonRace.Giant;
+                personClass.personModule.personName = name;
+                console.log("case 1")
                 break;
             case 2:
-                personClass.personModule.race = PersonRace.Giant;
+                personClass.personModule.race = PersonRace.Dwarf;
                 personClass.personModule.personName = name;
                 console.log("case 2")
                 break;
             case 3:
-                personClass.personModule.race = PersonRace.Dwarf;
+                personClass.personModule.race = PersonRace.Spirit;
                 personClass.personModule.personName = name;
                 console.log("case 3")
                 break;
-            case 4:
-                personClass.personModule.race = PersonRace.Spirit;
-                personClass.personModule.personName = name;
-                console.log("case 4")
-                break;
+            default:
+                console.log("Wrong!!!" + race)
 
         }
-
+        /* personClass.personModule.race = PersonRace.Human;
+        personClass.personModule.personName = name;
+ */
 
         this.gameObject.addChild(newPerson);
         personClass.personModule.personId = this.gameController.getPeopleCount();
-        console.log("Name & Race" + personClass)
+        newPerson.addBehaviour(new AnimationRenderer);
+
+        //console.log("Name & Race" + personClass)
         newPerson.addBehaviour(personClass);
         newPerson.addBehaviour(transform);
         this.gameController.addPerson(newPerson);
+        console.log(newPerson.getBehaviour(AnimationRenderer))
+        personClass.setAnimation(RoomType.WaterFactory)
+        console.log("PersonSet!!!")
+        console.log(newPerson.getBehaviour(PersonClass))
+        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+
+
     }
 
 }

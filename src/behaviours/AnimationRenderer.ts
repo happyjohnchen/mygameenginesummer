@@ -19,7 +19,7 @@ export class AnimationRenderer extends Behaviour implements Renderer {
     endNum = 2;//最后一张图片编号
 
     @number({allowZero: false})
-    frameForEachImage = 1;//每张图片显示帧数
+    frameForEachImage = 10;//每张图片显示帧数
 
     @boolean()
     private _pauseAnimation = false;
