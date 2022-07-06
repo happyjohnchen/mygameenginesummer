@@ -70,6 +70,23 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
+      - type: AttributeSystem
+        properties:
+          consumePerTime: 1
+          onceConsumeTime: 1
+          primeProduceTime: 5
+          maxValue: 1000
+          coefficient: 0.2
+          radix: 0.2
+    id: AttributeSystem
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
       - type: Camera
       - type: CameraMouseController
         properties:
@@ -109,6 +126,191 @@ children:
                   font: 微软雅黑
                   fontColor: '#000000'
             id: TextSaveArchive
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -450
+              y: -240
+              scaleX: 0.85
+              scaleY: 0.85
+              rotation: 0
+          - type: UiProgressBar
+        id: ProgressBar
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 20
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ShapeRectRenderer
+                properties:
+                  width: 100
+                  height: 20
+                  color: custom
+                  customColor: '#a29f4b'
+            id: ProgressEnergy
+            children:
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 3
+                      y: 3
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeRectRenderer
+                    properties:
+                      width: 94
+                      height: 14
+                      color: green
+                      customColor: '#ffffff'
+                id: EnergyBar
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 10
+                      y: 20
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: TextRenderer
+                    properties:
+                      text: 0/100
+                      fontSize: 20
+                      font: 微软雅黑
+                      fontColor: '#ffffff'
+                id: EnergyText
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: -37
+                      y: -35
+                      scaleX: 0.15
+                      scaleY: 0.15
+                      rotation: 0
+                  - type: ImageRenderer
+                    properties:
+                      imagePath: assets/images/ImageTryIcons/能源.png
+                id: Logo
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 170
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ShapeRectRenderer
+                properties:
+                  width: 100
+                  height: 20
+                  color: custom
+                  customColor: '#a29f4b'
+            id: ProgressFood
+            children:
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 3
+                      y: 3
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeRectRenderer
+                    properties:
+                      width: 94
+                      height: 14
+                      color: green
+                      customColor: '#ffffff'
+                id: FoodBar
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 10
+                      y: 20
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: TextRenderer
+                    properties:
+                      text: 0/100
+                      fontSize: 20
+                      font: 微软雅黑
+                      fontColor: '#ffffff'
+                id: FoodText
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: -42
+                      y: -17
+                      scaleX: 0.28
+                      scaleY: 0.28
+                      rotation: 0
+                  - type: ImageRenderer
+                    properties:
+                      imagePath: assets/images/ImageTryIcons/三明治.png
+                id: Logo
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 310
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ShapeRectRenderer
+                properties:
+                  width: 100
+                  height: 20
+                  color: custom
+                  customColor: '#a29f4b'
+            id: ProgressWater
+            children:
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 3
+                      y: 3
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeRectRenderer
+                    properties:
+                      width: 94
+                      height: 14
+                      color: green
+                      customColor: '#ffffff'
+                id: WaterBar
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 10
+                      y: 20
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: TextRenderer
+                    properties:
+                      text: 0/100
+                      fontSize: 20
+                      font: 微软雅黑
+                      fontColor: '#ffffff'
+                id: WaterText
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: -35
+                      y: -17
+                      scaleX: 0.25
+                      scaleY: 0.27
+                      rotation: 0
+                  - type: ImageRenderer
+                    properties:
+                      imagePath: assets/images/ImageTryIcons/水分管理推荐.png
+                id: Logo
   - behaviours:
       - type: Transform
         properties:
