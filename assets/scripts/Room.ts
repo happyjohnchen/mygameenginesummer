@@ -113,8 +113,11 @@ export class Room extends Behaviour {
             //roomModule.roomType=roomType
             roomGameObject.addBehaviour(new RoomClass())
             let roomClass=roomGameObject.getBehaviour(RoomClass)
-roomClass.setRoomid(roomModule.roomId)
-roomClass.setRoomType(roomModule.roomType)
+            roomClass.setRoomid(roomModule.roomId)
+            roomClass.setRoomType(roomModule.roomType)
+            //xjy加了一个人口对接和等级
+            roomClass.roomLevel = this.roomModule.level;
+            roomModule.people = roomClass.peopleInRoom;
         }
     }
     clickAndGetRoomID() {//点击room返回room的roomid

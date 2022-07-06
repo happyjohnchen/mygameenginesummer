@@ -97,10 +97,12 @@ export class GameEngine {
     resourceManager = new ResourceManager();
     systems: System[] = [];
     loadSceneData: string = '';
+    ready: boolean = false;
 
     public mode: "edit" | "play" = 'edit'
 
     async start() {
+        this.ready = false;
         this.rootGameObject.engine = this;
 
         //获取模式
@@ -192,9 +194,11 @@ export class GameEngine {
     }
 
     private startup() {
+        this.ready = false;
         this.rootGameObject.addBehaviour(new Transform());
         const text = this.resourceManager.getText(this.currentSceneName);
         const scene = this.unserilize(text);
+
         if (scene) {
             this.rootGameObject.addChild(scene);
         }
@@ -236,14 +240,33 @@ export class GameEngine {
                 }
             }
             body.onwheel = (e) => {
-                getGameObjectById('cameraEditor').getBehaviour(Transform).scaleX += e.deltaY / 5000;
-                getGameObjectById('cameraEditor').getBehaviour(Transform).scaleY += e.deltaY / 5000;
+                if (e.deltaY > 0 || getGameObjectById('cameraEditor').getBehaviour(Transform).scaleX > 0) {
+                    getGameObjectById('cameraEditor').getBehaviour(Transform).scaleX += e.deltaY / 5000;
+                    getGameObjectById('cameraEditor').getBehaviour(Transform).scaleY += e.deltaY / 5000;
+                }
             }
         }
 
         for (const system of this.systems) {
             system.onStart();
         }
+
+        this.ready = true;//所有GameObject和Behaviour已经就绪
+
+        //启动每一个behaviour
+        function visit(gameObject: GameObject, mode: 'edit' | 'play') {
+            for (const behaviour of gameObject.behaviours) {
+                behaviour.onStart();
+                if (mode === "play") {
+                    behaviour.onPlayStart();
+                }
+            }
+            for (const child of gameObject.children) {
+                visit(child, mode);
+            }
+        }
+
+        visit(this.rootGameObject, this.mode);
 
         this.enterFrame(0);
     }
@@ -307,6 +330,8 @@ export class GameObject {
     parent: GameObject;
 
     onClick?: Function;
+
+    preventOnClickBubble = false;
 
     onHoverIn?: Function;
 
@@ -372,6 +397,18 @@ export class GameObject {
         this.children.push(child);
         child.engine = this.engine;
         child.parent = this;
+        for (const behaviour of child.behaviours) {
+            behaviour.engine = this.engine;
+            if (this.engine.ready) {
+                behaviour.onStart();
+                if (this.engine.mode === "play") {
+                    behaviour.onPlayStart();
+                }
+            }
+            if (this.active) {
+                behaviour.active = true;
+            }
+        }
         if (this.active) {
             child.active = true;
         }
@@ -405,13 +442,17 @@ export class GameObject {
     addBehaviour(behaviour: Behaviour) {
         this.behaviours.push(behaviour);
         behaviour.gameObject = this;
-        behaviour.engine = this.engine;
-        behaviour.onStart();
-        if (this.engine.mode === "play") {
-            behaviour.onPlayStart();
-        }
-        if (this.active) {
-            behaviour.active = true;
+        if (this.engine) {
+            behaviour.engine = this.engine;
+            if (this.engine.ready) {
+                behaviour.onStart();
+                if (this.engine.mode === "play") {
+                    behaviour.onPlayStart();
+                }
+            }
+            if (this.active) {
+                behaviour.active = true;
+            }
         }
     }
 

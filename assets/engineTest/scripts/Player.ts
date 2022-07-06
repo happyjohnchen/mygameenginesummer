@@ -19,6 +19,7 @@ export class Player extends Behaviour {
 
     onStart() {
         console.log("player onStart");
+        console.log(getGameObjectById('sound').getBehaviour(Sound))
     }
 
     onPlayStart() {
@@ -47,13 +48,13 @@ export class Player extends Behaviour {
         this.gameObject.onHoverIn = (e) => {
             //鼠标移入
             console.log("Player onHoverIn");
-            alert("hoverIn")
+            //alert("hoverIn")
         }
 
         this.gameObject.onHoverOut = (e) => {
             //鼠标移出
             console.log("Player onHoverOut");
-            alert("hoverOut")
+            //alert("hoverOut")
         }
 
         this.gameObject.onClick = (e) => {
@@ -155,7 +156,6 @@ export class Player extends Behaviour {
                 case 'l':
                     //在player周围随机生成绿点
                     const child = new GameObject();
-                    this.gameObject.addChild(child);
 
                     const childTransform = new Transform();
                     childTransform.x = Math.random() * 100;
@@ -166,6 +166,8 @@ export class Player extends Behaviour {
                     childRenderer.radius = Math.random() % 30 + 20;
                     childRenderer.color = "#117744";
                     child.addBehaviour(childRenderer);
+
+                    this.gameObject.addChild(child);
                     break;
                 case 'k':
                     this.engine.loadScene("assets/engineTest/scenes/main.yaml", "123");

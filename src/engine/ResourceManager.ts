@@ -30,7 +30,7 @@ export class ResourceManager {
     getText(url: string) {
         const text = this.textCache[url];
         if (!text) {
-            alert('配置文件加载失败' + url)
+            console.log('配置文件加载失败:"' + url + '"');
         }
         return text;
     }
@@ -38,7 +38,7 @@ export class ResourceManager {
     getImage(url: string) {
         const image = this.imageCache[url]
         if (!image) {
-            alert('图片加载失败' + url)
+            console.log('图片加载失败:"' + url + '"');
         }
         return image;
     }

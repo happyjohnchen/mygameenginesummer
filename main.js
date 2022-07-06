@@ -147,11 +147,11 @@ function generateAssetsYaml() {
 }
 
 async function startup() {
-    console.log("正在加载Behaviours...");
+    console.log("Loading Behaviours...");
     generateMainTs();
-    console.log("获取场景、预制体和图片资产...");
+    console.log("Reading scenes, prefabs and images...");
     generateAssetsYaml();
-    console.log("所有资产已经获取，引擎开始启动...");
+    console.log("All assets has been read, launching game engine...");
     new WebSocketProxy().start();
     await startupCompiler();
     await startEditor();
