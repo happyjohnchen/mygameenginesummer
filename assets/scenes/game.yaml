@@ -37,6 +37,18 @@ children:
   - behaviours:
       - type: Transform
         properties:
+          x: -235
+          y: -166
+          scaleX: 0.08
+          scaleY: 0.08
+          rotation: 0
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/images/Room/entrance.png
+    id: Entrance
+  - behaviours:
+      - type: Transform
+        properties:
           x: 0
           y: 0
           scaleX: 1
@@ -122,7 +134,7 @@ children:
           - behaviours:
               - type: Transform
                 properties:
-                  x: 0
+                  x: null
                   y: 0
                   scaleX: 1
                   scaleY: 1
@@ -135,6 +147,117 @@ children:
                   font: 微软雅黑
                   fontColor: '#ffffff'
             id: material
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 100
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+        id: BuildUI
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 200
+                  y: 200
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ShapeRectRenderer
+                properties:
+                  width: 50
+                  height: 50
+                  color: red
+                  customColor: '#ffffff'
+              - type: UiUnfold
+            id: BuildButton
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: -50
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+            id: CreateUi
+            children:
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 150
+                      y: 0
+                      scaleX: 0.2
+                      scaleY: 0.8
+                      rotation: 0
+                  - type: ImageRenderer
+                    properties:
+                      imagePath: assets/engineTest/images/uitestbg.png
+                id: background
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 200
+                      y: 10
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeRectRenderer
+                    properties:
+                      width: 50
+                      height: 50
+                      color: blue
+                      customColor: '#ffffff'
+                  - type: UiCreateRoom
+                id: WaterFactory
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 200
+                      y: 80
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeRectRenderer
+                    properties:
+                      width: 50
+                      height: 50
+                      color: green
+                      customColor: '#ffffff'
+                  - type: UiCreateRoom
+                id: EnergyFactory
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 200
+                      y: 150
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeRectRenderer
+                    properties:
+                      width: 50
+                      height: 50
+                      color: red
+                      customColor: '#ffffff'
+                  - type: UiCreateRoom
+                id: FoodFactory
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 280
+                      y: 0
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeCircleRenderer
+                    properties:
+                      radius: 20
+                      color: red
+                      customColor: '#ffffff'
+                  - type: UiCloseForCreate
+                id: close
   - behaviours:
       - type: Transform
         properties:
@@ -164,15 +287,3 @@ children:
           coefficient: 0.2
           radix: 0.2
     id: AttributeController
-  - behaviours:
-      - type: Transform
-        properties:
-          x: -235
-          y: -166
-          scaleX: 0.08
-          scaleY: 0.08
-          rotation: 0
-      - type: ImageRenderer
-        properties:
-          imagePath: assets/images/Room/entrance.png
-    id: Entrance
