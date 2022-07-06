@@ -38,9 +38,10 @@ export class RoomSet extends Behaviour {
     @number()
     roomtype = RoomStatus.empty;
     canUpdateRoom = false;
-
+canChooseRoom=false
+buildRoomType:RoomType
     //数组初始化
-
+personId
     roomSetID
 
     //游戏开始时会执行一次
@@ -86,38 +87,67 @@ export class RoomSet extends Behaviour {
         RModule.roomStatus = RoomStatus.canBuild;
         room.roomModule = RModule
         roomChild.addBehaviour(room);
+        
         const backgroundImage = new ImageRenderer()
         if (roomStatus == RoomStatus.canBuild) {
             backgroundImage.imagePath = 'assets/engineTest/images/testImage.png'
         }
 
         roomChild.addBehaviour(backgroundImage);
+        let sonChild = new GameObject();
+        roomChild.addChild(sonChild)
+        const sonTransform = new Transform();
+        const sonImage = new ImageRenderer()
+        sonImage.imagePath='assets/engineTest/images/Nochose.png'
+        sonTransform.scaleX=0.1
+        sonTransform.scaleY=0.1
+        sonChild.addBehaviour(sonTransform)
+        sonChild.addBehaviour(sonImage);
         this.storeBuildStatus(roomPositionX, roomPositionY, roomChild)
 
     };
-    setRoomCanChoose() {
+    setbuildRoom(roomtype:RoomType){//建造房间
+this.buildRoomType= roomtype;
+    }
+    getBuildRoom(){
+return this.buildRoomType;
+    }
+setRoomNotCanCanchoose(){
+    
+    const rooms = getGameObjectById("GameController").getBehaviour(GameController).game.rooms;
+    for (const room of rooms) {
+        const image=room.children[0].getBehaviour(ImageRenderer);
+        image.imagePath='assets/engineTest/images/Nochose.png'
+    }
+}
+    setRoomCanChoose(personId:number) {
+        this.canChooseRoom=true;
+        this.personId=personId;
         const rooms = getGameObjectById("GameController").getBehaviour(GameController).game.rooms;
         for (const room of rooms) {
             const modules = room.getBehaviour(Room).roomModule
             const roomLevel = modules.level
-            const childTransform = new Transform();
-            const sonImage = new ImageRenderer()
-            if (roomLevel > 1) {
-                if (room.hasBehaviour(RoomClass)) {
-                    sonImage.imagePath = 'assets/engineTest/images/bigChose_left.png'
+            //console.log("childrem")
+            //console.log(room.child)
+            const image=room.children[0].getBehaviour(ImageRenderer);
+            if(roomLevel>0){
+              
+                if (roomLevel > 1) {
+                    if (room.hasBehaviour(RoomClass)) {
+                        image.imagePath = 'assets/engineTest/images/bigChose_left.png'
+                        console.log("image1")
+                    }
+                    else {
+                        image.imagePath = 'assets/engineTest/images/bigChose_right.png'
+                        console.log("image2")
+                    }
                 }
-                else {
-                    sonImage.imagePath = 'assets/engineTest/images/bigChose_right.png'
+                else if (roomLevel == 1) {
+                    image.imagePath= 'assets/engineTest/images/chose.png'
                 }
-            }
-            else if (roomLevel == 1) {
-                sonImage.imagePath = 'assets/engineTest/images/chose.png'
-            }
-            let roomChild = new GameObject();
             
-            room.addChild(roomChild)
-            roomChild.addBehaviour(childTransform)
-            roomChild.addBehaviour(sonImage);
+            }
+           
         }
     }
     //记录每个坑的状态
@@ -131,7 +161,8 @@ export class RoomSet extends Behaviour {
         return gameObeject.getBehaviour(Room)
     }
     removeRoomClass(gameObeject: GameObject) {
-        //gameObeject.removeBehaviour(Roomclass);
+       const roomclass= gameObeject.getBehaviour(RoomClass)
+        gameObeject.removeBehaviour(roomclass);
     }
     mergeHouse(clickGameobject: GameObject, neighborGameObject: GameObject) {//房間合在一起
         let clickRoom = this.getRoomBehabiour(clickGameobject)
@@ -190,7 +221,7 @@ export class RoomSet extends Behaviour {
             console.log(leftRoom)
             rightRoom = gameController.getRoomByPosition(rightPositon)
             if (leftRoom != null)
-                this.mergeHouse(clickRoom, leftRoom)
+                this.mergeHouse(leftRoom,clickRoom )
             if (rightRoom != null)
                 this.mergeHouse(clickRoom, rightRoom)
         }

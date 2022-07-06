@@ -23,7 +23,7 @@ export class PersonSet extends Behaviour {
     gameController: GameController
     private nowTime: number
     lastTimeCreate = 0
-    private createPeriod = 3600
+    private createPeriod = 10
     //private createPeriod = 15 * 60 * 60
 
     first = true;
@@ -34,13 +34,13 @@ export class PersonSet extends Behaviour {
     onStart() {
         this.gameController = getGameObjectById('GameController').getBehaviour(GameController);
         //this.gameObject.addBehaviour(this.gameController)
-        console.log(this.gameController);
-        console.log(this.gameObject)
+        //le.log(this.gameController);
+        //console.log(this.gameObject)
     }
 
     //游戏运行模式开始时会执行一次
     onPlayStart() {
-        console.log(this.gameObject)
+        //console.log(this.gameObject)
         //this.gameController.addPerson(this.gameObject);
         this.peopleCount = this.gameController.getPeopleCount();
         //this.newPerson();
@@ -78,25 +78,25 @@ export class PersonSet extends Behaviour {
             case 0:
                 personClass.personModule.race = PersonRace.Human;
                 personClass.personModule.personName = name;
-                console.log("case 0 :" + PersonRace.Human)
+                //console.log("case 0 :" + PersonRace.Human)
                 break;
             case 1:
                 personClass.personModule.race = PersonRace.Giant;
                 personClass.personModule.personName = name;
-                console.log("case 1")
+                //console.log("case 1")
                 break;
             case 2:
                 personClass.personModule.race = PersonRace.Dwarf;
                 personClass.personModule.personName = name;
-                console.log("case 2")
+                //console.log("case 2")
                 break;
             case 3:
                 personClass.personModule.race = PersonRace.Spirit;
                 personClass.personModule.personName = name;
-                console.log("case 3")
+                //console.log("case 3")
                 break;
             default:
-                console.log("Wrong!!!" + race)
+                //console.log("Wrong!!!" + race)
 
         }
         /* personClass.personModule.race = PersonRace.Human;
@@ -111,11 +111,11 @@ export class PersonSet extends Behaviour {
         newPerson.addBehaviour(personClass);
         newPerson.addBehaviour(transform);
         this.gameController.addPerson(newPerson);
-        console.log(newPerson.getBehaviour(AnimationRenderer))
+        //console.log(newPerson.getBehaviour(AnimationRenderer))
         personClass.setAnimation(RoomType.WaterFactory)
-        console.log("PersonSet!!!")
-        console.log(newPerson.getBehaviour(PersonClass))
-        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        //console.log("PersonSet!!!")
+        //console.log(newPerson.getBehaviour(PersonClass))
+        //console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
 
     }
