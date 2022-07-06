@@ -70,6 +70,23 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
+      - type: AttributeSystem
+        properties:
+          consumePerTime: 1
+          onceConsumeTime: 1
+          primeProduceTime: 5
+          maxValue: 1000
+          coefficient: 0.2
+          radix: 0.2
+    id: AttributeSystem
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
       - type: Camera
       - type: CameraMouseController
         properties:
@@ -109,6 +126,155 @@ children:
                   font: 微软雅黑
                   fontColor: '#000000'
             id: TextSaveArchive
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -460
+              y: -260
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: UiProgressBar
+        id: ProgressBar
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ShapeRectRenderer
+                properties:
+                  width: 120
+                  height: 20
+                  color: custom
+                  customColor: '#a29f4b'
+            id: ProgressEnergy
+            children:
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 3
+                      y: 3
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeRectRenderer
+                    properties:
+                      width: 114
+                      height: 12
+                      color: green
+                      customColor: '#ffffff'
+                id: EnergyBar
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 10
+                      y: 20
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: TextRenderer
+                    properties:
+                      text: 0/100
+                      fontSize: 20
+                      font: 微软雅黑
+                      fontColor: '#ffffff'
+                id: EnergyText
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 130
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ShapeRectRenderer
+                properties:
+                  width: 120
+                  height: 20
+                  color: custom
+                  customColor: '#a29f4b'
+            id: ProgressFood
+            children:
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 3
+                      y: 3
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeRectRenderer
+                    properties:
+                      width: 114
+                      height: 12
+                      color: green
+                      customColor: '#ffffff'
+                id: FoodBar
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 10
+                      y: 20
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: TextRenderer
+                    properties:
+                      text: 0/100
+                      fontSize: 20
+                      font: 微软雅黑
+                      fontColor: '#ffffff'
+                id: FoodText
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 260
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ShapeRectRenderer
+                properties:
+                  width: 120
+                  height: 20
+                  color: custom
+                  customColor: '#a29f4b'
+            id: ProgressWater
+            children:
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 3
+                      y: 3
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeRectRenderer
+                    properties:
+                      width: 114
+                      height: 12
+                      color: green
+                      customColor: '#ffffff'
+                id: WaterBar
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 10
+                      y: 20
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: TextRenderer
+                    properties:
+                      text: 0/100
+                      fontSize: 20
+                      font: 微软雅黑
+                      fontColor: '#ffffff'
+                id: WaterText
   - behaviours:
       - type: Transform
         properties:
