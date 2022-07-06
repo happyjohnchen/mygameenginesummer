@@ -86,6 +86,7 @@ export class Room extends Behaviour {
         console.log("clear" + room)
 
     }
+    
     upgradeRoom(roomGameObject: GameObject) {//升级房间
 
         let roomModule = roomGameObject.getBehaviour(Room).roomModule
