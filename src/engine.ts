@@ -240,8 +240,10 @@ export class GameEngine {
                 }
             }
             body.onwheel = (e) => {
-                getGameObjectById('cameraEditor').getBehaviour(Transform).scaleX += e.deltaY / 5000;
-                getGameObjectById('cameraEditor').getBehaviour(Transform).scaleY += e.deltaY / 5000;
+                if (e.deltaY > 0 || getGameObjectById('cameraEditor').getBehaviour(Transform).scaleX > 0) {
+                    getGameObjectById('cameraEditor').getBehaviour(Transform).scaleX += e.deltaY / 5000;
+                    getGameObjectById('cameraEditor').getBehaviour(Transform).scaleY += e.deltaY / 5000;
+                }
             }
         }
 
@@ -395,7 +397,7 @@ export class GameObject {
         this.children.push(child);
         child.engine = this.engine;
         child.parent = this;
-        for (const behaviour of child.behaviours){
+        for (const behaviour of child.behaviours) {
             behaviour.engine = this.engine;
             if (this.engine.ready) {
                 behaviour.onStart();
