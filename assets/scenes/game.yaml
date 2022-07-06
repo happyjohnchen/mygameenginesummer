@@ -124,7 +124,7 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 100
+              x: 150
               y: -250
               scaleX: 1
               scaleY: 1
@@ -306,14 +306,56 @@ children:
                   rotation: 0
               - type: ShapeRectRenderer
                 properties:
-                  width: 50
-                  height: 50
+                  width: 40
+                  height: 40
                   color: red
                   customColor: '#ffffff'
               - type: ChangeTimeSpeed
                 properties:
                   thisSpeed: 0
             id: pause
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 200
+              y: -250
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+        id: AddSpeedButton
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ShapeRectRenderer
+                properties:
+                  width: 40
+                  height: 40
+                  color: green
+                  customColor: '#ffffff'
+            id: AddSpeed
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 10
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: TextRenderer
+                properties:
+                  text: x1
+                  fontSize: 30
+                  font: 微软雅黑
+                  fontColor: '#ffffff'
+              - type: ShowSpeed
+              - type: ClickChangeSpeed
+            id: SpeedShow
   - behaviours:
       - type: Transform
         properties:
