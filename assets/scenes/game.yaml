@@ -143,7 +143,7 @@ children:
               - type: TextRenderer
                 properties:
                   text: '00'
-                  fontSize: 30
+                  fontSize: 25
                   font: 微软雅黑
                   fontColor: '#ffffff'
             id: material
@@ -261,7 +261,7 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 320
+              x: 300
               y: -250
               scaleX: 1
               scaleY: 1
@@ -327,21 +327,6 @@ children:
           - behaviours:
               - type: Transform
                 properties:
-                  x: 0
-                  y: 0
-                  scaleX: 1
-                  scaleY: 1
-                  rotation: 0
-              - type: ShapeRectRenderer
-                properties:
-                  width: 40
-                  height: 40
-                  color: green
-                  customColor: '#ffffff'
-            id: AddSpeed
-          - behaviours:
-              - type: Transform
-                properties:
                   x: 10
                   y: 0
                   scaleX: 1
@@ -350,7 +335,7 @@ children:
               - type: TextRenderer
                 properties:
                   text: x1
-                  fontSize: 30
+                  fontSize: 25
                   font: 微软雅黑
                   fontColor: '#ffffff'
               - type: ShowSpeed

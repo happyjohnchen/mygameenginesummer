@@ -23,7 +23,7 @@ export class TimeControllerSystem extends Behaviour {
     @number()
 
     dayHourTime = 16;//白天总时间
-    private speed= 1.0;
+    speed= 1.0;
 
 
 
