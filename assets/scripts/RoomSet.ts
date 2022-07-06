@@ -1,3 +1,4 @@
+import { transform } from "_@ts-morph_common@0.16.0@@ts-morph/common/lib/typescript";
 import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
 import { Prefab } from "../../src/behaviours/Prefab";
 import { GameObject, getGameObjectById } from "../../src/engine";
@@ -8,6 +9,7 @@ import { GameController } from "./GameController";
 import { GameSet } from "./GameSet";
 import { RoomModule, RoomPosition, RoomStatus, RoomType } from "./modules/RoomModule";
 import { Room } from "./Room";
+import { RoomClass } from "./RoomClass";
 export function setRoomImage(roomtype: RoomType, roomStatus: RoomStatus) {
     let imagePath: string
     switch (roomStatus) {//加图片
@@ -93,6 +95,31 @@ export class RoomSet extends Behaviour {
         this.storeBuildStatus(roomPositionX, roomPositionY, roomChild)
 
     };
+    setRoomCanChoose() {
+        const rooms = getGameObjectById("GameController").getBehaviour(GameController).game.rooms;
+        for (const room of rooms) {
+            const modules = room.getBehaviour(Room).roomModule
+            const roomLevel = modules.level
+            const childTransform = new Transform();
+            const sonImage = new ImageRenderer()
+            if (roomLevel > 1) {
+                if (room.hasBehaviour(RoomClass)) {
+                    sonImage.imagePath = 'assets/engineTest/images/bigChose_left.png'
+                }
+                else {
+                    sonImage.imagePath = 'assets/engineTest/images/bigChose_right.png'
+                }
+            }
+            else if (roomLevel == 1) {
+                sonImage.imagePath = 'assets/engineTest/images/chose.png'
+            }
+            let roomChild = new GameObject();
+            
+            room.addChild(roomChild)
+            roomChild.addBehaviour(childTransform)
+            roomChild.addBehaviour(sonImage);
+        }
+    }
     //记录每个坑的状态
     storeBuildStatus(x: number, y: number, gameObject: GameObject) {
         //this.roomGameObjectArray[x][y] = gameObject;
@@ -130,9 +157,9 @@ export class RoomSet extends Behaviour {
             }
         }
     }
-  
 
-    
+
+
     getRoomByXY(x: number, y: number) {//根据xy获取room
 
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
