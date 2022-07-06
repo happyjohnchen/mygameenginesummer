@@ -115,17 +115,27 @@ export class RoomClass extends Behaviour {
     }
 
     addPersonInRoom(id:number){//记录人物编号 并判断是否超出限额
-        if(this.peopleInRoom.length<this.calculateSize()){
-            //this.people[totalPeople] = id;//把id存起来
-            this.peopleInRoom[this.peopleInRoom.length] = id
-            this.calculateTotalAttribute();//改变一次属性值
-           this.setPeopleInRoom();
-            return true;
+        let isIn = false;
+        for(var p=0;p<this.peopleInRoom.length;p++){
+           if(this.peopleInRoom[p]==id){
+                isIn = true;
+                console.log("已经存在");
+                break;
+           }
         }
-        else {
-            console.log("已满");
-            return false;
-        }; 
+        if(!isIn){
+            if(this.peopleInRoom.length<this.calculateSize()){
+                //this.people[totalPeople] = id;//把id存起来
+                this.peopleInRoom[this.peopleInRoom.length] = id
+                this.calculateTotalAttribute();//改变一次属性值
+               this.setPeopleInRoom();
+                return true;
+            }
+            else {
+                console.log("已满");
+                return false;
+            }; 
+        }
         
     }
 
