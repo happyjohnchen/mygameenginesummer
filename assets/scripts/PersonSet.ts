@@ -23,7 +23,7 @@ export class PersonSet extends Behaviour {
     gameController: GameController
     private nowTime: number
     lastTimeCreate = 0
-    private createPeriod = 1000
+    private createPeriod = 3600
     //private createPeriod = 15 * 60 * 60
 
     first = true;
@@ -54,10 +54,9 @@ export class PersonSet extends Behaviour {
     //平均每16ms执行一次
     onTick(duringTime: number) {
         this.nowTime = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
-        if (this.nowTime - this.lastTimeCreate >= this.createPeriod && this.first) {
+        if (this.nowTime - this.lastTimeCreate >= this.createPeriod) {
             this.lastTimeCreate = this.nowTime;
             this.newPerson();
-            this.first = false
             //console.log("OnTick" + this.newPerson);
         }
     }

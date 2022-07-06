@@ -10,12 +10,8 @@ import { PersonRace } from "./modules/PersonModule";
 export class AttributeSystem extends Behaviour {
 
     //在此定义脚本中的属性
-    /* 分别挂在到三个属性的物体上，用来实现随时间掉落 且控制上下限
-    随房间数量消耗
-
-    用来控制三个属性得加减
-    三个属性随时间掉落并赋值
-
+    /*
+        属性系统 包含属性控制中所有算法
     */
 
     
@@ -78,15 +74,15 @@ export class AttributeSystem extends Behaviour {
         switch(type){
             case "water":
                 this.game.water = this.changeValue(this.game.water,changedValue);
-            console.log("目前水属性值"+this.game.water);
+                //console.log("目前水属性值"+this.game.water);
             break;
             case "energy":
                 this.game.energy = this.changeValue(this.game.energy,changedValue);
-            console.log("目前电属性值"+this.game.energy);
+                console.log("目前电属性值"+this.game.energy);
             break;
             case "food":
                 this.game.food = this.changeValue(this.game.food,changedValue);
-                console.log("目前食物属性值"+this.game.energy);
+                //console.log("目前食物属性值"+this.game.energy);
             break;
             case"material":
             this.game.material = this.changeValue(this.game.material,changedValue);//可能没有上限 到时候再说
@@ -163,6 +159,7 @@ export class AttributeSystem extends Behaviour {
     this.game.food= this.changeValue(this.game.food,-peopleCount);
     console.log("水和食物消耗"+peopleCount);
     console.log("水"+this.game.water);
+    console.log("食物"+this.game.food);
    }
 
    consumeForMaterial(consume:number){//判断是否可以消耗 不可以则返回false 可以返回true

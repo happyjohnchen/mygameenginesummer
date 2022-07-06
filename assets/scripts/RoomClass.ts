@@ -10,14 +10,22 @@ import {string} from "../../src/engine/validators/string";
 import { Transform } from "../../src/engine/Transform";
 import { AttributeSystem } from "./AttributeSystem";
 import { GameController } from "./GameController";
+import { PersonClass } from "./PersonClass";
+import { Type } from "ts-morph";
+import { Room } from "./Room";
 
 
 export class RoomClass extends Behaviour {
 
-    //测试用
+    /*
+        挂载在每一间屋子上 用来管理房间中的人，房间的属性和属性产出消耗等
+    */
+
+
+
     production = 20;//一次产出多少
     @number()
-    totalPeopleAttribute = 1;//总人物属性 有一个根据总特质转化的式子
+    totalPeopleAttribute = 0;//总人物属性 有一个根据总特质转化的式子
    
     @number()
     level1Size = 2;
@@ -35,16 +43,14 @@ export class RoomClass extends Behaviour {
 
     roomId = 0;
     roomLevel = 1;
-    //peopleInRoom;
-    //roompos = new Array();
     peopleInRoom: number[] = [];//储存进来人的id
     private attributeSystem
 
-    waterInRoom = 0;  //用来计算存进来的人物值
-    energyInRoom = 0;
-    foodInRoom = 0;
     private gamecontroller
     private timeController
+
+    leftPositionX = 0; 左边界位置
+    bottomPositionY = 0; 地面位置
     onStart() {//拿到
         
     }
@@ -70,8 +76,10 @@ export class RoomClass extends Behaviour {
 
     //平均每16ms执行一次   产出 增加
     onTick(duringTime: number) {
-        // let totalAttribute = this.calculateTotalAttribute();//到时候接人的时候补充算法替换
+        //let totalAttribute = this.calculateTotalAttribute();
+        //let createPeriod = this.attributeSystem.caslculateCreatePeriod(this.roomLevel,totalAttribute);
         let createPeriod = this.attributeSystem.calculateCreatePeriod(this.roomLevel,this.totalPeopleAttribute);
+        console.log("生产周期"+createPeriod);
         this.nowTime= this.timeController.getTotalGameSecondTime();
         if(this.nowTime-this.lastTimeCreate >=createPeriod*60*60){
             this.createProduction();
@@ -82,8 +90,9 @@ export class RoomClass extends Behaviour {
             this.lastTimeConsume = this.nowTime;  
         }
 
-        console.log("生产周期:"+createPeriod);
     }
+
+    //与人物相关的方法
 
     changeType(room:RoomType){//转换房间属性
        switch (room){
@@ -109,38 +118,99 @@ export class RoomClass extends Behaviour {
         if(this.peopleInRoom.length<this.calculateSize()){
             //this.people[totalPeople] = id;//把id存起来
             this.peopleInRoom[this.peopleInRoom.length] = id
-            this.setPeopleInRoom;
+            this.calculateTotalAttribute();//改变一次属性值
+           this.setPeopleInRoom();
             return true;
         }
         else {
             console.log("已满");
             return false;
-        };  
+        }; 
+        
     }
 
     removePersonInRoom(id:number){//记录人物编号
         for(var p=0;p<this.peopleInRoom.length;p++){
             if(this.peopleInRoom[p]==id){
                 this.peopleInRoom.splice(p,1);//删除
+                this.calculateTotalAttribute();
                 break;
             }
         }
     }
 
-    setPeopleInRoom(){ //刷新人物位置
-        
+    setPeopleInRoom(){ //刷新人物位置 播放相应动画
+        //等海欣合完就放出来
+        // this.leftPositionX = this.gameObject.getBehaviour(Room).getBorder(this.roomId).x;
+        // this.bottomPositionY = this.gameObject.getBehaviour(Room).getBorder(this.roomId).y;
+        for(var p=0;p<this.peopleInRoom.length;p++){
+            //这里赋值
+            const person= this.gamecontroller.getPersonById(this.peopleInRoom[p]);//拿到人
+            console.log(person);
+            const xPos = this.leftPositionX + this.getToLeftPositionX(this.roomType,p);
+            const yPos = this.bottomPositionY + this.getToBottomPositionY();
+            person.getBehaviour(PersonClass).setPostion(xPos,yPos);
+            
+            //动画 等xq测试完就放出来
+            person.getBehaviour(PersonClass).setAnimation(this.roomType);
+            
+        } 
     }
 
+    getToLeftPositionX(roomType:RoomType,posNumber:number){  //根据房间属性得到五个距离左边界位置值  0 1 2 water engery food
+        switch(roomType){
+            case RoomType.WaterFactory:
+                const waterPos={
+                    0: 0,
+                    1: 10,
+                    2: 0.5,
+                    3: 0.7,
+                    4: 1
+                }
+                return waterPos[posNumber];
+            case RoomType.EnergyFactory:
+                const energyPos={
+                    0: 0,
+                    1: 0.2,
+                    2: 0.4,
+                    3: 0.8,
+                    4: 1.5
+                }
+                return energyPos[posNumber];
+            case RoomType.FoodFactory:
+                const foodPos={
+                    0: 0,
+                    1: 0.1,
+                    2: 0.5,
+                    3: 0.7,
+                    4: 1.2
+                }
+                return foodPos[posNumber];
+        }
+           
+
+    }
+    getToBottomPositionY(){  //这里更改距离地面的坐标
+        return 5;
+    }
+
+    //属性相关的方法
 
     calculateTotalAttribute(){ //计算人物总属性 房间人物该属性之和
         let totalAttribute = 0;
         for(var p=0;p<this.peopleInRoom.length;p++){
             //这里写获取该id人物类属性
             //并作加法
-            //
+            let person= this.gamecontroller.getPersonById(this.peopleInRoom[p]);//拿到人
+            totalAttribute+= this.attributeSystem.getPeopleAttribute(person.getBehaviour(PersonClass).personModule.race,this.roomType);
+            console.log(p + "增加"+this.attributeSystem.getPeopleAttribute(person.getBehaviour(PersonClass).personModule.race,this.roomType));
+            // console.log(p+":"+ this.peopleInRoom[p]);
         }
-        return totalAttribute;
+        
+        this.totalPeopleAttribute =  totalAttribute;
+        console.log("现在总属性"+this.totalPeopleAttribute);
     }
+
 
     createProduction(){ //生成相应属性产出预制体  同时还要产出材料（还没写）
         this.attributeType = this.changeType(this.roomType);
@@ -149,7 +219,6 @@ export class RoomClass extends Behaviour {
             this.createPrefab(this.attributeType);
             this.createPrefab("material");
         }
-        console.log("create");
     }
 
 
@@ -166,7 +235,7 @@ export class RoomClass extends Behaviour {
         addAttributeBe.setPrefabProduction(attributeproduction);
         gameObjectchild.addBehaviour(addAttributeBe);
         const attributeprefab = new Prefab();
-        attributeprefab.prefabPath = 'assets/engineTest/prefabs/add'+type+'Prefab.yaml'
+        attributeprefab.prefabPath = 'assets/prefabs/add'+type+'Prefab.yaml'
         gameObjectchild.addBehaviour(attributeprefab);
     }
 
@@ -177,6 +246,8 @@ export class RoomClass extends Behaviour {
     setProduction(productionNew:number){
         this.production = productionNew;
     }
+
+
     ///   拿到属性值  ///
     getRoomType(){
         return this.attributeType;
@@ -205,4 +276,6 @@ export class RoomClass extends Behaviour {
     // setRoompos(pos:any){
     //     this.roompos = pos;
     // }
+
+
 }

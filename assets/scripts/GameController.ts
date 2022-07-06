@@ -189,7 +189,9 @@ export class GameController extends Behaviour {
         for (const person of this.game.people) {
             if( person.getBehaviour(PersonClass).personModule.personId == id)
             {
+                console.log (person.getBehaviour(PersonClass).personModule);
                 return person;
+                
             }
         }
     }
