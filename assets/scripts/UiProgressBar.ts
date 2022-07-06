@@ -58,9 +58,9 @@ export class UiProgressBar extends Behaviour {
         this.waterText.getBehaviour(TextRenderer).text = this.gameController.game.water + "/" + this.attributeSystem.maxValue;
 
         //更新进度条宽度
-        this.energyBar.width = this.gameController.game.energy / this.attributeSystem.maxValue * 114;
-        this.foodBar.width = this.gameController.game.food / this.attributeSystem.maxValue * 114;
-        this.waterBar.width = this.gameController.game.water / this.attributeSystem.maxValue * 114;
+        this.energyBar.width = this.gameController.game.energy / this.attributeSystem.maxValue * 94;
+        this.foodBar.width = this.gameController.game.food / this.attributeSystem.maxValue * 94;
+        this.waterBar.width = this.gameController.game.water / this.attributeSystem.maxValue * 94;
     }
 
     //平均每16ms执行一次

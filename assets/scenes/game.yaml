@@ -140,14 +140,14 @@ children:
           - behaviours:
               - type: Transform
                 properties:
-                  x: 0
+                  x: 20
                   y: 0
                   scaleX: 1
                   scaleY: 1
                   rotation: 0
               - type: ShapeRectRenderer
                 properties:
-                  width: 120
+                  width: 100
                   height: 20
                   color: custom
                   customColor: '#a29f4b'
@@ -163,8 +163,8 @@ children:
                       rotation: 0
                   - type: ShapeRectRenderer
                     properties:
-                      width: 114
-                      height: 12
+                      width: 94
+                      height: 14
                       color: green
                       customColor: '#ffffff'
                 id: EnergyBar
@@ -186,14 +186,14 @@ children:
           - behaviours:
               - type: Transform
                 properties:
-                  x: 130
+                  x: 150
                   y: 0
                   scaleX: 1
                   scaleY: 1
                   rotation: 0
               - type: ShapeRectRenderer
                 properties:
-                  width: 120
+                  width: 100
                   height: 20
                   color: custom
                   customColor: '#a29f4b'
@@ -209,8 +209,8 @@ children:
                       rotation: 0
                   - type: ShapeRectRenderer
                     properties:
-                      width: 114
-                      height: 12
+                      width: 94
+                      height: 14
                       color: green
                       customColor: '#ffffff'
                 id: FoodBar
@@ -232,14 +232,14 @@ children:
           - behaviours:
               - type: Transform
                 properties:
-                  x: 260
+                  x: 280
                   y: 0
                   scaleX: 1
                   scaleY: 1
                   rotation: 0
               - type: ShapeRectRenderer
                 properties:
-                  width: 120
+                  width: 100
                   height: 20
                   color: custom
                   customColor: '#a29f4b'
@@ -255,8 +255,8 @@ children:
                       rotation: 0
                   - type: ShapeRectRenderer
                     properties:
-                      width: 114
-                      height: 12
+                      width: 94
+                      height: 14
                       color: green
                       customColor: '#ffffff'
                 id: WaterBar
