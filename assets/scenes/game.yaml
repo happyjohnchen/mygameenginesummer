@@ -25,14 +25,14 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: -1000
-          y: -500
-          scaleX: 1
-          scaleY: 1
+          x: -530
+          y: -275
+          scaleX: 0.25
+          scaleY: 0.25
           rotation: 0
       - type: ImageRenderer
         properties:
-          imagePath: assets/engineTest/images/th.jpg
+          imagePath: assets/images/scene1.png
     id: Background
   - behaviours:
       - type: Transform
@@ -109,6 +109,32 @@ children:
                   font: 微软雅黑
                   fontColor: '#000000'
             id: TextSaveArchive
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 370
+              y: -250
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+        id: MaterialShow
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ShowAttribute
+              - type: TextRenderer
+                properties:
+                  text: '00'
+                  fontSize: 40
+                  font: 微软雅黑
+                  fontColor: '#ffffff'
+            id: material
   - behaviours:
       - type: Transform
         properties:
@@ -121,3 +147,32 @@ children:
         properties:
           roomtype: 0
     id: tileMap
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: AttributeSystem
+        properties:
+          consumePerTime: 1
+          onceConsumeTime: 1
+          primeProduceTime: 2
+          maxValue: 100
+          coefficient: 0.2
+          radix: 0.2
+    id: AttributeController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -235
+          y: -166
+          scaleX: 0.08
+          scaleY: 0.08
+          rotation: 0
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/images/Room/entrance.png
+    id: Entrance

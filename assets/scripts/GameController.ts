@@ -115,7 +115,7 @@ export class GameController extends Behaviour {
         this.game.water = 50;
         this.game.energy = 50;
         this.game.food = 50;
-        this.game.material = 0;
+        this.game.material = 200;
         console.log("GameController: 新存档创建成功");
     }
 
