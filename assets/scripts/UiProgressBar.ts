@@ -61,12 +61,6 @@ export class UiProgressBar extends Behaviour {
         this.energyBar.width = this.gameController.game.energy / this.attributeSystem.maxValue * 94;
         this.foodBar.width = this.gameController.game.food / this.attributeSystem.maxValue * 94;
         this.waterBar.width = this.gameController.game.water / this.attributeSystem.maxValue * 94;
-
-        if (this.gameController.game.energy<1000){
-            this.gameController.game.energy++;
-            this.gameController.game.food++;
-            this.gameController.game.water++;
-        }
     }
 
     //平均每16ms执行一次
