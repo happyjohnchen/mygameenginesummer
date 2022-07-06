@@ -56,6 +56,7 @@ export class PersonClass extends Behaviour {
         animationRenderer.startNum = 1;
         animationRenderer.endNum = 4;
         animationRenderer.frameForEachImage = 20;
+        console.log("生成动画" + roomType);
 
     }
     setPostion(x: number, y: number) {

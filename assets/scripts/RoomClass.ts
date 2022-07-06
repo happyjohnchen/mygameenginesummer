@@ -152,7 +152,7 @@ export class RoomClass extends Behaviour {
             person.getBehaviour(PersonClass).setPostion(xPos,yPos);
             
             //动画 等xq测试完就放出来
-            //person.getBehaviour(PersonClass).setAnimation(this.roomType);
+            person.getBehaviour(PersonClass).setAnimation(this.roomType);
             
         } 
     }

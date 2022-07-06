@@ -1,1 +1,1 @@
-assets/engineTest/scenes/uiTest_xjy.yaml
+assets/engineTest/scenes/testxjy.yaml

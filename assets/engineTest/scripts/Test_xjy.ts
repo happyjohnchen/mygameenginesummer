@@ -28,12 +28,8 @@ export class Test_xjy extends Behaviour {
     onPlayStart() {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
+                getGameObjectById("WaterFactory").getBehaviour(RoomClass).addPersonInRoom(0);
                 console.log("点击判断")
-                getGameObjectById("PersonOne").getBehaviour(PersonClass).personModule.personId = 1;
-                getGameObjectById("PersonOne").getBehaviour(PersonClass).personModule.race = PersonRace.Dwarf;
-                this.gamecontroller.addPerson(getGameObjectById("PersonOne"));
-                getGameObjectById("WaterFactory").getBehaviour(RoomClass).addPersonInRoom(1);
-                console.log(getGameObjectById("WaterFactory").getBehaviour(RoomClass).peopleInRoom);
             }
      
        }

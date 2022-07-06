@@ -28,10 +28,7 @@ export class Test_xjy2  extends Behaviour {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
                 console.log("点击判断")
-                getGameObjectById("Person2").getBehaviour(PersonClass).personModule.personId = 2;
-                getGameObjectById("Person2").getBehaviour(PersonClass).personModule.race = PersonRace.Human;
-                this.gamecontroller.addPerson(getGameObjectById("Person2"));
-                getGameObjectById("WaterFactory").getBehaviour(RoomClass).addPersonInRoom(2);
+                getGameObjectById("WaterFactory").getBehaviour(RoomClass).addPersonInRoom(1);
                 console.log(getGameObjectById("WaterFactory").getBehaviour(RoomClass).peopleInRoom);
                 console.log("2种族"+this.gamecontroller.getPersonById(2).getBehaviour(PersonClass).personModule.race);
             }

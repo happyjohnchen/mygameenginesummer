@@ -117,39 +117,6 @@ children:
           scaleY: 1
           rotation: 0
     id: People
-    children:
-      - behaviours:
-          - type: Transform
-            properties:
-              x: -200
-              y: -200
-              scaleX: 1
-              scaleY: 1
-              rotation: 0
-          - type: ShapeRectRenderer
-            properties:
-              width: 100
-              height: 100
-              color: blue
-              customColor: '#ffffff'
-          - type: PersonClass
-        id: PersonOne
-      - behaviours:
-          - type: Transform
-            properties:
-              x: 100
-              y: 100
-              scaleX: 1
-              scaleY: 1
-              rotation: 0
-          - type: ShapeRectRenderer
-            properties:
-              width: 100
-              height: 100
-              color: green
-              customColor: '#ffffff'
-          - type: PersonClass
-        id: Person2
   - behaviours:
       - type: Transform
         properties:
@@ -170,22 +137,6 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: 0
-          y: 200
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: Test_xjy2
-      - type: ShapeRectRenderer
-        properties:
-          width: 100
-          height: 100
-          color: red
-          customColor: '#ffffff'
-    id: '2'
-  - behaviours:
-      - type: Transform
-        properties:
           x: 300
           y: 200
           scaleX: 1
@@ -199,3 +150,32 @@ children:
           fontColor: '#000000'
       - type: ShowAttribute
     id: water
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: PersonSet
+        properties:
+          startPostionX: 100
+          startPositonY: -100
+    id: PersonSet
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 100
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Test_xjy2
+      - type: ShapeRectRenderer
+        properties:
+          width: 100
+          height: 100
+          color: blue
+          customColor: '#ffffff'
+    id: '2'
