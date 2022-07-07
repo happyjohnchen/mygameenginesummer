@@ -70,6 +70,9 @@ export class PersonSet extends Behaviour {
         const transform = new Transform();
         transform.x = this.startPostionX;
         transform.y = this.startPositonY;
+        //改变人物大小
+        transform.scaleX = 0.2;
+        transform.scaleY = 0.2;
         const personClass = new PersonClass()
         let race = randomRace()
         let name = randomName()
