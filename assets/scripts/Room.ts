@@ -34,11 +34,19 @@ export class Room extends Behaviour {
     changeRoomName(roomType: RoomType) {//根据roomtype的值切换物体名字
         this.gameObject.id = findKey(RoomType, roomType)
     }
-    addRoomClass() {//合完许佳阳的就放粗来
-        //this.gameObject.addBehaviour(Roomclass);
-        //gameObeject.removeBehaviour(Roomclass);
-    }
 
+onlyClickRoom(roomLevel:number){
+    const roomSet = getGameObjectById("tileMap").getBehaviour(RoomSet)
+   
+    if(roomLevel>1){
+        getGameObjectById("RoomSecondUi").active = true;
+        roomSet.updateAndDestroyBtnID=this.roomModule.roomId;
+    }
+   else if(roomLevel==1){
+    getGameObjectById("DestroyBtnOnly").active = true;
+    roomSet.updateAndDestroyBtnID=this.roomModule.roomId;
+   }
+}
     destroyRoom(roomId: number) {//1.单独的房间销毁；2.已升级的房间销毁
 
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
@@ -214,14 +222,8 @@ console.log(neighborRoom)
                     this.create();
                 roomSet.setRoomNotCanchoose();
             }
-            else if (this.roomModule.level > 1) {
 
-                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:"+this.roomModule.level)
-                getGameObjectById("RoomSecondUi").active = true;
-                roomSet.updateAndDestroyBtnID=this.roomModule.roomId;
-
-
-            }
+           this.onlyClickRoom(this.roomModule.level)
         
                
             
