@@ -560,3 +560,16 @@ children:
           coefficient: 0.2
           radix: 0.2
     id: AttributeController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: PersonSet
+        properties:
+          startPostionX: -400
+          startPositonY: -175
+    id: PersonSet
