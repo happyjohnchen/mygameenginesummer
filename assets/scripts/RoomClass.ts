@@ -129,6 +129,7 @@ export class RoomClass extends Behaviour {
                 this.peopleInRoom[this.peopleInRoom.length] = id
                 this.calculateTotalAttribute();//改变一次属性值
                this.setPeopleInRoom();
+               this.gameObject.getBehaviour(Room).roomModule.people = this.peopleInRoom;
                 return true;
             }
             else {
@@ -144,6 +145,7 @@ export class RoomClass extends Behaviour {
         for(var p=0;p<this.peopleInRoom.length;p++){
             if(this.peopleInRoom[p]==id){
                 this.peopleInRoom.splice(p,1);//删除
+                this.gameObject.getBehaviour(Room).roomModule.people = this.peopleInRoom;
                 this.calculateTotalAttribute();
                 break;
             }

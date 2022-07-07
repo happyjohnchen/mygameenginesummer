@@ -107,8 +107,8 @@ export class PersonSet extends Behaviour {
 
         this.gameObject.addChild(newPerson);
         personClass.personModule.personId = this.gameController.getPeopleCount();
+        personClass.personModule.room = 0;
         newPerson.addBehaviour(new AnimationRenderer);
-
         //console.log("Name & Race" + personClass)
         newPerson.addBehaviour(personClass);
         newPerson.addBehaviour(transform);
