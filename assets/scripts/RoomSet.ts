@@ -12,16 +12,18 @@ import { Room } from "./Room";
 import { RoomClass } from "./RoomClass";
 export function setRoomImage(roomtype: RoomType, roomLevel: number, isLeft?: boolean) {
     let imagePath: string
+    console.log(roomtype)
+    console.log(roomLevel)
     switch (roomLevel) {//加图片
         case 0: imagePath = 'assets/images/buildSystem/canBuild2.png'//灰色透明图片
             break;
         case 1:
             switch (roomtype) {
-                case 1: imagePath = 'assets/images/buildSystem/WaterFactory.png'//WaterFactory
+                case 0: imagePath = 'assets/images/buildSystem/WaterFactory.png'//WaterFactory
                     break;
-                case 2: imagePath = 'assets/images/buildSystem/EnergyFactory.png'//EnergyFactory
+                case 1: imagePath = 'assets/images/buildSystem/EnergyFactory.png'//EnergyFactory
                     break;
-                case 3: imagePath = 'assets/images/buildSystem/FoodFactory.png'//FoodFactory
+                case 2: imagePath = 'assets/images/buildSystem/FoodFactory.png'//FoodFactory
                     break;
             }
             break;
@@ -29,7 +31,7 @@ export function setRoomImage(roomtype: RoomType, roomLevel: number, isLeft?: boo
         case 2: case 3:
 
             switch (roomtype) {
-                case 1:
+                case 0:
                     if (isLeft) {
                         imagePath = 'assets/images/buildSystem/WaterFactory_left.png'//WaterFactory
                     }
@@ -37,7 +39,7 @@ export function setRoomImage(roomtype: RoomType, roomLevel: number, isLeft?: boo
                         imagePath = 'assets/images/buildSystem/WaterFactory_right.png'//WaterFactory
                     }
                     break;
-                case 2:
+                case 1:
                     if (isLeft) {
                         imagePath = 'assets/images/buildSystem/EnergyFactory_left.png'//EnergyFactory
                     }
@@ -45,7 +47,7 @@ export function setRoomImage(roomtype: RoomType, roomLevel: number, isLeft?: boo
                         imagePath = 'assets/images/buildSystem/EnergyFactory_right.png'//EnergyFactory
                     }
                     break;
-                case 3: if (isLeft) {
+                case 2: if (isLeft) {
                     imagePath = 'assets/images/buildSystem/FoodFactory_left.png'//FoodFactory
                 }
                 else {
@@ -63,7 +65,7 @@ export class RoomSet extends Behaviour {
     //在此定义脚本中的属性
     @number()
     roomtype = RoomStatus.empty;
-    canUpdateRoom = false;
+    canBuildRoom = false;
     canChooseRoom = false
     buildRoomType: RoomType
     //数组初始化
@@ -123,8 +125,6 @@ export class RoomSet extends Behaviour {
         const sonTransform = new Transform();
         const sonImage = new ImageRenderer()
         sonImage.imagePath = 'assets/images/buildSystem/Nochose.png'
-        sonTransform.scaleX = 0.1
-        sonTransform.scaleY = 0.1
         sonChild.addBehaviour(sonTransform)
         sonChild.addBehaviour(sonImage);
         this.storeBuildStatus(roomPositionX, roomPositionY, roomChild)
@@ -136,12 +136,13 @@ export class RoomSet extends Behaviour {
     getBuildRoom() {
         return this.buildRoomType;
     }
-    setRoomNotCanCanchoose() {
+    setRoomNotCanchoose() {
 
         const rooms = getGameObjectById("GameController").getBehaviour(GameController).game.rooms;
         for (const room of rooms) {
             const image = room.children[0].getBehaviour(ImageRenderer);
-            image.imagePath = 'assets/engineTest/images/Nochose.png'
+
+            image.imagePath = 'assets/images/buildSystem/Nochose.png'
         }
     }
     setRoomCanChoose(personId: number) {//选框
@@ -154,26 +155,44 @@ export class RoomSet extends Behaviour {
             //console.log("childrem")
             //console.log(room.child)
             const image = room.children[0].getBehaviour(ImageRenderer);
-            if (roomLevel > 0) {
 
-                if (roomLevel > 1) {
-                    if (room.hasBehaviour(RoomClass)) {
-                        image.imagePath = 'assets/engineTest/images/bigChose_left.png'
-                        console.log("image1")
-                    }
-                    else {
-                        image.imagePath = 'assets/engineTest/images/bigChose_right.png'
-                        console.log("image2")
-                    }
-                }
-                else if (roomLevel == 1) {
-                    image.imagePath = 'assets/engineTest/images/chose.png'
-                }
 
+            if (roomLevel > 1) {
+                if (room.hasBehaviour(RoomClass)) {
+                    image.imagePath = 'assets/images/buildSystem/bigChose_left.png'
+                    console.log("image1")
+                }
+                else {
+                    image.imagePath = 'assets/images/buildSystem/bigChose_right.png'
+                    console.log("image2")
+                }
             }
+            else if (roomLevel == 1) {
+                image.imagePath = 'assets/images/buildSystem/chose.png'
+            }
+
+
 
         }
     }
+    setRoomCanBuild() {//选框
+        const rooms = getGameObjectById("GameController").getBehaviour(GameController).game.rooms;
+        for (const room of rooms) {
+            const modules = room.getBehaviour(Room).roomModule
+            const roomLevel = modules.level
+            //console.log("childrem")
+            //console.log(room.child)
+            const image = room.children[0].getBehaviour(ImageRenderer);
+            if (roomLevel == 0) {
+               
+                    image.imagePath = 'assets/images/buildSystem/chose.png'
+                    console.log("image1")
+                
+            }
+        }
+        this.canBuildRoom=true;
+    }
+
     //记录每个坑的状态
     storeBuildStatus(x: number, y: number, gameObject: GameObject) {
         //this.roomGameObjectArray[x][y] = gameObject;
@@ -205,11 +224,10 @@ export class RoomSet extends Behaviour {
             clickRoom.upgradeRoom(clickGameobject)
             neighborRoom.upgradeRoom(neighborGameObject)
             this.removeRoomClass(neighborGameObject)//右边的房间去掉roomclass的behaviour
-            switch (clickRoomData.roomType) {//加图片
-                case 0:
-                    clickGameobject.getBehaviour(ImageRenderer).imagePath = setRoomImage(clickRoomData.roomType, clickRoomData.roomStatus,true)
-                    neighborGameObject.getBehaviour(ImageRenderer).imagePath = setRoomImage(neighborRoomData.roomType, neighborRoomData.roomStatus,false)
-            }
+           
+                    clickGameobject.getBehaviour(ImageRenderer).imagePath = setRoomImage(clickRoomData.roomType, clickRoomData.level, true)
+                    neighborGameObject.getBehaviour(ImageRenderer).imagePath = setRoomImage(neighborRoomData.roomType, neighborRoomData.level, false)
+            
         }
     }
 

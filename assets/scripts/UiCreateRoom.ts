@@ -50,8 +50,11 @@ export class UiCreateRoom extends Behaviour {
         }
         console.log(this.attibuteSystem.getBehaviour(AttributeSystem).consumeForMaterial(100));
         if(this.attibuteSystem.getBehaviour(AttributeSystem).consumeForMaterial(0)==true){
-            console.log("a")
-            getGameObjectById("tileMap").getBehaviour(RoomSet).setbuildRoom(roomTypeTable[this.roomTypeForUi]);
+         
+          const roomset=  getGameObjectById("tileMap").getBehaviour(RoomSet)
+          roomset.setbuildRoom(roomTypeTable[this.roomTypeForUi]);
+          
+          roomset.setRoomCanBuild();
             return roomTypeTable[this.roomTypeForUi]; //这个值就是返回的房间类型 邓海欣在这里写用这个值干什么  return 你根据需求 可以改
         }
         else{

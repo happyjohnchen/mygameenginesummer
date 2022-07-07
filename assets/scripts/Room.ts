@@ -132,6 +132,7 @@ export class Room extends Behaviour {
         const tileMapGameObj = getGameObjectById("tileMap")
         const roomSet = tileMapGameObj.getBehaviour(RoomSet)
         let thisRoom = this.gameObject.getBehaviour(Room)
+      
         let thisRoomModule = thisRoom.roomModule
         //想在这里判断点击了物体然后返回到父物体的roomSet中，然后就可以new 一个新的房间（create newroom()），并把新的房间状态改变
         //console.log("点之前" + thisRoomModule.roomStatus)
@@ -143,7 +144,7 @@ export class Room extends Behaviour {
 
         //王璐：在这里是升级，然后需要先选ui进行什么操作再升级,这只是个示例，你需要从ui获取roomType的值
         thisRoomModule.roomType = this.roomModule.roomType
-
+      
         //thisRoom.changeRoomName(thisRoomModule.roomType)
         //console.log(this.gameObject.id)
 
@@ -156,6 +157,7 @@ export class Room extends Behaviour {
 
         console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
         this.canCreate = false;
+        roomSet.buildRoomType=RoomType.noType;
     }
     //游戏开始时会执行一次
     onPlayStart() {
@@ -173,29 +175,36 @@ export class Room extends Behaviour {
             const tileMapGameObj = getGameObjectById("tileMap")
             const roomSet = tileMapGameObj.getBehaviour(RoomSet)
             console.log(roomSet.canChooseRoom)
-            if (roomSet.canChooseRoom && this.roomModule.level > 0) {
-                if (this.gameObject.hasBehaviour(RoomClass)) {
-                    this.gameObject.getBehaviour(RoomClass).addPersonInRoom(roomSet.personId);
-                    console.log("add in 1")
+            if (roomSet.canChooseRoom ) {
+                if(this.roomModule.level > 0){
+                    console.log("bbbbbbbbbbbbbbbbbbbbbbbbbbbb")
+                    if (this.gameObject.hasBehaviour(RoomClass)) {
+                        this.gameObject.getBehaviour(RoomClass).addPersonInRoom(roomSet.personId);
+                        console.log("add in 1")
+                    }
+                    else {
+                        const neighborRoom = getGameObjectById("GameController").getBehaviour(GameController).getRoomById(this.roomModule.neighbourId);
+                        neighborRoom.getBehaviour(RoomClass).addPersonInRoom(roomSet.personId);
+                        console.log("add in room")
+                    }
+                    console.log("personid:" + roomSet.personId)
+                    roomSet.setRoomNotCanchoose();
+                }}
+
+                else if(roomSet.canBuildRoom){
+                    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
+                    this.canCreate = true;
+                    this.roomModule.roomType=roomSet.getBuildRoom();
+                    if(this.roomModule.level==0&&this.roomModule.roomType!=RoomType.noType&&this.roomModule.roomType!=RoomType.Entrance)
+                    this.create();
+                    roomSet.setRoomNotCanchoose();
                 }
-                else {
-                    const neighborRoom = getGameObjectById("GameController").getBehaviour(GameController).getRoomById(this.roomModule.neighbourId);
-                    neighborRoom.getBehaviour(RoomClass).addPersonInRoom(roomSet.personId);
-                    console.log("add in room")
-                }
-                console.log("personid:" + roomSet.personId)
-                roomSet.setRoomNotCanCanchoose();
-            }
-            else {
-                this.canCreate = true;
-                this.roomModule.roomType=roomSet.getBuildRoom();
-                if(this.roomModule.level==0)
-                this.create();
-            }
+            
+           
             roomSet.canChooseRoom = false;
         };
     }
-
+    
     //每次屏幕刷新执行
     onUpdate() {
 
