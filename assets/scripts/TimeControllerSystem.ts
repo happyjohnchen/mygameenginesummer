@@ -4,7 +4,6 @@ import {randomNumber} from "./RandomSys";
 import {GameSet} from "./GameSet";
 import {getGameObjectById} from "../../src/engine";
 import {GameController} from "./GameController";
-import {watch} from "vite/types/chokidar";
 
 export class TimeControllerSystem extends Behaviour {
 
