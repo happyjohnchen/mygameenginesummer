@@ -39,12 +39,12 @@ children:
         properties:
           x: -235
           y: -166
-          scaleX: 0.08
-          scaleY: 0.08
+          scaleX: 1
+          scaleY: 1
           rotation: 0
       - type: ImageRenderer
         properties:
-          imagePath: assets/images/Room/entrance.png
+          imagePath: assets/images/buildSystem/entrance.png
     id: Entrance
   - behaviours:
       - type: Transform

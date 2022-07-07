@@ -61,14 +61,14 @@ export function setRoomImage(roomtype: RoomType, roomLevel: number, isLeft?: boo
     return imagePath
 }
 export class RoomSet extends Behaviour {
-    //建坑
+
     //在此定义脚本中的属性
     @number()
     roomtype = RoomStatus.empty;
     canBuildRoom = false;
     canChooseRoom = false
     buildRoomType: RoomType
-    //数组初始化
+
     personId
     roomSetID
 
@@ -79,9 +79,11 @@ export class RoomSet extends Behaviour {
     onPlayStart() {
         this.roomSetID = 0
         console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
-        for (let i = 0; i < 2; i++)
-            for (let j = 1; j < 6; j++)
-                this.createRoom(j, i, 2)
+     
+
+        for (let j = 3; j < 6; j++) { this.createRoom(j, 0, RoomStatus.canBuild) }
+        for (let j = 1; j < 6; j++) { this.createRoom(j, 1, RoomStatus.canBuild) }
+
     }
     //每次屏幕刷新执行
     onUpdate() {
@@ -103,8 +105,8 @@ export class RoomSet extends Behaviour {
         //console.log(gameController.game)
         gameController.addRoom(roomChild)
         const childTransform = new Transform();
-        childTransform.x = 0 + roomPositionX * 150;
-        childTransform.y = -200 + roomPositionY * 100;
+        childTransform.x = -385 + roomPositionX * 150;
+        childTransform.y = -166 + roomPositionY * 100;
         roomChild.addBehaviour(childTransform);
         const room = new Room();
         let RModule = new RoomModule()
@@ -184,13 +186,13 @@ export class RoomSet extends Behaviour {
             //console.log(room.child)
             const image = room.children[0].getBehaviour(ImageRenderer);
             if (roomLevel == 0) {
-               
-                    image.imagePath = 'assets/images/buildSystem/chose.png'
-                    console.log("image1")
-                
+
+                image.imagePath = 'assets/images/buildSystem/chose.png'
+                console.log("image1")
+
             }
         }
-        this.canBuildRoom=true;
+        this.canBuildRoom = true;
     }
 
     //记录每个坑的状态
@@ -224,10 +226,10 @@ export class RoomSet extends Behaviour {
             clickRoom.upgradeRoom(clickGameobject)
             neighborRoom.upgradeRoom(neighborGameObject)
             this.removeRoomClass(neighborGameObject)//右边的房间去掉roomclass的behaviour
-           
-                    clickGameobject.getBehaviour(ImageRenderer).imagePath = setRoomImage(clickRoomData.roomType, clickRoomData.level, true)
-                    neighborGameObject.getBehaviour(ImageRenderer).imagePath = setRoomImage(neighborRoomData.roomType, neighborRoomData.level, false)
-            
+
+            clickGameobject.getBehaviour(ImageRenderer).imagePath = setRoomImage(clickRoomData.roomType, clickRoomData.level, true)
+            neighborGameObject.getBehaviour(ImageRenderer).imagePath = setRoomImage(neighborRoomData.roomType, neighborRoomData.level, false)
+
         }
     }
 
@@ -287,7 +289,7 @@ export class RoomSet extends Behaviour {
         let leftRoom = this.getRoomByXY(position.x - 1, position.y)
         let rightRoom = this.getRoomByXY(position.x + 1, position.y)
         let topRoom = this.getRoomByXY(position.x, position.y - 1);
-        if (position.x - 1 >= 0 && leftRoom == null && position.y != 1) this.createRoom(position.x - 1, position.y, RoomStatus.canBuild);
+        if (position.x - 1 >= 0 && leftRoom == null && position.y != 1&&position.y!=2) this.createRoom(position.x - 1, position.y, RoomStatus.canBuild);
         if (position.x < 5 && rightRoom == null) this.createRoom(position.x + 1, position.y, RoomStatus.canBuild);
         if (bottomRoom == null) this.createRoom(position.x, position.y + 1, RoomStatus.canBuild);
         if (topRoom == null && position.y > 2) this.createRoom(position.x, position.y - 1, RoomStatus.canBuild);
