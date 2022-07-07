@@ -77,11 +77,13 @@ export class TimeControllerSystem extends Behaviour {
             this.game = getGameObjectById("GameController").getBehaviour(GameController).game;
             //随机减少
             if (!this.nightRandom) {
-                console.log(this.game)
                 console.log("夜晚开始:material" + this.game.material + ",energy" + this.game.energy + ",food" + this.game.food + ",water" + this.game.water);
                 this.nightRandom = true;
                 //随机减少几种资源
                 switch (randomNumber(3)) {
+                    case 0:
+                        console.log("今夜平安夜，没有损失")
+                        break;
                     case 1:
                         //减少一种资源
                         switch (randomNumber(4)) {
