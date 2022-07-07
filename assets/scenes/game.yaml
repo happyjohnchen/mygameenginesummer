@@ -72,6 +72,19 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
+      - type: PersonSet
+        properties:
+          startPostionX: -400
+          startPositonY: -175
+    id: PersonSet
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
       - type: GameController
     id: GameController
   - behaviours:
@@ -182,9 +195,9 @@ children:
                   - type: Transform
                     properties:
                       x: -37
-                      y: -35
-                      scaleX: 0.15
-                      scaleY: 0.15
+                      y: -15
+                      scaleX: 0.1
+                      scaleY: 0.1
                       rotation: 0
                   - type: ImageRenderer
                     properties:
@@ -239,14 +252,14 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: -42
-                      y: -17
-                      scaleX: 0.28
-                      scaleY: 0.28
+                      x: -38
+                      y: -15
+                      scaleX: 0.1
+                      scaleY: 0.1
                       rotation: 0
                   - type: ImageRenderer
                     properties:
-                      imagePath: assets/images/ImageTryIcons/三明治.png
+                      imagePath: assets/images/ImageTryIcons/食物.png
                 id: Logo
           - behaviours:
               - type: Transform
@@ -298,13 +311,13 @@ children:
                   - type: Transform
                     properties:
                       x: -35
-                      y: -17
-                      scaleX: 0.25
-                      scaleY: 0.27
+                      y: -15
+                      scaleX: 0.1
+                      scaleY: 0.1
                       rotation: 0
                   - type: ImageRenderer
                     properties:
-                      imagePath: assets/images/ImageTryIcons/水分管理推荐.png
+                      imagePath: assets/images/ImageTryIcons/水源.png
                 id: Logo
       - behaviours:
           - type: Transform
@@ -701,16 +714,3 @@ children:
           coefficient: 0.2
           radix: 0.2
     id: AttributeController
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: PersonSet
-        properties:
-          startPostionX: -400
-          startPositonY: -175
-    id: PersonSet
