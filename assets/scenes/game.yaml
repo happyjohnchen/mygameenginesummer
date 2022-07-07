@@ -139,8 +139,8 @@ children:
             properties:
               x: -450
               y: -240
-              scaleX: 0.85
-              scaleY: 0.85
+              scaleX: 0.75
+              scaleY: 0.75
               rotation: 0
           - type: UiProgressBar
         id: ProgressBar
@@ -323,9 +323,9 @@ children:
           - type: Transform
             properties:
               x: 150
-              y: -250
-              scaleX: 1
-              scaleY: 1
+              y: -240
+              scaleX: 0.75
+              scaleY: 0.75
               rotation: 0
         id: MaterialShow
         children:
@@ -464,10 +464,10 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 300
+              x: 330
               y: -250
-              scaleX: 1
-              scaleY: 1
+              scaleX: 0.75
+              scaleY: 0.75
               rotation: 0
         id: Time
         children:
@@ -521,9 +521,9 @@ children:
           - type: Transform
             properties:
               x: 200
-              y: -250
-              scaleX: 1
-              scaleY: 1
+              y: -240
+              scaleX: 0.75
+              scaleY: 0.75
               rotation: 0
         id: AddSpeedButton
         children:
