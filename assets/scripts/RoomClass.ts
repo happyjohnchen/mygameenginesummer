@@ -151,11 +151,8 @@ export class RoomClass extends Behaviour {
     }
 
     setPeopleInRoom(){ //刷新人物位置 播放相应动画
-<<<<<<< HEAD
        
-=======
         //等海欣合完就放出来
->>>>>>> origin/xjy_Game
         this.leftPositionX = this.gameObject.getBehaviour(Room).getBorder(this.roomId).x;
         this.bottomPositionY = this.gameObject.getBehaviour(Room).getBorder(this.roomId).y;
         for(var p=0;p<this.peopleInRoom.length;p++){
