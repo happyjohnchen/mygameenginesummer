@@ -13,7 +13,6 @@ export class DestroyOnlyUi extends Behaviour {
 
     //游戏运行模式开始时会执行一次
     onPlayStart() {
-        getGameObjectById("DestroyOnlyUi").active = false; 
         this.gameObject.onClick = (e) => {
             if(e.button ==0){//点击调用选择房间 同时关闭ui
                 this.destroyRoom();
