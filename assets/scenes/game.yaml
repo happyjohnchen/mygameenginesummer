@@ -73,6 +73,57 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
+      - type: RoomSet
+        properties:
+          roomtype: 0
+    id: tileMap
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: AttributeSystem
+        properties:
+          consumePerTime: 1
+          onceConsumeTime: 1
+          primeProduceTime: 2
+          maxValue: 1000
+          coefficient: 0.2
+          radix: 0.2
+    id: AttributeController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+    id: People
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 0.2
+          scaleY: 0.2
+          rotation: 0
+      - type: PersonSet
+        properties:
+          startPostionX: -400
+          startPositonY: -145
+    id: PersonSet
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
       - type: Camera
       - type: CameraMouseController
         properties:
@@ -839,54 +890,3 @@ children:
                   imageDown: assets/images/UI/close2.png
                   closeName: PersonNot
             id: closeBtn
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: RoomSet
-        properties:
-          roomtype: 0
-    id: tileMap
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: AttributeSystem
-        properties:
-          consumePerTime: 1
-          onceConsumeTime: 1
-          primeProduceTime: 2
-          maxValue: 1000
-          coefficient: 0.2
-          radix: 0.2
-    id: AttributeController
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-    id: People
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 0.2
-          scaleY: 0.2
-          rotation: 0
-      - type: PersonSet
-        properties:
-          startPostionX: -400
-          startPositonY: -145
-    id: PersonSet

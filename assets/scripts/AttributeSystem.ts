@@ -167,6 +167,7 @@ export class AttributeSystem extends Behaviour {
     }
         else{
             //触发提醒ui
+            getGameObjectById("ConsumeNot").active = true;
             return false;
         }
    }
