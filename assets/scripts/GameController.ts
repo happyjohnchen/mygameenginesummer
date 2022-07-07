@@ -106,7 +106,7 @@ export class GameController extends Behaviour {
         //设定时间
         console.log(this.game)
         this.game.time.setSpeed(1.0);
-        this.game.time.setInitialTime(1, 15, 0, 0);
+        this.game.time.setInitialTime(1, 0, 0, 0);
         //设定人列表为空
         this.game.people = [];
         //设定房间有一个大门
@@ -115,7 +115,7 @@ export class GameController extends Behaviour {
         this.game.water = 50;
         this.game.energy = 50;
         this.game.food = 50;
-        this.game.material = 200;
+        this.game.material = 500;
         console.log("GameController: 新存档创建成功");
     }
 
