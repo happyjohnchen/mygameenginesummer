@@ -28,7 +28,7 @@ export class UiProgressBar extends Behaviour {
     onPlayStart() {
         //获取所有对象
         this.gameController = getGameObjectById('GameController').getBehaviour(GameController);
-        this.attributeSystem = getGameObjectById("AttributeSystem").getBehaviour(AttributeSystem);
+        this.attributeSystem = getGameObjectById("AttributeController").getBehaviour(AttributeSystem);
         this.energyBar = getGameObjectById('EnergyBar').getBehaviour(ShapeRectRenderer);
         this.foodBar = getGameObjectById('FoodBar').getBehaviour(ShapeRectRenderer);
         this.waterBar = getGameObjectById('WaterBar').getBehaviour(ShapeRectRenderer);

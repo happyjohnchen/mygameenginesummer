@@ -551,7 +551,7 @@ children:
           consumePerTime: 1
           onceConsumeTime: 1
           primeProduceTime: 2
-          maxValue: 100
+          maxValue: 1000
           coefficient: 0.2
           radix: 0.2
     id: AttributeController
