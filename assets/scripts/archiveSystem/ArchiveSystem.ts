@@ -2,7 +2,7 @@ import {GameModule} from "../modules/GameModule"
 
 export class ArchiveSystem {
     static encryptArchive = false;//是否对存档文件加密
-    static fileEncryptSuffix = ".fsa";//加密文件的后缀名
+    static fileEncryptSuffix = ".psa";//加密文件的后缀名
 
     static saveFile(fileName: string, gameModule: GameModule) {
         let content = JSON.stringify(gameModule);

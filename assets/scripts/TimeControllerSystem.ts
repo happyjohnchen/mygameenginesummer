@@ -1,5 +1,9 @@
 import {Behaviour} from "../../src/engine/Behaviour";
 import {number} from "../../src/engine/validators/number";
+import {randomNumber} from "./RandomSys";
+import {GameSet} from "./GameSet";
+import {getGameObjectById} from "../../src/engine";
+import {GameController} from "./GameController";
 
 export class TimeControllerSystem extends Behaviour {
 
@@ -20,11 +24,14 @@ export class TimeControllerSystem extends Behaviour {
     private isDay = true;
     private dayCount = 1; //经过了多少天
 
+    private nightRandom = false;
+    private maxMinusPercent = 30;//夜间最多减少百分之几的资源
+    private game: GameSet
+
     @number()
 
     dayHourTime = 16;//白天总时间
-    speed= 1.0;
-
+    speed = 1.0;
 
 
     @number()
@@ -33,7 +40,8 @@ export class TimeControllerSystem extends Behaviour {
 
     //游戏开始时会执行一次
     onStart() {
-
+        //获取游戏控制器
+        this.game = getGameObjectById("GameController").getBehaviour(GameController).game;
     }
 
     onPlayStart() {
@@ -66,6 +74,60 @@ export class TimeControllerSystem extends Behaviour {
 
     onTick(duringTime: number) {
         if (!this.isDay) {
+            //随机减少
+            if (!this.nightRandom) {
+                this.nightRandom = true;
+                //随机减少几种资源
+                switch (randomNumber(3)) {
+                    case 1:
+                        //减少一种资源
+                        switch (randomNumber(4)) {
+                            case 0:
+                                this.game.material = Math.floor(this.game.material * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                break
+                            case 1:
+                                this.game.energy = Math.floor(this.game.energy * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                break
+                            case 2:
+                                this.game.food = Math.floor(this.game.food * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                break
+                            case 3:
+                                this.game.water = Math.floor(this.game.water * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                break
+                        }
+                        break;
+                    case 2:
+                        //减少两种资源
+                        switch (randomNumber(6)) {
+                            case 0:
+                                this.game.material = Math.floor(this.game.material * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                this.game.energy = Math.floor(this.game.energy * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                break
+                            case 1:
+                                this.game.material = Math.floor(this.game.material * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                this.game.food = Math.floor(this.game.food * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                break
+                            case 2:
+                                this.game.material = Math.floor(this.game.material * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                this.game.water = Math.floor(this.game.water * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                break
+                            case 3:
+                                this.game.energy = Math.floor(this.game.energy * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                this.game.food = Math.floor(this.game.food * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                break
+                            case 4:
+                                this.game.energy = Math.floor(this.game.energy * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                this.game.water = Math.floor(this.game.water * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                break
+                            case 5:
+                                this.game.food = Math.floor(this.game.food * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                this.game.water = Math.floor(this.game.water * (1 - randomNumber(this.maxMinusPercent) / 100));
+                                break
+                        }
+                        break;
+                }
+            }
+
             //黑夜
             this.nowNightTime += 1;
             if (this.nowNightTime >= this.nightTime) {
@@ -75,6 +137,7 @@ export class TimeControllerSystem extends Behaviour {
             }
         } else {
             //白天
+            this.nightRandom = false;
             this.secondTime += this.timePerTick * this.speed;
             if (this.hourTime >= this.dayHourTime) {
                 this.hourTime = 0;

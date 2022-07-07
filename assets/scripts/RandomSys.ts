@@ -7,3 +7,7 @@ export function randomName(): string {
 export function randomRace(): number {
     return Math.floor(Math.random() * 4);
 }
+
+export function randomNumber(maxNumber: number, minNumber = 0): number {
+    return Math.floor(Math.random() * (maxNumber - minNumber) + minNumber)
+}

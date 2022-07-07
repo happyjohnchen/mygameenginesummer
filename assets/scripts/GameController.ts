@@ -150,7 +150,7 @@ export class GameController extends Behaviour {
         gModule.newPersonTime = this.game.personSet.lastTimeCreate
 
             //保存存档
-            ArchiveSystem.saveFile("FalloutGameArchive", gModule);
+            ArchiveSystem.saveFile("PumpkinShelter", gModule);
     }
 
     //创建人
