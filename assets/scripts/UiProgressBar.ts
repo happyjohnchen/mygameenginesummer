@@ -17,8 +17,6 @@ export class UiProgressBar extends Behaviour {
     foodText: GameObject
     waterText: GameObject
 
-    showText = false;
-
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
 
@@ -37,21 +35,18 @@ export class UiProgressBar extends Behaviour {
         this.waterText = getGameObjectById('WaterText');
 
         //隐藏数字
-        this.energyText.active = this.showText;
-        this.foodText.active = this.showText;
-        this.waterText.active = this.showText;
-
-        //单击隐藏/显示数字
-        this.gameObject.onClick = () => {
-            this.showText = !this.showText;
-            this.energyText.active = this.showText;
-            this.foodText.active = this.showText;
-            this.waterText.active = this.showText;
-        }
+        this.energyText.active = false;
+        this.foodText.active = false
+        this.waterText.active = false;
     }
 
     //每次屏幕刷新执行
     onUpdate() {
+        //鼠标移入显示文字
+        this.energyText.active = this.gameObject.hovered;
+        this.foodText.active = this.gameObject.hovered;
+        this.waterText.active = this.gameObject.hovered;
+
         //更新数字显示
         this.energyText.getBehaviour(TextRenderer).text = this.gameController.game.energy + "/" + this.attributeSystem.maxValue;
         this.foodText.getBehaviour(TextRenderer).text = this.gameController.game.food + "/" + this.attributeSystem.maxValue;

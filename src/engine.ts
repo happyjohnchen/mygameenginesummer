@@ -339,6 +339,8 @@ export class GameObject {
 
     hovered = false;
 
+    currentHovered = false;
+
     behaviours: Behaviour[] = [];
 
     renderer: Renderer;
