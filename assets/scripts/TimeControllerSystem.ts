@@ -4,6 +4,7 @@ import {randomNumber} from "./RandomSys";
 import {GameSet} from "./GameSet";
 import {getGameObjectById} from "../../src/engine";
 import {GameController} from "./GameController";
+import {watch} from "vite/types/chokidar";
 
 export class TimeControllerSystem extends Behaviour {
 
@@ -40,8 +41,6 @@ export class TimeControllerSystem extends Behaviour {
 
     //游戏开始时会执行一次
     onStart() {
-        //获取游戏控制器
-        this.game = getGameObjectById("GameController").getBehaviour(GameController).game;
     }
 
     onPlayStart() {
@@ -74,8 +73,12 @@ export class TimeControllerSystem extends Behaviour {
 
     onTick(duringTime: number) {
         if (!this.isDay) {
+            //获取游戏控制器
+            this.game = getGameObjectById("GameController").getBehaviour(GameController).game;
             //随机减少
             if (!this.nightRandom) {
+                console.log(this.game)
+                console.log("夜晚开始:material" + this.game.material + ",energy" + this.game.energy + ",food" + this.game.food + ",water" + this.game.water);
                 this.nightRandom = true;
                 //随机减少几种资源
                 switch (randomNumber(3)) {
@@ -126,6 +129,7 @@ export class TimeControllerSystem extends Behaviour {
                         }
                         break;
                 }
+                console.log("夜晚结束:material" + this.game.material + ",energy" + this.game.energy + ",food" + this.game.food + ",water" + this.game.water);
             }
 
             //黑夜
