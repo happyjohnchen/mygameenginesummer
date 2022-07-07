@@ -123,8 +123,8 @@ export class GameController extends Behaviour {
         let saveRoom = new GameObject()
         gameController.addRoom(saveRoom)
         const childTransform = new Transform();
-        childTransform.x = 0 + roomModule.position.x * 150;
-        childTransform.y = -200 + roomModule.position.y * 100;
+        childTransform.x = -384 + roomModule.position.x * 149;
+        childTransform.y = -166 + roomModule.position.y * 100;
         saveRoom.addBehaviour(childTransform);
         const room = new Room();
         room.roomModule = roomModule
@@ -156,6 +156,7 @@ export class GameController extends Behaviour {
 
             gModule.rooms.push(roomModule);
         }
+        console.log(gModule.rooms)
         //写入资源数值
         gModule.water = this.game.water;
         gModule.energy = this.game.energy;
