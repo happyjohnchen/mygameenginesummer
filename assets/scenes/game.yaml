@@ -576,6 +576,7 @@ children:
               - type: ImageRenderer
                 properties:
                   imagePath: assets/images/UI/destroy_Btn.png
+              - type: DestroyBtn
             id: DestroyBtn
           - behaviours:
               - type: Transform
@@ -600,7 +601,25 @@ children:
               - type: ImageRenderer
                 properties:
                   imagePath: assets/images/UI/update_Btn.png
+              - type: UpdateBtn
             id: UpdateBtn
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 820
+                  y: -50
+                  scaleX: 0.2
+                  scaleY: 0.2
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/close.png
+              - type: UiClose
+                properties:
+                  imageUp: assets/images/UI/close.png
+                  imageDown: assets/images/UI/close2.png
+                  closeName: RoomSecondUi
+            id: closeBtn
   - behaviours:
       - type: Transform
         properties:
