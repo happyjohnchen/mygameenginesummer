@@ -362,87 +362,76 @@ children:
           - behaviours:
               - type: Transform
                 properties:
-                  x: 0
+                  x: 150
                   y: -50
-                  scaleX: 1
-                  scaleY: 1
+                  scaleX: 0.2
+                  scaleY: 0.2
                   rotation: 0
             id: CreateUi
             children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 150
+                      x: 0
                       y: 0
-                      scaleX: 0.2
-                      scaleY: 0.8
+                      scaleX: 1
+                      scaleY: 1
                       rotation: 0
                   - type: ImageRenderer
                     properties:
-                      imagePath: assets/engineTest/images/uitestbg.png
+                      imagePath: assets/images/UI/BuildUI_background.png
                 id: background
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 200
-                      y: 10
+                      x: 125
+                      y: 148
                       scaleX: 1
                       scaleY: 1
                       rotation: 0
-                  - type: ShapeRectRenderer
-                    properties:
-                      width: 50
-                      height: 50
-                      color: blue
-                      customColor: '#ffffff'
                   - type: UiCreateRoom
-                id: WaterFactory
-              - behaviours:
-                  - type: Transform
+                  - type: ImageRenderer
                     properties:
-                      x: 200
-                      y: 80
-                      scaleX: 1
-                      scaleY: 1
-                      rotation: 0
-                  - type: ShapeRectRenderer
-                    properties:
-                      width: 50
-                      height: 50
-                      color: green
-                      customColor: '#ffffff'
-                  - type: UiCreateRoom
-                id: EnergyFactory
-              - behaviours:
-                  - type: Transform
-                    properties:
-                      x: 200
-                      y: 150
-                      scaleX: 1
-                      scaleY: 1
-                      rotation: 0
-                  - type: ShapeRectRenderer
-                    properties:
-                      width: 50
-                      height: 50
-                      color: red
-                      customColor: '#ffffff'
-                  - type: UiCreateRoom
+                      imagePath: assets/images/UI/BuildUI_food.png
                 id: FoodFactory
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 280
-                      y: 0
+                      x: 160
+                      y: 480
                       scaleX: 1
                       scaleY: 1
                       rotation: 0
-                  - type: ShapeCircleRenderer
+                  - type: UiCreateRoom
+                  - type: ImageRenderer
                     properties:
-                      radius: 20
-                      color: red
-                      customColor: '#ffffff'
+                      imagePath: assets/images/UI/BuildUI_water.png
+                id: WaterFactory
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 125
+                      y: 810
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: UiCreateRoom
+                  - type: ImageRenderer
+                    properties:
+                      imagePath: assets/images/UI/BuildUI_Energy.png
+                id: EnergyFactory
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 550
+                      y: -50
+                      scaleX: 0.4
+                      scaleY: 0.4
+                      rotation: 0
                   - type: UiCloseForCreate
+                  - type: ImageRenderer
+                    properties:
+                      imagePath: assets/images/UI/close.png
                 id: close
       - behaviours:
           - type: Transform
