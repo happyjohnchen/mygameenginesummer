@@ -60,7 +60,7 @@ export class MouseControlSystem extends System {
                     if (result.onClick) {
                         result.onClick(e);
                     }
-                    if (result.preventOnClickBubble){
+                    if (result.preventOnClickBubble) {
                         //禁止冒泡
                         result = null;
                     } else {
@@ -100,6 +100,14 @@ export class MouseControlSystem extends System {
             point.y *= cameraTransform.scaleY;
             point.x += cameraTransform.x;
             point.y += cameraTransform.y;
+
+            const unHover = (gameObject: GameObject) => {
+                gameObject.currentHovered = false;
+                for (const child of gameObject.children) {
+                    unHover(child);
+                }
+            }
+            unHover(this.rootGameObject);
 
             const visit = (gameObject: GameObject, point: Point, e) => {
                 // console.log("visit"+gameObject.uuid);
@@ -165,10 +173,22 @@ export class MouseControlSystem extends System {
         // console.log(gameObject.id + this.mouseInTest(gameObject, point));
         if (gameObject.hovered !== this.mouseInTest(gameObject, point)) {
             gameObject.hovered = this.mouseInTest(gameObject, point);
-            if (gameObject.hovered && gameObject.onHoverIn) {
-                gameObject.onHoverIn(e);
-            } else if (!gameObject.hovered && gameObject.onHoverOut) {
-                gameObject.onHoverOut(e);
+            gameObject.currentHovered = gameObject.hovered;
+            if (gameObject.hovered) {
+                if (gameObject.onHoverIn) {
+                    gameObject.onHoverIn(e);
+                }
+            } else if (!gameObject.hovered) {
+                if (gameObject.onHoverOut) {
+                    gameObject.onHoverOut(e);
+                }
+            }
+        }
+        if (gameObject.hovered) {
+            let parent = gameObject.parent;
+            while (parent) {
+                parent.hovered = true;
+                parent = parent.parent;
             }
         }
     }
