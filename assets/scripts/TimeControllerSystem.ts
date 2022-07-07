@@ -35,7 +35,7 @@ export class TimeControllerSystem extends Behaviour {
 
 
     @number()
-    nightTime = 120;//夜晚时间长度 目前相当于现实2s
+    nightTime = 300;//夜晚时间长度 目前相当于现实5s
     private nowNightTime = 0;
 
     //游戏开始时会执行一次
@@ -74,6 +74,8 @@ export class TimeControllerSystem extends Behaviour {
 
     onTick(duringTime: number) {
         if (!this.isDay) {
+            //放夜晚图
+            getGameObjectById("NightTime").active = true;
             //随机减少
             if (!this.nightRandom) {
                 this.nightRandom = true;
@@ -137,6 +139,7 @@ export class TimeControllerSystem extends Behaviour {
             }
         } else {
             //白天
+            getGameObjectById("NightTime").active = false;
             this.nightRandom = false;
             this.secondTime += this.timePerTick * this.speed;
             if (this.hourTime >= this.dayHourTime) {

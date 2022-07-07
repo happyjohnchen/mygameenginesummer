@@ -72,10 +72,6 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: PersonSet
-        properties:
-          startPostionX: -400
-          startPositonY: -175
     id: PersonSet
   - behaviours:
       - type: Transform
@@ -99,6 +95,7 @@ children:
       - type: CameraMouseController
         properties:
           speed: 3
+      - type: UiNotShow
     id: camera
     children:
       - behaviours:
@@ -685,6 +682,43 @@ children:
                   imageDown: assets/images/UI/close2.png
                   closeName: DestroyOnlyUi
             id: closeBtn
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -500
+              y: -300
+              scaleX: 1.5
+              scaleY: 1.5
+              rotation: 0
+        id: NightTime
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/night.png
+            id: NightBG
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 260
+                  y: 170
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: TextRenderer
+                properties:
+                  text: 夜幕降临
+                  fontSize: 40
+                  font: 微软雅黑
+                  fontColor: '#ffffff'
+            id: TextForNight
   - behaviours:
       - type: Transform
         properties:
