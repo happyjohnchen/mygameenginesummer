@@ -75,7 +75,7 @@ children:
       - type: PersonSet
         properties:
           startPostionX: -400
-          startPositonY: -175
+          startPositonY: -145
     id: PersonSet
   - behaviours:
       - type: Transform
@@ -323,7 +323,7 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 150
+              x: 200
               y: -240
               scaleX: 0.75
               scaleY: 0.75
@@ -349,10 +349,10 @@ children:
           - behaviours:
               - type: Transform
                 properties:
-                  x: -50
-                  y: -30
-                  scaleX: 0.15
-                  scaleY: 0.15
+                  x: -80
+                  y: -20
+                  scaleX: 0.1
+                  scaleY: 0.1
                   rotation: 0
               - type: ImageRenderer
                 properties:
@@ -465,8 +465,8 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 330
-              y: -250
+              x: 350
+              y: -242
               scaleX: 0.75
               scaleY: 0.75
               rotation: 0
@@ -483,7 +483,7 @@ children:
               - type: TextRenderer
                 properties:
                   text: 第0天 0:0
-                  fontSize: 30
+                  fontSize: 25
                   font: 微软雅黑
                   fontColor: '#ffffff'
               - type: ShowTime
@@ -493,7 +493,7 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 250
+              x: 290
               y: -250
               scaleX: 1
               scaleY: 1
@@ -521,8 +521,8 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 200
-              y: -240
+              x: 250
+              y: -242
               scaleX: 0.75
               scaleY: 0.75
               rotation: 0
@@ -689,7 +689,7 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: -500
+              x: -2000
               y: -300
               scaleX: 1.5
               scaleY: 1.5

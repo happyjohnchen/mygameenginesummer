@@ -71,8 +71,8 @@ export class PersonSet extends Behaviour {
         transform.x = this.startPostionX;
         transform.y = this.startPositonY;
         //改变人物大小
-        transform.scaleX = 0.2;
-        transform.scaleY = 0.2;
+        transform.scaleX = 0.15;
+        transform.scaleY = 0.15;
         const personClass = new PersonClass()
         let race = randomRace()
         let name = randomName()
@@ -113,11 +113,11 @@ export class PersonSet extends Behaviour {
         newPerson.addBehaviour(personClass);
         newPerson.addBehaviour(transform);
         this.gameController.addPerson(newPerson);
-        //console.log(newPerson.getBehaviour(AnimationRenderer))
-        personClass.setAnimation(RoomType.WaterFactory)
-        //console.log("PersonSet!!!")
-        //console.log(newPerson.getBehaviour(PersonClass))
-        //console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        console.log(newPerson.getBehaviour(AnimationRenderer))
+        personClass.setAnimation(RoomType.noType)
+        console.log("PersonSet!!!")
+        console.log(newPerson.getBehaviour(PersonClass))
+        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
 
 
     }
