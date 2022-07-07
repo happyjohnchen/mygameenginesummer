@@ -1,3 +1,4 @@
+import { transform } from "_@ts-morph_common@0.16.0@@ts-morph/common/lib/typescript";
 import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
 import { Prefab } from "../../src/behaviours/Prefab";
 import { GameObject, getGameObjectById } from "../../src/engine";
@@ -9,16 +10,38 @@ import { GameSet } from "./GameSet";
 import { RoomModule, RoomPosition, RoomStatus, RoomType } from "./modules/RoomModule";
 import { Room } from "./Room";
 import { RoomClass } from "./RoomClass";
+export function setRoomImage(roomtype: RoomType, roomStatus: RoomStatus) {
+    let imagePath: string
+    switch (roomStatus) {//加图片
+        case 1:
+            switch (roomtype) {
+                case 1: imagePath = 'assets/engineTest/images/testImage1.png'//WaterFactory
+                    break;
+                case 2: imagePath = 'assets/engineTest/images/testImage2.png'//EnergyFactory
+                    break;
+                case 3: imagePath = 'assets/engineTest/images/testImage2.png'//FoodFactory
+                    break;
+            }
+            break;
 
+        case 2:
+
+            imagePath = 'assets/engineTest/images/testImage2.png'//灰色透明图片
+            break;
+
+    }
+    return imagePath
+}
 export class RoomSet extends Behaviour {
     //建坑
     //在此定义脚本中的属性
     @number()
     roomtype = RoomStatus.empty;
     canUpdateRoom = false;
-
+canChooseRoom=false
+buildRoomType:RoomType
     //数组初始化
-
+personId
     roomSetID
 
     //游戏开始时会执行一次
@@ -64,15 +87,69 @@ export class RoomSet extends Behaviour {
         RModule.roomStatus = RoomStatus.canBuild;
         room.roomModule = RModule
         roomChild.addBehaviour(room);
+        
         const backgroundImage = new ImageRenderer()
         if (roomStatus == RoomStatus.canBuild) {
             backgroundImage.imagePath = 'assets/engineTest/images/testImage.png'
         }
 
         roomChild.addBehaviour(backgroundImage);
+        let sonChild = new GameObject();
+        roomChild.addChild(sonChild)
+        const sonTransform = new Transform();
+        const sonImage = new ImageRenderer()
+        sonImage.imagePath='assets/engineTest/images/Nochose.png'
+        sonTransform.scaleX=0.1
+        sonTransform.scaleY=0.1
+        sonChild.addBehaviour(sonTransform)
+        sonChild.addBehaviour(sonImage);
         this.storeBuildStatus(roomPositionX, roomPositionY, roomChild)
 
     };
+    setbuildRoom(roomtype:RoomType){//建造房间
+this.buildRoomType= roomtype;
+    }
+    getBuildRoom(){
+return this.buildRoomType;
+    }
+setRoomNotCanCanchoose(){
+    
+    const rooms = getGameObjectById("GameController").getBehaviour(GameController).game.rooms;
+    for (const room of rooms) {
+        const image=room.children[0].getBehaviour(ImageRenderer);
+        image.imagePath='assets/engineTest/images/Nochose.png'
+    }
+}
+    setRoomCanChoose(personId:number) {
+        this.canChooseRoom=true;
+        this.personId=personId;
+        const rooms = getGameObjectById("GameController").getBehaviour(GameController).game.rooms;
+        for (const room of rooms) {
+            const modules = room.getBehaviour(Room).roomModule
+            const roomLevel = modules.level
+            //console.log("childrem")
+            //console.log(room.child)
+            const image=room.children[0].getBehaviour(ImageRenderer);
+            if(roomLevel>0){
+              
+                if (roomLevel > 1) {
+                    if (room.hasBehaviour(RoomClass)) {
+                        image.imagePath = 'assets/engineTest/images/bigChose_left.png'
+                        console.log("image1")
+                    }
+                    else {
+                        image.imagePath = 'assets/engineTest/images/bigChose_right.png'
+                        console.log("image2")
+                    }
+                }
+                else if (roomLevel == 1) {
+                    image.imagePath= 'assets/engineTest/images/chose.png'
+                }
+            
+            }
+           
+        }
+    }
     //记录每个坑的状态
     storeBuildStatus(x: number, y: number, gameObject: GameObject) {
         //this.roomGameObjectArray[x][y] = gameObject;
@@ -84,7 +161,8 @@ export class RoomSet extends Behaviour {
         return gameObeject.getBehaviour(Room)
     }
     removeRoomClass(gameObeject: GameObject) {
-        //gameObeject.removeBehaviour(Roomclass);
+       const roomclass= gameObeject.getBehaviour(RoomClass)
+        gameObeject.removeBehaviour(roomclass);
     }
     mergeHouse(clickGameobject: GameObject, neighborGameObject: GameObject) {//房間合在一起
         let clickRoom = this.getRoomBehabiour(clickGameobject)
@@ -110,54 +188,9 @@ export class RoomSet extends Behaviour {
             }
         }
     }
-    setRoomImage(roomtype: RoomType, roomStatus: RoomStatus) {
-        let imagePath: string
-        switch (roomStatus) {//加图片
-            case 1:
-                switch (roomtype) {
-                    case 1: imagePath = 'assets/engineTest/images/testImage1.png'//WaterFactory
-                        break;
-                    case 2: imagePath = 'assets/engineTest/images/testImage2.png'//EnergyFactory
-                        break;
-                    case 3: imagePath = 'assets/engineTest/images/testImage2.png'//FoodFactory
-                        break;
-                }
-                break;
 
-            case 2:
 
-                imagePath = 'assets/engineTest/images/testImage2.png'//灰色透明图片
-                break;
 
-        }
-        return imagePath
-    }
-
-    createRoomFromData(roomModule: RoomModule) {//从存档里恢复room
-        let gameController = getGameObjectById("GameController").getBehaviour(GameController)
-        let saveRoom = new GameObject()
-        gameController.addRoom(saveRoom)
-        const childTransform = new Transform();
-        childTransform.x = 0 + roomModule.position.x * 150;
-        childTransform.y = -200 + roomModule.position.y * 100;
-        saveRoom.addBehaviour(childTransform);
-        const room = new Room();
-        room.roomModule = roomModule
-        saveRoom.addBehaviour(room);
-        const backgroundImage = new ImageRenderer()
-        backgroundImage.imagePath = this.setRoomImage(roomModule.roomType, roomModule.roomStatus)
-        saveRoom.addBehaviour(backgroundImage);
-        //挂roomclass脚本
-        const roomclass = new RoomClass();
-        roomclass.setRoomType(roomModule.roomType);
-        roomclass.setRoomid(roomModule.roomId);
-        roomclass.setRoomLevel(roomModule.roomSize);
-        roomclass.peopleInRoom = roomModule.people;
-        saveRoom.addBehaviour(roomclass);
-        //下面补充房间人物位置
-        saveRoom.getBehaviour(RoomClass).setPeopleInRoom();//渲染人物位置
-        
-    }
     getRoomByXY(x: number, y: number) {//根据xy获取room
 
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
@@ -188,7 +221,7 @@ export class RoomSet extends Behaviour {
             console.log(leftRoom)
             rightRoom = gameController.getRoomByPosition(rightPositon)
             if (leftRoom != null)
-                this.mergeHouse(clickRoom, leftRoom)
+                this.mergeHouse(leftRoom,clickRoom )
             if (rightRoom != null)
                 this.mergeHouse(clickRoom, rightRoom)
         }

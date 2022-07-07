@@ -79,7 +79,7 @@ export class RoomClass extends Behaviour {
         //let totalAttribute = this.calculateTotalAttribute();
         //let createPeriod = this.attributeSystem.caslculateCreatePeriod(this.roomLevel,totalAttribute);
         let createPeriod = this.attributeSystem.calculateCreatePeriod(this.roomLevel,this.totalPeopleAttribute);
-        console.log("生产周期"+createPeriod);
+        //console.log("生产周期"+createPeriod);
         this.nowTime= this.timeController.getTotalGameSecondTime();
         if(this.nowTime-this.lastTimeCreate >=createPeriod*60*60){
             this.createProduction();

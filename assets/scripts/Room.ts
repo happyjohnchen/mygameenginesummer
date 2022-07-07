@@ -14,7 +14,7 @@ export class Room extends Behaviour {
     //在此定义脚本中的属性
 
     roomModule: RoomModule
-
+    canCreate
 
 
     // clickStatus//0不可点，1可升级，2建起房子，3移动小人选择房间
@@ -61,22 +61,22 @@ export class Room extends Behaviour {
         let xPosition = thisRoomModule.position.x
         let yPosition = thisRoomModule.position.y
         let position = new RoomPosition()
-        position.x = xPosition*150
-        position.y = yPosition*100
+        position.x = xPosition * 150
+        position.y = yPosition * 100
         if (thisRoomModule.level == 1) {
             return position
         }
         else if (thisRoomModule.level > 1) {
             let neighbourRoomGameObjectPositionX = gameController.getRoomById(thisRoomModule.neighbourId).getBehaviour(Room).roomModule.position.x
-            if( neighbourRoomGameObjectPositionX<xPosition)
-            position.x= neighbourRoomGameObjectPositionX*150
+            if (neighbourRoomGameObjectPositionX < xPosition)
+                position.x = neighbourRoomGameObjectPositionX * 150
             return position
         }
 
     }
     clearRoomValue(room: GameObject) {
-        let roomClass= room.getBehaviour(RoomClass)
-        room.removeBehaviour( roomClass)//合完许佳阳的放出来这2句
+        let roomClass = room.getBehaviour(RoomClass)
+        room.removeBehaviour(roomClass)//合完许佳阳的放出来这2句
         //room.getBehaviour(ImageRenderer).imagePath="灰色图片的路径"
         let roomModule = room.getBehaviour(Room).roomModule
         roomModule.level = 0;
@@ -86,6 +86,7 @@ export class Room extends Behaviour {
         console.log("clear" + room)
 
     }
+
     upgradeRoom(roomGameObject: GameObject) {//升级房间
 
         let roomModule = roomGameObject.getBehaviour(Room).roomModule
@@ -112,7 +113,7 @@ export class Room extends Behaviour {
             roomModule.level = 1//建造升级
             //roomModule.roomType=roomType
             roomGameObject.addBehaviour(new RoomClass())
-            let roomClass=roomGameObject.getBehaviour(RoomClass)
+            let roomClass = roomGameObject.getBehaviour(RoomClass)
             roomClass.setRoomid(roomModule.roomId)
             roomClass.setRoomType(roomModule.roomType)
             //xjy加了一个人口对接和等级
@@ -124,10 +125,40 @@ export class Room extends Behaviour {
         console.log(this.gameObject.getBehaviour(Room).roomModule.roomId)
         return this.gameObject.getBehaviour(Room).roomModule.roomId
     }
+    create() {
+        const tileMapGameObj = getGameObjectById("tileMap")
+        const roomSet = tileMapGameObj.getBehaviour(RoomSet)
+        let thisRoom = this.gameObject.getBehaviour(Room)
+        let thisRoomModule = thisRoom.roomModule
+        //想在这里判断点击了物体然后返回到父物体的roomSet中，然后就可以new 一个新的房间（create newroom()），并把新的房间状态改变
+        //console.log("点之前" + thisRoomModule.roomStatus)
+        //console.log("点之后" + thisRoomModule.roomStatus)
+        console.log("level:" + thisRoom.roomModule.level)
+        this.upgradeRoom(this.gameObject)
+        console.log("level:" + thisRoom.roomModule.level)
+
+
+        //王璐：在这里是升级，然后需要先选ui进行什么操作再升级,这只是个示例，你需要从ui获取roomType的值
+        thisRoomModule.roomType = this.roomModule.roomType
+
+        //thisRoom.changeRoomName(thisRoomModule.roomType)
+        //console.log(this.gameObject.id)
+
+        roomSet.storeBuildStatus(this.roomModule.position.x, this.roomModule.position.x, this.gameObject)
+        roomSet.checkNeighbor(this.roomModule.position)
+        // roomSet.setRoomType(this.positionX, this.positionY, RoomType.WaterFactory)
+        roomSet.checkMerge(this.roomModule.position)
+
+        //console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
+
+        console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
+        this.canCreate = false;
+    }
     //游戏开始时会执行一次
     onPlayStart() {
-
+        this.canCreate = false;
         this.gameObject.onClick = () => {
+
 
             /* 测试destroy
             console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
@@ -136,31 +167,29 @@ export class Room extends Behaviour {
              this.destroyRoom(id)
              console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)*/
 
-
-
-            let thisRoom = this.gameObject.getBehaviour(Room)
-            let thisRoomModule = thisRoom.roomModule
-            //想在这里判断点击了物体然后返回到父物体的roomSet中，然后就可以new 一个新的房间（create newroom()），并把新的房间状态改变
-            //console.log("点之前" + thisRoomModule.roomStatus)
-            //console.log("点之后" + thisRoomModule.roomStatus)
-            console.log("level:" + thisRoom.roomModule.level)
-            this.upgradeRoom(this.gameObject)
-            console.log("level:" + thisRoom.roomModule.level)
             const tileMapGameObj = getGameObjectById("tileMap")
-
-            //王璐：在这里是升级，然后需要先选ui进行什么操作再升级,这只是个示例，你需要从ui获取roomType的值
-            thisRoomModule.roomType = RoomType.FoodFactory
-
-            thisRoom.changeRoomName(thisRoomModule.roomType)
-            //console.log(this.gameObject.id)
             const roomSet = tileMapGameObj.getBehaviour(RoomSet)
-            roomSet.storeBuildStatus(this.roomModule.position.x, this.roomModule.position.x, this.gameObject)
-            roomSet.checkNeighbor(this.roomModule.position)
-            // roomSet.setRoomType(this.positionX, this.positionY, RoomType.WaterFactory)
-            roomSet.checkMerge(this.roomModule.position)
-            //console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
-
-            console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
+            console.log(roomSet.canChooseRoom)
+            if (roomSet.canChooseRoom && this.roomModule.level > 0) {
+                if (this.gameObject.hasBehaviour(RoomClass)) {
+                    this.gameObject.getBehaviour(RoomClass).addPersonInRoom(roomSet.personId);
+                    console.log("add in 1")
+                }
+                else {
+                    const neighborRoom = getGameObjectById("GameController").getBehaviour(GameController).getRoomById(this.roomModule.neighbourId);
+                    neighborRoom.getBehaviour(RoomClass).addPersonInRoom(roomSet.personId);
+                    console.log("add in room")
+                }
+                console.log("personid:" + roomSet.personId)
+                roomSet.setRoomNotCanCanchoose();
+            }
+            else {
+                this.canCreate = true;
+                this.roomModule.roomType=roomSet.getBuildRoom();
+                if(this.roomModule.level==0)
+                this.create();
+            }
+            roomSet.canChooseRoom = false;
         };
     }
 

@@ -8,8 +8,8 @@ import { RoomModule, RoomPosition } from "./modules/RoomModule";
 import { GameObject, getGameObjectById } from "../../src/engine";
 import { Transform } from "../../src/engine/Transform";
 import { Room } from "./Room";
-import { RoomSet } from "./RoomSet";
-
+import { RoomSet, setRoomImage } from "./RoomSet";
+import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
 import {number} from "../../src/engine/validators/number";
 import {string} from "../../src/engine/validators/string";
 import { PersonClass } from "./PersonClass";
@@ -83,12 +83,12 @@ export class GameController extends Behaviour {
         }
         //设定房间列表
         for (const roomModule of gModule.rooms) {
-            getGameObjectById("tileMap").getBehaviour(RoomSet).createRoomFromData(roomModule)
-            /* const newRoom = new GameObject();  
-             this.rooms.addChild(newRoom);//添加到游戏场景
-             this.game.rooms.push(newRoom);//添加到game
-             newRoom.addBehaviour(new Transform());*/
-
+          
+           /* const newRoom = new GameObject();  
+            this.rooms.addChild(newRoom);//添加到游戏场景
+            this.game.rooms.push(newRoom);//添加到game
+            newRoom.addBehaviour(new Transform());*/
+            this.createRoomFromData(roomModule)
 
         }
         //设定资源数值
@@ -118,7 +118,21 @@ export class GameController extends Behaviour {
         this.game.material = 500;
         console.log("GameController: 新存档创建成功");
     }
-
+    createRoomFromData(roomModule: RoomModule) {//从存档里恢复room
+        let gameController = getGameObjectById("GameController").getBehaviour(GameController)
+        let saveRoom = new GameObject()
+        gameController.addRoom(saveRoom)
+        const childTransform = new Transform();
+        childTransform.x = 0 + roomModule.position.x * 150;
+        childTransform.y = -200 + roomModule.position.y * 100;
+        saveRoom.addBehaviour(childTransform);
+        const room = new Room();
+        room.roomModule = roomModule
+        saveRoom.addBehaviour(room);
+        const backgroundImage = new ImageRenderer()
+        backgroundImage.imagePath = setRoomImage(roomModule.roomType, roomModule.roomStatus)
+        saveRoom.addBehaviour(backgroundImage);
+    }
     //保存存档
     saveArchive() {
         const gModule = new GameModule();

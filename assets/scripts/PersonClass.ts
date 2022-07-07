@@ -1,9 +1,11 @@
 import { AnimationRenderer } from "../../src/behaviours/AnimationRenderer";
 import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
+import { getGameObjectById } from "../../src/engine";
 import { Behaviour } from "../../src/engine/Behaviour";
 import { Transform } from "../../src/engine/Transform";
 import { PersonModule, PersonRace } from "./modules/PersonModule";
 import { RoomModule, RoomType } from "./modules/RoomModule";
+import { RoomSet } from "./RoomSet";
 
 export class PersonClass extends Behaviour {
 
@@ -29,6 +31,8 @@ export class PersonClass extends Behaviour {
     onPlayStart() {
         this.gameObject.onClick = () => {
             //移动房间
+            getGameObjectById("tileMap").getBehaviour(RoomSet).setRoomCanChoose(this.personModule.personId);
+            console.log(this.personModule.personId)
             return this.gameObject;
         }
 

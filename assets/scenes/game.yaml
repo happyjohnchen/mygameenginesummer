@@ -39,12 +39,12 @@ children:
         properties:
           x: -235
           y: -166
-          scaleX: 0.08
-          scaleY: 0.08
+          scaleX: 0.083
+          scaleY: 0.083
           rotation: 0
       - type: ImageRenderer
         properties:
-          imagePath: assets/images/Room/entrance.png
+          imagePath: assets/images/buildSystem/entrance.png
     id: Entrance
   - behaviours:
       - type: Transform
@@ -55,28 +55,6 @@ children:
           scaleY: 1
           rotation: 0
     id: Rooms
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-    id: People
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 0.2
-          scaleY: 0.2
-          rotation: 0
-      - type: PersonSet
-        properties:
-          startPostionX: -400
-          startPositonY: -145
-    id: PersonSet
   - behaviours:
       - type: Transform
         properties:
@@ -721,6 +699,9 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
+      - type: RoomSet
+        properties:
+          roomtype: 0
     id: tileMap
   - behaviours:
       - type: Transform
@@ -739,3 +720,25 @@ children:
           coefficient: 0.2
           radix: 0.2
     id: AttributeController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+    id: People
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 0.2
+          scaleY: 0.2
+          rotation: 0
+      - type: PersonSet
+        properties:
+          startPostionX: -400
+          startPositonY: -145
+    id: PersonSet
