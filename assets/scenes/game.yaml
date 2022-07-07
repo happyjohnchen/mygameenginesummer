@@ -145,7 +145,7 @@ children:
                   width: 100
                   height: 20
                   color: custom
-                  customColor: '#a29f4b'
+                  customColor: '#805200'
             id: ProgressEnergy
             children:
               - behaviours:
@@ -160,8 +160,8 @@ children:
                     properties:
                       width: 94
                       height: 14
-                      color: green
-                      customColor: '#ffffff'
+                      color: custom
+                      customColor: '#ffa900'
                 id: EnergyBar
               - behaviours:
                   - type: Transform
@@ -203,7 +203,7 @@ children:
                   width: 100
                   height: 20
                   color: custom
-                  customColor: '#a29f4b'
+                  customColor: '#805200'
             id: ProgressFood
             children:
               - behaviours:
@@ -218,8 +218,8 @@ children:
                     properties:
                       width: 94
                       height: 14
-                      color: green
-                      customColor: '#ffffff'
+                      color: custom
+                      customColor: '#ffa900'
                 id: FoodBar
               - behaviours:
                   - type: Transform
@@ -261,7 +261,7 @@ children:
                   width: 100
                   height: 20
                   color: custom
-                  customColor: '#a29f4b'
+                  customColor: '#805200'
             id: ProgressWater
             children:
               - behaviours:
@@ -276,8 +276,8 @@ children:
                     properties:
                       width: 94
                       height: 14
-                      color: green
-                      customColor: '#ffffff'
+                      color: custom
+                      customColor: '#ffa900'
                 id: WaterBar
               - behaviours:
                   - type: Transform
