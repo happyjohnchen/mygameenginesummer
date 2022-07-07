@@ -69,9 +69,13 @@ children:
         properties:
           x: 0
           y: 0
-          scaleX: 1
-          scaleY: 1
+          scaleX: 0.2
+          scaleY: 0.2
           rotation: 0
+      - type: PersonSet
+        properties:
+          startPostionX: -400
+          startPositonY: -175
     id: PersonSet
   - behaviours:
       - type: Transform
@@ -663,7 +667,7 @@ children:
               - type: ImageRenderer
                 properties:
                   imagePath: assets/images/UI/destroy_Btn.png
-              - type: DestroyOnlyUi
+              - type: DestroyBtn
             id: DestroyBtnOnly
           - behaviours:
               - type: Transform

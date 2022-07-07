@@ -50,11 +50,11 @@ export class PersonClass extends Behaviour {
 
     setAnimation(roomType: RoomType) {
         const animationRenderer = this.gameObject.getBehaviour(AnimationRenderer);
-        animationRenderer.imagePathPrefix = "assets/images/PeopleAnimations/testAnimation/"
-            + roomType.toString() + '-' + this.personModule.race.toString() + '-';
+        animationRenderer.imagePathPrefix = "assets/images/PeopleAnimations/"
+            + roomType.toString() + this.personModule.race.toString() ;
         animationRenderer.imagePathSuffix = '.png'
         animationRenderer.startNum = 1;
-        animationRenderer.endNum = 4;
+        animationRenderer.endNum = 5;
         animationRenderer.frameForEachImage = 20;
         console.log("生成动画" + roomType);
 
