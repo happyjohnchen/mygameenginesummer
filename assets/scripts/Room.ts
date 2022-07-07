@@ -8,7 +8,7 @@ import { GameController } from "./GameController";
 import { GameSet } from "./GameSet";
 import { RoomModule, RoomPosition, RoomStatus, RoomType } from "./modules/RoomModule";
 import { RoomClass } from "./RoomClass";
-import { RoomSet } from "./RoomSet";
+import { RoomSet, setRoomImage } from "./RoomSet";
 export class Room extends Behaviour {
 
     //在此定义脚本中的属性
@@ -108,9 +108,11 @@ export class Room extends Behaviour {
         else if (roomModule.roomStatus == RoomStatus.canBuild) {
             //升级成一级
             console.log("up")
-            this.gameObject.getBehaviour(ImageRenderer).imagePath = 'assets/engineTest/images/testImage1.png'
+          
             roomModule.roomStatus = 1
             roomModule.level = 1//建造升级
+            roomGameObject.getBehaviour(ImageRenderer).imagePath = setRoomImage(this.roomModule.roomType,this.roomModule.level)
+          
             //roomModule.roomType=roomType
             roomGameObject.addBehaviour(new RoomClass())
             let roomClass = roomGameObject.getBehaviour(RoomClass)
@@ -126,6 +128,7 @@ export class Room extends Behaviour {
         return this.gameObject.getBehaviour(Room).roomModule.roomId
     }
     create() {
+        console.log("creat")
         const tileMapGameObj = getGameObjectById("tileMap")
         const roomSet = tileMapGameObj.getBehaviour(RoomSet)
         let thisRoom = this.gameObject.getBehaviour(Room)
