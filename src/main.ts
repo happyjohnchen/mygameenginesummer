@@ -78,10 +78,7 @@ registerBehaviourClass(ChangeTimeSpeed);
 registerBehaviourClass(BehaviourDemo);
 registerBehaviourClass(ClickChangeSpeed);
 registerBehaviourClass(DestroyBtn);
-<<<<<<< HEAD
-=======
 registerBehaviourClass(DestroyOnlyUi);
->>>>>>> xjy_game
 registerBehaviourClass(GameController);
 registerBehaviourClass(PersonClass);
 registerBehaviourClass(PersonSet);
