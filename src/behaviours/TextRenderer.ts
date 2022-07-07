@@ -3,6 +3,7 @@ import { Behaviour } from "../engine/Behaviour";
 import { Rectangle } from "../engine/math";
 import { string } from "../engine/validators/string";
 import {number} from "../engine/validators/number";
+import {boolean} from "../engine/validators/boolean";
 
 export class TextRenderer extends Behaviour implements Renderer {
 
@@ -14,6 +15,12 @@ export class TextRenderer extends Behaviour implements Renderer {
     font = "微软雅黑";
     @string()
     fontColor = "#000000";
+    @boolean()
+    stroke = false;
+    @string()
+    strokeColor = '#ff0000';
+    @number()
+    strokeWidth = 3;
 
     measuredTextWidth = 0;
 
