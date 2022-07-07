@@ -15,7 +15,10 @@ export class UiNotShow extends Behaviour {
     onPlayStart() {
         getGameObjectById("NightTime").active = false;
         getGameObjectById("RoomSecondUi").active = false;
-        getGameObjectById("DestroyOnlyUi").active = false;  
+        getGameObjectById("DestroyOnlyUi").active = false;
+        getGameObjectById("IsCreateUi").active = false; 
+        getGameObjectById("ConsumeNot").active = false; 
+        getGameObjectById("PersonNot").active = false;   
     }
 
     //每次屏幕刷新执行

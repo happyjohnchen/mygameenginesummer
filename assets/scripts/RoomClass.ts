@@ -128,7 +128,7 @@ export class RoomClass extends Behaviour {
                 //this.people[totalPeople] = id;//把id存起来
                 this.peopleInRoom[this.peopleInRoom.length] = id
                 this.calculateTotalAttribute();//改变一次属性值
-               this.setPeopleInRoom();
+                this.setPeopleInRoom();
                this.gameObject.getBehaviour(Room).roomModule.people = this.peopleInRoom;
                 return true;
             }
@@ -164,7 +164,7 @@ export class RoomClass extends Behaviour {
             const xPos = this.leftPositionX + this.getToLeftPositionX(this.roomType,p);
             const yPos = this.bottomPositionY + this.getToBottomPositionY();
             person.getBehaviour(PersonClass).setPostion(xPos,yPos);
-            
+            person.getBehaviour(PersonClass).personModule.id = this.roomId;
             //动画 等xq测试完就放出来
            // person.getBehaviour(PersonClass).setAnimation(this.roomType);
             
