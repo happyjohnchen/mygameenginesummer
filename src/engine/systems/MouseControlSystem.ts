@@ -73,6 +73,54 @@ export class MouseControlSystem extends System {
                 }
             }
         });
+
+        window.addEventListener('mouseup', (e) => {
+            const point = {x: e.clientX, y: e.clientY};
+            const camera = getGameObjectById('camera');
+            if (!camera) {
+                return;
+            }
+            const cameraTransform = new Transform();
+
+            //camera坐标表示中心点
+            cameraTransform.x = camera.getBehaviour(Transform).x - camera.getBehaviour(Transform).scaleX * this.engineUIConfig.canvasWidth / 2;
+            cameraTransform.y = camera.getBehaviour(Transform).y - camera.getBehaviour(Transform).scaleY * this.engineUIConfig.canvasHeight / 2;
+            if (this.engineUIConfig.launchMode) {
+                cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX / this.engineUIConfig.launchModeZoomIndex;
+                cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY / this.engineUIConfig.launchModeZoomIndex;
+            } else {
+                cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX;
+                cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY;
+            }
+            cameraTransform.rotation = camera.getBehaviour(Transform).rotation;
+            //更新矩阵
+            cameraTransform.globalMatrix.updateFromTransformProperties(cameraTransform.x, cameraTransform.y, cameraTransform.scaleX, cameraTransform.scaleY, cameraTransform.rotation);
+
+            //画布坐标转化为摄像机坐标
+            point.x *= cameraTransform.scaleX;
+            point.y *= cameraTransform.scaleY;
+            point.x += cameraTransform.x;
+            point.y += cameraTransform.y;
+
+            let result = this.hitTest(this.rootGameObject, point);
+            if (result) {
+                while (result) {
+                    if (result.onClickFinish) {
+                        result.onClickFinish(e);
+                    }
+                    if (result.preventOnClickBubble) {
+                        //禁止冒泡
+                        result = null;
+                    } else {
+                        result = result.parent;
+                    }
+                }
+            } else {
+                if (this.rootGameObject.onClickFinish) {
+                    this.rootGameObject.onClickFinish(e);
+                }
+            }
+        });
         window.addEventListener('mousemove', (e) => {
             const point = {x: e.clientX, y: e.clientY};
             const camera = getGameObjectById('camera');

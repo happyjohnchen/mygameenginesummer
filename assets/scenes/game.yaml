@@ -145,7 +145,7 @@ children:
                   width: 100
                   height: 20
                   color: custom
-                  customColor: '#a29f4b'
+                  customColor: '#805200'
             id: ProgressEnergy
             children:
               - behaviours:
@@ -160,8 +160,8 @@ children:
                     properties:
                       width: 94
                       height: 14
-                      color: green
-                      customColor: '#ffffff'
+                      color: custom
+                      customColor: '#ffa900'
                 id: EnergyBar
               - behaviours:
                   - type: Transform
@@ -203,7 +203,7 @@ children:
                   width: 100
                   height: 20
                   color: custom
-                  customColor: '#a29f4b'
+                  customColor: '#805200'
             id: ProgressFood
             children:
               - behaviours:
@@ -218,8 +218,8 @@ children:
                     properties:
                       width: 94
                       height: 14
-                      color: green
-                      customColor: '#ffffff'
+                      color: custom
+                      customColor: '#ffa900'
                 id: FoodBar
               - behaviours:
                   - type: Transform
@@ -261,7 +261,7 @@ children:
                   width: 100
                   height: 20
                   color: custom
-                  customColor: '#a29f4b'
+                  customColor: '#805200'
             id: ProgressWater
             children:
               - behaviours:
@@ -276,8 +276,8 @@ children:
                     properties:
                       width: 94
                       height: 14
-                      color: green
-                      customColor: '#ffffff'
+                      color: custom
+                      customColor: '#ffa900'
                 id: WaterBar
               - behaviours:
                   - type: Transform
@@ -357,7 +357,6 @@ children:
                   color: red
                   customColor: '#ffffff'
               - type: UiUnfold
-              - type: UiChangePicture
             id: BuildButton
           - behaviours:
               - type: Transform
@@ -428,10 +427,14 @@ children:
                       scaleX: 0.4
                       scaleY: 0.4
                       rotation: 0
-                  - type: UiCloseForCreate
                   - type: ImageRenderer
                     properties:
                       imagePath: assets/images/UI/close.png
+                  - type: UiClose
+                    properties:
+                      imageUp: assets/images/UI/close.png
+                      imageDown: assets/images/UI/close2.png
+                      closeName: CreateUi
                 id: close
       - behaviours:
           - type: Transform
