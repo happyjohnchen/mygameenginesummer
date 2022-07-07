@@ -319,7 +319,7 @@ children:
           - behaviours:
               - type: Transform
                 properties:
-                  x: 0
+                  x: 10
                   y: 0
                   scaleX: 1
                   scaleY: 1
@@ -332,6 +332,18 @@ children:
                   font: 微软雅黑
                   fontColor: '#ffffff'
             id: material
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: -50
+                  y: -30
+                  scaleX: 0.15
+                  scaleY: 0.15
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/ImageTryIcons/材料.png
+            id: MaterialPicture
       - behaviours:
           - type: Transform
             properties:
