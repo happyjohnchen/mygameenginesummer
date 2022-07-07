@@ -23,11 +23,7 @@ export class PersonSet extends Behaviour {
     gameController: GameController
     private nowTime: number
     lastTimeCreate = 0
-<<<<<<< HEAD
-    private createPeriod = 10
-=======
     private createPeriod = 1000
->>>>>>> origin/xjy_Game
     //private createPeriod = 15 * 60 * 60
     first = true;
 

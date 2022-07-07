@@ -1,5 +1,8 @@
 import { getGameObjectById } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
+import { GameController } from "./GameController";
+import { Room } from "./Room";
+import { RoomSet } from "./RoomSet";
 
 export class UpdateBtn extends Behaviour {
 
@@ -22,6 +25,13 @@ export class UpdateBtn extends Behaviour {
     }
     updateRoom() {
         //这里写调用房间升级
+        let gameController = getGameObjectById("GameController").getBehaviour(GameController)
+let roomid=getGameObjectById("tileMap").getBehaviour(RoomSet).updateAndDestroyBtnID
+        if(roomid>=0){
+          let room=  gameController.getRoomById(roomid)
+          room.getBehaviour(Room).upgradeRoom(room);
+          roomid=-1
+        }
         console.log("升级");
     }
 

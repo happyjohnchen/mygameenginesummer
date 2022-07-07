@@ -12,8 +12,7 @@ import { Room } from "./Room";
 import { RoomClass } from "./RoomClass";
 export function setRoomImage(roomtype: RoomType, roomLevel: number, isLeft?: boolean) {
     let imagePath: string
-    console.log(roomtype)
-    console.log(roomLevel)
+ 
     switch (roomLevel) {//加图片
         case 0: imagePath = 'assets/images/buildSystem/canBuild2.png'//灰色透明图片
             break;
@@ -68,10 +67,10 @@ export class RoomSet extends Behaviour {
     canBuildRoom = false;
     canChooseRoom = false
     buildRoomType: RoomType
-
+canShowSecondUi=false
     personId
     roomSetID
-
+updateAndDestroyBtnID
     //游戏开始时会执行一次
     onStart(): void {
 
@@ -146,6 +145,7 @@ export class RoomSet extends Behaviour {
 
             image.imagePath = 'assets/images/buildSystem/Nochose.png'
         }
+        this.canBuildRoom=false
     }
     setRoomCanChoose(personId: number) {//选框
         this.canChooseRoom = true;
@@ -259,7 +259,7 @@ export class RoomSet extends Behaviour {
         let leftRoom: GameObject
         let rightRoom: GameObject
         clickRoom = gameController.getRoomByPosition(position)
-        if (position.x > 0 && position.x < 5) {
+        if (position.x > 0 && position.x < 6) {
             leftRoom = gameController.getRoomByPosition(leftPositon)
             console.log("left")
             console.log(leftRoom)
