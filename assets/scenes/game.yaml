@@ -357,6 +357,7 @@ children:
                   color: red
                   customColor: '#ffffff'
               - type: UiUnfold
+              - type: UiChangePicture
             id: BuildButton
           - behaviours:
               - type: Transform
