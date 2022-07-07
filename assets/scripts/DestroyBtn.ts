@@ -27,12 +27,14 @@ export class DestroyBtn extends Behaviour {
     destroyRoom() {
         //这里写调用房间摧毁
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
+
         let roomid=getGameObjectById("tileMap").getBehaviour(RoomSet).updateAndDestroyBtnID
                 if(roomid>=0){
                   let room=  gameController.getRoomById(roomid)
                   room.getBehaviour(Room).destroyRoom( roomid)
                   roomid=-1
                 }
+                
         console.log("摧毁");
     }
 

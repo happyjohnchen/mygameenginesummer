@@ -49,30 +49,19 @@ export class Room extends Behaviour {
         }
     }
     destroyRoom(roomId: number) {//1.单独的房间销毁；2.已升级的房间销毁
-
+        
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
         let thisRoomGameObject = gameController.getRoomById(roomId)
         let thisRoom = thisRoomGameObject.getBehaviour(Room)
-        console.log(thisRoom.roomModule.level)
-
-
-
-        if (thisRoom.roomModule.level > 1) {
-            let neighbourRoom = gameController.getRoomById(this.roomModule.neighbourId)
-            this.clearRoomValue(neighbourRoom)
-        }
-        this.clearRoomValue(thisRoomGameObject)
-        /*if (thisRoom.roomModule.level == 1) {
+        if(thisRoom.roomModule.people==null){//qqqqqqq
+            console.log(thisRoom.roomModule.level)
+            if (thisRoom.roomModule.level > 1) {
+                let neighbourRoom = gameController.getRoomById(this.roomModule.neighbourId)
+                this.clearRoomValue(neighbourRoom)
+            }
             this.clearRoomValue(thisRoomGameObject)
-
         }
-        else if (thisRoom.roomModule.level > 1) {
-
-            let neighbourRoom = gameController.getRoomById(this.roomModule.neighbourId)
-            this.clearRoomValue(thisRoomGameObject)
-            this.clearRoomValue(neighbourRoom)
-
-        }*/
+       
     }
     getBorder(roomId: number) {//返回房间x,y值
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
@@ -95,6 +84,13 @@ export class Room extends Behaviour {
 
     }
     clearRoomValue(room: GameObject) {
+        const roomlevelTable = {
+            1 : 20,
+            2 : 20,
+            3 :30
+        }
+        let gameController = getGameObjectById("GameController").getBehaviour(GameController)
+       
         console.log("clear")
         if (room.hasBehaviour(RoomClass)) {
             let roomClass = room.getBehaviour(RoomClass)
@@ -102,12 +98,13 @@ export class Room extends Behaviour {
         }
         //room.getBehaviour(ImageRenderer).imagePath="灰色图片的路径"
         let roomModule = room.getBehaviour(Room).roomModule
+        gameController.game.material+=roomlevelTable[roomModule.level];
         roomModule.level = 0;
         roomModule.neighbourId = -1
         roomModule.roomType = RoomType.noType
         roomModule.roomStatus = RoomStatus.canBuild
         room.getBehaviour(ImageRenderer).imagePath = setRoomImage(roomModule.roomType, roomModule.level)
-
+       
 
     }
 
@@ -117,6 +114,7 @@ export class Room extends Behaviour {
         console.log("aaaa" + roomModule.level)
 
         if (roomModule.level == 1) {
+
             console.log("up1")
             roomModule.level++
            

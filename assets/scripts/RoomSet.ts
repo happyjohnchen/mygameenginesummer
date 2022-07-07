@@ -79,7 +79,7 @@ export class RoomSet extends Behaviour {
         this.roomSetID = 0
         console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
 
-
+        //getGameObjectById("GameController").getBehaviour(GameController).game.rooms.
         for (let j = 3; j < 6; j++) { this.createRoom(j, 0, RoomStatus.canBuild) }
         for (let j = 1; j < 6; j++) { this.createRoom(j, 1, RoomStatus.canBuild) }
 

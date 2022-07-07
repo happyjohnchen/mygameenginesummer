@@ -49,7 +49,7 @@ export class UiCreateRoom extends Behaviour {
             "FoodFactory" :RoomType.FoodFactory
         }
         console.log(this.attibuteSystem.getBehaviour(AttributeSystem).consumeForMaterial(100));
-        if(this.attibuteSystem.getBehaviour(AttributeSystem).consumeForMaterial(0)==true){
+        if(this.attibuteSystem.getBehaviour(AttributeSystem).consumeForMaterial(100)==true){
          
           const roomset=  getGameObjectById("tileMap").getBehaviour(RoomSet)
           roomset.setbuildRoom(roomTypeTable[this.roomTypeForUi]);

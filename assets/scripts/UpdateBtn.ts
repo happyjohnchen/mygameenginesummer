@@ -24,6 +24,7 @@ export class UpdateBtn extends Behaviour {
         }
     }
     updateRoom() {
+        
         //这里写调用房间升级
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
 let roomid=getGameObjectById("tileMap").getBehaviour(RoomSet).updateAndDestroyBtnID
