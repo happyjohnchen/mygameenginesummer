@@ -25,6 +25,9 @@ export class Player extends Behaviour {
     onPlayStart() {
         console.log("player onPlayerStart, data: " + this.engine.loadSceneData as string);
 
+        this.gameObject.onClickFinish = ()=>{
+            console.log("Click finish")
+        }
         //读取存档
         try{
             let gameDataJSON = decodeURI(this.engine.loadSceneData);
@@ -61,7 +64,7 @@ export class Player extends Behaviour {
             //鼠标点击
             switch (e.button) {
                 case 0:
-                    alert("左键");
+                    console.log("左键");
                     break;
                 case 1:
                     console.log("中键");

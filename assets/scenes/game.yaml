@@ -25,15 +25,27 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: -1000
-          y: -500
-          scaleX: 1
-          scaleY: 1
+          x: -530
+          y: -275
+          scaleX: 0.25
+          scaleY: 0.25
           rotation: 0
       - type: ImageRenderer
         properties:
-          imagePath: assets/engineTest/images/th.jpg
+          imagePath: assets/images/scene1.png
     id: Background
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -235
+          y: -166
+          scaleX: 0.08
+          scaleY: 0.08
+          rotation: 0
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/images/Room/entrance.png
+    id: Entrance
   - behaviours:
       - type: Transform
         properties:
@@ -62,23 +74,6 @@ children:
           rotation: 0
       - type: GameController
     id: GameController
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: AttributeSystem
-        properties:
-          consumePerTime: 1
-          onceConsumeTime: 1
-          primeProduceTime: 5
-          maxValue: 1000
-          coefficient: 0.2
-          radix: 0.2
-    id: AttributeSystem
   - behaviours:
       - type: Transform
         properties:
@@ -150,7 +145,7 @@ children:
                   width: 100
                   height: 20
                   color: custom
-                  customColor: '#a29f4b'
+                  customColor: '#805200'
             id: ProgressEnergy
             children:
               - behaviours:
@@ -165,8 +160,8 @@ children:
                     properties:
                       width: 94
                       height: 14
-                      color: green
-                      customColor: '#ffffff'
+                      color: custom
+                      customColor: '#ffa900'
                 id: EnergyBar
               - behaviours:
                   - type: Transform
@@ -208,7 +203,7 @@ children:
                   width: 100
                   height: 20
                   color: custom
-                  customColor: '#a29f4b'
+                  customColor: '#805200'
             id: ProgressFood
             children:
               - behaviours:
@@ -223,8 +218,8 @@ children:
                     properties:
                       width: 94
                       height: 14
-                      color: green
-                      customColor: '#ffffff'
+                      color: custom
+                      customColor: '#ffa900'
                 id: FoodBar
               - behaviours:
                   - type: Transform
@@ -266,7 +261,7 @@ children:
                   width: 100
                   height: 20
                   color: custom
-                  customColor: '#a29f4b'
+                  customColor: '#805200'
             id: ProgressWater
             children:
               - behaviours:
@@ -281,8 +276,8 @@ children:
                     properties:
                       width: 94
                       height: 14
-                      color: green
-                      customColor: '#ffffff'
+                      color: custom
+                      customColor: '#ffa900'
                 id: WaterBar
               - behaviours:
                   - type: Transform
@@ -311,6 +306,226 @@ children:
                     properties:
                       imagePath: assets/images/ImageTryIcons/水分管理推荐.png
                 id: Logo
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 150
+              y: -250
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+        id: MaterialShow
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ShowAttribute
+              - type: TextRenderer
+                properties:
+                  text: '00'
+                  fontSize: 25
+                  font: 微软雅黑
+                  fontColor: '#ffffff'
+            id: material
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 100
+              y: 0
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+        id: BuildUI
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 200
+                  y: 200
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ShapeRectRenderer
+                properties:
+                  width: 50
+                  height: 50
+                  color: red
+                  customColor: '#ffffff'
+              - type: UiUnfold
+            id: BuildButton
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: -50
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+            id: CreateUi
+            children:
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 150
+                      y: 0
+                      scaleX: 0.2
+                      scaleY: 0.8
+                      rotation: 0
+                  - type: ImageRenderer
+                    properties:
+                      imagePath: assets/engineTest/images/uitestbg.png
+                id: background
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 200
+                      y: 10
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeRectRenderer
+                    properties:
+                      width: 50
+                      height: 50
+                      color: blue
+                      customColor: '#ffffff'
+                  - type: UiCreateRoom
+                id: WaterFactory
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 200
+                      y: 80
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeRectRenderer
+                    properties:
+                      width: 50
+                      height: 50
+                      color: green
+                      customColor: '#ffffff'
+                  - type: UiCreateRoom
+                id: EnergyFactory
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 200
+                      y: 150
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeRectRenderer
+                    properties:
+                      width: 50
+                      height: 50
+                      color: red
+                      customColor: '#ffffff'
+                  - type: UiCreateRoom
+                id: FoodFactory
+              - behaviours:
+                  - type: Transform
+                    properties:
+                      x: 280
+                      y: 0
+                      scaleX: 1
+                      scaleY: 1
+                      rotation: 0
+                  - type: ShapeCircleRenderer
+                    properties:
+                      radius: 20
+                      color: red
+                      customColor: '#ffffff'
+                  - type: UiCloseForCreate
+                id: close
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 300
+              y: -250
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+        id: Time
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: TextRenderer
+                properties:
+                  text: 第0天 0:0
+                  fontSize: 30
+                  font: 微软雅黑
+                  fontColor: '#ffffff'
+              - type: ShowTime
+                properties:
+                  startTime: 8
+            id: time
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 250
+              y: -250
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+        id: PauseButton
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ShapeRectRenderer
+                properties:
+                  width: 40
+                  height: 40
+                  color: red
+                  customColor: '#ffffff'
+              - type: ChangeTimeSpeed
+                properties:
+                  thisSpeed: 0
+            id: pause
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 200
+              y: -250
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+        id: AddSpeedButton
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 10
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: TextRenderer
+                properties:
+                  text: x1
+                  fontSize: 25
+                  font: 微软雅黑
+                  fontColor: '#ffffff'
+              - type: ShowSpeed
+              - type: ClickChangeSpeed
+            id: SpeedShow
   - behaviours:
       - type: Transform
         properties:
@@ -323,3 +538,20 @@ children:
         properties:
           roomtype: 0
     id: tileMap
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: AttributeSystem
+        properties:
+          consumePerTime: 1
+          onceConsumeTime: 1
+          primeProduceTime: 2
+          maxValue: 1000
+          coefficient: 0.2
+          radix: 0.2
+    id: AttributeController

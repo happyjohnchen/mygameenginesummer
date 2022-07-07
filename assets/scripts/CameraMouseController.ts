@@ -65,17 +65,17 @@ export class CameraMouseController extends Behaviour {
         transformLeft.y = 100;
         transformLeft.rotation = -90
         this.leftController.addBehaviour(transformLeft);
-        const imageLeft = new imageRenderer()
+        const imageLeft = new ImageRenderer()
         imageLeft.imagePath = 'assets/images/arr1_trans.png'
         this.leftController.addBehaviour(imageLeft)
 
-        this.leftController.onHoverIn = (e) => {
+        this.leftController.onHoverIn = () => {
             this.direction = 1;
             this.isHover = false;
             imageLeft.imagePath = 'assets/images/arr1.png'
             console.log("left Controller")
         }
-        this.leftController.onHoverOut = (e) => {
+        this.leftController.onHoverOut = () => {
             this.direction = 0;
             imageLeft.imagePath = 'assets/images/arr1_trans.png'
             this.isHover = false;
@@ -90,17 +90,17 @@ export class CameraMouseController extends Behaviour {
         transformRight.y = -105;
         transformRight.rotation = 90
         this.rightController.addBehaviour(transformRight);
-        const imageRight = new imageRenderer()
+        const imageRight = new ImageRenderer()
         imageRight.imagePath = 'assets/images/arr1_trans.png'
         this.rightController.addBehaviour(imageRight)
 
-        this.rightController.onHoverIn = (e) => {
+        this.rightController.onHoverIn = () => {
             this.direction = 2;
             this.isHover = false;
             imageRight.imagePath = 'assets/images/arr1.png'
             console.log("right Controller")
         }
-        this.rightController.onHoverOut = (e) => {
+        this.rightController.onHoverOut = () => {
             this.direction = 0;
             this.isHover = false;
             imageRight.imagePath = 'assets/images/arr1_trans.png'
@@ -115,17 +115,17 @@ export class CameraMouseController extends Behaviour {
         transformUp.y = -275;
         transformUp.rotation = 0
         this.upController.addBehaviour(transformUp);
-        const imageUp = new imageRenderer()
+        const imageUp = new ImageRenderer()
         imageUp.imagePath = 'assets/images/arr1_trans.png'
         this.upController.addBehaviour(imageUp)
 
-        this.upController.onHoverIn = (e) => {
+        this.upController.onHoverIn = () => {
             this.direction = 3;
             this.isHover = false;
             imageUp.imagePath = 'assets/images/arr1.png'
             console.log("up Controller")
         }
-        this.upController.onHoverOut = (e) => {
+        this.upController.onHoverOut = () => {
             this.direction = 0;
             this.isHover = false;
             imageUp.imagePath = 'assets/images/arr1_trans.png'
@@ -139,17 +139,17 @@ export class CameraMouseController extends Behaviour {
         transformDown.y = 275;
         transformDown.rotation = 180
         this.downController.addBehaviour(transformDown);
-        const imageDown = new imageRenderer()
+        const imageDown = new ImageRenderer()
         imageDown.imagePath = 'assets/images/arr1_trans.png'
         this.downController.addBehaviour(imageDown)
 
-        this.downController.onHoverIn = (e) => {
+        this.downController.onHoverIn = () => {
             this.direction = 4;
             this.isHover = false;
             imageDown.imagePath = 'assets/images/arr1.png'
             console.log("down Controller")
         }
-        this.downController.onHoverOut = (e) => {
+        this.downController.onHoverOut = () => {
             this.direction = 0;
             this.isHover = false;
             imageDown.imagePath = 'assets/images/arr1_trans.png'
@@ -171,7 +171,7 @@ export class CameraMouseController extends Behaviour {
                 }
                 break;
             case 2:
-                if (this.cameraTransform.x + 0.5 * this.canvas.width * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).x - this.backgroundImageRectangle.width <= 0) {
+                if (this.cameraTransform.x + 0.5 * this.canvas.width * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).x - this.backgroundImageRectangle.width * this.myBackGround.getBehaviour(Transform).scaleX <= 0) {
                     this.cameraTransform.x = this.cameraTransform.x + this.speed;
                 }
 
@@ -181,7 +181,7 @@ export class CameraMouseController extends Behaviour {
                     this.cameraTransform.y = this.cameraTransform.y - this.speed;
                 break;
             case 4:
-                if (this.cameraTransform.y + 0.5 * this.canvas.height * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).y - this.backgroundImageRectangle.height <= 0) {
+                if (this.cameraTransform.y + 0.5 * this.canvas.height * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).y - this.backgroundImageRectangle.height * this.myBackGround.getBehaviour(Transform).scaleY <= 0) {
                     this.cameraTransform.y = this.cameraTransform.y + this.speed;
                 }
                 break;
@@ -191,24 +191,23 @@ export class CameraMouseController extends Behaviour {
     }
 
     checkBackground() {
-        if (hasGameObjectById('background')) {
+        if (hasGameObjectById('Background')) {
             this.myBackGround = getGameObjectById('Background')
         } else {
             const child = new GameObject();
-            child.id = 'background'
+            child.id = 'Background'
             this.gameObject.parent.addChild(child)
             this.myBackGround = child
         }
-
     }
 
     checkBackgroundRenderer() {
-
-        if (!this.myBackGround.hasBehaviour(imageRenderer)) {
+        if (!this.myBackGround.hasBehaviour(ImageRenderer)) {
             const imageRenderer = new ImageRenderer()
             imageRenderer.imagePath = "assets/engineTest/images/th.jpg"
             this.myBackGround.addBehaviour(imageRenderer);
         }
-        this.backgroundImageRectangle = this.myBackGround.getBehaviour(imageRenderer).getBounds();
+        this.backgroundImageRectangle = this.myBackGround.getBehaviour(ImageRenderer).getBounds();
+        console.log(this.backgroundImageRectangle)
     }
 }

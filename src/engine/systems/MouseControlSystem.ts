@@ -60,7 +60,7 @@ export class MouseControlSystem extends System {
                     if (result.onClick) {
                         result.onClick(e);
                     }
-                    if (result.preventOnClickBubble){
+                    if (result.preventOnClickBubble) {
                         //禁止冒泡
                         result = null;
                     } else {
@@ -70,6 +70,54 @@ export class MouseControlSystem extends System {
             } else {
                 if (this.rootGameObject.onClick) {
                     this.rootGameObject.onClick(e);
+                }
+            }
+        });
+
+        window.addEventListener('mouseup', (e) => {
+            const point = {x: e.clientX, y: e.clientY};
+            const camera = getGameObjectById('camera');
+            if (!camera) {
+                return;
+            }
+            const cameraTransform = new Transform();
+
+            //camera坐标表示中心点
+            cameraTransform.x = camera.getBehaviour(Transform).x - camera.getBehaviour(Transform).scaleX * this.engineUIConfig.canvasWidth / 2;
+            cameraTransform.y = camera.getBehaviour(Transform).y - camera.getBehaviour(Transform).scaleY * this.engineUIConfig.canvasHeight / 2;
+            if (this.engineUIConfig.launchMode) {
+                cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX / this.engineUIConfig.launchModeZoomIndex;
+                cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY / this.engineUIConfig.launchModeZoomIndex;
+            } else {
+                cameraTransform.scaleX = camera.getBehaviour(Transform).scaleX;
+                cameraTransform.scaleY = camera.getBehaviour(Transform).scaleY;
+            }
+            cameraTransform.rotation = camera.getBehaviour(Transform).rotation;
+            //更新矩阵
+            cameraTransform.globalMatrix.updateFromTransformProperties(cameraTransform.x, cameraTransform.y, cameraTransform.scaleX, cameraTransform.scaleY, cameraTransform.rotation);
+
+            //画布坐标转化为摄像机坐标
+            point.x *= cameraTransform.scaleX;
+            point.y *= cameraTransform.scaleY;
+            point.x += cameraTransform.x;
+            point.y += cameraTransform.y;
+
+            let result = this.hitTest(this.rootGameObject, point);
+            if (result) {
+                while (result) {
+                    if (result.onClickFinish) {
+                        result.onClickFinish(e);
+                    }
+                    if (result.preventOnClickBubble) {
+                        //禁止冒泡
+                        result = null;
+                    } else {
+                        result = result.parent;
+                    }
+                }
+            } else {
+                if (this.rootGameObject.onClickFinish) {
+                    this.rootGameObject.onClickFinish(e);
                 }
             }
         });
@@ -100,6 +148,14 @@ export class MouseControlSystem extends System {
             point.y *= cameraTransform.scaleY;
             point.x += cameraTransform.x;
             point.y += cameraTransform.y;
+
+            const unHover = (gameObject: GameObject) => {
+                gameObject.currentHovered = false;
+                for (const child of gameObject.children) {
+                    unHover(child);
+                }
+            }
+            unHover(this.rootGameObject);
 
             const visit = (gameObject: GameObject, point: Point, e) => {
                 // console.log("visit"+gameObject.uuid);
@@ -165,10 +221,22 @@ export class MouseControlSystem extends System {
         // console.log(gameObject.id + this.mouseInTest(gameObject, point));
         if (gameObject.hovered !== this.mouseInTest(gameObject, point)) {
             gameObject.hovered = this.mouseInTest(gameObject, point);
-            if (gameObject.hovered && gameObject.onHoverIn) {
-                gameObject.onHoverIn(e);
-            } else if (!gameObject.hovered && gameObject.onHoverOut) {
-                gameObject.onHoverOut(e);
+            gameObject.currentHovered = gameObject.hovered;
+            if (gameObject.hovered) {
+                if (gameObject.onHoverIn) {
+                    gameObject.onHoverIn(e);
+                }
+            } else if (!gameObject.hovered) {
+                if (gameObject.onHoverOut) {
+                    gameObject.onHoverOut(e);
+                }
+            }
+        }
+        if (gameObject.hovered) {
+            let parent = gameObject.parent;
+            while (parent) {
+                parent.hovered = true;
+                parent = parent.parent;
             }
         }
     }
