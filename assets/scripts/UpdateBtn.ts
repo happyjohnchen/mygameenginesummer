@@ -1,7 +1,7 @@
 import { getGameObjectById } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
 
-export class UiCloseForCreate extends Behaviour {
+export class UpdateBtn extends Behaviour {
 
     //在此定义脚本中的属性
 
@@ -14,11 +14,15 @@ export class UiCloseForCreate extends Behaviour {
     //游戏运行模式开始时会执行一次
     onPlayStart() {
         this.gameObject.onClick = (e) => {
-            if(e.button ==0){
-                getGameObjectById("CreateUi").active = false;     
+            if(e.button ==0){//点击调用选择房间 同时关闭ui
+                this.updateRoom();
+                getGameObjectById("RoomSecondUi").active = false;
             }
-     
         }
+    }
+    updateRoom() {
+        //这里写调用房间升级
+        console.log("升级");
     }
 
     //每次屏幕刷新执行

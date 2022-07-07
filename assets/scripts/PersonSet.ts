@@ -13,19 +13,22 @@ import { AnimationRenderer } from "../../src/behaviours/AnimationRenderer";
 export class PersonSet extends Behaviour {
 
     @number()
-    startPostionX = 100;
+    startPostionX = -400;
 
     @number()
-    startPositonY = -100;
+    startPositonY = -175;
 
     //在此定义脚本中的属性
     peopleCount: number;
     gameController: GameController
     private nowTime: number
     lastTimeCreate = 0
+<<<<<<< HEAD
     private createPeriod = 10
+=======
+    private createPeriod = 1000
+>>>>>>> origin/xjy_Game
     //private createPeriod = 15 * 60 * 60
-
     first = true;
 
 

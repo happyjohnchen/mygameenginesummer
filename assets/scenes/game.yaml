@@ -319,7 +319,7 @@ children:
           - behaviours:
               - type: Transform
                 properties:
-                  x: 0
+                  x: 10
                   y: 0
                   scaleX: 1
                   scaleY: 1
@@ -332,6 +332,18 @@ children:
                   font: 微软雅黑
                   fontColor: '#ffffff'
             id: material
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: -50
+                  y: -30
+                  scaleX: 0.15
+                  scaleY: 0.15
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/ImageTryIcons/材料.png
+            id: MaterialPicture
       - behaviours:
           - type: Transform
             properties:
@@ -357,7 +369,6 @@ children:
                   color: red
                   customColor: '#ffffff'
               - type: UiUnfold
-              - type: UiChangePicture
             id: BuildButton
           - behaviours:
               - type: Transform
@@ -428,10 +439,14 @@ children:
                       scaleX: 0.4
                       scaleY: 0.4
                       rotation: 0
-                  - type: UiCloseForCreate
                   - type: ImageRenderer
                     properties:
                       imagePath: assets/images/UI/close.png
+                  - type: UiClose
+                    properties:
+                      imageUp: assets/images/UI/close.png
+                      imageDown: assets/images/UI/close2.png
+                      closeName: CreateUi
                 id: close
       - behaviours:
           - type: Transform
@@ -516,6 +531,95 @@ children:
               - type: ShowSpeed
               - type: ClickChangeSpeed
             id: SpeedShow
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -200
+              y: -50
+              scaleX: 0.4
+              scaleY: 0.4
+              rotation: 0
+        id: RoomSecondUi
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/update_destroy_UI.png
+            id: BackGround
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 180
+                  y: 60
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/destroy_compensate.png
+            id: DestroyComponent
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 20
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/destroy_Btn.png
+              - type: DestroyBtn
+            id: DestroyBtn
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 480
+                  y: 60
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/update_spend.png
+            id: UpdateComponent
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 720
+                  y: 2
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/update_Btn.png
+              - type: UpdateBtn
+            id: UpdateBtn
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 820
+                  y: -50
+                  scaleX: 0.2
+                  scaleY: 0.2
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/close.png
+              - type: UiClose
+                properties:
+                  imageUp: assets/images/UI/close.png
+                  imageDown: assets/images/UI/close2.png
+                  closeName: RoomSecondUi
+            id: closeBtn
   - behaviours:
       - type: Transform
         properties:
@@ -545,3 +649,16 @@ children:
           coefficient: 0.2
           radix: 0.2
     id: AttributeController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: PersonSet
+        properties:
+          startPostionX: -400
+          startPositonY: -175
+    id: PersonSet

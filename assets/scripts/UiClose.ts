@@ -3,16 +3,17 @@ import { getGameObjectById } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
 import { string } from "../../src/engine/validators/string";
 
-export class UiChangePicture extends Behaviour {
+export class UiClose extends Behaviour {
 
     //在此定义脚本中的属性
 
-    a:number = 0
+
     @string()
     imageUp = ""
     @string()
     imageDown = ""
- 
+    @string()
+    closeName = ""
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
 
@@ -22,16 +23,16 @@ export class UiChangePicture extends Behaviour {
     onPlayStart() {
         this.gameObject.onClick = (e) => {
             if(e.button ==0){
-                this.gameObject.getBehaviour(ImageRenderer).imagePath = this.imageDown;
+            
+                this.gameObject.getBehaviour(ImageRenderer).imagePath = this.imageDown;    
             }
-     
-        }
-        this.gameObject.onClickFinish = (e) => {
-            if(e.button ==0){
-                this.a = 0;
-                this.gameObject.getBehaviour(ImageRenderer).imagePath = this.imageUp;  
+            this.gameObject.onClickFinish = (e) => {
+                if(e.button ==0){
+                    this.gameObject.getBehaviour(ImageRenderer).imagePath = this.imageUp;  
+                    getGameObjectById(this.closeName).active = false; 
+                }
+         
             }
-     
         }
     }
 
