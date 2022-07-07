@@ -49,7 +49,8 @@ export class UiCreateRoom extends Behaviour {
             "FoodFactory" :RoomType.FoodFactory
         }
         console.log(this.attibuteSystem.getBehaviour(AttributeSystem).consumeForMaterial(100));
-        if(this.attibuteSystem.getBehaviour(AttributeSystem).consumeForMaterial(100)==true){
+        if(this.attibuteSystem.getBehaviour(AttributeSystem).consumeForMaterial(0)==true){
+            console.log("a")
             getGameObjectById("tileMap").getBehaviour(RoomSet).setbuildRoom(roomTypeTable[this.roomTypeForUi]);
             return roomTypeTable[this.roomTypeForUi]; //这个值就是返回的房间类型 邓海欣在这里写用这个值干什么  return 你根据需求 可以改
         }

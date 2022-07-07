@@ -130,7 +130,7 @@ export class GameController extends Behaviour {
         room.roomModule = roomModule
         saveRoom.addBehaviour(room);
         const backgroundImage = new ImageRenderer()
-        backgroundImage.imagePath = setRoomImage(roomModule.roomType, roomModule.roomStatus)
+        backgroundImage.imagePath = setRoomImage(roomModule.roomType, roomModule.level)
         saveRoom.addBehaviour(backgroundImage);
     }
     //保存存档
