@@ -12,7 +12,7 @@ import { Room } from "./Room";
 import { RoomClass } from "./RoomClass";
 export function setRoomImage(roomtype: RoomType, roomLevel: number, isLeft?: boolean) {
     let imagePath: string
- 
+
     switch (roomLevel) {//加图片
         case 0: imagePath = 'assets/images/buildSystem/canBuild.png'//灰色透明图片
             break;
@@ -67,10 +67,10 @@ export class RoomSet extends Behaviour {
     canBuildRoom = false;
     canChooseRoom = false
     buildRoomType: RoomType
-canShowSecondUi=false
+    canShowSecondUi = false
     personId
     roomSetID
-updateAndDestroyBtnID
+    updateAndDestroyBtnID
     //游戏开始时会执行一次
     onStart(): void {
 
@@ -78,7 +78,7 @@ updateAndDestroyBtnID
     onPlayStart() {
         this.roomSetID = 0
         console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
-     
+
 
         for (let j = 3; j < 6; j++) { this.createRoom(j, 0, RoomStatus.canBuild) }
         for (let j = 1; j < 6; j++) { this.createRoom(j, 1, RoomStatus.canBuild) }
@@ -104,10 +104,10 @@ updateAndDestroyBtnID
         //console.log(gameController.game)
         gameController.addRoom(roomChild)
         const childTransform = new Transform();
-        childTransform.x = -385 + roomPositionX * 149;
-        childTransform.y = -160 + roomPositionY * 100;
-childTransform.scaleX=0.083;
-childTransform.scaleY=0.083;
+        childTransform.x = -384 + roomPositionX * 149;
+        childTransform.y = -166 + roomPositionY * 100;
+        childTransform.scaleX = 0.083;
+        childTransform.scaleY = 0.083;
         roomChild.addBehaviour(childTransform);
         const room = new Room();
         let RModule = new RoomModule()
@@ -126,14 +126,12 @@ childTransform.scaleY=0.083;
         let sonChild = new GameObject();
         roomChild.addChild(sonChild)
         const sonTransform = new Transform();
-        sonTransform.scaleX=0.083
-        sonTransform.scaleY=0.083
         const sonImage = new ImageRenderer()
         sonImage.imagePath = 'assets/images/buildSystem/Nochose.png'
 
         sonChild.addBehaviour(sonTransform)
         sonChild.addBehaviour(sonImage);
- 
+
 
     };
     setbuildRoom(roomtype: RoomType) {//建造房间
@@ -150,7 +148,7 @@ childTransform.scaleY=0.083;
 
             image.imagePath = 'assets/images/buildSystem/Nochose.png'
         }
-        this.canBuildRoom=false
+        this.canBuildRoom = false
     }
     setRoomCanChoose(personId: number) {//选框
         this.canChooseRoom = true;
@@ -224,6 +222,7 @@ childTransform.scaleY=0.083;
             neighborRoomData.neighbourId = clickRoomData.roomId
             clickRoom.upgradeRoom(clickGameobject)
             neighborRoom.upgradeRoom(neighborGameObject)
+            clickGameobject.getBehaviour(RoomClass).setRoomLevel(2);
             this.removeRoomClass(neighborGameObject)//右边的房间去掉roomclass的behaviour
 
             clickGameobject.getBehaviour(ImageRenderer).imagePath = setRoomImage(clickRoomData.roomType, clickRoomData.level, true)
@@ -288,10 +287,10 @@ childTransform.scaleY=0.083;
         let leftRoom = this.getRoomByXY(position.x - 1, position.y)
         let rightRoom = this.getRoomByXY(position.x + 1, position.y)
         let topRoom = this.getRoomByXY(position.x, position.y - 1);
-        if (position.x - 1 >= 0 && leftRoom == null && position.y != 1&&position.y!=2) this.createRoom(position.x - 1, position.y, RoomStatus.canBuild);
+        if (position.x - 1 >= 0 && leftRoom == null && position.y != 1 && position.y != 2) this.createRoom(position.x - 1, position.y, RoomStatus.canBuild);
         if (position.x < 5 && rightRoom == null) this.createRoom(position.x + 1, position.y, RoomStatus.canBuild);
         if (bottomRoom == null) this.createRoom(position.x, position.y + 1, RoomStatus.canBuild);
         if (topRoom == null && position.y > 2) this.createRoom(position.x, position.y - 1, RoomStatus.canBuild);
-        if (position.x - 1 >= 0 && leftRoom == null &&position.y==2) this.createRoom(position.x - 1, position.y, RoomStatus.canBuild);
+        if (position.x - 1 >= 0 && leftRoom == null && position.y == 2) this.createRoom(position.x - 1, position.y, RoomStatus.canBuild);
     }
 }

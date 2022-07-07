@@ -81,8 +81,8 @@ export class Room extends Behaviour {
         let xPosition = thisRoomModule.position.x
         let yPosition = thisRoomModule.position.y
         let position = new RoomPosition()
-        position.x = xPosition * 150
-        position.y = yPosition * 100
+        position.x = -384+xPosition * 149
+        position.y =-166 + yPosition * 100
         if (thisRoomModule.level == 1) {
             return position
         }
@@ -119,7 +119,7 @@ export class Room extends Behaviour {
         if (roomModule.level == 1) {
             console.log("up1")
             roomModule.level++
-
+           
         }
         else if (roomModule.level == 2) {
             console.log("up2")
@@ -127,6 +127,12 @@ export class Room extends Behaviour {
             let gameController = getGameObjectById("GameController").getBehaviour(GameController)
             let neighborRoom = gameController.getRoomById(roomModule.neighbourId)
             neighborRoom.getBehaviour(Room).roomModule.level++
+            if(roomGameObject.hasBehaviour(RoomClass)){
+                roomGameObject.getBehaviour(RoomClass).setRoomLevel(3);
+            }
+           else{
+            neighborRoom.getBehaviour(RoomClass).setRoomLevel(3);
+           }
             console.log(neighborRoom)
         }
         else if (roomModule.roomStatus == RoomStatus.canBuild) {
@@ -155,11 +161,14 @@ export class Room extends Behaviour {
     }
     addPersonInRoom(personId: number) {//往房间里头加人物
         if (this.gameObject.hasBehaviour(RoomClass)) {
+          
             this.gameObject.getBehaviour(RoomClass).addPersonInRoom(personId);
+           
             console.log("add in 1")
         }
         else {
             const neighborRoom = getGameObjectById("GameController").getBehaviour(GameController).getRoomById(this.roomModule.neighbourId);
+           
             neighborRoom.getBehaviour(RoomClass).addPersonInRoom(personId);
             console.log("add in room")
         }

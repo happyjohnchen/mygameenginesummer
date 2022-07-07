@@ -63,28 +63,6 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
-    id: People
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 0.2
-          scaleY: 0.2
-          rotation: 0
-      - type: PersonSet
-        properties:
-          startPostionX: -400
-          startPositonY: -145
-    id: PersonSet
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
       - type: GameController
     id: GameController
   - behaviours:
@@ -752,3 +730,25 @@ children:
           coefficient: 0.2
           radix: 0.2
     id: AttributeController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+    id: People
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 0.2
+          scaleY: 0.2
+          rotation: 0
+      - type: PersonSet
+        properties:
+          startPostionX: -400
+          startPositonY: -145
+    id: PersonSet
