@@ -110,6 +110,12 @@ export class CanvasContextRenderingSystem extends System {
                         context.fillStyle = renderer.fontColor;
                         context.fillText(renderer.text, 0, renderer.fontSize);
                         renderer.measuredTextWidth = context.measureText(renderer.text).width;
+                        if (renderer.stroke){
+                            //描边
+                            context.strokeStyle = renderer.strokeColor;
+                            context.lineWidth = renderer.strokeWidth;
+                            context.strokeText(renderer.text, 0, renderer.fontSize);
+                        }
                         context.restore();
                     } else if (child.renderer instanceof ShapeRectRenderer) {
                         const renderer = child.renderer as ShapeRectRenderer;
