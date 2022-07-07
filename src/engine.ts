@@ -331,6 +331,8 @@ export class GameObject {
 
     onClick?: Function;
 
+    onClickFinish?: Function;
+
     preventOnClickBubble = false;
 
     onHoverIn?: Function;
