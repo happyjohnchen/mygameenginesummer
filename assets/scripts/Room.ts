@@ -1,6 +1,7 @@
 import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
 import { GameObject, getBehaviourClassByName, getGameObjectById } from "../../src/engine";
 import { Behaviour } from "../../src/engine/Behaviour";
+import { Transform } from "../../src/engine/Transform";
 import { boolean } from "../../src/engine/validators/boolean";
 import { number } from "../../src/engine/validators/number";
 import { findKey } from "./findEnumKey";
@@ -35,28 +36,32 @@ export class Room extends Behaviour {
         this.gameObject.id = findKey(RoomType, roomType)
     }
 
-onlyClickRoom(roomLevel:number){
-    const roomSet = getGameObjectById("tileMap").getBehaviour(RoomSet)
-   
-    if(roomLevel>1){
-        getGameObjectById("RoomSecondUi").active = true;
-        roomSet.updateAndDestroyBtnID=this.roomModule.roomId;
+    onlyClickRoom(roomLevel: number) {
+        const roomSet = getGameObjectById("tileMap").getBehaviour(RoomSet)
+
+        if (roomLevel > 1) {
+            getGameObjectById("RoomSecondUi").active = true;
+            roomSet.updateAndDestroyBtnID = this.roomModule.roomId;
+        }
+        else if (roomLevel == 1) {
+            getGameObjectById("DestroyOnlyUi").active = true;
+            roomSet.updateAndDestroyBtnID = this.roomModule.roomId;
+        }
     }
-   else if(roomLevel==1){
-    getGameObjectById("DestroyBtnOnly").active = true;
-    roomSet.updateAndDestroyBtnID=this.roomModule.roomId;
-   }
-}
     destroyRoom(roomId: number) {//1.单独的房间销毁；2.已升级的房间销毁
 
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
         let thisRoomGameObject = gameController.getRoomById(roomId)
         let thisRoom = thisRoomGameObject.getBehaviour(Room)
         console.log(thisRoom.roomModule.level)
-        
-        let neighbourRoom = gameController.getRoomById(this.roomModule.neighbourId)
+
+
+
+        if (thisRoom.roomModule.level > 1) {
+            let neighbourRoom = gameController.getRoomById(this.roomModule.neighbourId)
+            this.clearRoomValue(neighbourRoom)
+        }
         this.clearRoomValue(thisRoomGameObject)
-        this.clearRoomValue(neighbourRoom)
         /*if (thisRoom.roomModule.level == 1) {
             this.clearRoomValue(thisRoomGameObject)
 
@@ -91,7 +96,7 @@ onlyClickRoom(roomLevel:number){
     }
     clearRoomValue(room: GameObject) {
         console.log("clear")
-        if(room.hasBehaviour(RoomClass)){
+        if (room.hasBehaviour(RoomClass)) {
             let roomClass = room.getBehaviour(RoomClass)
             room.removeBehaviour(roomClass)//合完许佳阳的放出来这2句
         }
@@ -101,15 +106,15 @@ onlyClickRoom(roomLevel:number){
         roomModule.neighbourId = -1
         roomModule.roomType = RoomType.noType
         roomModule.roomStatus = RoomStatus.canBuild
-        room.getBehaviour(ImageRenderer).imagePath=setRoomImage(roomModule.roomType,roomModule.level)
-        
+        room.getBehaviour(ImageRenderer).imagePath = setRoomImage(roomModule.roomType, roomModule.level)
+
 
     }
 
     upgradeRoom(roomGameObject: GameObject) {//升级房间
 
         let roomModule = roomGameObject.getBehaviour(Room).roomModule
-        console.log("aaaa"+roomModule.level)
+        console.log("aaaa" + roomModule.level)
 
         if (roomModule.level == 1) {
             console.log("up1")
@@ -122,7 +127,7 @@ onlyClickRoom(roomLevel:number){
             let gameController = getGameObjectById("GameController").getBehaviour(GameController)
             let neighborRoom = gameController.getRoomById(roomModule.neighbourId)
             neighborRoom.getBehaviour(Room).roomModule.level++
-console.log(neighborRoom)
+            console.log(neighborRoom)
         }
         else if (roomModule.roomStatus == RoomStatus.canBuild) {
             //升级成一级
@@ -131,7 +136,9 @@ console.log(neighborRoom)
             roomModule.roomStatus = 1
             roomModule.level = 1//建造升级
             roomGameObject.getBehaviour(ImageRenderer).imagePath = setRoomImage(this.roomModule.roomType, this.roomModule.level)
-
+            let roomTransform = roomGameObject.getBehaviour(Transform)
+            roomTransform.scaleX = 0.083
+            roomTransform.scaleY = 0.083
             //roomModule.roomType=roomType
             roomGameObject.addBehaviour(new RoomClass())
             let roomClass = roomGameObject.getBehaviour(RoomClass)
@@ -170,21 +177,10 @@ console.log(neighborRoom)
         console.log("level:" + thisRoom.roomModule.level)
         this.upgradeRoom(this.gameObject)
         console.log("level:" + thisRoom.roomModule.level)
-
-
-        //王璐：在这里是升级，然后需要先选ui进行什么操作再升级,这只是个示例，你需要从ui获取roomType的值
         thisRoomModule.roomType = this.roomModule.roomType
-
-        //thisRoom.changeRoomName(thisRoomModule.roomType)
-        //console.log(this.gameObject.id)
-
-        roomSet.storeBuildStatus(this.roomModule.position.x, this.roomModule.position.x, this.gameObject)
         roomSet.checkNeighbor(this.roomModule.position)
         // roomSet.setRoomType(this.positionX, this.positionY, RoomType.WaterFactory)
         roomSet.checkMerge(this.roomModule.position)
-
-        //console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
-
         console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
         this.canCreate = false;
         roomSet.buildRoomType = RoomType.noType;
@@ -193,18 +189,10 @@ console.log(neighborRoom)
     onPlayStart() {
         this.canCreate = false;
         this.gameObject.onClick = () => {
-
-
-            /* 测试destroy
-            console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
-             //console.log(getGameObjectById("Rooms").children)
- const id =this.clickAndGetRoomID()
-             this.destroyRoom(id)
-             console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)*/
             const tileMapGameObj = getGameObjectById("tileMap")
             const roomSet = tileMapGameObj.getBehaviour(RoomSet)
             console.log(roomSet.canChooseRoom)
-            
+
             if (roomSet.canChooseRoom) {
                 if (this.roomModule.level > 0) {
                     let personId = roomSet.personId
@@ -223,10 +211,10 @@ console.log(neighborRoom)
                 roomSet.setRoomNotCanchoose();
             }
 
-           this.onlyClickRoom(this.roomModule.level)
-        
-               
-            
+            else { this.onlyClickRoom(this.roomModule.level) }
+
+
+
 
 
         };

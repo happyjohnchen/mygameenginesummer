@@ -39,8 +39,8 @@ children:
         properties:
           x: -235
           y: -166
-          scaleX: 1
-          scaleY: 1
+          scaleX: 0.083
+          scaleY: 0.083
           rotation: 0
       - type: ImageRenderer
         properties:
@@ -667,7 +667,7 @@ children:
               - type: ImageRenderer
                 properties:
                   imagePath: assets/images/UI/destroy_Btn.png
-              - type: DestroyBtn
+              - type: DestroyOnlyUi
             id: DestroyBtnOnly
           - behaviours:
               - type: Transform

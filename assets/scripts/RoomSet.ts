@@ -14,7 +14,7 @@ export function setRoomImage(roomtype: RoomType, roomLevel: number, isLeft?: boo
     let imagePath: string
  
     switch (roomLevel) {//加图片
-        case 0: imagePath = 'assets/images/buildSystem/canBuild2.png'//灰色透明图片
+        case 0: imagePath = 'assets/images/buildSystem/canBuild.png'//灰色透明图片
             break;
         case 1:
             switch (roomtype) {
@@ -104,8 +104,10 @@ updateAndDestroyBtnID
         //console.log(gameController.game)
         gameController.addRoom(roomChild)
         const childTransform = new Transform();
-        childTransform.x = -385 + roomPositionX * 150;
-        childTransform.y = -166 + roomPositionY * 100;
+        childTransform.x = -385 + roomPositionX * 149;
+        childTransform.y = -160 + roomPositionY * 100;
+childTransform.scaleX=0.083;
+childTransform.scaleY=0.083;
         roomChild.addBehaviour(childTransform);
         const room = new Room();
         let RModule = new RoomModule()
@@ -124,11 +126,14 @@ updateAndDestroyBtnID
         let sonChild = new GameObject();
         roomChild.addChild(sonChild)
         const sonTransform = new Transform();
+        sonTransform.scaleX=0.083
+        sonTransform.scaleY=0.083
         const sonImage = new ImageRenderer()
         sonImage.imagePath = 'assets/images/buildSystem/Nochose.png'
+
         sonChild.addBehaviour(sonTransform)
         sonChild.addBehaviour(sonImage);
-        this.storeBuildStatus(roomPositionX, roomPositionY, roomChild)
+ 
 
     };
     setbuildRoom(roomtype: RoomType) {//建造房间
@@ -193,12 +198,6 @@ updateAndDestroyBtnID
             }
         }
         this.canBuildRoom = true;
-    }
-
-    //记录每个坑的状态
-    storeBuildStatus(x: number, y: number, gameObject: GameObject) {
-        //this.roomGameObjectArray[x][y] = gameObject;
-
     }
 
     getRoomBehabiour(gameObeject: GameObject) {
@@ -293,29 +292,6 @@ updateAndDestroyBtnID
         if (position.x < 5 && rightRoom == null) this.createRoom(position.x + 1, position.y, RoomStatus.canBuild);
         if (bottomRoom == null) this.createRoom(position.x, position.y + 1, RoomStatus.canBuild);
         if (topRoom == null && position.y > 2) this.createRoom(position.x, position.y - 1, RoomStatus.canBuild);
-        /*if (position.x - 1 >= 0 && leftRoom == null && rightRoom == null&&bottomRoom == null) {
-             console.log('a')
-             console.log(rightRoom)
-             this.createRoom(position.x + 1, position.y, RoomStatus.canBuild)
-             this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
-             this.createRoom(position.x - 1, position.y, RoomStatus.canBuild)
-         }
-         else if (position.x > 0 && rightRoom == null&&bottomRoom == null) {
-             console.log('b')
-             this.createRoom(position.x + 1, position.y, RoomStatus.canBuild)
-             this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
-
-         }
-         else if (position.x - 1 >= 0 && leftRoom == null && position.y != 1&&bottomRoom == null) {
-             console.log('c')
-             this.createRoom(position.x - 1, position.y, RoomStatus.canBuild)
-             this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
-
-         }
-         else {
-             console.log("f")
-             this.createRoom(position.x, position.y + 1, RoomStatus.canBuild)
-         }
-     }*/
+        if (position.x - 1 >= 0 && leftRoom == null &&position.y==2) this.createRoom(position.x - 1, position.y, RoomStatus.canBuild);
     }
 }

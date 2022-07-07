@@ -20,6 +20,7 @@ export class DestroyBtn extends Behaviour {
             if(e.button ==0){//点击调用选择房间 同时关闭ui
                 this.destroyRoom();
                 getGameObjectById("RoomSecondUi").active = false;
+           
             }
         }
     }
