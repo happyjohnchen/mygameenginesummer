@@ -72,6 +72,15 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
+    id: PersonSet
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
       - type: GameController
     id: GameController
   - behaviours:
@@ -86,6 +95,7 @@ children:
       - type: CameraMouseController
         properties:
           speed: 3
+      - type: UiNotShow
     id: camera
     children:
       - behaviours:
@@ -126,8 +136,8 @@ children:
             properties:
               x: -450
               y: -240
-              scaleX: 0.85
-              scaleY: 0.85
+              scaleX: 0.75
+              scaleY: 0.75
               rotation: 0
           - type: UiProgressBar
         id: ProgressBar
@@ -182,9 +192,9 @@ children:
                   - type: Transform
                     properties:
                       x: -37
-                      y: -35
-                      scaleX: 0.15
-                      scaleY: 0.15
+                      y: -15
+                      scaleX: 0.1
+                      scaleY: 0.1
                       rotation: 0
                   - type: ImageRenderer
                     properties:
@@ -239,14 +249,14 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: -42
-                      y: -17
-                      scaleX: 0.28
-                      scaleY: 0.28
+                      x: -38
+                      y: -15
+                      scaleX: 0.1
+                      scaleY: 0.1
                       rotation: 0
                   - type: ImageRenderer
                     properties:
-                      imagePath: assets/images/ImageTryIcons/三明治.png
+                      imagePath: assets/images/ImageTryIcons/食物.png
                 id: Logo
           - behaviours:
               - type: Transform
@@ -298,21 +308,21 @@ children:
                   - type: Transform
                     properties:
                       x: -35
-                      y: -17
-                      scaleX: 0.25
-                      scaleY: 0.27
+                      y: -15
+                      scaleX: 0.1
+                      scaleY: 0.1
                       rotation: 0
                   - type: ImageRenderer
                     properties:
-                      imagePath: assets/images/ImageTryIcons/水分管理推荐.png
+                      imagePath: assets/images/ImageTryIcons/水源.png
                 id: Logo
       - behaviours:
           - type: Transform
             properties:
               x: 150
-              y: -250
-              scaleX: 1
-              scaleY: 1
+              y: -240
+              scaleX: 0.75
+              scaleY: 0.75
               rotation: 0
         id: MaterialShow
         children:
@@ -395,7 +405,7 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 125
+                      x: 200
                       y: 148
                       scaleX: 1
                       scaleY: 1
@@ -408,7 +418,7 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 160
+                      x: 200
                       y: 480
                       scaleX: 1
                       scaleY: 1
@@ -421,7 +431,7 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 125
+                      x: 200
                       y: 810
                       scaleX: 1
                       scaleY: 1
@@ -451,10 +461,10 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 300
+              x: 330
               y: -250
-              scaleX: 1
-              scaleY: 1
+              scaleX: 0.75
+              scaleY: 0.75
               rotation: 0
         id: Time
         children:
@@ -508,9 +518,9 @@ children:
           - type: Transform
             properties:
               x: 200
-              y: -250
-              scaleX: 1
-              scaleY: 1
+              y: -240
+              scaleX: 0.75
+              scaleY: 0.75
               rotation: 0
         id: AddSpeedButton
         children:
@@ -556,7 +566,7 @@ children:
           - behaviours:
               - type: Transform
                 properties:
-                  x: 180
+                  x: 200
                   y: 60
                   scaleX: 1
                   scaleY: 1
@@ -620,6 +630,95 @@ children:
                   imageDown: assets/images/UI/close2.png
                   closeName: RoomSecondUi
             id: closeBtn
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -100
+              y: -50
+              scaleX: 0.4
+              scaleY: 0.4
+              rotation: 0
+        id: DestroyOnlyUi
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/destroyOnly_UI.png
+            id: DestroyOnlyBg
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/destroy_Btn.png
+              - type: DestroyOnlyUi
+            id: DestroyBtnOnly
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 350
+                  y: -50
+                  scaleX: 0.2
+                  scaleY: 0.2
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/close.png
+              - type: UiClose
+                properties:
+                  imageUp: assets/images/UI/close.png
+                  imageDown: assets/images/UI/close2.png
+                  closeName: DestroyOnlyUi
+            id: closeBtn
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -500
+              y: -300
+              scaleX: 1.5
+              scaleY: 1.5
+              rotation: 0
+        id: NightTime
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/night.png
+            id: NightBG
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 260
+                  y: 170
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: TextRenderer
+                properties:
+                  text: 夜幕降临
+                  fontSize: 40
+                  font: 微软雅黑
+                  fontColor: '#ffffff'
+            id: TextForNight
   - behaviours:
       - type: Transform
         properties:
@@ -649,16 +748,3 @@ children:
           coefficient: 0.2
           radix: 0.2
     id: AttributeController
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: PersonSet
-        properties:
-          startPostionX: -400
-          startPositonY: -175
-    id: PersonSet

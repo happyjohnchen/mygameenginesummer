@@ -67,6 +67,9 @@ export class AttributeSystem extends Behaviour {
             this.consumeForFoodWater();
             this.lastTime = this.nowTime;  
         }
+        if(this.game.water==0||this.game.energy==0||this.game.food==0){
+                this.endGame();
+        }
     }
 
 
@@ -96,11 +99,6 @@ export class AttributeSystem extends Behaviour {
         let newNumber = addValue+primeValue;
         newNumber = newNumber>this.maxValue?this.maxValue:newNumber;
         newNumber = newNumber<this.minValue?this.minValue:newNumber;
-        if(newNumber==0)
-        {
-            console.log("数值为0，游戏结束")
-            this.game.time.setSpeed(0);
-        }
         return newNumber;
     }
 
@@ -200,5 +198,9 @@ export class AttributeSystem extends Behaviour {
             case RoomType.FoodFactory:
                 return foodForPeople[peopletype];
         }
+   }
+
+   endGame(){
+        this.game.time.setSpeed(0);
    }
 }

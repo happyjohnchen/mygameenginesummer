@@ -1,0 +1,77 @@
+behaviours:
+  - type: Transform
+    properties:
+      x: 0
+      y: 0
+      scaleX: 1
+      scaleY: 1
+      rotation: 0
+id: RootGameObject
+children:
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+    id: Background
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -150
+          y: 50
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: RoundedRectRenderer
+        properties:
+          width: 300
+          height: 80
+          cornerRadius: 30
+          color: custom
+          customColor: '#805200'
+      - type: UiBackToMenu
+    id: ReturnButton
+    children:
+      - behaviours:
+          - type: Transform
+            properties:
+              x: 20
+              y: 15
+              scaleX: 1
+              scaleY: 1
+              rotation: 0
+          - type: TextRenderer
+            properties:
+              text: 返 回 主 菜 单
+              fontSize: 40
+              font: 微软雅黑
+              fontColor: '#ffffff'
+        id: NewGameObject
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -200
+          y: -150
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: TextRenderer
+        properties:
+          text: 游 戏 结 束
+          fontSize: 80
+          font: 微软雅黑
+          fontColor: '#ffffff'
+    id: NewGameObject
