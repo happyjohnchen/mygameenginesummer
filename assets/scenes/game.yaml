@@ -721,9 +721,6 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: RoomSet
-        properties:
-          roomtype: 0
     id: tileMap
   - behaviours:
       - type: Transform
