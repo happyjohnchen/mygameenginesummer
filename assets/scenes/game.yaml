@@ -531,6 +531,76 @@ children:
               - type: ShowSpeed
               - type: ClickChangeSpeed
             id: SpeedShow
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -200
+              y: -50
+              scaleX: 0.4
+              scaleY: 0.4
+              rotation: 0
+        id: RoomSecondUi
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/update_destroy_UI.png
+            id: BackGround
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 180
+                  y: 60
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/destroy_compensate.png
+            id: DestroyComponent
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 20
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/destroy_Btn.png
+            id: DestroyBtn
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 480
+                  y: 60
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/update_spend.png
+            id: UpdateComponent
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 720
+                  y: 2
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/update_Btn.png
+            id: UpdateBtn
   - behaviours:
       - type: Transform
         properties:
