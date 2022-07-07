@@ -171,7 +171,7 @@ export class CameraMouseController extends Behaviour {
                 }
                 break;
             case 2:
-                if (this.cameraTransform.x + 0.5 * this.canvas.width * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).x - this.backgroundImageRectangle.width <= 0) {
+                if (this.cameraTransform.x + 0.5 * this.canvas.width * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).x - this.backgroundImageRectangle.width * this.myBackGround.getBehaviour(Transform).scaleX <= 0) {
                     this.cameraTransform.x = this.cameraTransform.x + this.speed;
                 }
 
@@ -181,7 +181,7 @@ export class CameraMouseController extends Behaviour {
                     this.cameraTransform.y = this.cameraTransform.y - this.speed;
                 break;
             case 4:
-                if (this.cameraTransform.y + 0.5 * this.canvas.height * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).y - this.backgroundImageRectangle.height <= 0) {
+                if (this.cameraTransform.y + 0.5 * this.canvas.height * this.cameraTransform.scaleX - this.myBackGround.getBehaviour(Transform).y - this.backgroundImageRectangle.height * this.myBackGround.getBehaviour(Transform).scaleY <= 0) {
                     this.cameraTransform.y = this.cameraTransform.y + this.speed;
                 }
                 break;
@@ -208,5 +208,6 @@ export class CameraMouseController extends Behaviour {
             this.myBackGround.addBehaviour(imageRenderer);
         }
         this.backgroundImageRectangle = this.myBackGround.getBehaviour(ImageRenderer).getBounds();
+        console.log(this.backgroundImageRectangle)
     }
 }
