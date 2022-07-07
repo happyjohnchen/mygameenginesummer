@@ -395,7 +395,7 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 125
+                      x: 200
                       y: 148
                       scaleX: 1
                       scaleY: 1
@@ -408,7 +408,7 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 160
+                      x: 200
                       y: 480
                       scaleX: 1
                       scaleY: 1
@@ -421,7 +421,7 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 125
+                      x: 200
                       y: 810
                       scaleX: 1
                       scaleY: 1
@@ -556,7 +556,7 @@ children:
           - behaviours:
               - type: Transform
                 properties:
-                  x: 180
+                  x: 200
                   y: 60
                   scaleX: 1
                   scaleY: 1
@@ -619,6 +619,58 @@ children:
                   imageUp: assets/images/UI/close.png
                   imageDown: assets/images/UI/close2.png
                   closeName: RoomSecondUi
+            id: closeBtn
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -100
+              y: -50
+              scaleX: 0.4
+              scaleY: 0.4
+              rotation: 0
+        id: DestroyOnlyUi
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/destroyOnly_UI.png
+            id: DestroyOnlyBg
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/destroy_Btn.png
+              - type: DestroyOnlyUi
+            id: DestroyBtnOnly
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 350
+                  y: -50
+                  scaleX: 0.2
+                  scaleY: 0.2
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/close.png
+              - type: UiClose
+                properties:
+                  imageUp: assets/images/UI/close.png
+                  imageDown: assets/images/UI/close2.png
+                  closeName: DestroyOnlyUi
             id: closeBtn
   - behaviours:
       - type: Transform
