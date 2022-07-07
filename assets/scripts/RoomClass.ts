@@ -152,8 +152,8 @@ export class RoomClass extends Behaviour {
 
     setPeopleInRoom(){ //刷新人物位置 播放相应动画
         //等海欣合完就放出来
-        // this.leftPositionX = this.gameObject.getBehaviour(Room).getBorder(this.roomId).x;
-        // this.bottomPositionY = this.gameObject.getBehaviour(Room).getBorder(this.roomId).y;
+        this.leftPositionX = this.gameObject.getBehaviour(Room).getBorder(this.roomId).x;
+        this.bottomPositionY = this.gameObject.getBehaviour(Room).getBorder(this.roomId).y;
         for(var p=0;p<this.peopleInRoom.length;p++){
             //这里赋值
             const person= this.gamecontroller.getPersonById(this.peopleInRoom[p]);//拿到人

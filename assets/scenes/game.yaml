@@ -105,19 +105,15 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 370
-              y: 200
-              scaleX: 1
-              scaleY: 1
+              x: 435
+              y: 220
+              scaleX: 0.15
+              scaleY: 0.15
               rotation: 0
-          - type: RoundedRectRenderer
-            properties:
-              width: 50
-              height: 50
-              cornerRadius: 20
-              color: custom
-              customColor: '#ffffff'
           - type: UiSaveArchive
+          - type: ImageRenderer
+            properties:
+              imagePath: assets/images/UI/save.png
         id: ButtonSaveArchive
         children:
           - behaviours:
@@ -324,7 +320,7 @@ children:
           - type: Transform
             properties:
               x: 200
-              y: -240
+              y: -241
               scaleX: 0.75
               scaleY: 0.75
               rotation: 0
@@ -335,8 +331,8 @@ children:
                 properties:
                   x: 10
                   y: 0
-                  scaleX: 1
-                  scaleY: 1
+                  scaleX: 1.1
+                  scaleY: 1.1
                   rotation: 0
               - type: ShowAttribute
               - type: TextRenderer
@@ -350,7 +346,7 @@ children:
               - type: Transform
                 properties:
                   x: -80
-                  y: -20
+                  y: -21
                   scaleX: 0.1
                   scaleY: 0.1
                   rotation: 0
@@ -361,7 +357,7 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 100
+              x: 150
               y: 0
               scaleX: 1
               scaleY: 1
@@ -372,23 +368,20 @@ children:
               - type: Transform
                 properties:
                   x: 200
-                  y: 200
-                  scaleX: 1
-                  scaleY: 1
+                  y: 210
+                  scaleX: 0.2
+                  scaleY: 0.2
                   rotation: 0
-              - type: ShapeRectRenderer
-                properties:
-                  width: 50
-                  height: 50
-                  color: red
-                  customColor: '#ffffff'
               - type: UiUnfold
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/Hammer.png
             id: BuildButton
           - behaviours:
               - type: Transform
                 properties:
-                  x: 150
-                  y: -50
+                  x: 160
+                  y: -45
                   scaleX: 0.2
                   scaleY: 0.2
                   rotation: 0
@@ -493,10 +486,10 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 290
-              y: -250
-              scaleX: 1
-              scaleY: 1
+              x: 300
+              y: -245
+              scaleX: 0.15
+              scaleY: 0.15
               rotation: 0
         id: PauseButton
         children:
@@ -508,23 +501,20 @@ children:
                   scaleX: 1
                   scaleY: 1
                   rotation: 0
-              - type: ShapeRectRenderer
-                properties:
-                  width: 40
-                  height: 40
-                  color: red
-                  customColor: '#ffffff'
               - type: ChangeTimeSpeed
                 properties:
                   thisSpeed: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/pause.png
             id: pause
       - behaviours:
           - type: Transform
             properties:
-              x: 250
-              y: -242
-              scaleX: 0.75
-              scaleY: 0.75
+              x: 260
+              y: -245
+              scaleX: 0.9
+              scaleY: 0.89
               rotation: 0
         id: AddSpeedButton
         children:
