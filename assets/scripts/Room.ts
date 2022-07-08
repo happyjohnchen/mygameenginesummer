@@ -4,6 +4,7 @@ import { Behaviour } from "../../src/engine/Behaviour";
 import { Transform } from "../../src/engine/Transform";
 import { boolean } from "../../src/engine/validators/boolean";
 import { number } from "../../src/engine/validators/number";
+import { AttributeSystem } from "./AttributeSystem";
 import { findKey } from "./findEnumKey";
 import { GameController } from "./GameController";
 import { GameSet } from "./GameSet";
@@ -198,6 +199,7 @@ export class Room extends Behaviour {
 
     }
     create() {
+       
         console.log("creat")
         const tileMapGameObj = getGameObjectById("tileMap")
         const roomSet = tileMapGameObj.getBehaviour(RoomSet)
@@ -217,6 +219,7 @@ export class Room extends Behaviour {
         console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
         this.canCreate = false;
         roomSet.buildRoomType = RoomType.noType;
+        getGameObjectById("AttributeController").getBehaviour(AttributeSystem).consumeForMaterial(200)
     }
     //游戏开始时会执行一次
     onPlayStart() {
@@ -226,7 +229,7 @@ export class Room extends Behaviour {
             const roomSet = tileMapGameObj.getBehaviour(RoomSet)
             console.log(roomSet.canChooseRoom)
 
-            if (roomSet.canChooseRoom) {
+            if (roomSet.canChooseRoom) {//room add person
                 if (this.roomModule.level > 0) {
                     let personId = roomSet.personId
                     const workRoom=this.checkRoomWhichHasRoomClass()
@@ -239,13 +242,20 @@ export class Room extends Behaviour {
                 roomSet.canChooseRoom = false;
             }
 
-            else if (roomSet.canBuildRoom) {
-                console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:")
-                this.canCreate = true;
-                this.roomModule.roomType = roomSet.getBuildRoom();
-                if (this.roomModule.level == 0 && this.roomModule.roomType != RoomType.noType && this.roomModule.roomType != RoomType.Entrance)
-                    this.create();
-                roomSet.setRoomNotCanchoose();
+            else if (roomSet.canBuildRoom) {//room build type
+                const confirmUI= getGameObjectById("IsCreateUi");
+                confirmUI.active=true
+                if(roomSet.confirmYesBtn){
+                    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:")
+                    this.canCreate = true;
+                    this.roomModule.roomType = roomSet.getBuildRoom();
+                    if (this.roomModule.level == 0 && this.roomModule.roomType != RoomType.noType && this.roomModule.roomType != RoomType.Entrance)           
+                        this.create();                     
+                    roomSet.setRoomNotCanchoose();
+                    roomSet.confirmYesBtn=false;
+                    confirmUI.active=false;
+                }
+             
             }
 
             else { this.onlyClickRoom(this.roomModule.level) }

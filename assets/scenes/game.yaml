@@ -811,6 +811,11 @@ children:
               - type: ImageRenderer
                 properties:
                   imagePath: assets/images/UI/no.png
+              - type: UiClose
+                properties:
+                  imageUp: ''
+                  imageDown: ''
+                  closeName: IsCreateUi
             id: NoBtn
       - behaviours:
           - type: Transform

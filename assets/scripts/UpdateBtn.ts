@@ -1,5 +1,6 @@
-import { getGameObjectById } from "../../src/engine";
+import { GameObject, getGameObjectById } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
+import { AttributeSystem } from "./AttributeSystem";
 import { GameController } from "./GameController";
 import { Room } from "./Room";
 import { RoomSet } from "./RoomSet";
@@ -8,10 +9,10 @@ export class UpdateBtn extends Behaviour {
 
     //在此定义脚本中的属性
 
-
+    attibuteSystem:GameObject
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
-
+        this.attibuteSystem = getGameObjectById("AttributeController");
     }
 
     //游戏运行模式开始时会执行一次
@@ -28,8 +29,8 @@ export class UpdateBtn extends Behaviour {
         //这里写调用房间升级
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
 let roomid=getGameObjectById("tileMap").getBehaviour(RoomSet).updateAndDestroyBtnID
-        if(roomid>=0){
-          let room=  gameController.getRoomById(roomid)
+        if(roomid>=0&&this.attibuteSystem.getBehaviour(AttributeSystem).consumeForMaterial(200)==true){
+          let room=gameController.getRoomById(roomid)
           room.getBehaviour(Room).upgradeRoom(room);
           roomid=-1
         }

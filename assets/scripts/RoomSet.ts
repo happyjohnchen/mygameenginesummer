@@ -71,6 +71,7 @@ export class RoomSet extends Behaviour {
     personId
     roomSetID
     updateAndDestroyBtnID
+    confirmYesBtn
     //游戏开始时会执行一次
     onStart(): void {
 

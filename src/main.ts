@@ -77,6 +77,7 @@ registerBehaviourClass(CameraMouseController);
 registerBehaviourClass(ChangeTimeSpeed);
 registerBehaviourClass(BehaviourDemo);
 registerBehaviourClass(ClickChangeSpeed);
+registerBehaviourClass(BehaviourDemo);
 registerBehaviourClass(DestroyBtn);
 registerBehaviourClass(DestroyOnlyUi);
 registerBehaviourClass(GameController);

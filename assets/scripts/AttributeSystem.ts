@@ -171,7 +171,16 @@ export class AttributeSystem extends Behaviour {
             return false;
         }
    }
-
+   checkCanConsume(consume:number){//判断是否可以消耗 不可以则返回false 可以返回true
+    if(consume<=this.game.material){
+        return true;
+    }
+        else{
+            //触发提醒ui
+            getGameObjectById("ConsumeNot").active = true;
+            return false;
+        }
+   }
    getPeopleAttribute(peopletype:PersonRace,roomType:RoomType){ //根据人种得到对应属性值
         const waterForPeople = {  //0123分别对应 人 巨人 矮人 精灵
             0:2,
