@@ -23,7 +23,7 @@ export class PersonSet extends Behaviour {
     gameController: GameController
     private nowTime: number
     lastTimeCreate = 0
-    private createPeriod = 1000
+    private createPeriod = 3600
     //private createPeriod = 15 * 60 * 60
     first = true;
 
@@ -53,11 +53,17 @@ export class PersonSet extends Behaviour {
     //平均每16ms执行一次
     onTick(duringTime: number) {
         this.nowTime = getGameObjectById('TimeController').getBehaviour(TimeControllerSystem).getTotalGameSecondTime();
-        if (this.nowTime - this.lastTimeCreate >= this.createPeriod) {
-            this.lastTimeCreate = this.nowTime;
-            this.newPerson();
-            //console.log("OnTick" + this.newPerson);
+        if(!this.first){
+            if (this.nowTime - this.lastTimeCreate >= this.createPeriod) {
+                this.lastTimeCreate = this.nowTime;
+                this.newPerson();
+                //console.log("OnTick" + this.newPerson);
+            }
         }
+        else{
+            this.newPerson();
+        }
+       
     }
 
     //删除Behaviour时会执行一次
@@ -114,10 +120,8 @@ export class PersonSet extends Behaviour {
         newPerson.addBehaviour(transform);
         this.gameController.addPerson(newPerson);
         console.log(newPerson.getBehaviour(AnimationRenderer))
-        personClass.setAnimation(RoomType.WaterFactory)
-        console.log("PersonSet!!!")
-        console.log(newPerson.getBehaviour(PersonClass))
-        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        personClass.setAnimation(RoomType.noType);
+        this.first =false;
 
 
     }

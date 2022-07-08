@@ -1,6 +1,7 @@
 import { GameObject, getGameObjectById } from "../../src/engine";
 import { Behaviour } from "../../src/engine/Behaviour";
 import { AttributeSystem } from "./AttributeSystem";
+import { GameController } from "./GameController";
 import { RoomModule, RoomType } from "./modules/RoomModule";
 import { RoomSet } from "./RoomSet";
 export class UiCreateRoom extends Behaviour {

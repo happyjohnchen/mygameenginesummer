@@ -162,11 +162,12 @@ export class RoomClass extends Behaviour {
             const person= this.gamecontroller.getPersonById(this.peopleInRoom[p]);//拿到人
             console.log(person);
             const xPos = this.leftPositionX + this.getToLeftPositionX(this.roomType,p);
-            const yPos = this.bottomPositionY + this.getToBottomPositionY();
+            const yPos = this.bottomPositionY + this.getToBottomPositionY(this.roomType,p);
             person.getBehaviour(PersonClass).setPostion(xPos,yPos);
             person.getBehaviour(PersonClass).personModule.id = this.roomId;
             //动画 等xq测试完就放出来
-           // person.getBehaviour(PersonClass).setAnimation(this.roomType);
+           //person.getBehaviour(PersonClass).setAnimation(this.roomType); 
+           person.getBehaviour(PersonClass).setAnimation(RoomType.WaterFactory); 
             
         } 
     }
@@ -175,37 +176,66 @@ export class RoomClass extends Behaviour {
         switch(roomType){
             case RoomType.WaterFactory:
                 const waterPos={
-                    0: 0,
-                    1: 50,
-                    2: 100,
-                    3: 150,
-                    4: 200
+                    0: 35,
+                    1: 60,
+                    2: 180,
+                    3: 215,
+                    4: 240
                 }
                 return waterPos[posNumber];
             case RoomType.EnergyFactory:
                 const energyPos={
-                    0: 0,
-                    1: 50,
-                    2: 100,
-                    3: 150,
-                    4: 200
+                    0: 20,
+                    1: 70,
+                    2: 120,
+                    3: 170,
+                    4: 220
                 }
                 return energyPos[posNumber];
             case RoomType.FoodFactory:
                 const foodPos={
-                    0: 0,
-                    1: 50,
-                    2: 100,
-                    3: 150,
-                    4: 200
+                    0: 20,
+                    1: 70,
+                    2: 120,
+                    3: 170,
+                    4: 220
                 }
                 return foodPos[posNumber];
         }
            
 
     }
-    getToBottomPositionY(){  //这里更改距离地面的坐标
-        return 15;
+    getToBottomPositionY(roomType:RoomType,posNumber:number){  //这里更改距离地面的坐标
+        switch(roomType){
+            case RoomType.WaterFactory:
+                const waterPos={
+                    0: 3,
+                    1: -1,
+                    2: -1,
+                    3: 16,
+                    4: 16
+                }
+                return waterPos[posNumber];
+            case RoomType.EnergyFactory:
+                const energyPos={
+                    0: 16,
+                    1: 16,
+                    2: 16,
+                    3: 16,
+                    4: 16
+                }
+                return energyPos[posNumber];
+            case RoomType.FoodFactory:
+                const foodPos={
+                    0: 16,
+                    1: 16,
+                    2: 16,
+                    3: 12,
+                    4: 12
+                }
+                return foodPos[posNumber];
+        }
+    
     }
 
     //属性相关的方法

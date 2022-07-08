@@ -212,5 +212,6 @@ export class AttributeSystem extends Behaviour {
 
    endGame(){
         this.game.time.setSpeed(0);
+        this.engine.loadScene('assets/scenes/end.yaml');
    }
 }
