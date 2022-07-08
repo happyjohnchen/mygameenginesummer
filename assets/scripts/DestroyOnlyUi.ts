@@ -29,6 +29,7 @@ export class DestroyOnlyUi extends Behaviour {
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
         let roomid=getGameObjectById("tileMap").getBehaviour(RoomSet).updateAndDestroyBtnID
                 if(roomid>=0){
+                    
                   let room=  gameController.getRoomById(roomid)
                   room.getBehaviour(Room).destroyRoom( roomid)
                   roomid=-1
