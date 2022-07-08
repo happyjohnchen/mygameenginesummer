@@ -21,75 +21,38 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: 0
-          y: 0
+          x: -480
+          y: -270
           scaleX: 1
           scaleY: 1
           rotation: 0
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/images/Menu/MenuBackground.png
     id: Background
   - behaviours:
       - type: Transform
         properties:
-          x: -100
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: RoundedRectRenderer
-        properties:
-          width: 200
-          height: 60
-          cornerRadius: 20
-          color: custom
-          customColor: '#ffffff'
-      - type: ButtonNewGame
-    id: NewGameButton
-    children:
-      - behaviours:
-          - type: Transform
-            properties:
-              x: 40
-              y: 5
-              scaleX: 1
-              scaleY: 1
-              rotation: 0
-          - type: TextRenderer
-            properties:
-              text: 新游戏
-              fontSize: 40
-              font: 微软雅黑
-              fontColor: '#000000'
-        id: NewGameText
-  - behaviours:
-      - type: Transform
-        properties:
-          x: -100
+          x: -290
           y: 100
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: RoundedRectRenderer
+      - type: ButtonNewGame
+      - type: ImageRenderer
         properties:
-          width: 200
-          height: 60
-          cornerRadius: 20
-          color: custom
-          customColor: '#ffffff'
+          imagePath: assets/images/Menu/StartGame.png
+    id: NewGameButton
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 150
+          y: 100
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
       - type: ButtonReadArchive
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/images/Menu/ReadArchive.png
     id: ReadArchiveButton
-    children:
-      - behaviours:
-          - type: Transform
-            properties:
-              x: 20
-              y: 5
-              scaleX: 1
-              scaleY: 1
-              rotation: 0
-          - type: TextRenderer
-            properties:
-              text: 读取存档
-              fontSize: 40
-              font: 微软雅黑
-              fontColor: '#000000'
-        id: ReadArchiveText

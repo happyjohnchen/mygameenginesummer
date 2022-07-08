@@ -1,4 +1,5 @@
 import {Behaviour} from "../../src/engine/Behaviour";
+import {ImageRenderer} from "../../src/behaviours/ImageRenderer";
 
 export class ButtonNewGame extends Behaviour {
 
@@ -13,6 +14,9 @@ export class ButtonNewGame extends Behaviour {
     //游戏运行模式开始时会执行一次
     onPlayStart() {
         this.gameObject.onClick = () => {
+            this.gameObject.getBehaviour(ImageRenderer).imagePath='assets/images/Menu/StartGameChosen.png'
+        }
+        this.gameObject.onClickFinish = () => {
             console.log("新游戏");
             //开始新游戏
             this.engine.loadScene('assets/scenes/game.yaml', '');
