@@ -134,7 +134,7 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 435
+              x: 390
               y: 220
               scaleX: 0.15
               scaleY: 0.15
@@ -360,8 +360,8 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 200
-              y: -241
+              x: 214
+              y: -247
               scaleX: 0.75
               scaleY: 0.75
               rotation: 0
@@ -370,8 +370,8 @@ children:
           - behaviours:
               - type: Transform
                 properties:
-                  x: 10
-                  y: 0
+                  x: -10
+                  y: 0.5
                   scaleX: 1.1
                   scaleY: 1.1
                   rotation: 0
@@ -381,18 +381,18 @@ children:
                   text: '00'
                   fontSize: 25
                   font: 微软雅黑
-                  fontColor: '#ffffff'
+                  fontColor: '#ffa800'
                   stroke: false
-                  strokeColor: ''
+                  strokeColor: '#ffffff'
                   strokeWidth: 0
             id: material
           - behaviours:
               - type: Transform
                 properties:
-                  x: -80
-                  y: -21
-                  scaleX: 0.1
-                  scaleY: 0.1
+                  x: -85
+                  y: -12
+                  scaleX: 0.08
+                  scaleY: 0.08
                   rotation: 0
               - type: ImageRenderer
                 properties:
@@ -401,7 +401,7 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 150
+              x: 90
               y: 0
               scaleX: 1
               scaleY: 1
@@ -485,7 +485,7 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: -20
+                      x: 640
                       y: -60
                       scaleX: 0.4
                       scaleY: 0.4
@@ -502,8 +502,8 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 350
-              y: -242
+              x: 359
+              y: -245
               scaleX: 0.75
               scaleY: 0.75
               rotation: 0
@@ -522,7 +522,7 @@ children:
                   text: 第0天 0:00
                   fontSize: 25
                   font: 微软雅黑
-                  fontColor: '#ffffff'
+                  fontColor: '#ffa800'
                   stroke: false
                   strokeColor: ''
                   strokeWidth: 0
@@ -533,10 +533,10 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 300
-              y: -245
+              x: 269
+              y: -247
               scaleX: 0.15
-              scaleY: 0.15
+              scaleY: 0.12
               rotation: 0
         id: PauseButton
         children:
@@ -558,8 +558,8 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: 260
-              y: -245
+              x: 309
+              y: -248
               scaleX: 0.9
               scaleY: 0.89
               rotation: 0
@@ -578,7 +578,7 @@ children:
                   text: x1
                   fontSize: 25
                   font: 微软雅黑
-                  fontColor: '#ffffff'
+                  fontColor: '#ffa800'
                   stroke: false
                   strokeColor: ''
                   strokeWidth: 0
@@ -898,7 +898,7 @@ children:
       - behaviours:
           - type: Transform
             properties:
-              x: -480
+              x: -5000
               y: -270
               scaleX: 1
               scaleY: 1
