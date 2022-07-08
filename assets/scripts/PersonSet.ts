@@ -120,10 +120,7 @@ export class PersonSet extends Behaviour {
         newPerson.addBehaviour(transform);
         this.gameController.addPerson(newPerson);
         console.log(newPerson.getBehaviour(AnimationRenderer))
-        personClass.setAnimation(RoomType.WaterFactory)
-        // console.log("PersonSet!!!")
-        // console.log(newPerson.getBehaviour(PersonClass))
-        // console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++")
+        personClass.setAnimation(RoomType.noType);
         this.first =false;
 
 
