@@ -66,7 +66,7 @@ export class Room extends Behaviour {
             this.clearRoomValue(thisRoomGameObject)
         }
         else {
-            //加有人不能摧毁销毁
+           getGameObjectById("Full").active=true
         }
     }
     getBorder(roomId: number) {//返回房间x,y值
@@ -191,17 +191,21 @@ export class Room extends Behaviour {
         const originRoom = person.getBehaviour(PersonClass).personModule.room
         if (originRoom == this.roomModule.roomId) return;
         const isFull = this.gameObject.getBehaviour(RoomClass).addPersonInRoom(personId)
-
+        console.log(this.gameObject)
+        console.log(isFull)
         if (!isFull) {
             getGameObjectById("PersonNot").active = true;
         }
         else {
             if (originRoom != 0) {
+                console.log("111111111111111111111111")
+                
                 let room = getGameObjectById("GameController").getBehaviour(GameController).getRoomById(originRoom)
                 const hasBehaviourRoom = room.getBehaviour(Room).checkRoomWhichHasRoomClass()
                 hasBehaviourRoom.getBehaviour(RoomClass).removePersonInRoom(personId)
                 console.log("add in 1")
             }
+            
             person.getBehaviour(PersonClass).personModule.room = this.roomModule.roomId;
         }
 
