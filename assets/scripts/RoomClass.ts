@@ -205,7 +205,7 @@ export class RoomClass extends Behaviour {
 
     }
     getToBottomPositionY(){  //这里更改距离地面的坐标
-        return 5;
+        return 15;
     }
 
     //属性相关的方法
