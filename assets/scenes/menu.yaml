@@ -28,7 +28,7 @@ children:
           rotation: 0
       - type: ImageRenderer
         properties:
-          imagePath: assets/images/Menu/MenuBackground.png
+          imagePath: assets/images/Menu/开始界面.png
     id: Background
   - behaviours:
       - type: Transform
@@ -56,3 +56,18 @@ children:
         properties:
           imagePath: assets/images/Menu/ReadArchive.png
     id: ReadArchiveButton
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -64
+          y: -204
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/images/Menu/玩法介绍按钮.png
+      - type: loadScene
+        properties:
+          scenes: assets/scenes/introduce.yaml
+    id: introduceBtn

@@ -1,0 +1,47 @@
+behaviours:
+  - type: Transform
+    properties:
+      x: 0
+      y: 0
+      scaleX: 1
+      scaleY: 1
+      rotation: 0
+id: RootGameObject
+children:
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Camera
+    id: camera
+  - behaviours:
+      - type: Transform
+        properties:
+          x: -480
+          y: -270
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/images/Menu/玩法介绍.png
+    id: Background
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 235
+          y: 115
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/images/Menu/返回值菜单.png
+      - type: loadScene
+        properties:
+          scenes: assets/scenes/menu.yaml
+    id: introduceBtn
