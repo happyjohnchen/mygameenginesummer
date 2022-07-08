@@ -25,7 +25,7 @@ export class AttributeSystem extends Behaviour {
      private material= 0;
 
      @number()
-     consumePerTime = 1;//一次消耗多少
+     consumePerTime = 1.1;//一次消耗多少
      private lastTime = 0;//经过的时间
      private nowTime = 0;
      @number()
@@ -125,9 +125,9 @@ export class AttributeSystem extends Behaviour {
         3: 98
     }
     const materialTable = {
-        1:10,
-        2:25,
-        3:40
+        1:15,
+        2:40,
+        3:70
     }
     switch(type){
         case("energy"):
