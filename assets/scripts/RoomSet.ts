@@ -80,9 +80,12 @@ export class RoomSet extends Behaviour {
         this.roomSetID = 0
         console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
 
-        //getGameObjectById("GameController").getBehaviour(GameController).game.rooms.
+       const hadRoom= getGameObjectById("GameController").getBehaviour(GameController).game.rooms
+       if(hadRoom.length==0){
         for (let j = 3; j < 6; j++) { this.createRoom(j, 0, RoomStatus.canBuild) }
         for (let j = 1; j < 6; j++) { this.createRoom(j, 1, RoomStatus.canBuild) }
+       }
+       
 
     }
     //每次屏幕刷新执行
@@ -117,6 +120,7 @@ export class RoomSet extends Behaviour {
         RModule.roomId = this.roomSetID
         RModule.roomType = RoomType.noType
         RModule.roomStatus = RoomStatus.canBuild;
+        RModule.hasRoomClass=false
         room.roomModule = RModule
         roomChild.addBehaviour(room);
 
@@ -225,7 +229,7 @@ export class RoomSet extends Behaviour {
             neighborRoom.upgradeRoom(neighborGameObject)
             clickGameobject.getBehaviour(RoomClass).setRoomLevel(2);
             this.removeRoomClass(neighborGameObject)//右边的房间去掉roomclass的behaviour
-
+neighborRoomData.hasRoomClass=false;
             clickGameobject.getBehaviour(ImageRenderer).imagePath = setRoomImage(clickRoomData.roomType, clickRoomData.level, true)
             neighborGameObject.getBehaviour(ImageRenderer).imagePath = setRoomImage(neighborRoomData.roomType, neighborRoomData.level, false)
 

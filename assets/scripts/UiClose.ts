@@ -2,6 +2,7 @@ import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
 import { getGameObjectById } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
 import { string } from "../../src/engine/validators/string";
+import { RoomSet } from "./RoomSet";
 
 export class UiClose extends Behaviour {
 
@@ -30,6 +31,7 @@ export class UiClose extends Behaviour {
                 if(e.button ==0){
                     this.gameObject.getBehaviour(ImageRenderer).imagePath = this.imageUp;  
                     getGameObjectById(this.closeName).active = false; 
+                    getGameObjectById("tileMap").getBehaviour(RoomSet).setRoomNotCanchoose();
                 }
          
             }

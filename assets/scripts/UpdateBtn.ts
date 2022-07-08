@@ -32,6 +32,7 @@ let roomid=getGameObjectById("tileMap").getBehaviour(RoomSet).updateAndDestroyBt
         if(roomid>=0&&this.attibuteSystem.getBehaviour(AttributeSystem).consumeForMaterial(200)==true){
           let room=gameController.getRoomById(roomid)
           room.getBehaviour(Room).upgradeRoom(room);
+          console.log(gameController.game.rooms)
           roomid=-1
         }
         console.log("升级");

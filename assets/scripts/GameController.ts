@@ -10,12 +10,13 @@ import { Transform } from "../../src/engine/Transform";
 import { Room } from "./Room";
 import { RoomSet, setRoomImage } from "./RoomSet";
 import { ImageRenderer } from "../../src/behaviours/ImageRenderer";
-import {number} from "../../src/engine/validators/number";
-import {string} from "../../src/engine/validators/string";
+import { number } from "../../src/engine/validators/number";
+import { string } from "../../src/engine/validators/string";
 import { PersonClass } from "./PersonClass";
+import { RoomClass } from "./RoomClass";
 
 export class GameController extends Behaviour {
-    
+
     game: GameSet = new GameSet();//游戏资源
     private people: GameObject;//此GameObject持有所有人
     private rooms: GameObject;//此GameObject持有所有房间
@@ -26,7 +27,7 @@ export class GameController extends Behaviour {
     onPlayStart() {
         //获取时间系统
         this.game.time = getGameObjectById("TimeController").getBehaviour(TimeControllerSystem);
-        console.log("!!!!!!!!!" +this.game.time)
+        console.log("!!!!!!!!!" + this.game.time)
         //获取人和房间对象
         this.people = getGameObjectById("People");
         this.rooms = getGameObjectById("Rooms");
@@ -83,14 +84,19 @@ export class GameController extends Behaviour {
         }
         //设定房间列表
         for (const roomModule of gModule.rooms) {
-          
-           /* const newRoom = new GameObject();  
-            this.rooms.addChild(newRoom);//添加到游戏场景
-            this.game.rooms.push(newRoom);//添加到game
-            newRoom.addBehaviour(new Transform());*/
-            this.createRoomFromData(roomModule)
 
+            /* const newRoom = new GameObject();  
+             this.rooms.addChild(newRoom);//添加到游戏场景
+             this.game.rooms.push(newRoom);//添加到game
+             newRoom.addBehaviour(new Transform());*/
+            this.createRoomFromData(roomModule)
         }
+        for(const room of this.game.rooms){
+            if(room.getBehaviour(Room).roomModule.hasRoomClass){
+                room.getBehaviour(RoomClass).setPeopleInRoom();
+            }
+        }
+   
         //设定资源数值
         this.game.water = gModule.water;
         this.game.energy = gModule.energy;
@@ -125,6 +131,8 @@ export class GameController extends Behaviour {
         const childTransform = new Transform();
         childTransform.x = -384 + roomModule.position.x * 149;
         childTransform.y = -166 + roomModule.position.y * 100;
+        childTransform.scaleX = 0.083;
+        childTransform.scaleY = 0.083;
         saveRoom.addBehaviour(childTransform);
         const room = new Room();
         room.roomModule = roomModule
@@ -132,6 +140,23 @@ export class GameController extends Behaviour {
         const backgroundImage = new ImageRenderer()
         backgroundImage.imagePath = setRoomImage(roomModule.roomType, roomModule.level)
         saveRoom.addBehaviour(backgroundImage);
+        const roomclassBehaviour = new RoomClass();
+        roomclassBehaviour.roomId = roomModule.roomId
+        roomclassBehaviour.roomLevel = roomModule.level
+        roomclassBehaviour.peopleInRoom = roomModule.people
+        if (roomModule.hasRoomClass) {
+            saveRoom.addBehaviour(roomclassBehaviour)
+
+        }
+
+        let sonChild = new GameObject();
+        saveRoom.addChild(sonChild)
+        const sonTransform = new Transform();
+        const sonImage = new ImageRenderer()
+        sonImage.imagePath = 'assets/images/buildSystem/Nochose.png'
+
+        sonChild.addBehaviour(sonTransform)
+        sonChild.addBehaviour(sonImage);
     }
     //保存存档
     saveArchive() {
@@ -144,7 +169,7 @@ export class GameController extends Behaviour {
         gModule.gameTime.second = this.game.time.getSecondTime();
         //写入人列表
         for (const people of this.game.people) {
-            const personModule = new PersonModule();
+            const personModule = people.getBehaviour(PersonClass).personModule;
 
 
             gModule.people.push(personModule);
@@ -164,8 +189,8 @@ export class GameController extends Behaviour {
         gModule.material = this.game.material;
         gModule.newPersonTime = this.game.personSet.lastTimeCreate
 
-            //保存存档
-            ArchiveSystem.saveFile("PumpkinShelter", gModule);
+        //保存存档
+        ArchiveSystem.saveFile("PumpkinShelter", gModule);
     }
 
     //创建人
@@ -202,11 +227,10 @@ export class GameController extends Behaviour {
     //用id获取人
     getPersonById(id: number) {
         for (const person of this.game.people) {
-            if( person.getBehaviour(PersonClass).personModule.personId == id)
-            {
-                console.log (person.getBehaviour(PersonClass).personModule);
+            if (person.getBehaviour(PersonClass).personModule.personId == id) {
+                console.log(person.getBehaviour(PersonClass).personModule);
                 return person;
-                
+
             }
         }
     }

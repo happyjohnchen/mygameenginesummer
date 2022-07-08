@@ -799,6 +799,7 @@ children:
               - type: ImageRenderer
                 properties:
                   imagePath: assets/images/UI/yes.png
+              - type: createConfirmYes
             id: YesBtn
           - behaviours:
               - type: Transform

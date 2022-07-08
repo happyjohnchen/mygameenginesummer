@@ -5,6 +5,7 @@ import { Transform } from "../../src/engine/Transform";
 import { boolean } from "../../src/engine/validators/boolean";
 import { number } from "../../src/engine/validators/number";
 import { AttributeSystem } from "./AttributeSystem";
+import { createConfirmYes } from "./createConfirmYes";
 import { findKey } from "./findEnumKey";
 import { GameController } from "./GameController";
 import { GameSet } from "./GameSet";
@@ -55,8 +56,8 @@ export class Room extends Behaviour {
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
         let thisRoomGameObject = gameController.getRoomById(roomId)
         let thisRoom = thisRoomGameObject.getBehaviour(Room)
-        const workRoom=this.checkRoomWhichHasRoomClass();
-        if (workRoom.getBehaviour(Room).roomModule.people.length==0) {//qqqqqqq
+        const workRoom = this.checkRoomWhichHasRoomClass();
+        if (workRoom.getBehaviour(Room).roomModule.people.length == 0) {//qqqqqqq
             console.log(thisRoom.roomModule.level)
             if (thisRoom.roomModule.level > 1) {
                 let neighbourRoom = gameController.getRoomById(this.roomModule.neighbourId)
@@ -79,6 +80,8 @@ export class Room extends Behaviour {
             return position
         }
         else if (thisRoomModule.level > 1) {
+            console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:")
+            console.log(this.gameObject)
             let neighbourRoomGameObjectPositionX = gameController.getRoomById(thisRoomModule.neighbourId).getBehaviour(Room).roomModule.position.x
             if (neighbourRoomGameObjectPositionX < xPosition)
                 position.x = neighbourRoomGameObjectPositionX * 150
@@ -98,6 +101,7 @@ export class Room extends Behaviour {
         if (room.hasBehaviour(RoomClass)) {
             let roomClass = room.getBehaviour(RoomClass)
             room.removeBehaviour(roomClass)//合完许佳阳的放出来这2句
+          
         }
         //room.getBehaviour(ImageRenderer).imagePath="灰色图片的路径"
         let roomModule = room.getBehaviour(Room).roomModule
@@ -106,6 +110,7 @@ export class Room extends Behaviour {
         roomModule.neighbourId = -1
         roomModule.roomType = RoomType.noType
         roomModule.roomStatus = RoomStatus.canBuild
+        roomModule.hasRoomClass=false
         room.getBehaviour(ImageRenderer).imagePath = setRoomImage(roomModule.roomType, roomModule.level)
 
 
@@ -129,7 +134,7 @@ export class Room extends Behaviour {
             let gameController = getGameObjectById("GameController").getBehaviour(GameController)
             let neighborRoom = gameController.getRoomById(roomModule.neighbourId)
             neighborRoom.getBehaviour(Room).roomModule.level++
-            
+
             if (roomGameObject.hasBehaviour(RoomClass)) {
                 roomGameObject.getBehaviour(RoomClass).setRoomLevel(3);
             }
@@ -156,6 +161,7 @@ export class Room extends Behaviour {
             //xjy加了一个人口对接和等级
             roomClass.roomLevel = this.roomModule.level;
             roomModule.people = roomClass.peopleInRoom;
+            roomModule.hasRoomClass=true;
         }
     }
     clickAndGetRoomID() {//点击room返回room的roomid
@@ -166,22 +172,22 @@ export class Room extends Behaviour {
         if (this.roomModule.level == 1) {
             return this.gameObject;
         }
-        else if(this.roomModule.level > 1)
+        else if (this.roomModule.level > 1)
             if (this.gameObject.hasBehaviour(RoomClass)) {
                 return this.gameObject;
             }
-            else{
+            else {
                 const neighborGameObject = getGameObjectById("GameController").getBehaviour(GameController).getRoomById(this.roomModule.neighbourId)
-            return neighborGameObject;
+                return neighborGameObject;
             }
-        }
-    
+    }
+
 
     addPersonInRoom(personId: number) {//往房间里头加人物
-        
+
         let person = getGameObjectById("GameController").getBehaviour(GameController).getPersonById(personId)
         const originRoom = person.getBehaviour(PersonClass).personModule.room
-        if(originRoom==this.roomModule.roomId)return;
+        if (originRoom == this.roomModule.roomId) return;
         const isFull = this.gameObject.getBehaviour(RoomClass).addPersonInRoom(personId)
 
         if (!isFull) {
@@ -190,8 +196,8 @@ export class Room extends Behaviour {
         else {
             if (originRoom != 0) {
                 let room = getGameObjectById("GameController").getBehaviour(GameController).getRoomById(originRoom)
-              const hasBehaviourRoom=room.getBehaviour(Room).checkRoomWhichHasRoomClass()
-              hasBehaviourRoom.getBehaviour(RoomClass).removePersonInRoom(personId)
+                const hasBehaviourRoom = room.getBehaviour(Room).checkRoomWhichHasRoomClass()
+                hasBehaviourRoom.getBehaviour(RoomClass).removePersonInRoom(personId)
                 console.log("add in 1")
             }
             person.getBehaviour(PersonClass).personModule.room = this.roomModule.roomId;
@@ -199,7 +205,7 @@ export class Room extends Behaviour {
 
     }
     create() {
-       
+
         console.log("creat")
         const tileMapGameObj = getGameObjectById("tileMap")
         const roomSet = tileMapGameObj.getBehaviour(RoomSet)
@@ -219,7 +225,7 @@ export class Room extends Behaviour {
         console.log(getGameObjectById("GameController").getBehaviour(GameController).game.rooms)
         this.canCreate = false;
         roomSet.buildRoomType = RoomType.noType;
-        getGameObjectById("AttributeController").getBehaviour(AttributeSystem).consumeForMaterial(200)
+        getGameObjectById("AttributeController").getBehaviour(AttributeSystem).consumeForMaterial(100)
     }
     //游戏开始时会执行一次
     onPlayStart() {
@@ -232,41 +238,41 @@ export class Room extends Behaviour {
             if (roomSet.canChooseRoom) {//room add person
                 if (this.roomModule.level > 0) {
                     let personId = roomSet.personId
-                    const workRoom=this.checkRoomWhichHasRoomClass()
-                    if(personId!=-1){
+                    const workRoom = this.checkRoomWhichHasRoomClass()
+                    if (personId != -1) {
                         workRoom.getBehaviour(Room).addPersonInRoom(personId)
                         roomSet.setRoomNotCanchoose();
                     }
                 }
-                roomSet.personId=-1;
+                roomSet.personId = -1;
                 roomSet.canChooseRoom = false;
             }
 
-            else if (roomSet.canBuildRoom) {//room build type
-                const confirmUI= getGameObjectById("IsCreateUi");
-                confirmUI.active=true
-                if(roomSet.confirmYesBtn){
-                    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa:")
-                    this.canCreate = true;
-                    this.roomModule.roomType = roomSet.getBuildRoom();
-                    if (this.roomModule.level == 0 && this.roomModule.roomType != RoomType.noType && this.roomModule.roomType != RoomType.Entrance)           
-                        this.create();                     
-                    roomSet.setRoomNotCanchoose();
-                    roomSet.confirmYesBtn=false;
-                    confirmUI.active=false;
-                }
-             
+            else if (roomSet.canBuildRoom&&this.roomModule.level == 0 && this.roomModule.roomType == RoomType.noType) {//room build type
+                const confirmUI = getGameObjectById("IsCreateUi");
+                confirmUI.active = true
+                getGameObjectById("YesBtn").getBehaviour(createConfirmYes).setRoom(this.gameObject);
             }
 
             else { this.onlyClickRoom(this.roomModule.level) }
-
-
-
-
-
+         
         };
     }
 
+    buildRoom() {
+    
+        const confirmUI = getGameObjectById("IsCreateUi");
+        confirmUI.active = true
+        this.canCreate = true;
+        const tileMapGameObj = getGameObjectById("tileMap")
+        const roomSet = tileMapGameObj.getBehaviour(RoomSet)
+        this.roomModule.roomType = roomSet.getBuildRoom();
+
+            this.create();
+        roomSet.setRoomNotCanchoose();
+        roomSet.confirmYesBtn = false;
+        confirmUI.active = false;
+    }
     //每次屏幕刷新执行
     onUpdate() {
 

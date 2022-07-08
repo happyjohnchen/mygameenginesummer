@@ -1,11 +1,14 @@
-import { getGameObjectById } from "../../src/engine";
+import { GameObject, getGameObjectById } from "../../src/engine";
 import {Behaviour} from "../../src/engine/Behaviour";
+import { Room } from "./Room";
 import { RoomSet } from "./RoomSet";
 
-export class BehaviourDemo extends Behaviour {
-
+export class createConfirmYes extends Behaviour {
+room:GameObject
     //在此定义脚本中的属性
-
+setRoom(room:GameObject){
+this.room=room;
+}
 
     //游戏编辑模式或运行模式开始时会执行一次
     onStart() {
@@ -15,8 +18,11 @@ export class BehaviourDemo extends Behaviour {
     //游戏运行模式开始时会执行一次
     onPlayStart() {
         this.gameObject.onClick = () => {
-            const roomset = getGameObjectById("tileMap").getBehaviour(RoomSet)
-           roomset.confirmYesBtn=true;
+            if(this.room!=null){
+                this.room.getBehaviour(Room).buildRoom();
+                this.room=null;
+            }
+            
         }
     }
 
