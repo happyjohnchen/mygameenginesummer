@@ -21,57 +21,25 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: 0
-          y: 0
+          x: -480
+          y: -270
           scaleX: 1
           scaleY: 1
           rotation: 0
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/images/Fail/GameFail.png
     id: Background
   - behaviours:
       - type: Transform
         properties:
-          x: -150
-          y: 50
+          x: 230
+          y: 130
           scaleX: 1
           scaleY: 1
           rotation: 0
-      - type: RoundedRectRenderer
-        properties:
-          width: 300
-          height: 80
-          cornerRadius: 30
-          color: custom
-          customColor: '#805200'
       - type: UiBackToMenu
+      - type: ImageRenderer
+        properties:
+          imagePath: assets/images/Fail/BackToMenu.png
     id: ReturnButton
-    children:
-      - behaviours:
-          - type: Transform
-            properties:
-              x: 20
-              y: 15
-              scaleX: 1
-              scaleY: 1
-              rotation: 0
-          - type: TextRenderer
-            properties:
-              text: 返 回 主 菜 单
-              fontSize: 40
-              font: 微软雅黑
-              fontColor: '#ffffff'
-        id: NewGameObject
-  - behaviours:
-      - type: Transform
-        properties:
-          x: -200
-          y: -150
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: TextRenderer
-        properties:
-          text: 游 戏 结 束
-          fontSize: 80
-          font: 微软雅黑
-          fontColor: '#ffffff'
-    id: NewGameObject

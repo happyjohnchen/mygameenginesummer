@@ -6,7 +6,7 @@
   "hierarchyPanelWidth": 400,
   "inspectorPanelWidth": 400,
   "gameName": "南瓜避难所",
-  "launchMode" :true,
+  "launchMode": false,
   "launchModeZoomIndex": 2,
   "launchModeDefaultScene": "assets/scenes/menu.yaml",
   "launchModeLoadingImage": "assets/images/loading.png"
