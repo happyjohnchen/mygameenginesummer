@@ -31,6 +31,7 @@ export class PersonClass extends Behaviour {
     onPlayStart() {
         this.gameObject.onClick = () => {
             //移动房间
+            
             getGameObjectById("tileMap").getBehaviour(RoomSet).setRoomCanChoose(this.personModule.personId);
             console.log(this.personModule.personId)
             return this.gameObject;
