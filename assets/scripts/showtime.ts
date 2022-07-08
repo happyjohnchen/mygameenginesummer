@@ -18,13 +18,23 @@ export class ShowTime extends Behaviour {
    startTime = 8;//初始显示时间
     //游戏开始时会执行一次
     onStart() { //基础数值
-        this.gameObject.getBehaviour(TextRenderer).text ="第"+ this.nowday + "天" + " " + this.nowhour + ":" + this.nowmin;
-        
+        if(this.nowmin<10){
+            this.gameObject.getBehaviour(TextRenderer).text = "第"+this.nowday + "天" + " " + this.nowhour + ":0" + this.nowmin;
+        }
+        else{
+            this.gameObject.getBehaviour(TextRenderer).text = "第"+this.nowday + "天" + " " + this.nowhour + ":" + this.nowmin;
+        }
     }
 
     //每次屏幕刷新执行
     onUpdate() {
-        this.gameObject.getBehaviour(TextRenderer).text = "第"+this.nowday + "天" + " " + this.nowhour + ":" + this.nowmin;
+        if(this.nowmin<10){
+            this.gameObject.getBehaviour(TextRenderer).text = "第"+this.nowday + "天" + " " + this.nowhour + ":0" + this.nowmin;
+        }
+        else{
+            this.gameObject.getBehaviour(TextRenderer).text = "第"+this.nowday + "天" + " " + this.nowhour + ":" + this.nowmin;
+        }
+        
     }
 
     //平均每16ms执行一次 从gamecontroller拿到时间
