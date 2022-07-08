@@ -66,7 +66,7 @@ export class Room extends Behaviour {
             this.clearRoomValue(thisRoomGameObject)
         }
         else {
-           getGameObjectById("Full").active=true
+            getGameObjectById("Full").active = true
         }
     }
     getBorder(roomId: number) {//返回房间x,y值
@@ -136,9 +136,17 @@ export class Room extends Behaviour {
             let gameController = getGameObjectById("GameController").getBehaviour(GameController)
             let neighborRoom = gameController.getRoomById(roomModule.neighbourId)
             neighborRoom.getBehaviour(Room).roomModule.level++
-
+            if (roomModule.hasRoomClass) {
+                roomGameObject.getBehaviour(ImageRenderer).imagePath = setRoomImage(roomModule.roomType, roomModule.level, true)
+                neighborRoom.getBehaviour(ImageRenderer).imagePath = setRoomImage(roomModule.roomType, roomModule.level, false)
+            }
+            else {
+                roomGameObject.getBehaviour(ImageRenderer).imagePath = setRoomImage(roomModule.roomType, roomModule.level, false)
+                neighborRoom.getBehaviour(ImageRenderer).imagePath = setRoomImage(roomModule.roomType, roomModule.level, true)
+            }
             if (roomGameObject.hasBehaviour(RoomClass)) {
                 roomGameObject.getBehaviour(RoomClass).setRoomLevel(3);
+
             }
             else {
                 neighborRoom.getBehaviour(RoomClass).setRoomLevel(3);
@@ -199,13 +207,13 @@ export class Room extends Behaviour {
         else {
             if (originRoom != 0) {
                 console.log("111111111111111111111111")
-                
+
                 let room = getGameObjectById("GameController").getBehaviour(GameController).getRoomById(originRoom)
                 const hasBehaviourRoom = room.getBehaviour(Room).checkRoomWhichHasRoomClass()
                 hasBehaviourRoom.getBehaviour(RoomClass).removePersonInRoom(personId)
                 console.log("add in 1")
             }
-            
+
             person.getBehaviour(PersonClass).personModule.room = this.roomModule.roomId;
         }
 

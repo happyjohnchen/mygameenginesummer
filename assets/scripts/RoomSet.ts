@@ -27,35 +27,65 @@ export function setRoomImage(roomtype: RoomType, roomLevel: number, isLeft?: boo
             }
             break;
 
-        case 2: case 3:
+        case 2: 
+        
+        switch (roomtype) {
+            case 0:
+                if (isLeft) {
+                    imagePath = 'assets/images/buildSystem/WaterFactory_left.png'//WaterFactory
+                }
+                else {
+                    imagePath = 'assets/images/buildSystem/WaterFactory_right.png'//WaterFactory
+                }
+                break;
+            case 1:
+                if (isLeft) {
+                    imagePath = 'assets/images/buildSystem/EnergyFactory_left.png'//EnergyFactory
+                }
+                else {
+                    imagePath = 'assets/images/buildSystem/EnergyFactory_right.png'//EnergyFactory
+                }
+                break;
+            case 2: if (isLeft) {
+                imagePath = 'assets/images/buildSystem/FoodFactory_left.png'//FoodFactory
+            }
+            else {
+                imagePath = 'assets/images/buildSystem/FoodFactory_right.png'//FoodFactory
+            }
+                break;
+        }
+        break;
+        
+        case 3:
+
+
 
             switch (roomtype) {
                 case 0:
                     if (isLeft) {
-                        imagePath = 'assets/images/buildSystem/WaterFactory_left.png'//WaterFactory
+                        imagePath = 'assets/images/buildSystem/WaterFactory1_left.png'//WaterFactory
                     }
                     else {
-                        imagePath = 'assets/images/buildSystem/WaterFactory_right.png'//WaterFactory
+                        imagePath = 'assets/images/buildSystem/WaterFactory1_right.png'//WaterFactory
                     }
                     break;
                 case 1:
                     if (isLeft) {
-                        imagePath = 'assets/images/buildSystem/EnergyFactory_left.png'//EnergyFactory
+                        imagePath = 'assets/images/buildSystem/EnergyFactory1_left.png'//EnergyFactory
                     }
                     else {
-                        imagePath = 'assets/images/buildSystem/EnergyFactory_right.png'//EnergyFactory
+                        imagePath = 'assets/images/buildSystem/EnergyFactory1_right.png'//EnergyFactory
                     }
                     break;
                 case 2: if (isLeft) {
-                    imagePath = 'assets/images/buildSystem/FoodFactory_left.png'//FoodFactory
+                    imagePath = 'assets/images/buildSystem/FoodFactory1_left.png'//FoodFactory
                 }
                 else {
-                    imagePath = 'assets/images/buildSystem/FoodFactory_right.png'//FoodFactory
+                    imagePath = 'assets/images/buildSystem/FoodFactory1_right.png'//FoodFactory
                 }
                     break;
             }
             break;
-
     }
     return imagePath
 }
