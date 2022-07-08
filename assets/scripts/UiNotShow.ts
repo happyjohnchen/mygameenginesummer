@@ -19,6 +19,7 @@ export class UiNotShow extends Behaviour {
         getGameObjectById("IsCreateUi").active = false; 
         getGameObjectById("ConsumeNot").active = false; 
         getGameObjectById("PersonNot").active = false;   
+        getGameObjectById("Full").active = false;  
     }
 
     //每次屏幕刷新执行

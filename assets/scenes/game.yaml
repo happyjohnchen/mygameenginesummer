@@ -890,3 +890,42 @@ children:
                   imageDown: assets/images/UI/close2.png
                   closeName: PersonNot
             id: closeBtn
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -100
+              y: -55
+              scaleX: 0.5
+              scaleY: 0.5
+              rotation: 0
+        id: Full
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/禁止摧毁房间.png
+            id: FulltBG
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 350
+                  y: -40
+                  scaleX: 0.2
+                  scaleY: 0.2
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/close.png
+              - type: UiClose
+                properties:
+                  imageUp: assets/images/UI/close.png
+                  imageDown: assets/images/UI/close2.png
+                  closeName: Full
+            id: closeBtn
