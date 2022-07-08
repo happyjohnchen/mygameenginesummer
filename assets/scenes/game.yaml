@@ -73,6 +73,57 @@ children:
           scaleX: 1
           scaleY: 1
           rotation: 0
+      - type: RoomSet
+        properties:
+          roomtype: 0
+    id: tileMap
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: AttributeSystem
+        properties:
+          consumePerTime: 1
+          onceConsumeTime: 1
+          primeProduceTime: 2
+          maxValue: 1000
+          coefficient: 0.2
+          radix: 0.2
+    id: AttributeController
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+    id: People
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 0.2
+          scaleY: 0.2
+          rotation: 0
+      - type: PersonSet
+        properties:
+          startPostionX: -400
+          startPositonY: -145
+    id: PersonSet
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
       - type: Camera
       - type: CameraMouseController
         properties:
@@ -108,6 +159,9 @@ children:
                   fontSize: 20
                   font: 微软雅黑
                   fontColor: '#000000'
+                  stroke: false
+                  strokeColor: ''
+                  strokeWidth: 0
             id: TextSaveArchive
       - behaviours:
           - type: Transform
@@ -165,6 +219,9 @@ children:
                       fontSize: 20
                       font: 微软雅黑
                       fontColor: '#ffffff'
+                      stroke: false
+                      strokeColor: ''
+                      strokeWidth: 0
                 id: EnergyText
               - behaviours:
                   - type: Transform
@@ -223,6 +280,9 @@ children:
                       fontSize: 20
                       font: 微软雅黑
                       fontColor: '#ffffff'
+                      stroke: false
+                      strokeColor: ''
+                      strokeWidth: 0
                 id: FoodText
               - behaviours:
                   - type: Transform
@@ -281,6 +341,9 @@ children:
                       fontSize: 20
                       font: 微软雅黑
                       fontColor: '#ffffff'
+                      stroke: false
+                      strokeColor: ''
+                      strokeWidth: 0
                 id: WaterText
               - behaviours:
                   - type: Transform
@@ -319,6 +382,9 @@ children:
                   fontSize: 25
                   font: 微软雅黑
                   fontColor: '#ffffff'
+                  stroke: false
+                  strokeColor: ''
+                  strokeWidth: 0
             id: material
           - behaviours:
               - type: Transform
@@ -380,7 +446,7 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 200
+                      x: 110
                       y: 148
                       scaleX: 1
                       scaleY: 1
@@ -393,7 +459,7 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 200
+                      x: 110
                       y: 480
                       scaleX: 1
                       scaleY: 1
@@ -406,7 +472,7 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 200
+                      x: 110
                       y: 810
                       scaleX: 1
                       scaleY: 1
@@ -419,8 +485,8 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 550
-                      y: -50
+                      x: 640
+                      y: -60
                       scaleX: 0.4
                       scaleY: 0.4
                       rotation: 0
@@ -457,6 +523,9 @@ children:
                   fontSize: 25
                   font: 微软雅黑
                   fontColor: '#ffffff'
+                  stroke: false
+                  strokeColor: ''
+                  strokeWidth: 0
               - type: ShowTime
                 properties:
                   startTime: 8
@@ -510,6 +579,9 @@ children:
                   fontSize: 25
                   font: 微软雅黑
                   fontColor: '#ffffff'
+                  stroke: false
+                  strokeColor: ''
+                  strokeWidth: 0
               - type: ShowSpeed
               - type: ClickChangeSpeed
             id: SpeedShow
@@ -690,55 +762,131 @@ children:
                   fontSize: 40
                   font: 微软雅黑
                   fontColor: '#ffffff'
+                  stroke: false
+                  strokeColor: ''
+                  strokeWidth: 0
             id: TextForNight
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: RoomSet
-        properties:
-          roomtype: 0
-    id: tileMap
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-      - type: AttributeSystem
-        properties:
-          consumePerTime: 1
-          onceConsumeTime: 1
-          primeProduceTime: 2
-          maxValue: 1000
-          coefficient: 0.2
-          radix: 0.2
-    id: AttributeController
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 1
-          scaleY: 1
-          rotation: 0
-    id: People
-  - behaviours:
-      - type: Transform
-        properties:
-          x: 0
-          y: 0
-          scaleX: 0.2
-          scaleY: 0.2
-          rotation: 0
-      - type: PersonSet
-        properties:
-          startPostionX: -400
-          startPositonY: -145
-    id: PersonSet
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -100
+              y: -55
+              scaleX: 0.5
+              scaleY: 0.5
+              rotation: 0
+        id: IsCreateUi
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/confirm.png
+            id: IsCreateUiBg
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 100
+                  y: 75
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/yes.png
+            id: YesBtn
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 250
+                  y: 75
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/no.png
+            id: NoBtn
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -100
+              y: -55
+              scaleX: 0.5
+              scaleY: 0.5
+              rotation: 0
+        id: ConsumeNot
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/耗材不足.png
+            id: Warn
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 350
+                  y: -40
+                  scaleX: 0.2
+                  scaleY: 0.2
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/close.png
+              - type: UiClose
+                properties:
+                  imageUp: assets/images/UI/close.png
+                  imageDown: assets/images/UI/close2.png
+                  closeName: ConsumeNot
+            id: closeBtn
+      - behaviours:
+          - type: Transform
+            properties:
+              x: -100
+              y: -55
+              scaleX: 0.5
+              scaleY: 0.5
+              rotation: 0
+        id: PersonNot
+        children:
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 0
+                  y: 0
+                  scaleX: 1
+                  scaleY: 1
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/人数已满提示.png
+            id: PersonNotBG
+          - behaviours:
+              - type: Transform
+                properties:
+                  x: 350
+                  y: -40
+                  scaleX: 0.2
+                  scaleY: 0.2
+                  rotation: 0
+              - type: ImageRenderer
+                properties:
+                  imagePath: assets/images/UI/close.png
+              - type: UiClose
+                properties:
+                  imageUp: assets/images/UI/close.png
+                  imageDown: assets/images/UI/close2.png
+                  closeName: PersonNot
+            id: closeBtn

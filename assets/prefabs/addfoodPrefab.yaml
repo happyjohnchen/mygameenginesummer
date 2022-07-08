@@ -13,13 +13,10 @@ children:
         properties:
           x: 50
           y: 0
-          scaleX: 1
-          scaleY: 1
+          scaleX: 0.1
+          scaleY: 0.1
           rotation: 0
-      - type: ShapeRectRenderer
+      - type: ImageRenderer
         properties:
-          width: 100
-          height: 100
-          color: blue
-          customColor: '#ffffff'
+          imagePath: assets/images/ImageTryIcons/食物.png
     id: addAttributePrefab

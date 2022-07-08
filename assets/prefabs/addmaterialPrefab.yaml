@@ -11,12 +11,12 @@ children:
   - behaviours:
       - type: Transform
         properties:
-          x: 50
+          x: -50
           y: 0
-          scaleX: 1
-          scaleY: 1
+          scaleX: 0.1
+          scaleY: 0.1
           rotation: 0
       - type: ImageRenderer
         properties:
-          imagePath: assets/engineTest/images/testImage1.png
+          imagePath: assets/images/ImageTryIcons/材料.png
     id: addAttributePrefab

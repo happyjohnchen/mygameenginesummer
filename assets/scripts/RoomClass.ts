@@ -128,7 +128,7 @@ export class RoomClass extends Behaviour {
                 //this.people[totalPeople] = id;//把id存起来
                 this.peopleInRoom[this.peopleInRoom.length] = id
                 this.calculateTotalAttribute();//改变一次属性值
-               this.setPeopleInRoom();
+                this.setPeopleInRoom();
                this.gameObject.getBehaviour(Room).roomModule.people = this.peopleInRoom;
                 return true;
             }
@@ -164,7 +164,7 @@ export class RoomClass extends Behaviour {
             const xPos = this.leftPositionX + this.getToLeftPositionX(this.roomType,p);
             const yPos = this.bottomPositionY + this.getToBottomPositionY();
             person.getBehaviour(PersonClass).setPostion(xPos,yPos);
-            
+            person.getBehaviour(PersonClass).personModule.id = this.roomId;
             //动画 等xq测试完就放出来
            // person.getBehaviour(PersonClass).setAnimation(this.roomType);
             
@@ -176,28 +176,28 @@ export class RoomClass extends Behaviour {
             case RoomType.WaterFactory:
                 const waterPos={
                     0: 0,
-                    1: 100,
-                    2: 0.5,
-                    3: 0.7,
-                    4: 1
+                    1: 50,
+                    2: 100,
+                    3: 150,
+                    4: 200
                 }
                 return waterPos[posNumber];
             case RoomType.EnergyFactory:
                 const energyPos={
                     0: 0,
-                    1: 0.2,
-                    2: 0.4,
-                    3: 0.8,
-                    4: 1.5
+                    1: 50,
+                    2: 100,
+                    3: 150,
+                    4: 200
                 }
                 return energyPos[posNumber];
             case RoomType.FoodFactory:
                 const foodPos={
                     0: 0,
-                    1: 0.1,
-                    2: 0.5,
-                    3: 0.7,
-                    4: 1.2
+                    1: 50,
+                    2: 100,
+                    3: 150,
+                    4: 200
                 }
                 return foodPos[posNumber];
         }
@@ -238,7 +238,7 @@ export class RoomClass extends Behaviour {
 
     createPrefab(type:string){//生成对应属性得预制体  water food energy material
         let gameObjectchild = new GameObject() //产出三种属性
-        this.gameObject.parent.addChild(gameObjectchild);
+        this.gameObject.parent.parent.addChild(gameObjectchild);
         const childrenTransform = new Transform();
         childrenTransform.x = this.gameObject.getBehaviour(Transform).x ;
         childrenTransform.y = this.gameObject.getBehaviour(Transform).y ;
