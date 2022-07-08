@@ -50,11 +50,12 @@ export class Room extends Behaviour {
         }
     }
     destroyRoom(roomId: number) {//1.单独的房间销毁；2.已升级的房间销毁
-        
+
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
         let thisRoomGameObject = gameController.getRoomById(roomId)
         let thisRoom = thisRoomGameObject.getBehaviour(Room)
-        if(thisRoom.roomModule.people==null){//qqqqqqq
+        const workRoom=this.checkRoomWhichHasRoomClass();
+        if (workRoom.getBehaviour(Room).roomModule.people.length==0) {//qqqqqqq
             console.log(thisRoom.roomModule.level)
             if (thisRoom.roomModule.level > 1) {
                 let neighbourRoom = gameController.getRoomById(this.roomModule.neighbourId)
@@ -62,7 +63,7 @@ export class Room extends Behaviour {
             }
             this.clearRoomValue(thisRoomGameObject)
         }
-       
+
     }
     getBorder(roomId: number) {//返回房间x,y值
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
@@ -71,8 +72,8 @@ export class Room extends Behaviour {
         let xPosition = thisRoomModule.position.x
         let yPosition = thisRoomModule.position.y
         let position = new RoomPosition()
-        position.x = -384+xPosition * 149
-        position.y =-166 + yPosition * 100
+        position.x = -384 + xPosition * 149
+        position.y = -166 + yPosition * 100
         if (thisRoomModule.level == 1) {
             return position
         }
@@ -86,12 +87,12 @@ export class Room extends Behaviour {
     }
     clearRoomValue(room: GameObject) {
         const roomlevelTable = {
-            1 : 20,
-            2 : 20,
-            3 :30
+            1: 20,
+            2: 20,
+            3: 30
         }
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
-       
+
         console.log("clear")
         if (room.hasBehaviour(RoomClass)) {
             let roomClass = room.getBehaviour(RoomClass)
@@ -99,13 +100,13 @@ export class Room extends Behaviour {
         }
         //room.getBehaviour(ImageRenderer).imagePath="灰色图片的路径"
         let roomModule = room.getBehaviour(Room).roomModule
-        gameController.game.material+=roomlevelTable[roomModule.level];
+        gameController.game.material += roomlevelTable[roomModule.level];
         roomModule.level = 0;
         roomModule.neighbourId = -1
         roomModule.roomType = RoomType.noType
         roomModule.roomStatus = RoomStatus.canBuild
         room.getBehaviour(ImageRenderer).imagePath = setRoomImage(roomModule.roomType, roomModule.level)
-       
+
 
     }
 
@@ -118,20 +119,22 @@ export class Room extends Behaviour {
 
             console.log("up1")
             roomModule.level++
-           
+
         }
         else if (roomModule.level == 2) {
+
             console.log("up2")
             roomModule.level++
             let gameController = getGameObjectById("GameController").getBehaviour(GameController)
             let neighborRoom = gameController.getRoomById(roomModule.neighbourId)
             neighborRoom.getBehaviour(Room).roomModule.level++
-            if(roomGameObject.hasBehaviour(RoomClass)){
+            
+            if (roomGameObject.hasBehaviour(RoomClass)) {
                 roomGameObject.getBehaviour(RoomClass).setRoomLevel(3);
             }
-           else{
-            neighborRoom.getBehaviour(RoomClass).setRoomLevel(3);
-           }
+            else {
+                neighborRoom.getBehaviour(RoomClass).setRoomLevel(3);
+            }
             console.log(neighborRoom)
         }
         else if (roomModule.roomStatus == RoomStatus.canBuild) {
@@ -158,27 +161,41 @@ export class Room extends Behaviour {
         console.log(this.gameObject.getBehaviour(Room).roomModule.roomId)
         return this.gameObject.getBehaviour(Room).roomModule.roomId
     }
-    addPersonInRoom(personId: number) {//往房间里头加人物
-      const person=  getGameObjectById("GameController").getBehaviour(GameController).getPersonById(personId)
-        if(person.getBehaviour(PersonClass).personModule.room==0){
+    checkRoomWhichHasRoomClass() {
+        if (this.roomModule.level == 1) {
+            return this.gameObject;
+        }
+        else if(this.roomModule.level > 1)
             if (this.gameObject.hasBehaviour(RoomClass)) {
-          
-                this.gameObject.getBehaviour(RoomClass).addPersonInRoom(personId);
-               if(!this.gameObject.getBehaviour(RoomClass).addPersonInRoom(personId)){
-                //加UI人已满
-               }
-                console.log("add in 1")
+                return this.gameObject;
             }
-            else {
-                const neighborRoom = getGameObjectById("GameController").getBehaviour(GameController).getRoomById(this.roomModule.neighbourId);
-               
-                neighborRoom.getBehaviour(RoomClass).addPersonInRoom(personId);
-                console.log("add in room")
+            else{
+                const neighborGameObject = getGameObjectById("GameController").getBehaviour(GameController).getRoomById(this.roomModule.neighbourId)
+            return neighborGameObject;
             }
         }
-       else{//从一个房间移到另一个房间。。
-        person.getBehaviour(PersonClass).personModule.room
-       }
+    
+
+    addPersonInRoom(personId: number) {//往房间里头加人物
+        
+        let person = getGameObjectById("GameController").getBehaviour(GameController).getPersonById(personId)
+        const originRoom = person.getBehaviour(PersonClass).personModule.room
+        if(originRoom==this.roomModule.roomId)return;
+        const isFull = this.gameObject.getBehaviour(RoomClass).addPersonInRoom(personId)
+
+        if (!isFull) {
+            getGameObjectById("PersonNot").active = true;
+        }
+        else {
+            if (originRoom != 0) {
+                let room = getGameObjectById("GameController").getBehaviour(GameController).getRoomById(originRoom)
+              const hasBehaviourRoom=room.getBehaviour(Room).checkRoomWhichHasRoomClass()
+              hasBehaviourRoom.getBehaviour(RoomClass).removePersonInRoom(personId)
+                console.log("add in 1")
+            }
+            person.getBehaviour(PersonClass).personModule.room = this.roomModule.roomId;
+        }
+
     }
     create() {
         console.log("creat")
@@ -212,9 +229,13 @@ export class Room extends Behaviour {
             if (roomSet.canChooseRoom) {
                 if (this.roomModule.level > 0) {
                     let personId = roomSet.personId
-                    this.addPersonInRoom(personId);
-                    roomSet.setRoomNotCanchoose();
+                    const workRoom=this.checkRoomWhichHasRoomClass()
+                    if(personId!=-1){
+                        workRoom.getBehaviour(Room).addPersonInRoom(personId)
+                        roomSet.setRoomNotCanchoose();
+                    }
                 }
+                roomSet.personId=-1;
                 roomSet.canChooseRoom = false;
             }
 
