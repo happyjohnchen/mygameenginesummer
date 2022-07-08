@@ -485,7 +485,7 @@ children:
               - behaviours:
                   - type: Transform
                     properties:
-                      x: 640
+                      x: -20
                       y: -60
                       scaleX: 0.4
                       scaleY: 0.4
@@ -519,7 +519,7 @@ children:
                   rotation: 0
               - type: TextRenderer
                 properties:
-                  text: 第0天 0:0
+                  text: 第0天 0:00
                   fontSize: 25
                   font: 微软雅黑
                   fontColor: '#ffffff'
