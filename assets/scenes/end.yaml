@@ -43,3 +43,18 @@ children:
         properties:
           imagePath: assets/images/Fail/BackToMenu.png
     id: ReturnButton
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Sound
+        properties:
+          soundPath: assets\sound\end.mp3
+          autoPlay: true
+          _loopPlay: true
+    id: BGM
+

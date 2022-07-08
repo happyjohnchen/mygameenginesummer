@@ -917,3 +917,17 @@ children:
                 properties:
                   imagePath: assets/images/night.png
             id: NightBG
+  - behaviours:
+      - type: Transform
+        properties:
+          x: 0
+          y: 0
+          scaleX: 1
+          scaleY: 1
+          rotation: 0
+      - type: Sound
+        properties:
+          soundPath: assets\sound\game.mp3
+          autoPlay: true
+          _loopPlay: true
+    id: BGM
