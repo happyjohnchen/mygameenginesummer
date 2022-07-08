@@ -8,6 +8,7 @@ import { findKey } from "./findEnumKey";
 import { GameController } from "./GameController";
 import { GameSet } from "./GameSet";
 import { RoomModule, RoomPosition, RoomStatus, RoomType } from "./modules/RoomModule";
+import { PersonClass } from "./PersonClass";
 import { RoomClass } from "./RoomClass";
 import { RoomSet, setRoomImage } from "./RoomSet";
 import { UpdateBtn } from "./UpdateBtn";
@@ -158,18 +159,26 @@ export class Room extends Behaviour {
         return this.gameObject.getBehaviour(Room).roomModule.roomId
     }
     addPersonInRoom(personId: number) {//往房间里头加人物
-        if (this.gameObject.hasBehaviour(RoomClass)) {
+      const person=  getGameObjectById("GameController").getBehaviour(GameController).getPersonById(personId)
+        if(person.getBehaviour(PersonClass).personModule.room==0){
+            if (this.gameObject.hasBehaviour(RoomClass)) {
           
-            this.gameObject.getBehaviour(RoomClass).addPersonInRoom(personId);
-           
-            console.log("add in 1")
+                this.gameObject.getBehaviour(RoomClass).addPersonInRoom(personId);
+               if(!this.gameObject.getBehaviour(RoomClass).addPersonInRoom(personId)){
+                //加UI人已满
+               }
+                console.log("add in 1")
+            }
+            else {
+                const neighborRoom = getGameObjectById("GameController").getBehaviour(GameController).getRoomById(this.roomModule.neighbourId);
+               
+                neighborRoom.getBehaviour(RoomClass).addPersonInRoom(personId);
+                console.log("add in room")
+            }
         }
-        else {
-            const neighborRoom = getGameObjectById("GameController").getBehaviour(GameController).getRoomById(this.roomModule.neighbourId);
-           
-            neighborRoom.getBehaviour(RoomClass).addPersonInRoom(personId);
-            console.log("add in room")
-        }
+       else{//从一个房间移到另一个房间。。
+        person.getBehaviour(PersonClass).personModule.room
+       }
     }
     create() {
         console.log("creat")
