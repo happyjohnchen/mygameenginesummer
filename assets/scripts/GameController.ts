@@ -153,6 +153,7 @@ export class GameController extends Behaviour {
         roomclassBehaviour.roomId = roomModule.roomId
         roomclassBehaviour.roomLevel = roomModule.level
         roomclassBehaviour.peopleInRoom = roomModule.people
+        roomclassBehaviour.roomType = roomModule.roomType
         if (roomModule.hasRoomClass) {
             saveRoom.addBehaviour(roomclassBehaviour)
         }
