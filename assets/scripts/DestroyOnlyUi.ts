@@ -31,7 +31,8 @@ export class DestroyOnlyUi extends Behaviour {
                 if(roomid>=0){
                     
                   let room=  gameController.getRoomById(roomid)
-                  room.getBehaviour(Room).destroyRoom( roomid)
+                  
+                  room.getBehaviour(Room).destroyRoom(roomid)
                   roomid=-1
                 }
         console.log("摧毁");

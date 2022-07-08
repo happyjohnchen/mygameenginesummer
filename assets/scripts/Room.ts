@@ -65,7 +65,9 @@ export class Room extends Behaviour {
             }
             this.clearRoomValue(thisRoomGameObject)
         }
-
+        else {
+            //加有人不能摧毁销毁
+        }
     }
     getBorder(roomId: number) {//返回房间x,y值
         let gameController = getGameObjectById("GameController").getBehaviour(GameController)
@@ -101,7 +103,7 @@ export class Room extends Behaviour {
         if (room.hasBehaviour(RoomClass)) {
             let roomClass = room.getBehaviour(RoomClass)
             room.removeBehaviour(roomClass)//合完许佳阳的放出来这2句
-          
+
         }
         //room.getBehaviour(ImageRenderer).imagePath="灰色图片的路径"
         let roomModule = room.getBehaviour(Room).roomModule
@@ -110,7 +112,7 @@ export class Room extends Behaviour {
         roomModule.neighbourId = -1
         roomModule.roomType = RoomType.noType
         roomModule.roomStatus = RoomStatus.canBuild
-        roomModule.hasRoomClass=false
+        roomModule.hasRoomClass = false
         room.getBehaviour(ImageRenderer).imagePath = setRoomImage(roomModule.roomType, roomModule.level)
 
 
@@ -161,7 +163,7 @@ export class Room extends Behaviour {
             //xjy加了一个人口对接和等级
             roomClass.roomLevel = this.roomModule.level;
             roomModule.people = roomClass.peopleInRoom;
-            roomModule.hasRoomClass=true;
+            roomModule.hasRoomClass = true;
         }
     }
     clickAndGetRoomID() {//点击room返回room的roomid
@@ -248,19 +250,19 @@ export class Room extends Behaviour {
                 roomSet.canChooseRoom = false;
             }
 
-            else if (roomSet.canBuildRoom&&this.roomModule.level == 0 && this.roomModule.roomType == RoomType.noType) {//room build type
+            else if (roomSet.canBuildRoom && this.roomModule.level == 0 && this.roomModule.roomType == RoomType.noType) {//room build type
                 const confirmUI = getGameObjectById("IsCreateUi");
                 confirmUI.active = true
                 getGameObjectById("YesBtn").getBehaviour(createConfirmYes).setRoom(this.gameObject);
             }
 
             else { this.onlyClickRoom(this.roomModule.level) }
-         
+
         };
     }
 
     buildRoom() {
-    
+
         const confirmUI = getGameObjectById("IsCreateUi");
         confirmUI.active = true
         this.canCreate = true;
@@ -268,7 +270,7 @@ export class Room extends Behaviour {
         const roomSet = tileMapGameObj.getBehaviour(RoomSet)
         this.roomModule.roomType = roomSet.getBuildRoom();
 
-            this.create();
+        this.create();
         roomSet.setRoomNotCanchoose();
         roomSet.confirmYesBtn = false;
         confirmUI.active = false;
