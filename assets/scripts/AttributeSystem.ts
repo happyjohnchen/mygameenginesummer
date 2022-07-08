@@ -162,7 +162,7 @@ export class AttributeSystem extends Behaviour {
 
    consumeForMaterial(consume:number){//判断是否可以消耗 不可以则返回false 可以返回true
     if(consume<=this.game.material){
-        //this.game.material -= consume;//减去消耗
+        this.game.material -= consume;//减去消耗
         return true;
     }
         else{
