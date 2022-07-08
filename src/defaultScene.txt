@@ -1,1 +1,1 @@
-assets/scenes/end.yaml
+assets/scenes/menu.yaml
