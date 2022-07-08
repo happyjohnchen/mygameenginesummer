@@ -77,12 +77,12 @@ export class GameController extends Behaviour {
             personInfo.personModule = personModule;
             newPerson.addBehaviour(personInfo)
             newPerson.addBehaviour(new AnimationRenderer)
-            newPerson.getBehaviour(PersonClass).setAnimation(RoomType.WaterFactory);
+            newPerson.getBehaviour(PersonClass).setAnimation(RoomType.noType);
             const transform = new Transform();
             transform.scaleX = 0.15
             transform.scaleY = 0.15
             transform.x = -400
-            transform.y = -175
+            transform.y = -160
             this.people.addChild(newPerson);//添加到游戏场景
             this.game.people.push(newPerson);//添加到game
             newPerson.addBehaviour(transform);
@@ -96,6 +96,7 @@ export class GameController extends Behaviour {
             if (room.getBehaviour(Room).roomModule.hasRoomClass) {
                 room.getBehaviour(RoomClass).setPeopleInRoom();
             }
+            
         }
 
         //设定资源数值
