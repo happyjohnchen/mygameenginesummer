@@ -215,7 +215,7 @@ export class RoomSet extends Behaviour {
 
         }
     }
-    setRoomCanBuild() {//选框
+    setRoomCanBuild() {//哪些可以建造的框
         const rooms = getGameObjectById("GameController").getBehaviour(GameController).game.rooms;
         for (const room of rooms) {
             const modules = room.getBehaviour(Room).roomModule

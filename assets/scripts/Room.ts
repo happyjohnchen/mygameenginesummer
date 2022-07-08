@@ -22,19 +22,10 @@ export class Room extends Behaviour {
     canCreate
 
 
-    // clickStatus//0不可点，1可升级，2建起房子，3移动小人选择房间
-    //static roomObjects:{ [id:string]: RoomType } = {}
     onStart() {
 
     }
-    /* setRoomClick(statusNumber: number) {
-         this.clickStatus = statusNumber
-     }
- 
-     charaterMoveStatus() {
-         if (this.clickStatus == 3)
-             return [this.roomModule.position.x * 150, this.roomModule.position.y * 100]
-     }*/
+
     changeRoomName(roomType: RoomType) {//根据roomtype的值切换物体名字
         this.gameObject.id = findKey(RoomType, roomType)
     }
