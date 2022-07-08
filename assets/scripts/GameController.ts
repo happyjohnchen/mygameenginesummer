@@ -4,7 +4,7 @@ import { ArchiveSystem } from "./archiveSystem/ArchiveSystem";
 import { GameModule } from "./modules/GameModule";
 import { TimeControllerSystem } from "./TimeControllerSystem";
 import { PersonModule } from "./modules/PersonModule";
-import { RoomModule, RoomPosition } from "./modules/RoomModule";
+import { RoomModule, RoomPosition, RoomType } from "./modules/RoomModule";
 import { GameObject, getGameObjectById } from "../../src/engine";
 import { Transform } from "../../src/engine/Transform";
 import { Room } from "./Room";
@@ -14,6 +14,8 @@ import { number } from "../../src/engine/validators/number";
 import { string } from "../../src/engine/validators/string";
 import { PersonClass } from "./PersonClass";
 import { RoomClass } from "./RoomClass";
+import { AnimationRenderer } from "../../src/behaviours/AnimationRenderer";
+import { transform } from "_@ts-morph_common@0.16.0@@ts-morph/common/lib/typescript";
 
 export class GameController extends Behaviour {
 
@@ -74,29 +76,28 @@ export class GameController extends Behaviour {
             const personInfo = new PersonClass();
             personInfo.personModule = personModule;
             newPerson.addBehaviour(personInfo)
+            newPerson.addBehaviour(new AnimationRenderer)
+            newPerson.getBehaviour(PersonClass).setAnimation(RoomType.WaterFactory);
+            const transform = new Transform();
+            transform.scaleX = 0.15
+            transform.scaleY = 0.15
+            transform.x = -400
+            transform.y = -175
             this.people.addChild(newPerson);//添加到游戏场景
             this.game.people.push(newPerson);//添加到game
-            newPerson.addBehaviour(new Transform());
-
+            newPerson.addBehaviour(transform);
             // this.peopleCount++;
-
-
         }
         //设定房间列表
         for (const roomModule of gModule.rooms) {
-
-            /* const newRoom = new GameObject();  
-             this.rooms.addChild(newRoom);//添加到游戏场景
-             this.game.rooms.push(newRoom);//添加到game
-             newRoom.addBehaviour(new Transform());*/
             this.createRoomFromData(roomModule)
         }
-        for(const room of this.game.rooms){
-            if(room.getBehaviour(Room).roomModule.hasRoomClass){
+        for (const room of this.game.rooms) {
+            if (room.getBehaviour(Room).roomModule.hasRoomClass) {
                 room.getBehaviour(RoomClass).setPeopleInRoom();
             }
         }
-   
+
         //设定资源数值
         this.game.water = gModule.water;
         this.game.energy = gModule.energy;
@@ -138,7 +139,14 @@ export class GameController extends Behaviour {
         room.roomModule = roomModule
         saveRoom.addBehaviour(room);
         const backgroundImage = new ImageRenderer()
-        backgroundImage.imagePath = setRoomImage(roomModule.roomType, roomModule.level)
+
+        if (roomModule.hasRoomClass && roomModule.level > 1)
+            backgroundImage.imagePath = setRoomImage(roomModule.roomType, roomModule.level, true)
+        else {
+            backgroundImage.imagePath = setRoomImage(roomModule.roomType, roomModule.level, false)
+        }
+
+
         saveRoom.addBehaviour(backgroundImage);
         const roomclassBehaviour = new RoomClass();
         roomclassBehaviour.roomId = roomModule.roomId
@@ -146,7 +154,6 @@ export class GameController extends Behaviour {
         roomclassBehaviour.peopleInRoom = roomModule.people
         if (roomModule.hasRoomClass) {
             saveRoom.addBehaviour(roomclassBehaviour)
-
         }
 
         let sonChild = new GameObject();
