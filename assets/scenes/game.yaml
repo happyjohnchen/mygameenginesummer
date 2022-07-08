@@ -813,8 +813,8 @@ children:
                   imagePath: assets/images/UI/no.png
               - type: UiClose
                 properties:
-                  imageUp: ''
-                  imageDown: ''
+                  imageUp: assets/images/UI/no.png
+                  imageDown: assets/images/UI/no.png
                   closeName: IsCreateUi
             id: NoBtn
       - behaviours:
