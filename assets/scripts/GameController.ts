@@ -144,7 +144,7 @@ export class GameController extends Behaviour {
         gModule.gameTime.second = this.game.time.getSecondTime();
         //写入人列表
         for (const people of this.game.people) {
-            const personModule = new PersonModule();
+            const personModule = people.getBehaviour(PersonClass).personModule;
 
 
             gModule.people.push(personModule);
